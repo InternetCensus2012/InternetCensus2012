@@ -1,0 +1,2349 @@
+<!DOCTYPE html>
+<html>
+<head> 
+<title>Internet Census 2012</title>
+ <script type="text/javascript" src="../js/jquery-latest.js"></script> 
+ <script type="text/javascript" src="../js/__jquery.tablesorter.min.js"></script> 
+ <link rel="stylesheet" type="text/css" href="../style.css">
+
+ <script>
+ $(document).ready(function() 
+  { 
+   generate(14);
+   $("#sortable").tablesorter(); 
+  } 
+ );  
+ 
+ function generate(index) {
+    
+  var pages=[
+   ["1t","3t","7t","7u","9t","13u","17u","19t","21t","22t","23t","25t","26t","35t","37u","42t","42u","43t","44t","53t","53u","69u","70t","79t","80t","81t","82t","83t","84t","85t","88t","88u","98t","100t","106t","110t","111t","111u","113t","119t","123u","130t","135t","135u","137u","139t","143t","144t","161t","161u","177u","179t","199t"],
+   ["214t","254t","255t","256t","257t","264t","280t","311t","389t","390t","406t","407u","427t","443t","444t","445t","449t","464t","465t","497t","500u","505t","510t","512t","513t","514t","515t","517u","518u","523t","523u","524t","540t","543t","544t","548t","554t","587t","591t","593t","616t","620t","625t","626u","628t","631t","636t","641t","646t","660t","666t"],
+   ["706t","710t","711t","731t","771t","782t","783t","787t","808t","873t","888t","898t","900t","901t","902t","990t","993t","995t","1000t","1010t","1022t","1024t","1025t","1026t","1027t","1028t","1029t","1030t","1031t","1032t","1033t","1035t","1036t","1037t","1038t","1039t","1040t","1041t","1042t","1043t","1044t","1048t","1049t","1050t","1053t","1054t","1056t","1058t","1059t"],
+   ["1064t","1065t","1066t","1068t","1069t","1071t","1074t","1080t","1090t","1095t","1098t","1099t","1100t","1105t","1109t","1110t","1111t","1112t","1200t","1212t","1214t","1217t","1220t","1234t","1241t","1248t","1302t","1311t","1314t","1344t","1352t","1400t","1414t","1415t","1416t","1417t","1418t","1419t","1419u","1420t","1432t","1433t","1434u","1467t","1494t"],
+   ["1500t","1501t","1503t","1505t","1505u","1521t","1522t","1526t","1527t","1549t","1550t","1574t","1583t","1604u","1610t","1611t","1666t","1687t","1688t","1702t","1720t","1723t","1748t","1754t","1755t","1761t","1761u","1762t","1763t","1801t","1830t","1900t","1935t","1967u","1972t","1981t","1998t","2000t","2001t","2002t","2003t","2005t","2010t","2024t","2030t","2040t","2049t","2064t","2068t"],
+   ["2100t","2103t","2105t","2107t","2121t","2160t","2161t","2301t","2303u","2306t","2383t","2396t","2401t","2427t","2427u","2525t","2600t","2601t","2627t","2638u","2701t","2715t","2717t","2869t","2947t","2967t","2967u","3000t","3001t","3002t","3003t","3004t","3005t","3006t","3025t","3031t","3050t","3052t","3128t","3268t","3280t","3306t","3310t","3333t","3351t","3372t","3389t","3483u","3493t","3531t"],
+   ["3632t","3689t","3690t","3703t","3872t","3892t","3900t","3940t","3986t","4000t","4001t","4045t","4045u","4155t","4369t","4443t","4444t","4567t","4660t","4711t","4868t","4899t","4999t","5000t","5001t","5003t","5009t","5050t","5051t","5060t","5060u","5061t","5101t","5120t","5190t","5222t","5232t","5269t","5280t","5302t","5323t","5353u","5357t","5400t","5427t","5432t","5520t","5530t","5550t","5555t","5556t","5570t"],
+   ["5600t","5631t","5632u","5666t","5800t","5801t","5802t","5803t","5900t","5901t","6000t","6001t","6002t","6003t","6004t","6005t","6006t","6007t","6008t","6009t","6010t","6011t","6012t","6013t","6014t","6015t","6016t","6017t","6018t","6019t","6020t","6050t","6103t","6112t","6163t","6346t","6379t","6543t","6544t","6560t","6588t","6600t","6646t","6660t","6661t","6662t","6663t","6664t","6665t","6666t","6667t","6668t","6669t","6670t","6699t"],
+   ["6802t","6969t","7000t","7001u","7002t","7007t","7008t","7070t","7100t","7101t","7144t","7145t","7171t","7180t","7200t","7210t","7272t","7402t","7461t","7776t","7777t","7780t","7937t","7938t","8000t","8001t","8002t","8003t","8004t","8005t","8006t","8007t","8008t","8009t","8010t","8031t","8080t","8081t","8082t","8083t","8084t","8085t","8087t","8088t","8118t","8138t","8181t","8194t","8307t","8333t","8443t","8770t"],
+   ["8880t","8881t","8882t","8883t","8884t","8885t","8886t","8887t","8888t","9000t","9001t","9002t","9003t","9030t","9050t","9080t","9088t","9089t","9090t","9091t","9092t","9093t","9094t","9095t","9096t","9097t","9098t","9099t","9100t","9100u","9101t","9102t","9103t","9104t","9105t","9106t","9107t","9481t","9801t","9999t","10000t","10000u","10001t","10005t","10010t","10031t","10080u","11210t","11211t","11211u","11371t","11965t","12203u","12345t"],
+   ["13013t","13666t","13720t","13722t","13783t","14238t","14534t","15000t","15001t","15002t","17007t","17555u","17988t","18086t","18182t","18264t","19150t","19350t","20000t","22001t","22490t","26214t","26470t","27000t","27001t","27002t","27003t","27004t","27005t","27006t","27007t","27008t","27009t","27010t","27017t","27960u","30444t","31337t","31416t","32211t","32750t","32750u","32751t","32751u","32752t","32752u","32753t","32753u","32754t","32754u"],
+   ["32755t","32755u","32756t","32756u","32757t","32757u","32758t","32758u","32759t","32759u","32760t","32760u","32761t","32761u","32762t","32762u","32763t","32763u","32764t","32764u","32765t","32765u","32766t","32766u","32767t","32767u","32768t","32768u","32769t","32769u","32770t","32770u","32771t","32771u","32772t","32772u","32773t","32773u","32774t","32774u","32775t","32775u","32776t","32776u","32777t","32777u"],
+   ["32778t","32778u","32779t","32779u","32780t","32780u","32781t","32781u","32782t","32782u","32783t","32783u","32784t","32784u","32785t","32785u","32786t","32786u","32787t","32787u","32788t","32788u","32789t","32789u","32790t","32790u","32791t","32791u","32792t","32792u","32793t","32793u","32794t","32794u","32795t","32795u","32796t","32796u","32797t","32797u","32798t","32798u","32799t","32799u"],
+   ["32800t","32800u","32801t","32801u","32802t","32802u","32803t","32803u","32804t","32804u","32805t","32805u","32806t","32806u","32807t","32807u","32808t","32808u","32809t","32809u","32810t","32810u","33015t","34012t","37435t","38978t","38978u","40193t","41523t","49152t","49152u","49153u","49154u","49155u","49156u","49157t","49400t","50000t","50001t","50002t","50003t","50004t","50005t","50006t","50007t","50008t","50009t"],
+   ["50010t","50011t","50012t","50013t","50014t","50015t","50016t","50017t","50018t","50019t","50020t","50021t","50022t","50023t","50024t","50025t","50030t","55553t","55555t","56667t","60000t","60001t","60002t","60003t","60004t","60006t","60007t","60008t","60009t","60010t","60011t","60012t","60013t","60014t","60015t","60016t","60017t","60018t","60019t","60020t","60021t","60022t","60023t","60024t","60025t","Combinedt"]
+  ];
+  current = "Combinedt"
+
+  var html = ""
+  var col = 0;
+  for (var i = 0; i < pages[index].length; ++i){
+   if (col == 0){
+    html = html + "<tr>"
+   }
+   if(pages[index][i].indexOf("u") != -1){
+    port = pages[index][i].replace(/u/g, " UDP");
+    link = pages[index][i].replace(/u/g, "_UDP_product.html");
+   }else{
+    port = pages[index][i].replace(/t/g, "");
+    link = pages[index][i].replace(/t/g, "_TCP_product.html");
+   }
+   if(pages[index][i] == ("" + current)){
+    html = html + "<td style=\"background-color:#e9e9e9\"><a href=\""+link+"\">"+port+"</a></td>"
+   }else{
+    html = html + "<td><a href=\""+link+"\">"+port+"</a></td>"
+   }
+   
+   col = col +1;
+   if (col == 14){
+    col = 0;
+    html = html + "</tr>"
+   }
+  }
+  $("#submenu").html(html);
+  $(".clicks").css({'background-color': ''})
+  $("#click"+index).css({'background-color': '#e9e9e9'})
+ }
+ </script>
+ 
+</head>
+
+<body>
+<div id="main">
+
+ <table id = "nav">
+ <col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" />
+ <tr>
+ <td><a href="../paper.html">Paper</a></td>
+ <td><a href="../images.html">Images</a></td>
+ <td><a href="../download.html">Download</a></td>
+ <td><a href="../hilbert.html">Hilbert Browser</a></td>
+ <td class="highlight1"><a href="../serviceprobe_overview.html">Service Probe Overview</a></td>
+ <td><a href="../tld_overview.html">rDNS Overview</a></td>
+ </tr>
+ </table>
+
+ 
+ <table id="nav1">
+ <tr>
+  <td style="width:10%"><a href="../serviceprobe_overview.html"><span style="font-size: 14px;">Overview</span></a></td>
+  <td> 
+  <span style="font-size: 14px;">Port Details</span>
+   <table id = "nav">
+    <tr>
+     <td id="click0" class="clicks" onclick="generate(0)">< 200</td>
+     <td id="click1" class="clicks" onclick="generate(1)">< 700</td>
+     <td id="click2" class="clicks" onclick="generate(2)">< 1060 </td>
+     <td id="click3" class="clicks" onclick="generate(3)">< 1500 </td>
+     <td id="click4" class="clicks" onclick="generate(4)">< 2100 </td>
+     <td id="click5" class="clicks" onclick="generate(5)">< 3600 </td>
+     <td id="click6" class="clicks" onclick="generate(6)">< 5600 </td>
+     <td id="click7" class="clicks" onclick="generate(7)">< 6700 </td>
+     <td id="click8" class="clicks" onclick="generate(8)">< 8800 </td>
+     <td id="click9" class="clicks" onclick="generate(9)">< 13000</td>
+     <td id="click10" class="clicks" onclick="generate(10)">< 32755</td>
+     <td id="click11" class="clicks" onclick="generate(11)">< 32778</td>
+     <td id="click12" class="clicks" onclick="generate(12)">< 32800</td>
+     <td id="click13" class="clicks" onclick="generate(13)">< 50010</td>
+     <td id="click14" class="clicks" onclick="generate(14)">< 65536</td>
+    </tr>
+   </table>
+
+   <table  id = "submenu">
+    <tr><td>This menu requires javascript, sorry<td><tr>
+   </table>
+  </td>
+ </tr>
+ </table>
+ <table id = "nav">
+ <tr>
+  <td style ="width:12.5%" ><a href="60025_TCP_product.html">Prev Port</a></td>
+  <td style ="width:25% ; background-color: #e4e4e4" ><a href="Combined_TCP_product.html">Products</a></td>
+  <td style ="width:25% ;"><a href="Combined_TCP_version.html">Versions</a></td>
+  <td style ="width:25% ;"><a href="Combined_TCP_full.html">Full</a></td>
+  <td style ="width:12.5%" ><a href="">Next Port</a></td>
+ <tr>
+ </table>
+ 
+ 
+ <div id="content">
+  Overview of services running on all probed ports.<br>
+  ~452.36 Million services observed from May to December 2012.  <br>
+  To get raw lists of the data go to <a href="../download.html">Download</a>. For an explanation what this data is and where it comes from see <a href="../paper.html">Paper</a>.<br><br>
+
+
+  <table id="sortable" class="tablesorter" style ="text-align:center;border:none"> 
+   <col width="20%" /><col width="50%" /><col width="15%" /><col width="15%" />
+   <thead>
+    <th>Servicename <img src="../icon_sort.png"></th>
+<th>Product <img src="../icon_sort.png"></th>
+<th>Count <img src="../icon_sort.png"></th>
+<th>Percent <img src="../icon_sort.png"></th>
+ 
+   </thead>
+   <tbody>
+    <tr><td>http</td><td></td><td>29362183</td><td>6.491</td></tr>
+<tr><td>no match</td><td>-/-</td><td>25345820</td><td>5.603</td></tr>
+<tr><td>ssl</td><td>SSLv3</td><td>25226518</td><td>5.577</td></tr>
+<tr><td>http</td><td>Apache</td><td>22499238</td><td>4.974</td></tr>
+<tr><td>ftp</td><td>Netgear broadband router or ZyXel VoIP adapter ftpd</td><td>18944094</td><td>4.188</td></tr>
+<tr><td>http</td><td>Allegro RomPager</td><td>14578878</td><td>3.223</td></tr>
+<tr><td>telnet</td><td>Netgear broadband router or ZyXel VoIP adapter telnetd</td><td>12038830</td><td>2.661</td></tr>
+<tr><td>sip</td><td></td><td>11090671</td><td>2.452</td></tr>
+<tr><td>domain</td><td>ISC BIND</td><td>10288301</td><td>2.274</td></tr>
+<tr><td>snmp</td><td>Cisco SNMP service</td><td>9434947</td><td>2.086</td></tr>
+<tr><td>http</td><td>Microsoft HTTPAPI httpd</td><td>8415456</td><td>1.86</td></tr>
+<tr><td>rpcbind</td><td></td><td>8199048</td><td>1.812</td></tr>
+<tr><td>msrpc</td><td>Microsoft Windows RPC</td><td>7926139</td><td>1.752</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td>7519324</td><td>1.662</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>7000494</td><td>1.548</td></tr>
+<tr><td>telnet</td><td></td><td>6766250</td><td>1.496</td></tr>
+<tr><td>ms-wbt-server</td><td>Microsoft Terminal Service</td><td>6207904</td><td>1.372</td></tr>
+<tr><td>smtp</td><td></td><td>5973939</td><td>1.321</td></tr>
+<tr><td>snmp</td><td>SNMPv1 server</td><td>5912919</td><td>1.307</td></tr>
+<tr><td>snmp</td><td>net-snmp</td><td>5003435</td><td>1.106</td></tr>
+<tr><td>smtp</td><td>Exim smtpd</td><td>4862809</td><td>1.075</td></tr>
+<tr><td>ssh</td><td>Dropbear sshd</td><td>4583509</td><td>1.013</td></tr>
+<tr><td>http</td><td>nginx</td><td>4556319</td><td>1.007</td></tr>
+<tr><td>domain</td><td></td><td>4509140</td><td>0.997</td></tr>
+<tr><td>http</td><td>Thomson TR-69 http config</td><td>4103672</td><td>0.907</td></tr>
+<tr><td>http</td><td>AkamaiGHost</td><td>4065931</td><td>0.899</td></tr>
+<tr><td>snmp</td><td>SNMPv3 server</td><td>3894510</td><td>0.861</td></tr>
+<tr><td>ftp</td><td></td><td>3880704</td><td>0.858</td></tr>
+<tr><td>ssl</td><td>TLSv1</td><td>3785522</td><td>0.837</td></tr>
+<tr><td>http</td><td>Actiontec TR069 remote access</td><td>3772536</td><td>0.834</td></tr>
+<tr><td>http</td><td>WSTL CPE 1.0</td><td>3514565</td><td>0.777</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>3280806</td><td>0.725</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>2997607</td><td>0.663</td></tr>
+<tr><td>imap</td><td>Dovecot imapd</td><td>2948780</td><td>0.652</td></tr>
+<tr><td>ftp</td><td>ProFTPD</td><td>2776513</td><td>0.614</td></tr>
+<tr><td>ftp</td><td>Pure-FTPd</td><td>2770816</td><td>0.613</td></tr>
+<tr><td>smtp</td><td>Postfix smtpd</td><td>2565549</td><td>0.567</td></tr>
+<tr><td>domain</td><td>dnsmasq</td><td>2554178</td><td>0.565</td></tr>
+<tr><td>pop3</td><td>Dovecot pop3d</td><td>2520752</td><td>0.557</td></tr>
+<tr><td>upnp</td><td>Portable SDK for UPnP devices</td><td>2485276</td><td>0.549</td></tr>
+<tr><td>telnet</td><td>Linux telnetd</td><td>2162121</td><td>0.478</td></tr>
+<tr><td>ftp</td><td>D-Link DSL-2750U ftp firmware update</td><td>2159782</td><td>0.477</td></tr>
+<tr><td>http</td><td>micro_httpd</td><td>2156056</td><td>0.477</td></tr>
+<tr><td>ftp</td><td>Microsoft ftpd</td><td>2096823</td><td>0.464</td></tr>
+<tr><td>http</td><td>GoAhead-Webs httpd</td><td>2091952</td><td>0.462</td></tr>
+<tr><td>rtsp-proxy</td><td>Blue Coat rtsp proxy</td><td>1967659</td><td>0.435</td></tr>
+<tr><td>ftp</td><td>vsftpd</td><td>1883378</td><td>0.416</td></tr>
+<tr><td>imap</td><td>Courier Imapd</td><td>1748856</td><td>0.387</td></tr>
+<tr><td>sip</td><td>T-Com Speedport</td><td>1677312</td><td>0.371</td></tr>
+<tr><td>http</td><td>mini_httpd</td><td>1657958</td><td>0.367</td></tr>
+<tr><td>http</td><td>Arris Touchstone cable modem http config</td><td>1610056</td><td>0.356</td></tr>
+<tr><td>irc</td><td>Dancer ircd</td><td>1606392</td><td>0.355</td></tr>
+<tr><td>http</td><td>Boa HTTPd</td><td>1602838</td><td>0.354</td></tr>
+<tr><td>http</td><td>Port25 PowerMTA mail gateway http admin</td><td>1508672</td><td>0.334</td></tr>
+<tr><td>soap</td><td>gSOAP soap</td><td>1463079</td><td>0.323</td></tr>
+<tr><td>http</td><td>ActionTec TR-069 remote access</td><td>1341513</td><td>0.297</td></tr>
+<tr><td>telnet</td><td>BusyBox telnetd</td><td>1330749</td><td>0.294</td></tr>
+<tr><td>http</td><td>Apache Tomcat/Coyote JSP engine</td><td>1301601</td><td>0.288</td></tr>
+<tr><td>snmp</td><td></td><td>1295457</td><td>0.286</td></tr>
+<tr><td>upnp</td><td>Intel UPnP reference SDK</td><td>1268849</td><td>0.28</td></tr>
+<tr><td>telnet</td><td>Alcatel/Thomson SpeedTouch DSL router admin interface</td><td>1250883</td><td>0.277</td></tr>
+<tr><td>telnet</td><td>Cisco 1721 router telnetd</td><td>1198158</td><td>0.265</td></tr>
+<tr><td>netbios-ssn</td><td>Microsoft Windows 98 netbios-ssn</td><td>1175961</td><td>0.26</td></tr>
+<tr><td>bandwidth-test</td><td>MikroTik bandwidth-test server</td><td>1173898</td><td>0.259</td></tr>
+<tr><td>chat</td><td>AIM or ICQ server</td><td>1151718</td><td>0.255</td></tr>
+<tr><td>smtp</td><td>Sendmail</td><td>1093831</td><td>0.242</td></tr>
+<tr><td>mgcp</td><td></td><td>1077575</td><td>0.238</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 SIP</td><td>1058595</td><td>0.234</td></tr>
+<tr><td>http</td><td>thttpd</td><td>1012368</td><td>0.224</td></tr>
+<tr><td>vnc</td><td>VNC</td><td>1006630</td><td>0.223</td></tr>
+<tr><td>smtp</td><td>Microsoft ESMTP</td><td>987827</td><td>0.218</td></tr>
+<tr><td>http</td><td>ActionTec DSL http config</td><td>957872</td><td>0.212</td></tr>
+<tr><td>http</td><td>GoAhead-Webs embedded httpd</td><td>948036</td><td>0.21</td></tr>
+<tr><td>smux</td><td>HP-UX smux</td><td>940069</td><td>0.208</td></tr>
+<tr><td>snmp</td><td>Lexmark SNMP service</td><td>926261</td><td>0.205</td></tr>
+<tr><td>http</td><td>SonicWALL</td><td>913481</td><td>0.202</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>888626</td><td>0.196</td></tr>
+<tr><td>ssh</td><td></td><td>887728</td><td>0.196</td></tr>
+<tr><td>pop3</td><td>Courier pop3d</td><td>877597</td><td>0.194</td></tr>
+<tr><td>http</td><td>TR-069 remote access</td><td>865807</td><td>0.191</td></tr>
+<tr><td>http</td><td>Secure Computing Sidewinder firewall http admin</td><td>862420</td><td>0.191</td></tr>
+<tr><td>ftp</td><td>MikroTik router ftpd</td><td>796196</td><td>0.176</td></tr>
+<tr><td>http</td><td>rhttpd</td><td>737740</td><td>0.163</td></tr>
+<tr><td>osiris</td><td>osiris host IDS agent</td><td>732047</td><td>0.162</td></tr>
+<tr><td>ssh</td><td>Cisco SSH</td><td>713643</td><td>0.158</td></tr>
+<tr><td>domain</td><td>OpenDNS Updater</td><td>709878</td><td>0.157</td></tr>
+<tr><td>isakmp</td><td></td><td>689671</td><td>0.152</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7320 SIP</td><td>681793</td><td>0.151</td></tr>
+<tr><td>ftp</td><td>FileZilla ftpd</td><td>677664</td><td>0.15</td></tr>
+<tr><td>cisco-sla-responder</td><td>Cisco SLA Responder</td><td>676904</td><td>0.15</td></tr>
+<tr><td>http</td><td>MiniServ</td><td>670244</td><td>0.148</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7390 SIP</td><td>657502</td><td>0.145</td></tr>
+<tr><td>rtsp</td><td></td><td>654767</td><td>0.145</td></tr>
+<tr><td>smtp</td><td>Microsoft Exchange smtpd</td><td>614299</td><td>0.136</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7112 SIP</td><td>601542</td><td>0.133</td></tr>
+<tr><td>http</td><td>Cisco IOS http config</td><td>583758</td><td>0.129</td></tr>
+<tr><td>http</td><td>Port25 PowerMTA web monitor</td><td>581958</td><td>0.129</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7240 SIP</td><td>579881</td><td>0.128</td></tr>
+<tr><td>mdns</td><td>DNS-based service discovery</td><td>574812</td><td>0.127</td></tr>
+<tr><td>telnet</td><td>utelnetd</td><td>573179</td><td>0.127</td></tr>
+<tr><td>ftp</td><td>vsftpd (before 2.0.8) or WU-FTPD</td><td>572603</td><td>0.127</td></tr>
+<tr><td>ssl</td><td>Microsoft IIS SSL</td><td>572287</td><td>0.127</td></tr>
+<tr><td>telnet</td><td>Pirelli NetGate VOIP v2 broadband router telnetd</td><td>549789</td><td>0.122</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v3 SIP</td><td>547646</td><td>0.121</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box WLAN 7170</td><td>539996</td><td>0.119</td></tr>
+<tr><td>smtp</td><td>Symantec Enterprise Security manager smtpd</td><td>533825</td><td>0.118</td></tr>
+<tr><td>domain</td><td>Microsoft DNS</td><td>527770</td><td>0.117</td></tr>
+<tr><td>telnet</td><td>Cisco IOS telnetd</td><td>517651</td><td>0.114</td></tr>
+<tr><td>telnet</td><td>Broadcom BCM96338 ADSL router telnetd</td><td>480181</td><td>0.106</td></tr>
+<tr><td>http</td><td>NET-DK</td><td>477587</td><td>0.106</td></tr>
+<tr><td>telnet</td><td>NASLite-SMB/Sveasoft Alchemy firmware telnetd</td><td>458629</td><td>0.101</td></tr>
+<tr><td>http</td><td>Thomson TWG850 router http config</td><td>453613</td><td>0.1</td></tr>
+<tr><td>http</td><td>DD-WRT milli_httpd</td><td>444333</td><td>0.098</td></tr>
+<tr><td>sip</td><td>T-Com Speedport W 503V</td><td>433530</td><td>0.096</td></tr>
+<tr><td>telnet</td><td>Cisco router telnetd</td><td>433206</td><td>0.096</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v2 SIP</td><td>426662</td><td>0.094</td></tr>
+<tr><td>ajp13</td><td>Apache Jserv</td><td>425730</td><td>0.094</td></tr>
+<tr><td>ftp</td><td>Serv-U ftpd</td><td>424848</td><td>0.094</td></tr>
+<tr><td>socks5</td><td></td><td>422846</td><td>0.093</td></tr>
+<tr><td>http</td><td>Alcatel/Thomson SpeedTouch ADSL http config</td><td>421202</td><td>0.093</td></tr>
+<tr><td>ncacn_http</td><td>Microsoft Windows RPC over HTTP</td><td>419024</td><td>0.093</td></tr>
+<tr><td>telnet</td><td>Broadcom BCM96328 DSL router telnetd</td><td>418810</td><td>0.093</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7050 SIP</td><td>410711</td><td>0.091</td></tr>
+<tr><td>vnc</td><td>Apple remote desktop vnc</td><td>405010</td><td>0.09</td></tr>
+<tr><td>postgresql</td><td>PostgreSQL DB</td><td>405001</td><td>0.09</td></tr>
+<tr><td>pop3</td><td>qmail pop3d</td><td>392209</td><td>0.087</td></tr>
+<tr><td>ldap</td><td></td><td>384770</td><td>0.085</td></tr>
+<tr><td>pop3pw</td><td>poppassd</td><td>380816</td><td>0.084</td></tr>
+<tr><td>ftp</td><td>D-Link or USRobotics ADSL router firmware update ftpd</td><td>379270</td><td>0.084</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box WLAN 7270</td><td>371429</td><td>0.082</td></tr>
+<tr><td>dominoconsole</td><td>Lotus Domino Console</td><td>371324</td><td>0.082</td></tr>
+<tr><td>telnet</td><td>D-Link DSL-2640B ADSL router telnetd</td><td>363459</td><td>0.08</td></tr>
+<tr><td>http</td><td>Virata-EmWeb</td><td>353262</td><td>0.078</td></tr>
+<tr><td>zebra</td><td>Quagga routing software</td><td>350438</td><td>0.077</td></tr>
+<tr><td>airport-admin</td><td>Apple AirPort or Time Capsule admin</td><td>347113</td><td>0.077</td></tr>
+<tr><td>telnet</td><td>Check Point Firewall-1 telnetd</td><td>344864</td><td>0.076</td></tr>
+<tr><td>http</td><td>uc-httpd</td><td>339438</td><td>0.075</td></tr>
+<tr><td>netbios-ns</td><td>Microsoft Windows XP netbios-ssn</td><td>337257</td><td>0.075</td></tr>
+<tr><td>ssh</td><td>MikroTik RouterOS sshd</td><td>333444</td><td>0.074</td></tr>
+<tr><td>http</td><td>MikroTik router config httpd</td><td>332806</td><td>0.074</td></tr>
+<tr><td>http</td><td>Avtech AVN801 network camera</td><td>326335</td><td>0.072</td></tr>
+<tr><td>ssl</td><td>TLS</td><td>320775</td><td>0.071</td></tr>
+<tr><td>printer</td><td></td><td>320002</td><td>0.071</td></tr>
+<tr><td>ftp</td><td>Check Point Firewall-1 ftpd</td><td>318044</td><td>0.07</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7390 WAP ftpd</td><td>314216</td><td>0.069</td></tr>
+<tr><td>http</td><td>Digifort Enterprise 6.5 httpd</td><td>310885</td><td>0.069</td></tr>
+<tr><td>http</td><td>webs</td><td>308598</td><td>0.068</td></tr>
+<tr><td>http</td><td>Hikvision-Webs</td><td>301699</td><td>0.067</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7113 SIP</td><td>299856</td><td>0.066</td></tr>
+<tr><td>telnet</td><td>Draytek Vigor ADSL router telnetd</td><td>294549</td><td>0.065</td></tr>
+<tr><td>smtp</td><td>IdeaSmtpServer smtpd</td><td>280947</td><td>0.062</td></tr>
+<tr><td>sip-proxy</td><td>Cisco SIP Gateway</td><td>279362</td><td>0.062</td></tr>
+<tr><td>telnet</td><td>Broadcom BCM96328 ADSL router telnetd</td><td>279346</td><td>0.062</td></tr>
+<tr><td>domain</td><td>NSD</td><td>278487</td><td>0.062</td></tr>
+<tr><td>http</td><td>uhttpd</td><td>278033</td><td>0.061</td></tr>
+<tr><td>telnet</td><td>Cisco telnetd</td><td>276370</td><td>0.061</td></tr>
+<tr><td>ftp</td><td>GNU Inetutils FTPd</td><td>274199</td><td>0.061</td></tr>
+<tr><td>netbios-ssn</td><td></td><td>272292</td><td>0.06</td></tr>
+<tr><td>imap</td><td>UW imapd</td><td>267590</td><td>0.059</td></tr>
+<tr><td>sip</td><td>BT HomeHub</td><td>267299</td><td>0.059</td></tr>
+<tr><td>http</td><td>Waveplus HTTPD</td><td>265740</td><td>0.059</td></tr>
+<tr><td>http</td><td>GeoVision GeoHttpServer for webcams</td><td>261451</td><td>0.058</td></tr>
+<tr><td>arcserve</td><td>ARCserve Discovery</td><td>260907</td><td>0.058</td></tr>
+<tr><td>rtsp</td><td>Darwin Streaming Server</td><td>253164</td><td>0.056</td></tr>
+<tr><td>pptp</td><td>Point to Point Tunneling Protocol</td><td>249434</td><td>0.055</td></tr>
+<tr><td>http</td><td>SonicWALL firewall http config</td><td>245098</td><td>0.054</td></tr>
+<tr><td>http</td><td>MikroTik router http config</td><td>242854</td><td>0.054</td></tr>
+<tr><td>http</td><td>TeamViewer httpd</td><td>240582</td><td>0.053</td></tr>
+<tr><td>http</td><td>NetBox httpd</td><td>237779</td><td>0.053</td></tr>
+<tr><td>smtp</td><td>MailEnable smptd</td><td>237311</td><td>0.052</td></tr>
+<tr><td>http</td><td>Netwave IP camera http config</td><td>234520</td><td>0.052</td></tr>
+<tr><td>ftp</td><td>GlobespanVirata ftpd</td><td>231400</td><td>0.051</td></tr>
+<tr><td>ftp</td><td>Alcatel Speedtouch ADSL router ftpd</td><td>229050</td><td>0.051</td></tr>
+<tr><td>http</td><td>Maverick</td><td>226986</td><td>0.05</td></tr>
+<tr><td>kerberos-sec</td><td>Windows 2003 Kerberos</td><td>226021</td><td>0.05</td></tr>
+<tr><td>ftp</td><td>bftpd</td><td>223660</td><td>0.049</td></tr>
+<tr><td>http</td><td>Piolink Switch</td><td>223243</td><td>0.049</td></tr>
+<tr><td>http</td><td>httpd</td><td>215182</td><td>0.048</td></tr>
+<tr><td>http</td><td>CentOS</td><td>213845</td><td>0.047</td></tr>
+<tr><td>ipp</td><td>CUPS</td><td>209434</td><td>0.046</td></tr>
+<tr><td>telnet</td><td>HP H3C SR8808 SecBlade firewall module telnetd</td><td>209317</td><td>0.046</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box WLAN 7320</td><td>206705</td><td>0.046</td></tr>
+<tr><td>ms-sql-s</td><td>Microsoft SQL Server 2000</td><td>203295</td><td>0.045</td></tr>
+<tr><td>ftp</td><td>NcFTPd</td><td>202843</td><td>0.045</td></tr>
+<tr><td>http</td><td>sw-cp-server httpd</td><td>202306</td><td>0.045</td></tr>
+<tr><td>telnet</td><td>Broadcom BCM96338 DSL router telnetd</td><td>201996</td><td>0.045</td></tr>
+<tr><td>vnc-http</td><td>RealVNC</td><td>201604</td><td>0.045</td></tr>
+<tr><td>http</td><td>Blue Coat proxy server</td><td>200570</td><td>0.044</td></tr>
+<tr><td>http-proxy</td><td>Symantec firewall http proxy</td><td>200154</td><td>0.044</td></tr>
+<tr><td>vnc</td><td></td><td>199829</td><td>0.044</td></tr>
+<tr><td>http</td><td>Cross Web Server</td><td>193198</td><td>0.043</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7141 SIP</td><td>190885</td><td>0.042</td></tr>
+<tr><td>http</td><td>Kucci</td><td>188480</td><td>0.042</td></tr>
+<tr><td>rsync</td><td></td><td>188291</td><td>0.042</td></tr>
+<tr><td>http</td><td>DrayTek Vigor 2800-series ADSL router httpd</td><td>187257</td><td>0.041</td></tr>
+<tr><td>vnc-http</td><td>Ultr@VNC</td><td>185562</td><td>0.041</td></tr>
+<tr><td>domain</td><td>pdnsd or Tor DNSPort</td><td>184561</td><td>0.041</td></tr>
+<tr><td>ssh</td><td>SCS sshd</td><td>183581</td><td>0.041</td></tr>
+<tr><td>http</td><td>Jetty</td><td>175979</td><td>0.039</td></tr>
+<tr><td>ftp</td><td>VxWorks ftpd</td><td>175797</td><td>0.039</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box WLAN 7390</td><td>175486</td><td>0.039</td></tr>
+<tr><td>socks4</td><td>Connection rejected or failed; connections possibly ok</td><td>175418</td><td>0.039</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box WLAN 7113</td><td>175417</td><td>0.039</td></tr>
+<tr><td>kerberos-sec</td><td>MIT Kerberos</td><td>174502</td><td>0.039</td></tr>
+<tr><td>http</td><td>Mbedthis-Appweb</td><td>174318</td><td>0.039</td></tr>
+<tr><td>kerberos-sec</td><td>Heimdal Kerberos</td><td>173466</td><td>0.038</td></tr>
+<tr><td>pop3</td><td>MailEnable POP3 Server</td><td>173394</td><td>0.038</td></tr>
+<tr><td>http</td><td>smartcds</td><td>170666</td><td>0.038</td></tr>
+<tr><td>http</td><td>WebProxy</td><td>168876</td><td>0.037</td></tr>
+<tr><td>webmin</td><td></td><td>168100</td><td>0.037</td></tr>
+<tr><td>http</td><td>Linksys wireless-G WAP http config</td><td>166189</td><td>0.037</td></tr>
+<tr><td>domain</td><td>PowerDNS</td><td>165263</td><td>0.037</td></tr>
+<tr><td>netbios-ssn</td><td>Samba smbd</td><td>164593</td><td>0.036</td></tr>
+<tr><td>winbox</td><td>MikroTik WinBox management console</td><td>161626</td><td>0.036</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box WLAN 7240</td><td>160438</td><td>0.035</td></tr>
+<tr><td>http</td><td>Linux</td><td>158254</td><td>0.035</td></tr>
+<tr><td>http</td><td>AIM</td><td>157836</td><td>0.035</td></tr>
+<tr><td>afp</td><td>Apple AFP</td><td>156899</td><td>0.035</td></tr>
+<tr><td>ms-sql-s</td><td>Microsoft SQL Server 2005</td><td>156846</td><td>0.035</td></tr>
+<tr><td>rtsp</td><td>Microsoft Windows Media Server</td><td>152706</td><td>0.034</td></tr>
+<tr><td>ftp</td><td>Netgear DG632 router ftpd</td><td>151289</td><td>0.033</td></tr>
+<tr><td>telnet</td><td>H3C switch telnetd</td><td>151278</td><td>0.033</td></tr>
+<tr><td>socks-proxy</td><td>Socks4A</td><td>151142</td><td>0.033</td></tr>
+<tr><td>rpcapd</td><td>WinPcap remote packet capture daemon</td><td>147842</td><td>0.033</td></tr>
+<tr><td>imap</td><td>IdeaImapServer imapd</td><td>146315</td><td>0.032</td></tr>
+<tr><td>http</td><td>Rapidsite/Apa httpd</td><td>144743</td><td>0.032</td></tr>
+<tr><td>ftp</td><td>WU-FTPD</td><td>143106</td><td>0.032</td></tr>
+<tr><td>http</td><td>IdeaWebServer httpd</td><td>140179</td><td>0.031</td></tr>
+<tr><td>ftp</td><td>FreeBSD ftpd</td><td>139580</td><td>0.031</td></tr>
+<tr><td>http</td><td>Westell cable modem http config</td><td>139533</td><td>0.031</td></tr>
+<tr><td>http</td><td>LiteSpeed httpd</td><td>137988</td><td>0.031</td></tr>
+<tr><td>ssl/vmware-auth</td><td>VMware Authentication Daemon</td><td>137308</td><td>0.03</td></tr>
+<tr><td>kerberos-sec</td><td>Mac OS X kerberos-sec</td><td>135868</td><td>0.03</td></tr>
+<tr><td>ssh</td><td>AllegroSoft RomSShell sshd</td><td>135771</td><td>0.03</td></tr>
+<tr><td>http</td><td>WindWeb</td><td>135499</td><td>0.03</td></tr>
+<tr><td>telnet</td><td>Netopia ADSL router telnetd</td><td>134106</td><td>0.03</td></tr>
+<tr><td>sip</td><td>T-Com Speedport W 920V</td><td>133833</td><td>0.03</td></tr>
+<tr><td>smtp</td><td>PowerMTA smtpd</td><td>131180</td><td>0.029</td></tr>
+<tr><td>http</td><td>Netwave webcam http config</td><td>130360</td><td>0.029</td></tr>
+<tr><td>sip</td><td> M5T SIP Stack/4.1.2.2</td><td>129716</td><td>0.029</td></tr>
+<tr><td>telnet</td><td>Ubee Cable Modem</td><td>129004</td><td>0.029</td></tr>
+<tr><td>remoting</td><td>MS .NET Remoting services</td><td>127607</td><td>0.028</td></tr>
+<tr><td>http</td><td>Netgear CVG834G cable modem http config</td><td>127377</td><td>0.028</td></tr>
+<tr><td>http</td><td>Check Point SVN foundation httpd</td><td>127248</td><td>0.028</td></tr>
+<tr><td>ident</td><td>pidentd</td><td>127215</td><td>0.028</td></tr>
+<tr><td>upnp</td><td>Conexant-EmWeb</td><td>127152</td><td>0.028</td></tr>
+<tr><td>tftp</td><td>Cisco router tftpd</td><td>125664</td><td>0.028</td></tr>
+<tr><td>memcached</td><td>Memcached</td><td>124406</td><td>0.028</td></tr>
+<tr><td>http</td><td>Mini web server</td><td>124177</td><td>0.027</td></tr>
+<tr><td>quagga</td><td>Quagga routing software</td><td>123774</td><td>0.027</td></tr>
+<tr><td>http</td><td>BusyBox httpd</td><td>123729</td><td>0.027</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box WLAN 7050</td><td>123518</td><td>0.027</td></tr>
+<tr><td>http</td><td>D-Link DIR-300 WAP http admin</td><td>120913</td><td>0.027</td></tr>
+<tr><td>pop3</td><td>IdeaPop3Server pop3d</td><td>120539</td><td>0.027</td></tr>
+<tr><td>http</td><td>Mathopd httpd</td><td>118745</td><td>0.026</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7270v3 WAP ftpd</td><td>118304</td><td>0.026</td></tr>
+<tr><td>chargen</td><td></td><td>117461</td><td>0.026</td></tr>
+<tr><td>X11</td><td></td><td>116975</td><td>0.026</td></tr>
+<tr><td>http</td><td>Httpd</td><td>116910</td><td>0.026</td></tr>
+<tr><td>vnc</td><td>RealVNC Enterprise</td><td>116513</td><td>0.026</td></tr>
+<tr><td>http</td><td>Intoto httpd</td><td>116121</td><td>0.026</td></tr>
+<tr><td>firebird</td><td>Firebird RDBMS</td><td>115336</td><td>0.025</td></tr>
+<tr><td>telnet</td><td>Green Packet DX230 WAP telnetd</td><td>112491</td><td>0.025</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>112320</td><td>0.025</td></tr>
+<tr><td>telnet</td><td>Openwall GNU/*/Linux telnetd</td><td>111695</td><td>0.025</td></tr>
+<tr><td>vnc</td><td>RealVNC Personal</td><td>111543</td><td>0.025</td></tr>
+<tr><td>upnp</td><td>ipOS</td><td>111514</td><td>0.025</td></tr>
+<tr><td>http-proxy</td><td>F5 BIG-IP load balancer http proxy</td><td>111301</td><td>0.025</td></tr>
+<tr><td>ssh</td><td>Linksys WRT45G modified dropbear sshd</td><td>109844</td><td>0.024</td></tr>
+<tr><td>ssh</td><td>Huawei VRP sshd</td><td>108342</td><td>0.024</td></tr>
+<tr><td>fw1-topology</td><td>Checkpoint FireWall-1 Topology</td><td>106973</td><td>0.024</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box WLAN 7112</td><td>106473</td><td>0.024</td></tr>
+<tr><td>http</td><td>http server 1.0</td><td>106058</td><td>0.023</td></tr>
+<tr><td>telnet</td><td>SpeedStream router telnetd</td><td>104884</td><td>0.023</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box WLAN 7141</td><td>104884</td><td>0.023</td></tr>
+<tr><td>smtp</td><td>Cisco PIX sanitized smtpd</td><td>102803</td><td>0.023</td></tr>
+<tr><td>http</td><td>Chunjs</td><td>101233</td><td>0.022</td></tr>
+<tr><td>xml</td><td></td><td>101105</td><td>0.022</td></tr>
+<tr><td>http</td><td>Ubicom</td><td>100840</td><td>0.022</td></tr>
+<tr><td>svnserve</td><td>Subversion</td><td>100635</td><td>0.022</td></tr>
+<tr><td>imap</td><td>Microsoft Exchange 2007-2010 imapd</td><td>99392</td><td>0.022</td></tr>
+<tr><td>telnet</td><td>Broadcom BCM96348 ADSL router telnetd</td><td>99340</td><td>0.022</td></tr>
+<tr><td>sip</td><td>QIP instant messenger SIP</td><td>98892</td><td>0.022</td></tr>
+<tr><td>http</td><td>RapidLogic</td><td>98878</td><td>0.022</td></tr>
+<tr><td>pop3</td><td>Dovecot DirectAdmin pop3d</td><td>98003</td><td>0.022</td></tr>
+<tr><td>ssh</td><td>Seagate GoFlex NAS device sshd</td><td>97782</td><td>0.022</td></tr>
+<tr><td>ms-sql-s</td><td>Microsoft SQL Server 2008 R2</td><td>97016</td><td>0.021</td></tr>
+<tr><td>psql</td><td>Pervasive.SQL Server - Relational Engine</td><td>96843</td><td>0.021</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7270v2 WAP ftpd</td><td>95863</td><td>0.021</td></tr>
+<tr><td>ntp</td><td>NTP</td><td>95026</td><td>0.021</td></tr>
+<tr><td>http</td><td>Perfectone IP301 VoIP phone http config</td><td>95008</td><td>0.021</td></tr>
+<tr><td>smtp</td><td>Alt-N MDaemon mail server</td><td>94369</td><td>0.021</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2007-2010 pop3d</td><td>93945</td><td>0.021</td></tr>
+<tr><td>telnet</td><td>Huawei STC router telnetd</td><td>92050</td><td>0.02</td></tr>
+<tr><td>telnet</td><td>ZyXEL ZXDSL 831CII ADSL modem telnetd</td><td>89854</td><td>0.02</td></tr>
+<tr><td>mongodb</td><td>MongoDB</td><td>89242</td><td>0.02</td></tr>
+<tr><td>smtp</td><td>rblsmtpd wrapped smtpd</td><td>86360</td><td>0.019</td></tr>
+<tr><td>imap</td><td>MailEnable imapd</td><td>85943</td><td>0.019</td></tr>
+<tr><td>upnp</td><td>Microsoft Windows UPnP</td><td>85513</td><td>0.019</td></tr>
+<tr><td>ftp</td><td>Dreambox ftpd</td><td>84344</td><td>0.019</td></tr>
+<tr><td>printer</td><td>Panasonic mfpscdl.exe service</td><td>83872</td><td>0.019</td></tr>
+<tr><td>ssh</td><td>lancom sshd</td><td>83867</td><td>0.019</td></tr>
+<tr><td>http</td><td>Microsoft ISA httpd</td><td>82892</td><td>0.018</td></tr>
+<tr><td>http</td><td>ADTRAN</td><td>82023</td><td>0.018</td></tr>
+<tr><td>telnet</td><td>Huawei Home Gateway</td><td>81620</td><td>0.018</td></tr>
+<tr><td>imap</td><td>Microsoft Exchange Server 2003 imapd</td><td>81472</td><td>0.018</td></tr>
+<tr><td>netbios-ssn</td><td>Nepenthes honeypot netbios-ssn</td><td>80785</td><td>0.018</td></tr>
+<tr><td>http</td><td>Boa httpd</td><td>80410</td><td>0.018</td></tr>
+<tr><td>ericssontimestep</td><td>Ericsson Timestep Permit VPN</td><td>80319</td><td>0.018</td></tr>
+<tr><td>telnet</td><td>Microsoft Windows XP telnetd</td><td>80101</td><td>0.018</td></tr>
+<tr><td>http</td><td>SMCD3GNV/... UPnP/1.0 MiniUPnPd/1.4</td><td>79600</td><td>0.018</td></tr>
+<tr><td>telnet</td><td>Ambit cable modem telnetd</td><td>78747</td><td>0.017</td></tr>
+<tr><td>http</td><td>WangWnagSimpleServer</td><td>78580</td><td>0.017</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>78407</td><td>0.017</td></tr>
+<tr><td>ftp</td><td>oftpd</td><td>77531</td><td>0.017</td></tr>
+<tr><td>http</td><td>Sierra Wireless Raven XE V2221E-V 3G WAP http admin</td><td>77358</td><td>0.017</td></tr>
+<tr><td>oracle-tns</td><td>Oracle TNS Listener</td><td>75510</td><td>0.017</td></tr>
+<tr><td>http</td><td>Microsoft IIS</td><td>75440</td><td>0.017</td></tr>
+<tr><td>http</td><td>Switch</td><td>74680</td><td>0.017</td></tr>
+<tr><td>http</td><td>Router</td><td>73792</td><td>0.016</td></tr>
+<tr><td>http</td><td>ZTE H220N router http config</td><td>73486</td><td>0.016</td></tr>
+<tr><td>http</td><td>Lanswitch - V100R003 HttpServer 1.1</td><td>72181</td><td>0.016</td></tr>
+<tr><td>imap-proxy</td><td>nginx imap proxy</td><td>72081</td><td>0.016</td></tr>
+<tr><td>ftp</td><td>Synology DiskStation NAS ftpd</td><td>70495</td><td>0.016</td></tr>
+<tr><td>http</td><td>World Client WDaemon httpd</td><td>70424</td><td>0.016</td></tr>
+<tr><td>ssh</td><td>Cisco/3com IPSSHd</td><td>70010</td><td>0.015</td></tr>
+<tr><td>ssl</td><td>OpenSSL</td><td>69782</td><td>0.015</td></tr>
+<tr><td>http-proxy</td><td>NetApp NetCache http proxy</td><td>69147</td><td>0.015</td></tr>
+<tr><td>http</td><td>Lotus Domino httpd</td><td>69006</td><td>0.015</td></tr>
+<tr><td>pop3</td><td>Zimbra Collabration Suite pop3d</td><td>68787</td><td>0.015</td></tr>
+<tr><td>ssh</td><td>NetScreen sshd</td><td>68737</td><td>0.015</td></tr>
+<tr><td>ftp</td><td>Symantec Raptor Firewall ftpd</td><td>68223</td><td>0.015</td></tr>
+<tr><td>http</td><td>CherryPy httpd</td><td>68175</td><td>0.015</td></tr>
+<tr><td>http</td><td>alphapd</td><td>67700</td><td>0.015</td></tr>
+<tr><td>ftp</td><td>Gene6 ftpd</td><td>67401</td><td>0.015</td></tr>
+<tr><td>eggdrop</td><td>Eggdrop IRC bot console</td><td>67032</td><td>0.015</td></tr>
+<tr><td>http</td><td>i3 micro or Linksys SPA400 VoIP gateway http config</td><td>66597</td><td>0.015</td></tr>
+<tr><td>imap</td><td>Cyrus imapd</td><td>66417</td><td>0.015</td></tr>
+<tr><td>citrix-ica</td><td>Citrix Metaframe XP ICA</td><td>66375</td><td>0.015</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 SIP</td><td>65616</td><td>0.015</td></tr>
+<tr><td>telnet</td><td>SMC SMC2870W Wireless Ethernet Bridge</td><td>65599</td><td>0.015</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7360 SL SIP</td><td>64109</td><td>0.014</td></tr>
+<tr><td>telnet</td><td>SMC8013WG cable modem/WAP telnetd</td><td>63473</td><td>0.014</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box WLAN 3270</td><td>63342</td><td>0.014</td></tr>
+<tr><td>http</td><td>Google httpd</td><td>62899</td><td>0.014</td></tr>
+<tr><td>http</td><td>HP-ChaiSOE</td><td>61825</td><td>0.014</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7340 SIP</td><td>61803</td><td>0.014</td></tr>
+<tr><td>smtp</td><td>Barracuda Networks Spam Firewall smtpd</td><td>61498</td><td>0.014</td></tr>
+<tr><td>telnet</td><td>Zmodo DVR</td><td>61340</td><td>0.014</td></tr>
+<tr><td>http</td><td>Realtron WebServer 1.1</td><td>61238</td><td>0.014</td></tr>
+<tr><td>http</td><td>CCProxy</td><td>60204</td><td>0.013</td></tr>
+<tr><td>telnet</td><td>VxWorks telnetd</td><td>58819</td><td>0.013</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>58776</td><td>0.013</td></tr>
+<tr><td>http</td><td>Linksys router http config</td><td>58534</td><td>0.013</td></tr>
+<tr><td>ms-sql-s</td><td>Microsoft SQL Server 2008</td><td>58208</td><td>0.013</td></tr>
+<tr><td>http</td><td>DVR Systems webcam http interface</td><td>58066</td><td>0.013</td></tr>
+<tr><td>flexlm</td><td>FlexLM license manager</td><td>58004</td><td>0.013</td></tr>
+<tr><td>telnet</td><td>Motorola VT1000v VOIP Adapter telnetd</td><td>57012</td><td>0.013</td></tr>
+<tr><td>telnet</td><td>Broadcom BCM96828 ADSL router telnetd</td><td>56762</td><td>0.013</td></tr>
+<tr><td>smtp</td><td>IMail NT-ESMTP</td><td>56592</td><td>0.013</td></tr>
+<tr><td>http</td><td>VMware ESXi Server httpd</td><td>56562</td><td>0.013</td></tr>
+<tr><td>microsoft-ds</td><td>Microsoft Windows XP microsoft-ds</td><td>56450</td><td>0.012</td></tr>
+<tr><td>ndmp</td><td>Veritas Backup Exec ndmp</td><td>56401</td><td>0.012</td></tr>
+<tr><td>http</td><td>IP_SHARER WEB</td><td>56326</td><td>0.012</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>56305</td><td>0.012</td></tr>
+<tr><td>tftp</td><td>Zoom X5 ADSL modem tftpd</td><td>56220</td><td>0.012</td></tr>
+<tr><td>telnet</td><td>Huawei Home Gateway 510</td><td>55950</td><td>0.012</td></tr>
+<tr><td>telnet</td><td>Pocket CMD telnetd</td><td>55823</td><td>0.012</td></tr>
+<tr><td>http</td><td>TwistedWeb httpd</td><td>55135</td><td>0.012</td></tr>
+<tr><td>sip</td><td> M5T SIP Stack/4.1.7.9</td><td>54873</td><td>0.012</td></tr>
+<tr><td>pop3</td><td></td><td>54857</td><td>0.012</td></tr>
+<tr><td>telnet</td><td>ZXDSL 831II</td><td>54757</td><td>0.012</td></tr>
+<tr><td>sip</td><td>T-Com Speedport W 722V</td><td>54625</td><td>0.012</td></tr>
+<tr><td>http</td><td>cloudflare-nginx</td><td>54613</td><td>0.012</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 Annex A SIP</td><td>54270</td><td>0.012</td></tr>
+<tr><td>irc</td><td>Unreal ircd</td><td>54264</td><td>0.012</td></tr>
+<tr><td>sip</td><td>T-Com Speedport W 721V</td><td>54124</td><td>0.012</td></tr>
+<tr><td>http</td><td>Thin</td><td>54000</td><td>0.012</td></tr>
+<tr><td>afp</td><td>Apple Time Capsule AFP</td><td>53730</td><td>0.012</td></tr>
+<tr><td>http</td><td>Embedded HTTP Server</td><td>53280</td><td>0.012</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>53273</td><td>0.012</td></tr>
+<tr><td>imap</td><td>Alt-N MDaemon imapd</td><td>51817</td><td>0.011</td></tr>
+<tr><td>http</td><td>Draytek Vigor ADSL router webadmin</td><td>51723</td><td>0.011</td></tr>
+<tr><td>upnp</td><td>MiniUPnP</td><td>51290</td><td>0.011</td></tr>
+<tr><td>telnet</td><td>D-Link DVG-series VoIP gateway telnetd</td><td>50925</td><td>0.011</td></tr>
+<tr><td>rmiregistry</td><td>Java RMI</td><td>50740</td><td>0.011</td></tr>
+<tr><td>http</td><td>OwnServer1.0</td><td>50605</td><td>0.011</td></tr>
+<tr><td>fw1-rlogin</td><td>Check Point FireWall-1 authenticated RLogin server</td><td>49575</td><td>0.011</td></tr>
+<tr><td>ssh</td><td>SunSSH</td><td>49141</td><td>0.011</td></tr>
+<tr><td>http</td><td>Netgear DGN1000 router http config</td><td>49095</td><td>0.011</td></tr>
+<tr><td>telnet</td><td>Vulcan</td><td>49074</td><td>0.011</td></tr>
+<tr><td>utorrent-udp</td><td>uTorrent UDP listener</td><td>48785</td><td>0.011</td></tr>
+<tr><td>ftp</td><td>DrayTek Vigor router ftpd</td><td>48564</td><td>0.011</td></tr>
+<tr><td>http</td><td>Cisco-MWEB</td><td>48523</td><td>0.011</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>48457</td><td>0.011</td></tr>
+<tr><td>netbios-ns</td><td>Samba nmbd</td><td>48409</td><td>0.011</td></tr>
+<tr><td>pop3</td><td>IMail pop3d</td><td>48325</td><td>0.011</td></tr>
+<tr><td>ftp</td><td>HP JetDirect ftpd</td><td>48238</td><td>0.011</td></tr>
+<tr><td>http</td><td>GoAhead-Webs</td><td>48137</td><td>0.011</td></tr>
+<tr><td>http</td><td>Tomato WAP firmware httpd</td><td>48085</td><td>0.011</td></tr>
+<tr><td>telnet</td><td>UTT Hiper 2610 router telnetd</td><td>47929</td><td>0.011</td></tr>
+<tr><td>domain</td><td>MikroTik RouterOS named or OpenDNS Updater</td><td>47625</td><td>0.011</td></tr>
+<tr><td>lotusnotes</td><td>Lotus Domino server</td><td>47428</td><td>0.01</td></tr>
+<tr><td>http</td><td>IP_SHARER WEB 1.0</td><td>47276</td><td>0.01</td></tr>
+<tr><td>jabber</td><td>ejabberd</td><td>47106</td><td>0.01</td></tr>
+<tr><td>sip</td><td>Sipek VoIP</td><td>47097</td><td>0.01</td></tr>
+<tr><td>domain</td><td>NetWare dnsd</td><td>47060</td><td>0.01</td></tr>
+<tr><td>http</td><td>Cdn Cache Server V2.0</td><td>47019</td><td>0.01</td></tr>
+<tr><td>telnet</td><td>HP JetDirect printer telnetd</td><td>46774</td><td>0.01</td></tr>
+<tr><td>imap</td><td>SmarterMail imapd</td><td>46698</td><td>0.01</td></tr>
+<tr><td>http</td><td>TP-LINK WR740N WAP http config</td><td>46453</td><td>0.01</td></tr>
+<tr><td>http</td><td>GM Streaming Server httpd</td><td>46337</td><td>0.01</td></tr>
+<tr><td>qotd</td><td>Windows qotd</td><td>46323</td><td>0.01</td></tr>
+<tr><td>http</td><td>AOLserver httpd</td><td>46163</td><td>0.01</td></tr>
+<tr><td>http</td><td>Netgear DG834G router http config</td><td>45788</td><td>0.01</td></tr>
+<tr><td>http</td><td>NetPort httpd</td><td>45220</td><td>0.01</td></tr>
+<tr><td>http</td><td>Arris</td><td>44729</td><td>0.01</td></tr>
+<tr><td>netbios-ns</td><td>Microsoft Windows Mobile netbios-ssn</td><td>44252</td><td>0.01</td></tr>
+<tr><td>http-proxy</td><td>MikroTik http proxy</td><td>43507</td><td>0.01</td></tr>
+<tr><td>rtsp</td><td>Apple AirTunes rtspd</td><td>43380</td><td>0.01</td></tr>
+<tr><td>ftp</td><td>Muddleftpd</td><td>42708</td><td>0.009</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7240 WAP ftpd</td><td>42501</td><td>0.009</td></tr>
+<tr><td>nagios-nsca</td><td>Nagios NSCA</td><td>42282</td><td>0.009</td></tr>
+<tr><td>telnet</td><td>Huawei HG655b DSL router telnetd</td><td>42227</td><td>0.009</td></tr>
+<tr><td>http</td><td>PDR-M800</td><td>42181</td><td>0.009</td></tr>
+<tr><td>telnet</td><td>Netwave Cable Modem</td><td>41788</td><td>0.009</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7320 WAP ftpd</td><td>41422</td><td>0.009</td></tr>
+<tr><td>ftp</td><td>SurgeFTPd</td><td>41223</td><td>0.009</td></tr>
+<tr><td>ldap</td><td>OpenLDAP</td><td>41126</td><td>0.009</td></tr>
+<tr><td>http</td><td>Caucho Resin JSP engine</td><td>40989</td><td>0.009</td></tr>
+<tr><td>http</td><td>IBM HTTP Server</td><td>40544</td><td>0.009</td></tr>
+<tr><td>http</td><td>TP-LINK Router</td><td>40232</td><td>0.009</td></tr>
+<tr><td>pop3</td><td>SmarterMail pop3d</td><td>40055</td><td>0.009</td></tr>
+<tr><td>shoutcast</td><td>SHOUTcast server</td><td>40043</td><td>0.009</td></tr>
+<tr><td>http</td><td>HTTPD  1.0</td><td>39999</td><td>0.009</td></tr>
+<tr><td>ftp</td><td>tnftpd</td><td>39778</td><td>0.009</td></tr>
+<tr><td>http</td><td>dcs-lig-httpd</td><td>39777</td><td>0.009</td></tr>
+<tr><td>http</td><td>gws</td><td>39705</td><td>0.009</td></tr>
+<tr><td>http</td><td>Gemtek</td><td>39497</td><td>0.009</td></tr>
+<tr><td>imap</td><td>hMailServer imapd</td><td>39257</td><td>0.009</td></tr>
+<tr><td>microsoft-ds</td><td>Microsoft Windows 2003 or 2008 microsoft-ds</td><td>39232</td><td>0.009</td></tr>
+<tr><td>ftp</td><td>Solaris ftpd</td><td>38972</td><td>0.009</td></tr>
+<tr><td>time</td><td></td><td>38742</td><td>0.009</td></tr>
+<tr><td>finger</td><td>Cisco fingerd</td><td>38663</td><td>0.009</td></tr>
+<tr><td>http</td><td>NAI EPO Agent framework</td><td>38612</td><td>0.009</td></tr>
+<tr><td>http</td><td>Icecast streaming media server</td><td>38508</td><td>0.009</td></tr>
+<tr><td>http</td><td>WEB SERVER</td><td>38315</td><td>0.008</td></tr>
+<tr><td>sip</td><td>DPC2203-120730</td><td>38143</td><td>0.008</td></tr>
+<tr><td>telnet</td><td>Dreambox media device telnetd</td><td>37641</td><td>0.008</td></tr>
+<tr><td>sip</td><td>Motorola SBV5220-SIP-1.2.6-SCM-05-SHTW</td><td>37328</td><td>0.008</td></tr>
+<tr><td>http</td><td>Netgear WGR614v7 WAP http config</td><td>36991</td><td>0.008</td></tr>
+<tr><td>pop3</td><td>hMailServer pop3d</td><td>36916</td><td>0.008</td></tr>
+<tr><td>http</td><td>Apple ODS DVD/CD Sharing Agent httpd</td><td>36557</td><td>0.008</td></tr>
+<tr><td>telnet</td><td>ZXDSL  831II</td><td>36425</td><td>0.008</td></tr>
+<tr><td>http</td><td>Generic router http config</td><td>36320</td><td>0.008</td></tr>
+<tr><td>login</td><td>Cisco/NetApp logind</td><td>36163</td><td>0.008</td></tr>
+<tr><td>wins</td><td>Microsoft Windows Wins</td><td>36039</td><td>0.008</td></tr>
+<tr><td>http</td><td>TP-LINK WR841N WAP http config</td><td>35960</td><td>0.008</td></tr>
+<tr><td>http</td><td>Netgear DG834 router http config</td><td>35515</td><td>0.008</td></tr>
+<tr><td>telnet</td><td>Huawei Technologies Co., Ltd.</td><td>35288</td><td>0.008</td></tr>
+<tr><td>http</td><td>ChipPC Extreme httpd</td><td>35040</td><td>0.008</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7170 WAP ftpd</td><td>34929</td><td>0.008</td></tr>
+<tr><td>http</td><td>D-Link DVS-4088S, DVS-5088S, or DVG-7062S VoIP gateway http config</td><td>34468</td><td>0.008</td></tr>
+<tr><td>telnet</td><td>Sagem F@st 2604 ADSL router telnetd</td><td>34316</td><td>0.008</td></tr>
+<tr><td>domain</td><td>Aethra SV1242 WAP</td><td>34238</td><td>0.008</td></tr>
+<tr><td>domain</td><td>TinyDNS</td><td>34197</td><td>0.008</td></tr>
+<tr><td>vnc-http</td><td>VNC Server Enterprise Edition httpd</td><td>34193</td><td>0.008</td></tr>
+<tr><td>openvpn</td><td>OpenVPN</td><td>34159</td><td>0.008</td></tr>
+<tr><td>ftp</td><td>DrayTek Vigor 2820 ADSL router ftpd</td><td>34037</td><td>0.008</td></tr>
+<tr><td>http</td><td>EdgePrism</td><td>33671</td><td>0.007</td></tr>
+<tr><td>http</td><td>Indy</td><td>33600</td><td>0.007</td></tr>
+<tr><td>http</td><td>Gadspot/Avtech AV787 webcam http config</td><td>33479</td><td>0.007</td></tr>
+<tr><td>telnet</td><td>GlobespanVirata telnetd</td><td>33201</td><td>0.007</td></tr>
+<tr><td>telnet</td><td>DD-WRT telnetd</td><td>33160</td><td>0.007</td></tr>
+<tr><td>telnet</td><td>Broadcom BCM96368 ADSL router telnetd</td><td>32821</td><td>0.007</td></tr>
+<tr><td>login</td><td>Airspan MiMAX WiMAX WAP logind</td><td>32821</td><td>0.007</td></tr>
+<tr><td>printer</td><td>Microsoft lpd</td><td>32819</td><td>0.007</td></tr>
+<tr><td>telnet</td><td>ZXDSL  831CII</td><td>32659</td><td>0.007</td></tr>
+<tr><td>http</td><td>thin 1.2.11 codename Bat-Shit Crazy</td><td>32467</td><td>0.007</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7360 SIP</td><td>32326</td><td>0.007</td></tr>
+<tr><td>http</td><td>RapidLogic httpd</td><td>32304</td><td>0.007</td></tr>
+<tr><td>finger</td><td>BSD/Linux fingerd</td><td>32278</td><td>0.007</td></tr>
+<tr><td>http</td><td>Netgear WGR614v9 WAP http config</td><td>32250</td><td>0.007</td></tr>
+<tr><td>telnet</td><td>USRobotics/Sagem router telnetd</td><td>32201</td><td>0.007</td></tr>
+<tr><td>smtp</td><td>MDaemon smtpd</td><td>32117</td><td>0.007</td></tr>
+<tr><td>imap</td><td>Zimbra imapd</td><td>32114</td><td>0.007</td></tr>
+<tr><td>telnet</td><td>Cisco ASR 9010 router telnetd</td><td>32040</td><td>0.007</td></tr>
+<tr><td>rtsp</td><td>RealOne Server</td><td>31790</td><td>0.007</td></tr>
+<tr><td>nntp</td><td>Microsoft NNTP Service</td><td>31669</td><td>0.007</td></tr>
+<tr><td>afp</td><td>Netatalk</td><td>31637</td><td>0.007</td></tr>
+<tr><td>telnet</td><td>Broadcom BCM96358 ADSL router telnetd</td><td>31485</td><td>0.007</td></tr>
+<tr><td>printer</td><td>lpd</td><td>31016</td><td>0.007</td></tr>
+<tr><td>telnet</td><td>Allied Telesyn Rapier switch telnetd</td><td>31008</td><td>0.007</td></tr>
+<tr><td>http-proxy</td><td>Tinyproxy</td><td>30648</td><td>0.007</td></tr>
+<tr><td>ssh</td><td>Mocana embedded SSH</td><td>30627</td><td>0.007</td></tr>
+<tr><td>telnet</td><td>BSD-derived telnetd</td><td>30517</td><td>0.007</td></tr>
+<tr><td>http</td><td>sw-cp-server</td><td>30497</td><td>0.007</td></tr>
+<tr><td>netsaint</td><td>Netsaint Status Daemon</td><td>30399</td><td>0.007</td></tr>
+<tr><td>http</td><td>NetApp DFM httpd</td><td>30300</td><td>0.007</td></tr>
+<tr><td>http</td><td>MS-SDK-HttpServer</td><td>30149</td><td>0.007</td></tr>
+<tr><td>http</td><td>Virgin Super Hub media player http config</td><td>30037</td><td>0.007</td></tr>
+<tr><td>afs</td><td>OpenAFS</td><td>29942</td><td>0.007</td></tr>
+<tr><td>irc-proxy</td><td>psyBNC</td><td>29847</td><td>0.007</td></tr>
+<tr><td>http</td><td>Nucleus</td><td>29635</td><td>0.007</td></tr>
+<tr><td>sip</td><td>Pirelli/Pirelli WLAN IAD-1.38S-M</td><td>29569</td><td>0.007</td></tr>
+<tr><td>ovm-manager</td><td>Oracle VM Manager</td><td>29170</td><td>0.006</td></tr>
+<tr><td>imap</td><td>IMail imapd</td><td>29165</td><td>0.006</td></tr>
+<tr><td>http</td><td>Allegro-Software-RomPager</td><td>28977</td><td>0.006</td></tr>
+<tr><td>telnet</td><td>Enterasys XSR Security Router telnetd</td><td>28895</td><td>0.006</td></tr>
+<tr><td>http</td><td>TP-LINK WR340G WAP http config</td><td>28806</td><td>0.006</td></tr>
+<tr><td>http</td><td>Zimbra http config</td><td>28755</td><td>0.006</td></tr>
+<tr><td>http</td><td>Huawei HG532c ADSL router http config</td><td>28403</td><td>0.006</td></tr>
+<tr><td>http</td><td>Linksys PAP2 VoIP http config</td><td>28315</td><td>0.006</td></tr>
+<tr><td>rtsp</td><td>Vivotek IP7131 or IP7138 webcam rtspd</td><td>28284</td><td>0.006</td></tr>
+<tr><td>http</td><td>Slingbox remote streaming httpd</td><td>28134</td><td>0.006</td></tr>
+<tr><td>http</td><td>HP Proliant System Management</td><td>27946</td><td>0.006</td></tr>
+<tr><td>http</td><td>PWS httpd</td><td>27896</td><td>0.006</td></tr>
+<tr><td>http</td><td>DrcomServer1.0</td><td>27826</td><td>0.006</td></tr>
+<tr><td>telnet</td><td>Huawei Quidway Eudemon firewall telnetd</td><td>27717</td><td>0.006</td></tr>
+<tr><td>sip-proxy</td><td>Asterisk PBX</td><td>27674</td><td>0.006</td></tr>
+<tr><td>http</td><td>Dreambox httpd</td><td>27475</td><td>0.006</td></tr>
+<tr><td>ftp</td><td>Tornado vxWorks ftpd</td><td>27435</td><td>0.006</td></tr>
+<tr><td>upnp</td><td>Virata-EmWeb httpd</td><td>27251</td><td>0.006</td></tr>
+<tr><td>http</td><td>Boa</td><td>27198</td><td>0.006</td></tr>
+<tr><td>smtp</td><td>Kerio Connect smtpd</td><td>27103</td><td>0.006</td></tr>
+<tr><td>telnet</td><td>OneAccess ONE100A router telnetd</td><td>27005</td><td>0.006</td></tr>
+<tr><td>telnet</td><td>Billion or D-Link ADSL router telnetd</td><td>26929</td><td>0.006</td></tr>
+<tr><td>ssl/pop3</td><td>Cyrus pop3sd</td><td>26893</td><td>0.006</td></tr>
+<tr><td>http</td><td>Grandstream HT502 VoIP router http config</td><td>26832</td><td>0.006</td></tr>
+<tr><td>http</td><td>HTTP Software 1.1</td><td>26748</td><td>0.006</td></tr>
+<tr><td>ftp</td><td>Billion 741GE ADSL router</td><td>26687</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>Zimbra pop3d</td><td>26412</td><td>0.006</td></tr>
+<tr><td>http</td><td>Agranat-EmWeb</td><td>26388</td><td>0.006</td></tr>
+<tr><td>http</td><td>SiemensGigaset-Server</td><td>26374</td><td>0.006</td></tr>
+<tr><td>http-proxy</td><td>Haproxy http proxy</td><td>26300</td><td>0.006</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box</td><td>26107</td><td>0.006</td></tr>
+<tr><td>tandem-print</td><td>Sharp printer tandem printing</td><td>25940</td><td>0.006</td></tr>
+<tr><td>telnet</td><td>ZXDSL 931WII</td><td>25880</td><td>0.006</td></tr>
+<tr><td>rtsp</td><td>Helix DNA Server</td><td>25570</td><td>0.006</td></tr>
+<tr><td>ftp</td><td>Xavi 7768 WAP ftpd</td><td>25507</td><td>0.006</td></tr>
+<tr><td>ftp</td><td>ZyXEL ZXDSL 831CII ADSL modem telnetd</td><td>25487</td><td>0.006</td></tr>
+<tr><td>xdmcp</td><td>XDMCP</td><td>25195</td><td>0.006</td></tr>
+<tr><td>http</td><td>MochiWeb</td><td>25086</td><td>0.006</td></tr>
+<tr><td>http</td><td>Router Webserver</td><td>25045</td><td>0.006</td></tr>
+<tr><td>http</td><td>D-Link router/Airlink NAS http config</td><td>24960</td><td>0.006</td></tr>
+<tr><td>jabber</td><td>Jabber instant messaging server</td><td>24771</td><td>0.005</td></tr>
+<tr><td>ftp</td><td>HP LaserJet P4014 printer ftpd</td><td>24716</td><td>0.005</td></tr>
+<tr><td>telnet</td><td>Cisco or Edge-core switch telnetd</td><td>24591</td><td>0.005</td></tr>
+<tr><td>http</td><td>WYM httpd</td><td>24535</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>qpopper</td><td>24420</td><td>0.005</td></tr>
+<tr><td>telnet</td><td>ZXR10 Carrier-class High-end Routing Switch of ZTE Corporation</td><td>24305</td><td>0.005</td></tr>
+<tr><td>ftp</td><td>Kiss DP-558 PVR ftpd</td><td>24028</td><td>0.005</td></tr>
+<tr><td>telnet</td><td>Airspan MiMAX WiMAX WAP telnetd</td><td>24001</td><td>0.005</td></tr>
+<tr><td>ftp</td><td>Brother/HP printer ftpd</td><td>23891</td><td>0.005</td></tr>
+<tr><td>telnet</td><td>Conexant ATU-R ADSL router telnetd</td><td>23503</td><td>0.005</td></tr>
+<tr><td>http</td><td>IST OIS</td><td>23438</td><td>0.005</td></tr>
+<tr><td>ftp</td><td>NET Disk/NetStore ftpd</td><td>23393</td><td>0.005</td></tr>
+<tr><td>ssh</td><td>Cyberoam firewall sshd</td><td>23321</td><td>0.005</td></tr>
+<tr><td>http</td><td>David WebBox httpd</td><td>23200</td><td>0.005</td></tr>
+<tr><td>http</td><td>SafeNet Sentinel Keys License Monitor httpd</td><td>23107</td><td>0.005</td></tr>
+<tr><td>http</td><td>QNAP TS-219P NAS http config</td><td>22755</td><td>0.005</td></tr>
+<tr><td>http</td><td>Techno Vision Security System http config</td><td>22752</td><td>0.005</td></tr>
+<tr><td>telnet</td><td>BladeCenter or TANDBERG Codec telnetd</td><td>22741</td><td>0.005</td></tr>
+<tr><td>ssh</td><td>WeOnlyDo sshd</td><td>22740</td><td>0.005</td></tr>
+<tr><td>login</td><td></td><td>22674</td><td>0.005</td></tr>
+<tr><td>telnet</td><td>VBrick 4300 video encoder telnetd</td><td>22533</td><td>0.005</td></tr>
+<tr><td>http</td><td>Conexant-EmWeb</td><td>22532</td><td>0.005</td></tr>
+<tr><td>http</td><td>APC SmartUPS http config</td><td>22476</td><td>0.005</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box 5140</td><td>22255</td><td>0.005</td></tr>
+<tr><td>sieve</td><td>Cyrus timsieved</td><td>22159</td><td>0.005</td></tr>
+<tr><td>ftp</td><td>WS FTPd</td><td>22153</td><td>0.005</td></tr>
+<tr><td>http-proxy</td><td>EZproxy web proxy</td><td>21946</td><td>0.005</td></tr>
+<tr><td>http</td><td>Microsoft Windows Media Server</td><td>21902</td><td>0.005</td></tr>
+<tr><td>http</td><td>OpenRG</td><td>21901</td><td>0.005</td></tr>
+<tr><td>http</td><td>Debut embedded httpd</td><td>21821</td><td>0.005</td></tr>
+<tr><td>http</td><td>COLIB_ASYNC_HTTP_SERVER</td><td>21743</td><td>0.005</td></tr>
+<tr><td>http</td><td>CommuniGate Pro httpd</td><td>21674</td><td>0.005</td></tr>
+<tr><td>ssh</td><td>Bitvise WinSSHD</td><td>21569</td><td>0.005</td></tr>
+<tr><td>http</td><td>Unknown</td><td>21558</td><td>0.005</td></tr>
+<tr><td>sip</td><td>Motorola SBV5220-SIP-1.2.6-SCM-01-SHTW</td><td>21524</td><td>0.005</td></tr>
+<tr><td>rtsp</td><td>D-Link DCS-2130 webcam rtspd</td><td>21454</td><td>0.005</td></tr>
+<tr><td>afp</td><td>Apple Airport Extreme/Time Capsule AFP</td><td>21388</td><td>0.005</td></tr>
+<tr><td>ssh</td><td>DrayTek Vigor 2820n ADSL router sshd</td><td>21365</td><td>0.005</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7570 vDSL SIP</td><td>21347</td><td>0.005</td></tr>
+<tr><td>smtp</td><td>Lotus Domino smtpd</td><td>21324</td><td>0.005</td></tr>
+<tr><td>telnet</td><td>Zoom X6 ADSL router telnetd</td><td>21259</td><td>0.005</td></tr>
+<tr><td>http</td><td>FlashCom</td><td>21180</td><td>0.005</td></tr>
+<tr><td>http</td><td>httpd 1.1</td><td>21084</td><td>0.005</td></tr>
+<tr><td>http</td><td>Buffalo AirStation http config</td><td>21021</td><td>0.005</td></tr>
+<tr><td>http</td><td>HP JetDirect printer webadmin</td><td>20853</td><td>0.005</td></tr>
+<tr><td>http</td><td>Zope httpd</td><td>20701</td><td>0.005</td></tr>
+<tr><td>http</td><td>Sandpiper Footprint http load balancer</td><td>20656</td><td>0.005</td></tr>
+<tr><td>http</td><td>Fortinet VPN/firewall http config</td><td>20656</td><td>0.005</td></tr>
+<tr><td>http</td><td>RealVNC</td><td>20625</td><td>0.005</td></tr>
+<tr><td>rifa-dvr</td><td>Rifatron DVR</td><td>20609</td><td>0.005</td></tr>
+<tr><td>http</td><td>Cisco ASA firewall http config</td><td>20523</td><td>0.005</td></tr>
+<tr><td>http</td><td>Sun GlassFish</td><td>20455</td><td>0.005</td></tr>
+<tr><td>http</td><td>A p a c h e</td><td>20269</td><td>0.004</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7390 84.05.22 SIP</td><td>20257</td><td>0.004</td></tr>
+<tr><td>smtp-proxy</td><td>ESET NOD32 anti-virus smtp proxy</td><td>20214</td><td>0.004</td></tr>
+<tr><td>http</td><td>YAMAHA-RT</td><td>20084</td><td>0.004</td></tr>
+<tr><td>telnet</td><td>ZTE 9806H                          #</td><td>20053</td><td>0.004</td></tr>
+<tr><td>ssh</td><td>Serv-U SSH Server</td><td>19998</td><td>0.004</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v1 SIP</td><td>19959</td><td>0.004</td></tr>
+<tr><td>http</td><td>Kerio MailServer http config</td><td>19943</td><td>0.004</td></tr>
+<tr><td>netbios-ns</td><td>Microsoft Windows NT netbios-ssn</td><td>19854</td><td>0.004</td></tr>
+<tr><td>http</td><td>RemotelyAnywhere remote PC management httpd</td><td>19748</td><td>0.004</td></tr>
+<tr><td>sip</td><td>Asterisk</td><td>19645</td><td>0.004</td></tr>
+<tr><td>imap</td><td>Kerio Connect imapd</td><td>19603</td><td>0.004</td></tr>
+<tr><td>daytime</td><td>Microsoft Windows USA daytime</td><td>19591</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>Openwall popa3d</td><td>19560</td><td>0.004</td></tr>
+<tr><td>http</td><td>Netgear or Linksys WAP http config</td><td>19521</td><td>0.004</td></tr>
+<tr><td>smtp</td><td>mailfront smtpd</td><td>19459</td><td>0.004</td></tr>
+<tr><td>http</td><td>BarracudaHTTP</td><td>19440</td><td>0.004</td></tr>
+<tr><td>http</td><td>GoAhead httpd</td><td>19407</td><td>0.004</td></tr>
+<tr><td>rtmp</td><td>Real-Time Messaging Protocol</td><td>19205</td><td>0.004</td></tr>
+<tr><td>telnet</td><td>Alcatel 7750 SR router telnetd</td><td>18825</td><td>0.004</td></tr>
+<tr><td>http-proxy</td><td>CCProxy http proxy</td><td>18797</td><td>0.004</td></tr>
+<tr><td>ftp</td><td>Nepenthes HoneyTrap fake vulnerable ftpd</td><td>18776</td><td>0.004</td></tr>
+<tr><td>telnet</td><td>Huawei Quidway S5624P-PWR telnetd</td><td>18770</td><td>0.004</td></tr>
+<tr><td>http</td><td>Ubicom httpd</td><td>18744</td><td>0.004</td></tr>
+<tr><td>daytime</td><td></td><td>18731</td><td>0.004</td></tr>
+<tr><td>telnet</td><td>D-Link ADSL router telnetd</td><td>18724</td><td>0.004</td></tr>
+<tr><td>irc-proxy</td><td>ShroudBNC irc-proxy</td><td>18703</td><td>0.004</td></tr>
+<tr><td>zebra</td><td>GNU Zebra routing software</td><td>18675</td><td>0.004</td></tr>
+<tr><td>sip-proxy</td><td>3CX PhoneSystem PBX</td><td>18561</td><td>0.004</td></tr>
+<tr><td>http</td><td>CompaqHTTPServer</td><td>18552</td><td>0.004</td></tr>
+<tr><td>rtsp</td><td>Avtech MPEG4 DVR control rtspd</td><td>18450</td><td>0.004</td></tr>
+<tr><td>http</td><td>Swann DVR8-2600 security camera system httpd</td><td>18420</td><td>0.004</td></tr>
+<tr><td>sip</td><td>Motorola SBV5121-SIP-1.2.4-SCM-09-SHTW</td><td>18376</td><td>0.004</td></tr>
+<tr><td>http</td><td>D-Link DI-524 http config</td><td>18368</td><td>0.004</td></tr>
+<tr><td>tftp</td><td>Plan 9 tftpd</td><td>18359</td><td>0.004</td></tr>
+<tr><td>http</td><td>Tridium Niagara httpd</td><td>18324</td><td>0.004</td></tr>
+<tr><td>ssh</td><td>Fortinet VPN/firewall sshd</td><td>18320</td><td>0.004</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7113 Annex A SIP</td><td>18271</td><td>0.004</td></tr>
+<tr><td>http</td><td>FortiClient firewall http config</td><td>18245</td><td>0.004</td></tr>
+<tr><td>http</td><td>Netgear WNR1000v3 WAP http config</td><td>18217</td><td>0.004</td></tr>
+<tr><td>imap</td><td></td><td>18128</td><td>0.004</td></tr>
+<tr><td>http</td><td>Linksys WRT54GL wireless-G router http config</td><td>17984</td><td>0.004</td></tr>
+<tr><td>http</td><td>Edgewater Networks Edgemarc 4562 VoIP gateway web config</td><td>17915</td><td>0.004</td></tr>
+<tr><td>http</td><td>i3micro VRG VoIP adapter http config</td><td>17906</td><td>0.004</td></tr>
+<tr><td>http-proxy</td><td>Microsoft Foundation Class httpd</td><td>17902</td><td>0.004</td></tr>
+<tr><td>telnet</td><td>Brother/HP printer telnetd</td><td>17845</td><td>0.004</td></tr>
+<tr><td>ftp</td><td>OpenBSD ftpd</td><td>17830</td><td>0.004</td></tr>
+<tr><td>http</td><td>Crestron MPS-200 AV routing system http config</td><td>17794</td><td>0.004</td></tr>
+<tr><td>smtp</td><td>IceWarp smtpd</td><td>17588</td><td>0.004</td></tr>
+<tr><td>xmpp</td><td>Wildfire XMPP Client</td><td>17485</td><td>0.004</td></tr>
+<tr><td>telnet</td><td>Grandstream HT-502 VoIP router telnetd</td><td>17277</td><td>0.004</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>17237</td><td>0.004</td></tr>
+<tr><td>http</td><td>Verizon FIOS Actiontec http config</td><td>17230</td><td>0.004</td></tr>
+<tr><td>ftp</td><td>Wind River FTP server</td><td>17135</td><td>0.004</td></tr>
+<tr><td>telnet</td><td>Cyberoam UTM firewall telnetd</td><td>17132</td><td>0.004</td></tr>
+<tr><td>ftp</td><td>MegaBit Gear ftpd</td><td>17122</td><td>0.004</td></tr>
+<tr><td>http</td><td>WebServer</td><td>17028</td><td>0.004</td></tr>
+<tr><td>telnet</td><td>Polycom ViewStation Video Conferencing telnetd</td><td>16957</td><td>0.004</td></tr>
+<tr><td>http</td><td>uTorrent utserver web interface</td><td>16887</td><td>0.004</td></tr>
+<tr><td>domain</td><td>MyDNS</td><td>16762</td><td>0.004</td></tr>
+<tr><td>smtp</td><td>XMail SMTP server</td><td>16619</td><td>0.004</td></tr>
+<tr><td>http</td><td>FlashCom httpd</td><td>16596</td><td>0.004</td></tr>
+<tr><td>http</td><td>HiQ Flash Server</td><td>16590</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>Microsoft Windows 2003 POP3 Service</td><td>16582</td><td>0.004</td></tr>
+<tr><td>telnet</td><td>Cisco LocalDirector telnetd</td><td>16555</td><td>0.004</td></tr>
+<tr><td>pop3pw</td><td>ApplePasswordServer pop3 password change daemon</td><td>16549</td><td>0.004</td></tr>
+<tr><td>ipp</td><td>Web-Server httpd</td><td>16540</td><td>0.004</td></tr>
+<tr><td>http</td><td>Sagem F@st router httpd</td><td>16431</td><td>0.004</td></tr>
+<tr><td>ssl/imap</td><td>Cyrus imapd</td><td>16407</td><td>0.004</td></tr>
+<tr><td>http</td><td>HTTP</td><td>16379</td><td>0.004</td></tr>
+<tr><td>http</td><td>Gnway Web Server</td><td>16199</td><td>0.004</td></tr>
+<tr><td>http</td><td>WebServer(IPCamera_Logo)</td><td>16168</td><td>0.004</td></tr>
+<tr><td>http</td><td>Foundry Networks</td><td>15881</td><td>0.004</td></tr>
+<tr><td>ftp</td><td>TRENDnet/Hawking webcam ftpd</td><td>15847</td><td>0.004</td></tr>
+<tr><td>http</td><td>antid</td><td>15821</td><td>0.003</td></tr>
+<tr><td>http</td><td>Web-Server httpd</td><td>15720</td><td>0.003</td></tr>
+<tr><td>http</td><td>Oracle Application Server 10g httpd</td><td>15688</td><td>0.003</td></tr>
+<tr><td>telnet</td><td>Huawei Technologies Co.,Ltd. 2002-2007. All rights reserved.</td><td>15575</td><td>0.003</td></tr>
+<tr><td>http</td><td>EZPacket Web Server</td><td>15573</td><td>0.003</td></tr>
+<tr><td>http</td><td>linux</td><td>15572</td><td>0.003</td></tr>
+<tr><td>http</td><td>Net-OS 5.xx UPnP</td><td>15493</td><td>0.003</td></tr>
+<tr><td>daap</td><td>mt-daapd DAAP</td><td>15416</td><td>0.003</td></tr>
+<tr><td>http</td><td>Network Associates ePolicy Orchestrator</td><td>15408</td><td>0.003</td></tr>
+<tr><td>psql-btrieve</td><td>Pervasive.SQL Server - Btrieve Engine</td><td>15405</td><td>0.003</td></tr>
+<tr><td>http</td><td>uTorrent WebUI</td><td>15306</td><td>0.003</td></tr>
+<tr><td>http</td><td>WEBrick httpd</td><td>15243</td><td>0.003</td></tr>
+<tr><td>http-proxy</td><td>SonicWALL SSL-VPN http proxy</td><td>15230</td><td>0.003</td></tr>
+<tr><td>http</td><td>NetPower HTTPd</td><td>15161</td><td>0.003</td></tr>
+<tr><td>telnet</td><td>Huawei AR28-09 router telnetd</td><td>15143</td><td>0.003</td></tr>
+<tr><td>http</td><td>Fortinet FortiGate 50B firewall http config</td><td>15120</td><td>0.003</td></tr>
+<tr><td>http</td><td>KWS-1043N-Svr</td><td>15088</td><td>0.003</td></tr>
+<tr><td>ilo</td><td>HP ProLiant ML350 Interactive Lights Out</td><td>14978</td><td>0.003</td></tr>
+<tr><td>http</td><td>VMware ESXi 4.1 Server httpd</td><td>14957</td><td>0.003</td></tr>
+<tr><td>http</td><td>Indy httpd</td><td>14930</td><td>0.003</td></tr>
+<tr><td>telnet</td><td>Huawei SmartAX MT880 ADSL router telnetd</td><td>14912</td><td>0.003</td></tr>
+<tr><td>http</td><td>HTTP Server</td><td>14906</td><td>0.003</td></tr>
+<tr><td>talk</td><td>Talk server</td><td>14888</td><td>0.003</td></tr>
+<tr><td>http</td><td>FC</td><td>14877</td><td>0.003</td></tr>
+<tr><td>sieve</td><td>Dovecot timsieved</td><td>14687</td><td>0.003</td></tr>
+<tr><td>zabbix</td><td>Zabbix Monitoring System</td><td>14513</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>Dionaea honeypot ftpd</td><td>14501</td><td>0.003</td></tr>
+<tr><td>http</td><td>D-Link/Airlink IP webcam http config</td><td>14495</td><td>0.003</td></tr>
+<tr><td>http</td><td>ZyXEL ZyWALL USG 200 firewall http config</td><td>14421</td><td>0.003</td></tr>
+<tr><td>telnet</td><td>ZXAN product  of ZTE Corporation</td><td>14398</td><td>0.003</td></tr>
+<tr><td>telnet</td><td>ZXR10 Carrier-Class High-end Router of ZTE Corporation</td><td>14377</td><td>0.003</td></tr>
+<tr><td>retrospect</td><td>Dantz Retrospect backup client</td><td>14319</td><td>0.003</td></tr>
+<tr><td>sftp</td><td>ProFTPD mod_sftp</td><td>14290</td><td>0.003</td></tr>
+<tr><td>ntop-http</td><td>Ntop web interface</td><td>14262</td><td>0.003</td></tr>
+<tr><td>daytime</td><td>Microsoft Windows International daytime</td><td>14250</td><td>0.003</td></tr>
+<tr><td>sip</td><td>T-Com Speedport W 701V</td><td>14223</td><td>0.003</td></tr>
+<tr><td>domain</td><td>Unbound</td><td>14179</td><td>0.003</td></tr>
+<tr><td>tcpwrapped</td><td>BSD TCP Wrappers</td><td>14032</td><td>0.003</td></tr>
+<tr><td>http</td><td>D-Link DI-804HV http config</td><td>13927</td><td>0.003</td></tr>
+<tr><td>http</td><td>HTTPServer</td><td>13909</td><td>0.003</td></tr>
+<tr><td>http-proxy</td><td>Fortinet FortiGuard http proxy</td><td>13811</td><td>0.003</td></tr>
+<tr><td>http</td><td>iDVRhttpSvr</td><td>13808</td><td>0.003</td></tr>
+<tr><td>appleevents</td><td>Apple Remote Events</td><td>13792</td><td>0.003</td></tr>
+<tr><td>imap</td><td>Microsoft Exchange 2000 imapd</td><td>13690</td><td>0.003</td></tr>
+<tr><td>imap</td><td>Kerio imapd</td><td>13641</td><td>0.003</td></tr>
+<tr><td>postgresql</td><td>PostgreSQL</td><td>13637</td><td>0.003</td></tr>
+<tr><td>vnc-http</td><td>TightVNC</td><td>13620</td><td>0.003</td></tr>
+<tr><td>sip</td><td>Edgewater Networks Edgemarc 4500 series VoIP gateway SIP</td><td>13616</td><td>0.003</td></tr>
+<tr><td>ident</td><td>HP-UX identd</td><td>13606</td><td>0.003</td></tr>
+<tr><td>http</td><td>Webs</td><td>13598</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>Tenor Multipath Switch ftpd</td><td>13446</td><td>0.003</td></tr>
+<tr><td>http</td><td>W3MFC</td><td>13436</td><td>0.003</td></tr>
+<tr><td>http</td><td>WebLogic httpd</td><td>13427</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>Microsoft IIS ftpd</td><td>13390</td><td>0.003</td></tr>
+<tr><td>domain</td><td>NLNet Labs Unbound</td><td>13388</td><td>0.003</td></tr>
+<tr><td>sip</td><td>Motorola SBV5121-SIP-1.2.6-SCM-01-SHTW</td><td>13355</td><td>0.003</td></tr>
+<tr><td>ms-wbt-server</td><td>xrdp</td><td>13342</td><td>0.003</td></tr>
+<tr><td>http</td><td>Lusca</td><td>13341</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box 6360 cable modem ftpd</td><td>13335</td><td>0.003</td></tr>
+<tr><td>telnet</td><td>Ricoh maintenance telnetd</td><td>13325</td><td>0.003</td></tr>
+<tr><td>http</td><td>Microsoft-HTTPAPI</td><td>13323</td><td>0.003</td></tr>
+<tr><td>jetdirect</td><td>JetDirect</td><td>13320</td><td>0.003</td></tr>
+<tr><td>telnet</td><td>Foundry Networks telnetd</td><td>13265</td><td>0.003</td></tr>
+<tr><td>http</td><td>HP Jetdirect httpd</td><td>13257</td><td>0.003</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box WLAN 7140</td><td>13221</td><td>0.003</td></tr>
+<tr><td>vtun</td><td>Vtun Virtual Tunnel</td><td>13120</td><td>0.003</td></tr>
+<tr><td>http</td><td>EdgePrismSSL</td><td>13104</td><td>0.003</td></tr>
+<tr><td>bacula-fd</td><td>Bacula file daemon</td><td>13102</td><td>0.003</td></tr>
+<tr><td>smtp</td><td>WinWebMail smtpd</td><td>13069</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>Multitech MultiVoip 410 VoIP gateway ftpd</td><td>13048</td><td>0.003</td></tr>
+<tr><td>http</td><td>HP Integrated Lights-Out http config</td><td>12997</td><td>0.003</td></tr>
+<tr><td>http</td><td>Web Server</td><td>12974</td><td>0.003</td></tr>
+<tr><td>http</td><td>Linksys WRT54G wireless-G router http config</td><td>12970</td><td>0.003</td></tr>
+<tr><td>http</td><td>Airlink 101 or TRENDnet TVIP-422w webcam http config</td><td>12945</td><td>0.003</td></tr>
+<tr><td>http</td><td>SinforHttpd</td><td>12925</td><td>0.003</td></tr>
+<tr><td>timbuktu</td><td>Timbuktu remote desktop</td><td>12909</td><td>0.003</td></tr>
+<tr><td>secure-socket</td><td>CA Secure Socket Adapter</td><td>12897</td><td>0.003</td></tr>
+<tr><td>ssh</td><td>ZyXEL ZyWALL sshd</td><td>12894</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>12890</td><td>0.003</td></tr>
+<tr><td>telnet</td><td>3Com SuperStack 3 Switch 4500 or Huawei Quidway AR28-09 WAP telnetd</td><td>12865</td><td>0.003</td></tr>
+<tr><td>shell</td><td>Ricoh rshd</td><td>12797</td><td>0.003</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v3 74.05.21 SIP</td><td>12793</td><td>0.003</td></tr>
+<tr><td>font-service</td><td>Sun Solaris fs.auto</td><td>12710</td><td>0.003</td></tr>
+<tr><td>domain</td><td>pdnsd</td><td>12699</td><td>0.003</td></tr>
+<tr><td>http</td><td>IBM WebSphere Application Server</td><td>12670</td><td>0.003</td></tr>
+<tr><td>telnet</td><td>ZTE Full Service Access Platform              #</td><td>12669</td><td>0.003</td></tr>
+<tr><td>sip</td><td>DPX2203-120730</td><td>12655</td><td>0.003</td></tr>
+<tr><td>sip</td><td>Motorola SBV5121-SIP-1.2.6-SCM-05-SHTW</td><td>12638</td><td>0.003</td></tr>
+<tr><td>http</td><td>Nucleus/4.3 UPnP/1.0 Virata-EmWeb</td><td>12595</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>12584</td><td>0.003</td></tr>
+<tr><td>http</td><td>SmarterTools httpd</td><td>12571</td><td>0.003</td></tr>
+<tr><td>http</td><td>LuCI Lua http config</td><td>12559</td><td>0.003</td></tr>
+<tr><td>ipp</td><td>Canon printer http config</td><td>12540</td><td>0.003</td></tr>
+<tr><td>http</td><td>Citrix Metaframe ICA Browser</td><td>12535</td><td>0.003</td></tr>
+<tr><td>http</td><td>Abyss httpd</td><td>12494</td><td>0.003</td></tr>
+<tr><td>ident</td><td>authd</td><td>12486</td><td>0.003</td></tr>
+<tr><td>http</td><td>Server</td><td>12457</td><td>0.003</td></tr>
+<tr><td>telnet</td><td>Quintum Tenor A800 VoIP gateway CDR telnetd</td><td>12456</td><td>0.003</td></tr>
+<tr><td>oracle-mts</td><td>Oracle MTS Recovery Service</td><td>12430</td><td>0.003</td></tr>
+<tr><td>http</td><td>HP StorageWorks AG118A tape autoloader http config</td><td>12429</td><td>0.003</td></tr>
+<tr><td>http</td><td>H3C-Miniware-Webs</td><td>12397</td><td>0.003</td></tr>
+<tr><td>http</td><td>USI</td><td>12389</td><td>0.003</td></tr>
+<tr><td>http</td><td>siyou server</td><td>12376</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>12320</td><td>0.003</td></tr>
+<tr><td>netbios-ns</td><td>Microsoft Windows netbios-ssn</td><td>12243</td><td>0.003</td></tr>
+<tr><td>upnp</td><td>TwonkyMedia UPnP</td><td>12178</td><td>0.003</td></tr>
+<tr><td>rtsp</td><td>AXIS 207W or 212 PTZ network camera rtspd</td><td>12166</td><td>0.003</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v3 74.05.22 SIP</td><td>12098</td><td>0.003</td></tr>
+<tr><td>telnet</td><td>Dreambox DVB telnetd</td><td>12073</td><td>0.003</td></tr>
+<tr><td>http</td><td>Linksys E1200 WAP http config</td><td>12058</td><td>0.003</td></tr>
+<tr><td>http</td><td>IPG</td><td>12028</td><td>0.003</td></tr>
+<tr><td>sip</td><td>Nokia N86 phone SIP</td><td>11981</td><td>0.003</td></tr>
+<tr><td>telnet</td><td>Huawei  WiMAX CPE</td><td>11979</td><td>0.003</td></tr>
+<tr><td>http</td><td>fec</td><td>11966</td><td>0.003</td></tr>
+<tr><td>tftp</td><td></td><td>11860</td><td>0.003</td></tr>
+<tr><td>http</td><td>TRENDnet TV-IP110w or TV-IP422W webcam display httpd</td><td>11803</td><td>0.003</td></tr>
+<tr><td>http</td><td>Samba SWAT administration server</td><td>11754</td><td>0.003</td></tr>
+<tr><td>http</td><td>TibetSystem Server 2.0</td><td>11751</td><td>0.003</td></tr>
+<tr><td>http</td><td>Rumpus httpd</td><td>11685</td><td>0.003</td></tr>
+<tr><td>http</td><td>PSIWBL</td><td>11685</td><td>0.003</td></tr>
+<tr><td>http-proxy</td><td>DansGuardian HTTP proxy</td><td>11667</td><td>0.003</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box WLAN</td><td>11644</td><td>0.003</td></tr>
+<tr><td>http</td><td>webserver</td><td>11641</td><td>0.003</td></tr>
+<tr><td>http</td><td>letv</td><td>11639</td><td>0.003</td></tr>
+<tr><td>http</td><td>TRENDnet TV-IP100 or TV-IP110 webcam display httpd</td><td>11634</td><td>0.003</td></tr>
+<tr><td>telnet</td><td>Huawei Home Gateway 520</td><td>11507</td><td>0.003</td></tr>
+<tr><td>http</td><td>Netgear WNR2000v2 WAP http config</td><td>11492</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box WLAN 3370 WAP ftpd</td><td>11480</td><td>0.003</td></tr>
+<tr><td>http</td><td>ASSP (Anti-Spam SMTP Proxy) httpd</td><td>11368</td><td>0.003</td></tr>
+<tr><td>telnet</td><td>Broadcom BCM96358 DSL router telnetd</td><td>11333</td><td>0.003</td></tr>
+<tr><td>http</td><td>D-Link 2640T DSL router http config</td><td>11333</td><td>0.003</td></tr>
+<tr><td>netbackup</td><td>Veritas Netbackup java listener</td><td>11315</td><td>0.003</td></tr>
+<tr><td>http</td><td>Fedora</td><td>11279</td><td>0.002</td></tr>
+<tr><td>imap</td><td>Lotus Domino imapd</td><td>11238</td><td>0.002</td></tr>
+<tr><td>serialnumber</td><td>Mac OS X Server serialnumberd</td><td>11223</td><td>0.002</td></tr>
+<tr><td>http</td><td>Oracle XML DB Enterprise Edition httpd</td><td>11216</td><td>0.002</td></tr>
+<tr><td>http</td><td>Eudemon Server 1.0</td><td>11195</td><td>0.002</td></tr>
+<tr><td>http</td><td>Web-Server</td><td>11176</td><td>0.002</td></tr>
+<tr><td>msdtc</td><td>Microsoft Distributed Transaction Coordinator</td><td>11144</td><td>0.002</td></tr>
+<tr><td>http</td><td>D-Link DIR-600 WAP http config</td><td>11104</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Mac OS X Server ftpd</td><td>11096</td><td>0.002</td></tr>
+<tr><td>http</td><td>Green Packet DX230 WAP http config</td><td>11090</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>WinWebMail pop3d</td><td>11079</td><td>0.002</td></tr>
+<tr><td>rtsp</td><td>Apple QuickTime Streaming Server</td><td>11023</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>D-Link DSL-500B telnetd</td><td>10954</td><td>0.002</td></tr>
+<tr><td>cvspserver</td><td>cvs pserver</td><td>10917</td><td>0.002</td></tr>
+<tr><td>smtp</td><td>Communigate Pro SMTP</td><td>10902</td><td>0.002</td></tr>
+<tr><td>http</td><td>CloudFront httpd</td><td>10864</td><td>0.002</td></tr>
+<tr><td>http</td><td>HP HTTP Server</td><td>10804</td><td>0.002</td></tr>
+<tr><td>http</td><td>Citrix Xen Simple HTTP Server</td><td>10708</td><td>0.002</td></tr>
+<tr><td>irc</td><td>InspIRCd</td><td>10674</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>Broadcom BCM96333 DSL router telnetd</td><td>10612</td><td>0.002</td></tr>
+<tr><td>socks-proxy</td><td>CCProxy socks proxy</td><td>10605</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>MailMax pop3d</td><td>10597</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>use home media gateway</td><td>10527</td><td>0.002</td></tr>
+<tr><td>http</td><td>a_63</td><td>10497</td><td>0.002</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box WLAN 7360</td><td>10490</td><td>0.002</td></tr>
+<tr><td>smtp-proxy</td><td>spamd smtpd</td><td>10435</td><td>0.002</td></tr>
+<tr><td>upnp</td><td>Virata-EmWeb</td><td>10429</td><td>0.002</td></tr>
+<tr><td>netsaint</td><td>Netsaint status daemon</td><td>10399</td><td>0.002</td></tr>
+<tr><td>java-rmi</td><td>Java RMI</td><td>10382</td><td>0.002</td></tr>
+<tr><td>http</td><td>ghttpd</td><td>10374</td><td>0.002</td></tr>
+<tr><td>http</td><td>HttpFileServer httpd</td><td>10352</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>Tandberg MXP Video Conference appliance telnetd</td><td>10333</td><td>0.002</td></tr>
+<tr><td>http</td><td>Network Camera</td><td>10323</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>zFTPServer</td><td>10318</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>Viking</td><td>10264</td><td>0.002</td></tr>
+<tr><td>http</td><td>WMI</td><td>10227</td><td>0.002</td></tr>
+<tr><td>http</td><td>TP-LINK WR741N WAP http config</td><td>10192</td><td>0.002</td></tr>
+<tr><td>http</td><td>Trend Micro OfficeScan Antivirus http config</td><td>10171</td><td>0.002</td></tr>
+<tr><td>http</td><td>Mongrel httpd</td><td>10139</td><td>0.002</td></tr>
+<tr><td>http</td><td>ACOS HTTPD</td><td>10133</td><td>0.002</td></tr>
+<tr><td>http</td><td>TwistedWeb</td><td>10123</td><td>0.002</td></tr>
+<tr><td>http</td><td>HTTP Server 1.0</td><td>10114</td><td>0.002</td></tr>
+<tr><td>http</td><td>ADH-Web</td><td>10074</td><td>0.002</td></tr>
+<tr><td>http</td><td>Linksys E1000 WAP http config</td><td>10055</td><td>0.002</td></tr>
+<tr><td>http</td><td>axhttpd</td><td>10012</td><td>0.002</td></tr>
+<tr><td>http</td><td>nginx admin</td><td>9985</td><td>0.002</td></tr>
+<tr><td>http</td><td>Aterm(HT)</td><td>9935</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>vm-pop3d</td><td>9889</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>ZyXEL Prestige cable modem telnetd</td><td>9880</td><td>0.002</td></tr>
+<tr><td>http</td><td>Sun ONE Web Server</td><td>9850</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2000 pop3d</td><td>9778</td><td>0.002</td></tr>
+<tr><td>ormi</td><td>Oracle Remote Method Invocation</td><td>9762</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>use GaoKe MG6000 series gateway.</td><td>9745</td><td>0.002</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7140 Annex A SIP</td><td>9702</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>IBM OS/400 FTPd</td><td>9686</td><td>0.002</td></tr>
+<tr><td>vnc-http</td><td>WinVNC</td><td>9677</td><td>0.002</td></tr>
+<tr><td>http</td><td>Gateway-Webs</td><td>9668</td><td>0.002</td></tr>
+<tr><td>vnc</td><td>Ultr@VNC Repeater</td><td>9600</td><td>0.002</td></tr>
+<tr><td>ipmi-advertiserd</td><td>SuperMicro IPMI advertiserd</td><td>9565</td><td>0.002</td></tr>
+<tr><td>http</td><td>ImagiaTek</td><td>9563</td><td>0.002</td></tr>
+<tr><td>domain</td><td>MaraDNS</td><td>9563</td><td>0.002</td></tr>
+<tr><td>http</td><td>Rhinosoft Serv-U httpd</td><td>9560</td><td>0.002</td></tr>
+<tr><td>http</td><td>ATR-HTTP-Server</td><td>9538</td><td>0.002</td></tr>
+<tr><td>eggdrop</td><td>Eggdrop irc bot console</td><td>9534</td><td>0.002</td></tr>
+<tr><td>http</td><td>wg_httpd</td><td>9517</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>ipopd</td><td>9475</td><td>0.002</td></tr>
+<tr><td>ilom-remote-console</td><td>Sun Interactive Lights Out Manager or SuperMicro IPMI remote console</td><td>9471</td><td>0.002</td></tr>
+<tr><td>printer</td><td>Lexmark lpd service</td><td>9418</td><td>0.002</td></tr>
+<tr><td>directconnect</td><td>Direct Connect P2P</td><td>9414</td><td>0.002</td></tr>
+<tr><td>http</td><td>Fnord httpd</td><td>9375</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>TYPSoft ftpd</td><td>9362</td><td>0.002</td></tr>
+<tr><td>http</td><td>WSGIServer</td><td>9352</td><td>0.002</td></tr>
+<tr><td>http</td><td>Sun GlassFish Open Source Edition</td><td>9352</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>Lancom 1721+ VPN router telnetd</td><td>9350</td><td>0.002</td></tr>
+<tr><td>http</td><td>Oracle HTTP Server Powered by Apache</td><td>9346</td><td>0.002</td></tr>
+<tr><td>kvm</td><td>Raritan KVM</td><td>9329</td><td>0.002</td></tr>
+<tr><td>http</td><td>Winstone Servlet Engine</td><td>9310</td><td>0.002</td></tr>
+<tr><td>domain</td><td>Nortel Contivity firewall DNS</td><td>9298</td><td>0.002</td></tr>
+<tr><td>http-proxy</td><td>Ncat http proxy</td><td>9285</td><td>0.002</td></tr>
+<tr><td>smtp</td><td>Surgemail smtpd</td><td>9165</td><td>0.002</td></tr>
+<tr><td>ssh</td><td>APC AOS cryptlib sshd</td><td>9159</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Qpop pop3d</td><td>9156</td><td>0.002</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box WLAN 7570</td><td>9154</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>ProFTPD or KnFTPD</td><td>9153</td><td>0.002</td></tr>
+<tr><td>http</td><td>Speedr</td><td>9139</td><td>0.002</td></tr>
+<tr><td>http</td><td>Linksys E2500 WAP http config</td><td>9136</td><td>0.002</td></tr>
+<tr><td>msrpc</td><td></td><td>9131</td><td>0.002</td></tr>
+<tr><td>http</td><td>Konica Minolta PageScope Web Connection httpd</td><td>8999</td><td>0.002</td></tr>
+<tr><td>http</td><td>Netgear DG834GT router http config</td><td>8992</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>HP JetDirect telnetd</td><td>8990</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>Huawei Access Runner ADSL telnetd</td><td>8987</td><td>0.002</td></tr>
+<tr><td>http</td><td>Urchin RSS aggregator</td><td>8977</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache (Linux)</td><td>8951</td><td>0.002</td></tr>
+<tr><td>imap</td><td>Perdition imapd</td><td>8920</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Cerberus FTP Server</td><td>8915</td><td>0.002</td></tr>
+<tr><td>imap</td><td>Microsoft Exchange 2003 imapd</td><td>8911</td><td>0.002</td></tr>
+<tr><td>smtp</td><td>Microsoft Exchange 2010 smtpd</td><td>8875</td><td>0.002</td></tr>
+<tr><td>http</td><td>HttpServer 1.1</td><td>8875</td><td>0.002</td></tr>
+<tr><td>pbs-maui</td><td>PBS/Maui Roll</td><td>8855</td><td>0.002</td></tr>
+<tr><td>http</td><td>Linksys E2000 WAP http config</td><td>8842</td><td>0.002</td></tr>
+<tr><td>http</td><td>Mobotix Camera http config</td><td>8821</td><td>0.002</td></tr>
+<tr><td>http</td><td>MailEnable httpd</td><td>8811</td><td>0.002</td></tr>
+<tr><td>http</td><td>Novell NetWare HTTP Stack</td><td>8800</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>3Com 4500 switch telnetd</td><td>8727</td><td>0.002</td></tr>
+<tr><td>smtp</td><td>Lyris ListManager smtpd</td><td>8710</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache Tomcat</td><td>8703</td><td>0.002</td></tr>
+<tr><td>http</td><td>Lexmark printer http config</td><td>8603</td><td>0.002</td></tr>
+<tr><td>http</td><td>MF60</td><td>8563</td><td>0.002</td></tr>
+<tr><td>ssh</td><td>Adtran Netvanta RomCliSecure sshd</td><td>8543</td><td>0.002</td></tr>
+<tr><td>http</td><td>MS .NET Remoting httpd</td><td>8462</td><td>0.002</td></tr>
+<tr><td>http</td><td>AddPac AP200B VoIP gateway http config</td><td>8456</td><td>0.002</td></tr>
+<tr><td>http</td><td>Alcatel Speedtouch ADSL router httpd</td><td>8454</td><td>0.002</td></tr>
+<tr><td>http</td><td>WebFS httpd</td><td>8439</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>HP FTP Print Server</td><td>8437</td><td>0.002</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 29.04.87 SIP</td><td>8436</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>AD Network Video Dedicated Micros DVR ftpd</td><td>8421</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>TwoFTPd</td><td>8411</td><td>0.002</td></tr>
+<tr><td>http</td><td>HP Officejet Pro 8500 A910 printer http config</td><td>8370</td><td>0.002</td></tr>
+<tr><td>http-proxy</td><td>3Proxy http proxy</td><td>8355</td><td>0.002</td></tr>
+<tr><td>http</td><td>HTTPD</td><td>8353</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>DSLink 260E</td><td>8306</td><td>0.002</td></tr>
+<tr><td>pop3-proxy</td><td>Perdition pop3 proxy</td><td>8264</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>Viking II</td><td>8260</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>Broadcom BCM96368 DSL router telnetd</td><td>8223</td><td>0.002</td></tr>
+<tr><td>http</td><td>Ipswitch IMail web service</td><td>8130</td><td>0.002</td></tr>
+<tr><td>http</td><td>eMule P2P</td><td>8117</td><td>0.002</td></tr>
+<tr><td>http</td><td>Knopflerfish httpd</td><td>8116</td><td>0.002</td></tr>
+<tr><td>http</td><td>Stanley NT500 access control system httpd</td><td>8068</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>WU-FTPD or MIT Kerberos ftpd</td><td>7966</td><td>0.002</td></tr>
+<tr><td>http</td><td>Polycom SoundPoint VoIP phone http config</td><td>7954</td><td>0.002</td></tr>
+<tr><td>http</td><td>TeleEye</td><td>7936</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2007 pop3d</td><td>7923</td><td>0.002</td></tr>
+<tr><td>ssh</td><td>HP Integrated Lights-Out mpSSH</td><td>7911</td><td>0.002</td></tr>
+<tr><td>http</td><td>Microsoft-WinCE</td><td>7908</td><td>0.002</td></tr>
+<tr><td>smtp</td><td>MailMarshal</td><td>7890</td><td>0.002</td></tr>
+<tr><td>http</td><td>Western Digital My Book http config</td><td>7852</td><td>0.002</td></tr>
+<tr><td>peercast</td><td>Peercast</td><td>7842</td><td>0.002</td></tr>
+<tr><td>http</td><td>Transmission BitTorrent management httpd</td><td>7778</td><td>0.002</td></tr>
+<tr><td>ms-sql-s</td><td>Dionaea honeypot MS-SQL server</td><td>7714</td><td>0.002</td></tr>
+<tr><td>http</td><td>2Wire HomePortal touer http config</td><td>7714</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apple AirPlay httpd</td><td>7702</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>WarFTPd</td><td>7691</td><td>0.002</td></tr>
+<tr><td>finger</td><td>Sun Solaris fingerd</td><td>7680</td><td>0.002</td></tr>
+<tr><td>http</td><td>Embedded Web Server</td><td>7670</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>BetaFTPd</td><td>7667</td><td>0.002</td></tr>
+<tr><td>sip</td><td>M5T UA SSP 2.0.4.6 / M5T SIP Stack/4.0.26.26</td><td>7665</td><td>0.002</td></tr>
+<tr><td>http</td><td>Netgear WGR614v6 WAP http config</td><td>7665</td><td>0.002</td></tr>
+<tr><td>http</td><td>Datum</td><td>7647</td><td>0.002</td></tr>
+<tr><td>http</td><td>Virtual Web 0.9</td><td>7618</td><td>0.002</td></tr>
+<tr><td>digi-usb</td><td>Digi USB-over-TCP bridge</td><td>7589</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>MicroDigital MDR-4600 DVR telnetd</td><td>7573</td><td>0.002</td></tr>
+<tr><td>http</td><td>TornadoServer</td><td>7561</td><td>0.002</td></tr>
+<tr><td>http</td><td>Oracle WebLogic Server</td><td>7548</td><td>0.002</td></tr>
+<tr><td>rtsp</td><td>Vivotek FD8134V webcam rtspd</td><td>7542</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>ZyXEL P-2601HN-F1 broadband router telnetd</td><td>7501</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>Lantronix XPort telnetd</td><td>7477</td><td>0.002</td></tr>
+<tr><td>http</td><td>HP Officejet Pro 8600 printer http config</td><td>7459</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>UBEE Cable Modem</td><td>7426</td><td>0.002</td></tr>
+<tr><td>shoutcast-publishing</td><td>SHOUTcast publishing port</td><td>7424</td><td>0.002</td></tr>
+<tr><td>http</td><td>IceWarp webmail httpd</td><td>7359</td><td>0.002</td></tr>
+<tr><td>gnutella</td><td>Shareaza</td><td>7300</td><td>0.002</td></tr>
+<tr><td>as-servermap</td><td>IBM OS/400 as-servermapd</td><td>7256</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>3Com Superstack switch telnetd</td><td>7254</td><td>0.002</td></tr>
+<tr><td>imap</td><td>Microsoft Exchange imapd</td><td>7248</td><td>0.002</td></tr>
+<tr><td>http</td><td>Netscape Enterprise httpd</td><td>7239</td><td>0.002</td></tr>
+<tr><td>http</td><td>InterNiche Technologies WebServer</td><td>7221</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>DSL MODEM</td><td>7212</td><td>0.002</td></tr>
+<tr><td>ipp</td><td>Xerox Phaser 3500</td><td>7201</td><td>0.002</td></tr>
+<tr><td>powerchute</td><td>APC Powerchute</td><td>7198</td><td>0.002</td></tr>
+<tr><td>http</td><td>uClinux-httpd</td><td>7195</td><td>0.002</td></tr>
+<tr><td>http</td><td>Scientific-Altanta WebStar Cable Modem http config</td><td>7185</td><td>0.002</td></tr>
+<tr><td>imap</td><td>Microsoft Exchange 2007 imapd</td><td>7174</td><td>0.002</td></tr>
+<tr><td>http</td><td>Netgear FVS318 router http config</td><td>7165</td><td>0.002</td></tr>
+<tr><td>http</td><td>TP-LINK WR541G/542G WAP http config</td><td>7135</td><td>0.002</td></tr>
+<tr><td>http</td><td>QNAP TS-659, TS-809U, or TS-859U NAS http config</td><td>7132</td><td>0.002</td></tr>
+<tr><td>http</td><td>TP-LINK WR941N WAP http config</td><td>7130</td><td>0.002</td></tr>
+<tr><td>http</td><td>Huawei-3Com HTTPD</td><td>7085</td><td>0.002</td></tr>
+<tr><td>imap-proxy</td><td>Mailfront imapfront imap proxy</td><td>7083</td><td>0.002</td></tr>
+<tr><td>napster</td><td>WinMX or Lopster Napster P2P client</td><td>7023</td><td>0.002</td></tr>
+<tr><td>http-proxy</td><td>BlueCoat SG-400 http proxy</td><td>6995</td><td>0.002</td></tr>
+<tr><td>smtp</td><td>Merak Mail Server smtpd</td><td>6977</td><td>0.002</td></tr>
+<tr><td>snmp</td><td>Thomson SNMP service</td><td>6975</td><td>0.002</td></tr>
+<tr><td>http</td><td>Huawei HMS Download Service</td><td>6949</td><td>0.002</td></tr>
+<tr><td>http</td><td>D-Link DIR-100 http config</td><td>6926</td><td>0.002</td></tr>
+<tr><td>http</td><td>WindRiver-WebServer</td><td>6896</td><td>0.002</td></tr>
+<tr><td>clam</td><td>Clam AV</td><td>6874</td><td>0.002</td></tr>
+<tr><td>http</td><td>Sipura SPA VoIP http config</td><td>6867</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>Motorola Canopy Subscriber Module telnetd</td><td>6822</td><td>0.002</td></tr>
+<tr><td>http</td><td>D-Link DCS-920 webcam http config</td><td>6821</td><td>0.002</td></tr>
+<tr><td>hp-pjl</td><td>HP LaserJet P2055 Series</td><td>6812</td><td>0.002</td></tr>
+<tr><td>http</td><td>Dell Embedded Remote Access card httpd</td><td>6764</td><td>0.001</td></tr>
+<tr><td>http</td><td>Vivotek 3102 Camera http config</td><td>6763</td><td>0.001</td></tr>
+<tr><td>http</td><td>Netgear DGN2000 router http config</td><td>6757</td><td>0.001</td></tr>
+<tr><td>http</td><td>WMI V5</td><td>6723</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>HP ProLiant ML110 Interactive Lights Out telnetd</td><td>6712</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>D-Link DSL-524B ADSL router</td><td>6674</td><td>0.001</td></tr>
+<tr><td>http</td><td>Embedded HTTP Server.</td><td>6648</td><td>0.001</td></tr>
+<tr><td>H.323-gatekeeper</td><td>GNU Gatekeeper</td><td>6645</td><td>0.001</td></tr>
+<tr><td>http</td><td>Samsung UE55D7000 TV http config</td><td>6607</td><td>0.001</td></tr>
+<tr><td>http</td><td>TP-LINK WR543G WAP http config</td><td>6574</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>BSD ftpd</td><td>6573</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>ZTE F822                           #</td><td>6565</td><td>0.001</td></tr>
+<tr><td>http</td><td>GlobespanVirata-EmWeb</td><td>6535</td><td>0.001</td></tr>
+<tr><td>http</td><td>ADH-Web httpd</td><td>6534</td><td>0.001</td></tr>
+<tr><td>landesk-rc</td><td>Novell Zen Remote Desktop</td><td>6506</td><td>0.001</td></tr>
+<tr><td>http</td><td>BMC HTTP Server</td><td>6500</td><td>0.001</td></tr>
+<tr><td>drac-console</td><td>Dell Remote Access Controller 4 console</td><td>6487</td><td>0.001</td></tr>
+<tr><td>http</td><td>Mbedthis-AppWeb</td><td>6449</td><td>0.001</td></tr>
+<tr><td>http</td><td>Ipswitch IMail Monitor web service</td><td>6429</td><td>0.001</td></tr>
+<tr><td>http</td><td>sffe</td><td>6413</td><td>0.001</td></tr>
+<tr><td>http</td><td>Web</td><td>6401</td><td>0.001</td></tr>
+<tr><td>giop</td><td>CORBA naming service</td><td>6398</td><td>0.001</td></tr>
+<tr><td>http</td><td>Zeus httpd</td><td>6394</td><td>0.001</td></tr>
+<tr><td>http</td><td>eHTTP</td><td>6383</td><td>0.001</td></tr>
+<tr><td>smtp</td><td>Allworx 6x VoIP phone smtpd</td><td>6380</td><td>0.001</td></tr>
+<tr><td>vnc</td><td>iTALC</td><td>6344</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7360SL WAP ftpd</td><td>6327</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>XMail pop3d</td><td>6322</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Rumpus ftpd</td><td>6321</td><td>0.001</td></tr>
+<tr><td>http</td><td>Linksys E3000 WAP http config</td><td>6312</td><td>0.001</td></tr>
+<tr><td>http</td><td>HP LaserJet P1606 http config</td><td>6303</td><td>0.001</td></tr>
+<tr><td>http</td><td>Microsoft-IIS</td><td>6286</td><td>0.001</td></tr>
+<tr><td>http</td><td>avtech</td><td>6278</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Xlight ftpd</td><td>6273</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Huawei Quidway S8505 switch telnetd</td><td>6248</td><td>0.001</td></tr>
+<tr><td>http</td><td>UserGate http report area</td><td>6241</td><td>0.001</td></tr>
+<tr><td>nsclient</td><td>Netsaint Windows Client</td><td>6236</td><td>0.001</td></tr>
+<tr><td>http</td><td>Compaq Insight Manager HTTP server</td><td>6231</td><td>0.001</td></tr>
+<tr><td>http</td><td>Linksys E4200 WAP http config</td><td>6187</td><td>0.001</td></tr>
+<tr><td>http</td><td>Rex media encoder http config</td><td>6185</td><td>0.001</td></tr>
+<tr><td>http</td><td>Sun Niagara httpd</td><td>6182</td><td>0.001</td></tr>
+<tr><td>http</td><td>Netgear WNR3500L WAP http config</td><td>6165</td><td>0.001</td></tr>
+<tr><td>http</td><td>iTunes</td><td>6161</td><td>0.001</td></tr>
+<tr><td>http</td><td>ZyXEL Prestige webadmin</td><td>6143</td><td>0.001</td></tr>
+<tr><td>http</td><td>Start HTTP-Server</td><td>6137</td><td>0.001</td></tr>
+<tr><td>http</td><td>Accton VM1188T VoIP phone http config</td><td>6123</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>ACLogic CesarFTPd</td><td>6122</td><td>0.001</td></tr>
+<tr><td>http</td><td>Netgear DG834PN router http config</td><td>6115</td><td>0.001</td></tr>
+<tr><td>http</td><td>APN HTTPD V1.4</td><td>6115</td><td>0.001</td></tr>
+<tr><td>http</td><td>Pike v7.8 release 517</td><td>6096</td><td>0.001</td></tr>
+<tr><td>http</td><td>Varnish</td><td>6087</td><td>0.001</td></tr>
+<tr><td>http</td><td>Lancom 1721+ VPN http config</td><td>6085</td><td>0.001</td></tr>
+<tr><td>http</td><td>CTCFC</td><td>6085</td><td>0.001</td></tr>
+<tr><td>http</td><td>webcamXP httpd</td><td>6043</td><td>0.001</td></tr>
+<tr><td>http</td><td>Cisco VPN Concentrator http config</td><td>6031</td><td>0.001</td></tr>
+<tr><td>http</td><td>Vivotek Network Camera</td><td>6024</td><td>0.001</td></tr>
+<tr><td>http</td><td>HeiTel GmbH Web Server</td><td>5968</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>ZXR10 ZSR Serial Router of ZTE Corporation</td><td>5965</td><td>0.001</td></tr>
+<tr><td>http</td><td>EWS-NIC4</td><td>5959</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box WLAN 3270 WAP ftpd</td><td>5934</td><td>0.001</td></tr>
+<tr><td>rtsp</td><td>Cisco WVC54GCA webcam rtspd</td><td>5930</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>ZXAN product C220 of ZTE Corporation</td><td>5920</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Trolltech Troll-FTPd</td><td>5908</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>EIS System!</td><td>5899</td><td>0.001</td></tr>
+<tr><td>smtp</td><td>Symantec Messaging Gateway smtpd</td><td>5874</td><td>0.001</td></tr>
+<tr><td>http</td><td>D-Link Internet Camera</td><td>5867</td><td>0.001</td></tr>
+<tr><td>http</td><td>Cherokee httpd</td><td>5846</td><td>0.001</td></tr>
+<tr><td>http</td><td>Seagate Black Armor 440 NAS http config</td><td>5836</td><td>0.001</td></tr>
+<tr><td>http</td><td>Bluecat Networks Proteus IPAM or Enterasys Dragon IDS http config</td><td>5812</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>GlobalScape CuteFTP sshd</td><td>5802</td><td>0.001</td></tr>
+<tr><td>http</td><td>Dreambox DVB Enigma httpd</td><td>5801</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>MT800</td><td>5798</td><td>0.001</td></tr>
+<tr><td>http</td><td>Tengine</td><td>5784</td><td>0.001</td></tr>
+<tr><td>http</td><td>Maipu-Webs</td><td>5777</td><td>0.001</td></tr>
+<tr><td>http</td><td>LANCOM 1611</td><td>5757</td><td>0.001</td></tr>
+<tr><td>http</td><td>D-Link DCS-900 webcam http config</td><td>5739</td><td>0.001</td></tr>
+<tr><td>http</td><td>David-WebBox</td><td>5707</td><td>0.001</td></tr>
+<tr><td>domain</td><td>Fortinet FortiGate named</td><td>5695</td><td>0.001</td></tr>
+<tr><td>http</td><td>82170290</td><td>5682</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Fon 7150</td><td>5678</td><td>0.001</td></tr>
+<tr><td>http</td><td>SpeedTouch DSL router http config</td><td>5677</td><td>0.001</td></tr>
+<tr><td>http</td><td>HP Officejet 6500 E710n-z printer http config</td><td>5630</td><td>0.001</td></tr>
+<tr><td>http</td><td>FRITZ!Box http config</td><td>5621</td><td>0.001</td></tr>
+<tr><td>http</td><td>GlobespanVirata httpd</td><td>5617</td><td>0.001</td></tr>
+<tr><td>http</td><td>CalendarServer</td><td>5601</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Rhinosoft Serv-U FTP</td><td>5595</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Broadcom BCM96345 ADSL router telnetd</td><td>5592</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Datacom DM706CR router telnetd</td><td>5576</td><td>0.001</td></tr>
+<tr><td>http</td><td>KEDACOM-Webs</td><td>5569</td><td>0.001</td></tr>
+<tr><td>http</td><td>Panasonic BB-HCM331 Network Camera http config</td><td>5566</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Quick 'n Easy ftpd</td><td>5542</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>D-Link D-500G telnetd</td><td>5534</td><td>0.001</td></tr>
+<tr><td>http</td><td>JBoss service httpd</td><td>5532</td><td>0.001</td></tr>
+<tr><td>irc</td><td>ircu ircd</td><td>5531</td><td>0.001</td></tr>
+<tr><td>http-proxy</td><td>BlueCoat http proxy</td><td>5510</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Balance Servers TCAdmin game hosting ftpd</td><td>5507</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Ambit U10C020 cable modem telnetd</td><td>5503</td><td>0.001</td></tr>
+<tr><td>http</td><td>MoxaHttp</td><td>5488</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>DB102</td><td>5474</td><td>0.001</td></tr>
+<tr><td>http</td><td>JC-HTTPD</td><td>5461</td><td>0.001</td></tr>
+<tr><td>http</td><td>3Com switch http config</td><td>5456</td><td>0.001</td></tr>
+<tr><td>http</td><td>Siemens Gigaset SX682 WiMAX WAP http config</td><td>5451</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Konica Minolta bizhub printer ftpd</td><td>5448</td><td>0.001</td></tr>
+<tr><td>sip-proxy</td><td>FreeSWITCH mod_sofia</td><td>5445</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>5440</td><td>0.001</td></tr>
+<tr><td>http</td><td>remote-potato-v1 Microsoft-HTTPAPI</td><td>5436</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Ascend DSLPipe ADSL modem telnetd</td><td>5402</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Polycom SoundPoint 331</td><td>5398</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>NET+OS ftpd</td><td>5397</td><td>0.001</td></tr>
+<tr><td>ipp</td><td>Xerox WorkCentre IPP</td><td>5393</td><td>0.001</td></tr>
+<tr><td>sip</td><td>DPC2203-120531</td><td>5387</td><td>0.001</td></tr>
+<tr><td>smtp</td><td>Citadel smtpd</td><td>5374</td><td>0.001</td></tr>
+<tr><td>http</td><td>Bomgar</td><td>5359</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v2 54.05.22 SIP</td><td>5307</td><td>0.001</td></tr>
+<tr><td>http</td><td>VNC Server Enterprise Edition</td><td>5306</td><td>0.001</td></tr>
+<tr><td>http</td><td>Oracle GlassFish</td><td>5304</td><td>0.001</td></tr>
+<tr><td>http</td><td>Dart WebServer Tool</td><td>5304</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 29.04.80 SIP</td><td>5299</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v2 54.05.21 SIP</td><td>5292</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Broadcom BCM96332 ADSL router telnetd</td><td>5275</td><td>0.001</td></tr>
+<tr><td>http</td><td>Sun Java System httpd</td><td>5244</td><td>0.001</td></tr>
+<tr><td>http</td><td>DTV HMC-Lite Server</td><td>5244</td><td>0.001</td></tr>
+<tr><td>http</td><td>falcon</td><td>5211</td><td>0.001</td></tr>
+<tr><td>http</td><td>eHTTP v2.0</td><td>5187</td><td>0.001</td></tr>
+<tr><td>http-proxy</td><td>3proxy http proxy</td><td>5171</td><td>0.001</td></tr>
+<tr><td>http</td><td>YTS</td><td>5166</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>cppop pop3d</td><td>5160</td><td>0.001</td></tr>
+<tr><td>http</td><td>Sony Bravia TV</td><td>5159</td><td>0.001</td></tr>
+<tr><td>http</td><td>Lancom 1721 VPN http config</td><td>5157</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Pirelli Age UB router telnetd</td><td>5148</td><td>0.001</td></tr>
+<tr><td>http</td><td>Sagemcom SX682 WiMAX</td><td>5138</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>ZXDSL 831AII</td><td>5115</td><td>0.001</td></tr>
+<tr><td>http</td><td>- Web acceleration by http</td><td>5104</td><td>0.001</td></tr>
+<tr><td>http</td><td>SiftLogic API Server v1.1</td><td>5094</td><td>0.001</td></tr>
+<tr><td>daytime</td><td>Microsoft Windows daytime</td><td>5084</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>libssh</td><td>5073</td><td>0.001</td></tr>
+<tr><td>vnc-http</td><td>x11vnc</td><td>5072</td><td>0.001</td></tr>
+<tr><td>http</td><td>Sunbelt Software CounterSpy Agent antimalware SOAP over HTTP</td><td>5056</td><td>0.001</td></tr>
+<tr><td>http</td><td>Check Point VPN-1/UTM NGX R70 firewall http admin</td><td>5056</td><td>0.001</td></tr>
+<tr><td>exec</td><td></td><td>5044</td><td>0.001</td></tr>
+<tr><td>smtp</td><td>RaidenMAILD smtpd</td><td>5036</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Treck Embedded ftpd</td><td>4992</td><td>0.001</td></tr>
+<tr><td>http</td><td>Linksys WRT54GS wireless-G router http config</td><td>4987</td><td>0.001</td></tr>
+<tr><td>http</td><td>HTTPsrv</td><td>4969</td><td>0.001</td></tr>
+<tr><td>nntp</td><td>INN nntpd</td><td>4963</td><td>0.001</td></tr>
+<tr><td>http</td><td>Ubuntu</td><td>4956</td><td>0.001</td></tr>
+<tr><td>http</td><td>SABnzbd newsreader http interface</td><td>4955</td><td>0.001</td></tr>
+<tr><td>http</td><td>TiVo To Go httpd</td><td>4952</td><td>0.001</td></tr>
+<tr><td>http</td><td>HP Photosmart D110 series printer http config</td><td>4950</td><td>0.001</td></tr>
+<tr><td>rtsp</td><td>iCanSystem rtspd</td><td>4917</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>HP-UX or AIX ftpd</td><td>4899</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>4897</td><td>0.001</td></tr>
+<tr><td>sip-proxy</td><td>CommuniGatePro VoIP Gateway</td><td>4886</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Allied Telesis x900-series switch telnetd</td><td>4878</td><td>0.001</td></tr>
+<tr><td>ovhcheckout</td><td>OVH OvhCheckOut</td><td>4873</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Sagem router telnetd</td><td>4870</td><td>0.001</td></tr>
+<tr><td>http</td><td>Z-World Rabbit</td><td>4870</td><td>0.001</td></tr>
+<tr><td>soap</td><td>Dell 1130n printer soap</td><td>4860</td><td>0.001</td></tr>
+<tr><td>http</td><td>EPProxy</td><td>4855</td><td>0.001</td></tr>
+<tr><td>squeezecenter</td><td>Logitech SqueezeCenter music server</td><td>4850</td><td>0.001</td></tr>
+<tr><td>http</td><td>Mongoose httpd</td><td>4830</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Funkwerk bintec R1200 router</td><td>4824</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Cisco C220  DebugShell</td><td>4810</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Sun Solaris telnetd</td><td>4807</td><td>0.001</td></tr>
+<tr><td>http</td><td>mhttpd v1.0</td><td>4799</td><td>0.001</td></tr>
+<tr><td>http</td><td>D-Link DCS-910 webcam http config</td><td>4782</td><td>0.001</td></tr>
+<tr><td>http</td><td>Henry</td><td>4780</td><td>0.001</td></tr>
+<tr><td>hp-pjl</td><td>hp LaserJet 4250</td><td>4769</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Actiontec Q1000 DSL router telnetd</td><td>4767</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Freescale Semiconductor Embedded Linux Environment</td><td>4765</td><td>0.001</td></tr>
+<tr><td>http</td><td>Cougar</td><td>4759</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Motorola SBV5220-SIP-1.2.4-SCM-09-SHTW</td><td>4753</td><td>0.001</td></tr>
+<tr><td>http</td><td>HP Photosmart 5510 series printer http config</td><td>4744</td><td>0.001</td></tr>
+<tr><td>http</td><td>Synacast Media Server</td><td>4742</td><td>0.001</td></tr>
+<tr><td>mdns</td><td></td><td>4740</td><td>0.001</td></tr>
+<tr><td>http</td><td>Lancom 1711 VPN http config</td><td>4734</td><td>0.001</td></tr>
+<tr><td>donkey</td><td>MLDonkey multi-network P2P server</td><td>4725</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>AliceBox AH4021 telnet config</td><td>4720</td><td>0.001</td></tr>
+<tr><td>imap</td><td>Merak Mail Server imapd</td><td>4719</td><td>0.001</td></tr>
+<tr><td>http</td><td>ZyXEL P-320W broadband router http config</td><td>4712</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7390 84.05.21 SIP</td><td>4711</td><td>0.001</td></tr>
+<tr><td>http</td><td>Epson printer httpd</td><td>4696</td><td>0.001</td></tr>
+<tr><td>http</td><td>Business LAN R800</td><td>4681</td><td>0.001</td></tr>
+<tr><td>http</td><td>QS</td><td>4668</td><td>0.001</td></tr>
+<tr><td>http</td><td>VMware ESX Server httpd</td><td>4661</td><td>0.001</td></tr>
+<tr><td>http</td><td>Naga Simple Server</td><td>4659</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>ZyWALL USG 100 firewall ftpd</td><td>4649</td><td>0.001</td></tr>
+<tr><td>http</td><td>Wireless Network Camera</td><td>4618</td><td>0.001</td></tr>
+<tr><td>http</td><td>3Com switch webadmin</td><td>4618</td><td>0.001</td></tr>
+<tr><td>ftp-proxy</td><td>Frox ftp proxy</td><td>4594</td><td>0.001</td></tr>
+<tr><td>http</td><td>lf</td><td>4590</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Nucleus ftpd</td><td>4583</td><td>0.001</td></tr>
+<tr><td>http</td><td>VMware ESX 4.0 Server httpd</td><td>4578</td><td>0.001</td></tr>
+<tr><td>http</td><td>JRun Web Server</td><td>4574</td><td>0.001</td></tr>
+<tr><td>http</td><td>libwww-perl-daemon httpd</td><td>4573</td><td>0.001</td></tr>
+<tr><td>http</td><td>Netgear FS726TP switch http config</td><td>4569</td><td>0.001</td></tr>
+<tr><td>http</td><td>ab_http alpha2</td><td>4561</td><td>0.001</td></tr>
+<tr><td>http</td><td>Linksys WRT54G WAP http config</td><td>4547</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>4527</td><td>0.001</td></tr>
+<tr><td>http</td><td>kangle</td><td>4505</td><td>0.001</td></tr>
+<tr><td>http</td><td>Miktotik Dude network monitor</td><td>4499</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Microsoft Windows 2000 telnetd</td><td>4496</td><td>0.001</td></tr>
+<tr><td>http</td><td>GoldStar iPECS 50B PBX http config</td><td>4490</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>HTC P4000 PDA/Phone ftpd</td><td>4462</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>ADI Convergence Galaxy update ftpd</td><td>4434</td><td>0.001</td></tr>
+<tr><td>http</td><td>HsHttpServer</td><td>4428</td><td>0.001</td></tr>
+<tr><td>http</td><td>RedHatEnterpriseAS</td><td>4424</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Titan ftpd</td><td>4421</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Motorola SBV5222-SIP-2.0.6-SCM-01-SHTW</td><td>4403</td><td>0.001</td></tr>
+<tr><td>http</td><td>OpenDNS Guide</td><td>4399</td><td>0.001</td></tr>
+<tr><td>smtp</td><td>NetBox smtpd</td><td>4396</td><td>0.001</td></tr>
+<tr><td>landesk-rc</td><td>LANDesk RC</td><td>4396</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Tilgin Vood HG13xxx_CSx000-01_09_05_09</td><td>4388</td><td>0.001</td></tr>
+<tr><td>landesk</td><td>LANDesk Management Suite</td><td>4365</td><td>0.001</td></tr>
+<tr><td>http</td><td>Netgear DGN2200v3 router http config</td><td>4365</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Tandberg-515 VoIP server</td><td>4361</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Dreambox 5.1.0 telnetd</td><td>4348</td><td>0.001</td></tr>
+<tr><td>http</td><td>HP Photosmart B110 series printer http config</td><td>4337</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Dreambox 4.7.0 telnetd</td><td>4314</td><td>0.001</td></tr>
+<tr><td>http</td><td>gadogado2</td><td>4314</td><td>0.001</td></tr>
+<tr><td>sip</td><td>DPX2203-120912</td><td>4305</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Huawei Technology. Co., Ltd.</td><td>4296</td><td>0.001</td></tr>
+<tr><td>http</td><td>Grandstream HT286 VoIP router http config</td><td>4296</td><td>0.001</td></tr>
+<tr><td>http</td><td>BBVS</td><td>4285</td><td>0.001</td></tr>
+<tr><td>http</td><td>Small Home Server httpd</td><td>4280</td><td>0.001</td></tr>
+<tr><td>ice</td><td>Internet Communications Engine</td><td>4267</td><td>0.001</td></tr>
+<tr><td>printer</td><td>LPRng</td><td>4266</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Telefonadapter - Telia Bredbandstelefoni</td><td>4258</td><td>0.001</td></tr>
+<tr><td>http</td><td>TP-LINK WR1043ND WAP http config</td><td>4255</td><td>0.001</td></tr>
+<tr><td>http</td><td>PVSS</td><td>4239</td><td>0.001</td></tr>
+<tr><td>http</td><td>Linksys SPA942 VoIP phone http config</td><td>4235</td><td>0.001</td></tr>
+<tr><td>http</td><td>squid</td><td>4231</td><td>0.001</td></tr>
+<tr><td>smtp</td><td>Kerio MailServer</td><td>4219</td><td>0.001</td></tr>
+<tr><td>http</td><td>Mini web server 1.0 ZTE corp 2005.</td><td>4219</td><td>0.001</td></tr>
+<tr><td>ncp</td><td>Novell NetWare NCP</td><td>4215</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Zoom ADSL modem telnetd</td><td>4212</td><td>0.001</td></tr>
+<tr><td>http</td><td>Linksys WRT OpenWrt http config</td><td>4204</td><td>0.001</td></tr>
+<tr><td>http</td><td>WebServerX</td><td>4196</td><td>0.001</td></tr>
+<tr><td>http</td><td>Snom 300 VoIP phone http config</td><td>4187</td><td>0.001</td></tr>
+<tr><td>http</td><td>IocpServer</td><td>4187</td><td>0.001</td></tr>
+<tr><td>http</td><td>HP Deskjet 3050A series printer http config</td><td>4175</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7570vDSL WAP ftpd</td><td>4175</td><td>0.001</td></tr>
+<tr><td>http</td><td>Check Point Firewall-1 Client Authentication httpd</td><td>4168</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Topfield TF7100HDPVRt DVR ftpd</td><td>4161</td><td>0.001</td></tr>
+<tr><td>snmp</td><td>Aruba Networks SNMP service</td><td>4137</td><td>0.001</td></tr>
+<tr><td>http</td><td>AudioCodes MP-202 VoIP adapter http config</td><td>4125</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box WLAN 08.04.34</td><td>4123</td><td>0.001</td></tr>
+<tr><td>http</td><td>Router Web Config System</td><td>4121</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>AIX telnetd</td><td>4115</td><td>0.001</td></tr>
+<tr><td>http</td><td>Lancom 1711+ VPN http config</td><td>4105</td><td>0.001</td></tr>
+<tr><td>http</td><td>IronPort AsyncOS http config</td><td>4093</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>CoreFTP sshd</td><td>4083</td><td>0.001</td></tr>
+<tr><td>pop3pw</td><td>CommuniGate Pro pop3 password change daemon</td><td>4080</td><td>0.001</td></tr>
+<tr><td>http</td><td>KM-MFP-http</td><td>4077</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>WS_FTP sshd</td><td>4060</td><td>0.001</td></tr>
+<tr><td>oracle</td><td>Oracle Database</td><td>4053</td><td>0.001</td></tr>
+<tr><td>smtp</td><td>JAMES smtpd</td><td>4043</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Netopia 3347NWG wireless ADSL router telnetd</td><td>4040</td><td>0.001</td></tr>
+<tr><td>http</td><td>Netgem</td><td>4040</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>ZyWALL USG 20 firewall ftpd</td><td>4039</td><td>0.001</td></tr>
+<tr><td>imap</td><td>Novell GroupWise imapd</td><td>4033</td><td>0.001</td></tr>
+<tr><td>http</td><td>Apache Advanced Extranet Server httpd</td><td>4032</td><td>0.001</td></tr>
+<tr><td>http</td><td>OpenWrt BusyBox httpd</td><td>4024</td><td>0.001</td></tr>
+<tr><td>http</td><td>Rapid Logic</td><td>4013</td><td>0.001</td></tr>
+<tr><td>http</td><td>Web-Based Enterprise Management CIM serverOpenPegasus WBEM httpd</td><td>4002</td><td>0.001</td></tr>
+<tr><td>http</td><td>Everfocus webcam http config</td><td>3997</td><td>0.001</td></tr>
+<tr><td>http</td><td>Cisco SPA112 VoIP adapter</td><td>3980</td><td>0.001</td></tr>
+<tr><td>http</td><td>Western Digital WD TV Live media player http config</td><td>3969</td><td>0.001</td></tr>
+<tr><td>smtp</td><td>Axigen smtpd</td><td>3968</td><td>0.001</td></tr>
+<tr><td>http</td><td>Oracle-iPlanet-Web-Server</td><td>3941</td><td>0.001</td></tr>
+<tr><td>http</td><td>Demandware eCommerce Server</td><td>3916</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>RaidenMAILD pop3d</td><td>3914</td><td>0.001</td></tr>
+<tr><td>http</td><td>InterNiche Technologies WebServer 2.0</td><td>3909</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Broadcom BCM96332 DSL router telnetd</td><td>3906</td><td>0.001</td></tr>
+<tr><td>http</td><td>unknown</td><td>3906</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Sagem ADSL router</td><td>3900</td><td>0.001</td></tr>
+<tr><td>http</td><td>DirecTV JSON RPC</td><td>3887</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Motorola SBV5222-SIP-2.0.6-SCM-05-SHTW</td><td>3879</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box WLAN 7340</td><td>3873</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>D-Link 524, DIR-300, or WBR-1310 WAP telnetd</td><td>3868</td><td>0.001</td></tr>
+<tr><td>http</td><td>Adaptec/IBM ServeRAID Management http config</td><td>3854</td><td>0.001</td></tr>
+<tr><td>http</td><td>DirecTV satellite receiver http interface</td><td>3847</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>3843</td><td>0.001</td></tr>
+<tr><td>http</td><td>AnWeb</td><td>3840</td><td>0.001</td></tr>
+<tr><td>lexlm</td><td>Lexmark language monitor</td><td>3838</td><td>0.001</td></tr>
+<tr><td>http</td><td>SEQUANS</td><td>3838</td><td>0.001</td></tr>
+<tr><td>zebedee</td><td>Zebedee encrypted tunnel</td><td>3812</td><td>0.001</td></tr>
+<tr><td>http</td><td>ver2.4 rev0</td><td>3810</td><td>0.001</td></tr>
+<tr><td>http</td><td>Embedthis-Appweb</td><td>3810</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Funkwerk bintec R3000 router</td><td>3805</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Foxgate S9816 switch telnetd</td><td>3803</td><td>0.001</td></tr>
+<tr><td>http</td><td>HyNetOS</td><td>3801</td><td>0.001</td></tr>
+<tr><td>http</td><td>avtech httpd</td><td>3794</td><td>0.001</td></tr>
+<tr><td>ibm-db2</td><td>IBM DB2 Database Server</td><td>3791</td><td>0.001</td></tr>
+<tr><td>http</td><td>xServers</td><td>3784</td><td>0.001</td></tr>
+<tr><td>imap-proxy</td><td>Zarafa imap proxy</td><td>3756</td><td>0.001</td></tr>
+<tr><td>http</td><td>Solaris management console server</td><td>3744</td><td>0.001</td></tr>
+<tr><td>http</td><td>DarwinStreamingServer</td><td>3739</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Funkwerk bintec R230a router</td><td>3733</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7270v1 WAP ftpd</td><td>3733</td><td>0.001</td></tr>
+<tr><td>http</td><td>Mini ASP Web Server</td><td>3728</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>Radware sshd</td><td>3721</td><td>0.001</td></tr>
+<tr><td>smtp</td><td>hMailServer</td><td>3721</td><td>0.001</td></tr>
+<tr><td>http</td><td>ZyXEL-RomPager</td><td>3713</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>Cisco IP Phone CP-7900G-series sshd</td><td>3710</td><td>0.001</td></tr>
+<tr><td>pcanywheredata</td><td>Symantec pcAnywhere</td><td>3704</td><td>0.001</td></tr>
+<tr><td>smtp</td><td>Winmail smtpd</td><td>3696</td><td>0.001</td></tr>
+<tr><td>http</td><td>Node.js</td><td>3696</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Winmail pop3d</td><td>3691</td><td>0.001</td></tr>
+<tr><td>http</td><td>Tiny redirect server</td><td>3684</td><td>0.001</td></tr>
+<tr><td>http</td><td>DSLG WEB SERVER</td><td>3680</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Net Administration Divisions ftpd</td><td>3676</td><td>0.001</td></tr>
+<tr><td>http</td><td>SentinelKeysServer</td><td>3666</td><td>0.001</td></tr>
+<tr><td>ftp-proxy</td><td>UserGate ftpd</td><td>3664</td><td>0.001</td></tr>
+<tr><td>http</td><td>iCanWebServer</td><td>3642</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Tandberg-516 VoIP server</td><td>3640</td><td>0.001</td></tr>
+<tr><td>symantec-av</td><td>Symantec rtvscan antivirus</td><td>3627</td><td>0.001</td></tr>
+<tr><td>netsupport</td><td>NetSupport PC remote control</td><td>3610</td><td>0.001</td></tr>
+<tr><td>hp-pjl</td><td>LASERJET 4050</td><td>3609</td><td>0.001</td></tr>
+<tr><td>upnp</td><td>D-Link DIR-600 WAP UPnP</td><td>3599</td><td>0.001</td></tr>
+<tr><td>http</td><td>Kerio MailServer Webmail</td><td>3599</td><td>0.001</td></tr>
+<tr><td>http</td><td>Tiny WebServer</td><td>3586</td><td>0.001</td></tr>
+<tr><td>http</td><td>DigiSprite httpd</td><td>3583</td><td>0.001</td></tr>
+<tr><td>http-proxy</td><td>Pound http proxy</td><td>3582</td><td>0.001</td></tr>
+<tr><td>http</td><td>Coship Electronics Embedded Web Server</td><td>3581</td><td>0.001</td></tr>
+<tr><td>http</td><td>Asterisk</td><td>3580</td><td>0.001</td></tr>
+<tr><td>svrloc</td><td>Apple slpd</td><td>3574</td><td>0.001</td></tr>
+<tr><td>smtp</td><td>hMailServer smtpd</td><td>3550</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>APC AOS ftpd</td><td>3548</td><td>0.001</td></tr>
+<tr><td>finger</td><td>XMail fingerd</td><td>3548</td><td>0.001</td></tr>
+<tr><td>http</td><td>D-Link DFL-800 or DFL-860 firewall http config</td><td>3545</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Telindus ftpd</td><td>3540</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Guild ftpd</td><td>3536</td><td>0.001</td></tr>
+<tr><td>http</td><td>AVM FRITZ!Box WLAN 7170 WAP http config</td><td>3514</td><td>0.001</td></tr>
+<tr><td>ms-sql-s</td><td>Microsoft SQL Server</td><td>3510</td><td>0.001</td></tr>
+<tr><td>http</td><td>PSC 4.0.0.3</td><td>3507</td><td>0.001</td></tr>
+<tr><td>http</td><td>ZNC IRC bouncer http config</td><td>3504</td><td>0.001</td></tr>
+<tr><td>http</td><td>SAP Web Application Server</td><td>3477</td><td>0.001</td></tr>
+<tr><td>http</td><td>Netgear GS724T switch http config</td><td>3473</td><td>0.001</td></tr>
+<tr><td>http</td><td>Panasonic webcam http config</td><td>3472</td><td>0.001</td></tr>
+<tr><td>http</td><td>Netgear WNR3500 WAP http config</td><td>3466</td><td>0.001</td></tr>
+<tr><td>http</td><td>CJServer</td><td>3462</td><td>0.001</td></tr>
+<tr><td>http</td><td>Beck IPC@CHIP embedded httpd</td><td>3460</td><td>0.001</td></tr>
+<tr><td>http</td><td>Lantronix XPort embedded ethernet http config</td><td>3459</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>APC telnetd</td><td>3439</td><td>0.001</td></tr>
+<tr><td>http</td><td>Netgear WNR834Bv2 WAP http config</td><td>3434</td><td>0.001</td></tr>
+<tr><td>http</td><td>QNAP TS-109-II NAS http config</td><td>3412</td><td>0.001</td></tr>
+<tr><td>http</td><td>BlueIris-HTTP</td><td>3412</td><td>0.001</td></tr>
+<tr><td>http</td><td>bukkit MusicService</td><td>3393</td><td>0.001</td></tr>
+<tr><td>http</td><td>BaseHTTPServer</td><td>3382</td><td>0.001</td></tr>
+<tr><td>http</td><td>bywifi</td><td>3364</td><td>0.001</td></tr>
+<tr><td>smtp</td><td>Tobit David.fx smtpd</td><td>3358</td><td>0.001</td></tr>
+<tr><td>http</td><td>WebtoB</td><td>3355</td><td>0.001</td></tr>
+<tr><td>jabber</td><td>Prosody Jabber client</td><td>3354</td><td>0.001</td></tr>
+<tr><td>imap</td><td>Tobit David.fx imapd</td><td>3351</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Cisco 7940 IP Phone</td><td>3349</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Polycom VSX 8000 ftpd</td><td>3348</td><td>0.001</td></tr>
+<tr><td>daytime</td><td>Sun Solaris daytime</td><td>3342</td><td>0.001</td></tr>
+<tr><td>warcraft</td><td>World of Warcraft world server</td><td>3341</td><td>0.001</td></tr>
+<tr><td>http</td><td>D-Link DI-604 http config</td><td>3335</td><td>0.001</td></tr>
+<tr><td>http</td><td>Linux 2.4.18 UPnP</td><td>3334</td><td>0.001</td></tr>
+<tr><td>http</td><td>Tornado httpd</td><td>3332</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cubic Circle Cucipop pop3d</td><td>3327</td><td>0.001</td></tr>
+<tr><td>hp-pjl</td><td>HP LaserJet P2015 Series</td><td>3326</td><td>0.001</td></tr>
+<tr><td>http</td><td>eWON</td><td>3324</td><td>0.001</td></tr>
+<tr><td>http</td><td>BaseHTTP</td><td>3321</td><td>0.001</td></tr>
+<tr><td>jabber</td><td>Prosody Jabber server</td><td>3304</td><td>0.001</td></tr>
+<tr><td>http</td><td>AudioCodes Mediant 200 VoIP gateway http config</td><td>3304</td><td>0.001</td></tr>
+<tr><td>imap</td><td>Binc imapd</td><td>3302</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Netgear 3500L WAP ftpd</td><td>3301</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Sony PCS-G50 telnetd</td><td>3297</td><td>0.001</td></tr>
+<tr><td>http</td><td>EWS-NIC5</td><td>3282</td><td>0.001</td></tr>
+<tr><td>http</td><td>MS .NET Remoting</td><td>3272</td><td>0.001</td></tr>
+<tr><td>http</td><td>HP Photosmart Plus B210 series printer http config</td><td>3260</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Funkwerk bintec R230aw router</td><td>3240</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MailSite pop3d</td><td>3235</td><td>0.001</td></tr>
+<tr><td>http</td><td>XWeb 1.0</td><td>3219</td><td>0.001</td></tr>
+<tr><td>hp-pjl</td><td>hp LaserJet 1320 series</td><td>3199</td><td>0.001</td></tr>
+<tr><td>smtp</td><td>Cisco IronPort C160 firewall smtpd</td><td>3196</td><td>0.001</td></tr>
+<tr><td>imap</td><td>Citadel imapd</td><td>3182</td><td>0.001</td></tr>
+<tr><td>hp-pjl</td><td>HP Color LaserJet CP2025dn</td><td>3179</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>ZyXEL ZXDSL 831II ADSL modem telnetd</td><td>3170</td><td>0.001</td></tr>
+<tr><td>http</td><td>Canon Pixma IP4000R printer http config</td><td>3166</td><td>0.001</td></tr>
+<tr><td>http</td><td>HTTP-RTMP Stream Server</td><td>3162</td><td>0.001</td></tr>
+<tr><td>http</td><td>AIP250</td><td>3153</td><td>0.001</td></tr>
+<tr><td>smtp</td><td>ArGoSoft Mail Server Pro</td><td>3135</td><td>0.001</td></tr>
+<tr><td>hp-pjl</td><td>HP LaserJet P3005</td><td>3122</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Cadant C3 Cable Modem Termination Server telnetd</td><td>3107</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Huawei Technologies Co., Ltd. 2004-2009. All rights reserved.</td><td>3102</td><td>0.001</td></tr>
+<tr><td>http</td><td>eSoft</td><td>3100</td><td>0.001</td></tr>
+<tr><td>http</td><td>AquaController 4.0</td><td>3096</td><td>0.001</td></tr>
+<tr><td>http</td><td>gateway</td><td>3081</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>IRTS-NTOPIA System >>>>>>>></td><td>3080</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Adtran Netvanta 3200 router telnetd</td><td>3077</td><td>0.001</td></tr>
+<tr><td>http</td><td>Netgear WGR614v8 WAP http config</td><td>3077</td><td>0.001</td></tr>
+<tr><td>http-proxy</td><td>Citrix Application Firewall</td><td>3076</td><td>0.001</td></tr>
+<tr><td>http</td><td>DVSS Herculese DVR http config</td><td>3073</td><td>0.001</td></tr>
+<tr><td>http</td><td>HP/Compaq Integrated Lights-Out http config</td><td>3070</td><td>0.001</td></tr>
+<tr><td>http</td><td>Casi-Rusco camera/Bestelco VoIP phone http config</td><td>3068</td><td>0.001</td></tr>
+<tr><td>http</td><td>Milestone XProtect video surveillance http interface</td><td>3061</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Draytek ADSL router ftpd</td><td>3040</td><td>0.001</td></tr>
+<tr><td>squeezecli</td><td>SqueezeCenter CLI</td><td>3038</td><td>0.001</td></tr>
+<tr><td>http</td><td>ejabberd http admin</td><td>3031</td><td>0.001</td></tr>
+<tr><td>http</td><td>Sun Solaris Management Console</td><td>3019</td><td>0.001</td></tr>
+<tr><td>hp-pjl</td><td>HP LaserJet P3010 Series</td><td>2994</td><td>0.001</td></tr>
+<tr><td>http</td><td>wanduck</td><td>2985</td><td>0.001</td></tr>
+<tr><td>http</td><td>Toshiba Tec printer http config</td><td>2983</td><td>0.001</td></tr>
+<tr><td>http</td><td>GR-HTTPD Server</td><td>2973</td><td>0.001</td></tr>
+<tr><td>http</td><td>Citrix Access Gateway</td><td>2973</td><td>0.001</td></tr>
+<tr><td>http</td><td>dvr1614n web-cam httpd</td><td>2960</td><td>0.001</td></tr>
+<tr><td>hp-pjl</td><td>HP LaserJet P4015</td><td>2957</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>BreezeACCESS wireless router telnetd</td><td>2956</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Texas Imperial Software WFTPD</td><td>2954</td><td>0.001</td></tr>
+<tr><td>http</td><td>Canon printer web interface</td><td>2947</td><td>0.001</td></tr>
+<tr><td>http</td><td>Polycom ViewStation</td><td>2946</td><td>0.001</td></tr>
+<tr><td>http</td><td>ZyXEL Modem</td><td>2945</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>Force10 switch sshd</td><td>2937</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Huawei Quidway A8010 switch telnetd</td><td>2935</td><td>0.001</td></tr>
+<tr><td>http</td><td>Linksys WRT600N WAP http config</td><td>2935</td><td>0.001</td></tr>
+<tr><td>http</td><td>Panasonic AVC Server</td><td>2930</td><td>0.001</td></tr>
+<tr><td>http</td><td>meida server</td><td>2925</td><td>0.001</td></tr>
+<tr><td>http</td><td>Surgemail webmail</td><td>2924</td><td>0.001</td></tr>
+<tr><td>http</td><td>FVG318</td><td>2918</td><td>0.001</td></tr>
+<tr><td>http</td><td>3ware 3DM2 Serial RAID http config</td><td>2916</td><td>0.001</td></tr>
+<tr><td>http</td><td>D-Link DI-808HV http config</td><td>2908</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>ZyXEL ZyWALL USG 200 firewall telnetd</td><td>2906</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>D-Link DVA-G3170i telnetd</td><td>2905</td><td>0.001</td></tr>
+<tr><td>http</td><td>NetEngine Server 1.0</td><td>2903</td><td>0.001</td></tr>
+<tr><td>vnc-http</td><td>VNC Server Personal Edition httpd</td><td>2902</td><td>0.001</td></tr>
+<tr><td>http</td><td>WCY_WEBServer</td><td>2898</td><td>0.001</td></tr>
+<tr><td>http</td><td>Lyris ListManagerWeb</td><td>2897</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Polycom SoundPoint 550</td><td>2894</td><td>0.001</td></tr>
+<tr><td>http</td><td>No Information</td><td>2886</td><td>0.001</td></tr>
+<tr><td>smtp</td><td>Eudora EIMS X smtpd</td><td>2884</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Telindus router telnetd</td><td>2879</td><td>0.001</td></tr>
+<tr><td>http</td><td>monit httpd</td><td>2877</td><td>0.001</td></tr>
+<tr><td>caldav</td><td>TwistedWeb httpd</td><td>2870</td><td>0.001</td></tr>
+<tr><td>http</td><td>Gordano Messaging Suite Web Server v17.01.3793</td><td>2863</td><td>0.001</td></tr>
+<tr><td>http</td><td>CrushFTP httpd</td><td>2861</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Microsoft FTP Service</td><td>2856</td><td>0.001</td></tr>
+<tr><td>upnp</td><td>D-Link DIR-300 WAP UPnP</td><td>2852</td><td>0.001</td></tr>
+<tr><td>http</td><td>PunkBuster http config</td><td>2845</td><td>0.001</td></tr>
+<tr><td>http</td><td>m0n0wall FreeBSD firewall web interface</td><td>2836</td><td>0.001</td></tr>
+<tr><td>http</td><td>Bosch Divar Security Systems http config</td><td>2836</td><td>0.001</td></tr>
+<tr><td>http</td><td>OracleAS Web Cache 10g</td><td>2835</td><td>0.001</td></tr>
+<tr><td>http</td><td>Motion Camera httpd</td><td>2817</td><td>0.001</td></tr>
+<tr><td>http</td><td>AIM HTTP</td><td>2817</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Comtrend FTP firmware update utility</td><td>2815</td><td>0.001</td></tr>
+<tr><td>http</td><td>Sun Java System Application Server httpd</td><td>2813</td><td>0.001</td></tr>
+<tr><td>netwareip</td><td>Novell NetWare/IP</td><td>2804</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>VanDyke VShell sshd</td><td>2802</td><td>0.001</td></tr>
+<tr><td>imap</td><td>Mercury/32 imapd</td><td>2800</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Titanium</td><td>2798</td><td>0.001</td></tr>
+<tr><td>soap</td><td>SMC SMCWBR14S Barricade WAP soap</td><td>2790</td><td>0.001</td></tr>
+<tr><td>ssl</td><td>multi-vendor SSL</td><td>2776</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>D-Link Printer Server ftpd</td><td>2775</td><td>0.001</td></tr>
+<tr><td>ndmp</td><td>NetApp Data ONTAP ndmp</td><td>2772</td><td>0.001</td></tr>
+<tr><td>http</td><td>LG HDCP Server</td><td>2769</td><td>0.001</td></tr>
+<tr><td>irc</td><td></td><td>2762</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Ingate-Firewall/4.9.2</td><td>2756</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>USRobotics Wireless MAXg ADSL router telnetd</td><td>2748</td><td>0.001</td></tr>
+<tr><td>hp-pjl</td><td>HP LaserJet 4100 Series</td><td>2743</td><td>0.001</td></tr>
+<tr><td>http</td><td>Avaya IP Office VoIP PBX httpd</td><td>2739</td><td>0.001</td></tr>
+<tr><td>irc</td><td>IRCnet ircd</td><td>2725</td><td>0.001</td></tr>
+<tr><td>irc</td><td>BitlBee IRCd</td><td>2725</td><td>0.001</td></tr>
+<tr><td>http</td><td>CANON HTTP Server</td><td>2725</td><td>0.001</td></tr>
+<tr><td>melange</td><td>Melange Chat Server</td><td>2724</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7050 Annex A SIP</td><td>2714</td><td>0.001</td></tr>
+<tr><td>http</td><td>Delta Networks Embedded HTTPD</td><td>2706</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Lingo VoIP config telnetd</td><td>2705</td><td>0.001</td></tr>
+<tr><td>http</td><td>Lancom 1821n wireless router http config</td><td>2698</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Sun Solaris 8 ftpd</td><td>2696</td><td>0.001</td></tr>
+<tr><td>http</td><td>RollingStream</td><td>2695</td><td>0.001</td></tr>
+<tr><td>http</td><td>gSoap 2.7.6c / Dimark client 4.0.2 beta</td><td>2695</td><td>0.001</td></tr>
+<tr><td>hp-pjl</td><td>hp LaserJet 4200</td><td>2694</td><td>0.001</td></tr>
+<tr><td>http</td><td>thttpd-alphanetworks</td><td>2684</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Actiontec router ftpd</td><td>2683</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>USHA SSH</td><td>2678</td><td>0.001</td></tr>
+<tr><td>xmail-ctrl</td><td>XMail CTRL Server</td><td>2677</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>the server management network terminal!</td><td>2674</td><td>0.001</td></tr>
+<tr><td>hp-pjl</td><td>?</td><td>2669</td><td>0.001</td></tr>
+<tr><td>http</td><td>Tinyweb httpd</td><td>2660</td><td>0.001</td></tr>
+<tr><td>http</td><td>Wusage httpd</td><td>2658</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7360 WAP ftpd</td><td>2640</td><td>0.001</td></tr>
+<tr><td>ms-wbt-server</td><td>VirtualBox VM Remote Desktop Service</td><td>2631</td><td>0.001</td></tr>
+<tr><td>snmp</td><td>Canon SNMP service</td><td>2630</td><td>0.001</td></tr>
+<tr><td>pop3pw</td><td>Ipswitch IMail pop3 password change daemon</td><td>2630</td><td>0.001</td></tr>
+<tr><td>http</td><td>FileMaker Web Publishing httpd</td><td>2626</td><td>0.001</td></tr>
+<tr><td>http</td><td>III 100</td><td>2620</td><td>0.001</td></tr>
+<tr><td>snmp</td><td>MikroTik router SNMP service</td><td>2610</td><td>0.001</td></tr>
+<tr><td>http</td><td>HP Photosmart 7510 series printer http config</td><td>2606</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Zhone Technologies</td><td>2604</td><td>0.001</td></tr>
+<tr><td>http</td><td>Lancom DSL/DSL/I-1611 router http config</td><td>2603</td><td>0.001</td></tr>
+<tr><td>http</td><td>Linksys E1500 WAP http config</td><td>2598</td><td>0.001</td></tr>
+<tr><td>http</td><td>Rex</td><td>2594</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>Cisco VPN Concentrator SSHd</td><td>2593</td><td>0.001</td></tr>
+<tr><td>H.323/Q.931</td><td></td><td>2592</td><td>0.001</td></tr>
+<tr><td>http</td><td>VB</td><td>2588</td><td>0.001</td></tr>
+<tr><td>http</td><td>WISPR</td><td>2586</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>tpop3d</td><td>2584</td><td>0.001</td></tr>
+<tr><td>netsaint</td><td>NC_Net nagios server</td><td>2584</td><td>0.001</td></tr>
+<tr><td>http</td><td>VMware View Manager httpd</td><td>2582</td><td>0.001</td></tr>
+<tr><td>http</td><td>VPON Server</td><td>2576</td><td>0.001</td></tr>
+<tr><td>http</td><td>XBMC Web Media Manager</td><td>2573</td><td>0.001</td></tr>
+<tr><td>pop3-proxy</td><td>Zarafa pop3 proxy</td><td>2568</td><td>0.001</td></tr>
+<tr><td>http</td><td>Tracd</td><td>2568</td><td>0.001</td></tr>
+<tr><td>http</td><td>iRMC S2 Webserver</td><td>2568</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Roku media player telnetd</td><td>2566</td><td>0.001</td></tr>
+<tr><td>http</td><td>VMware Server 2 http config</td><td>2564</td><td>0.001</td></tr>
+<tr><td>http-proxy</td><td>Microsoft ISA Server http proxy</td><td>2562</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>NetBSD lukemftpd</td><td>2551</td><td>0.001</td></tr>
+<tr><td>nuttcp</td><td>nuttcp network throughput tester</td><td>2548</td><td>0.001</td></tr>
+<tr><td>http-proxy</td><td>ziproxy http proxy</td><td>2545</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Oracle Enterprise XML DB ftpd</td><td>2545</td><td>0.001</td></tr>
+<tr><td>http</td><td>Linksys WRT110 wireless-G router http config</td><td>2543</td><td>0.001</td></tr>
+<tr><td>http</td><td>uTorrent http admin</td><td>2542</td><td>0.001</td></tr>
+<tr><td>http</td><td>SmarterTools</td><td>2535</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Huawei Home Gateway 550</td><td>2533</td><td>0.001</td></tr>
+<tr><td>http</td><td>Drohne Internal HTTP Server by Searchmetrics GmbH (c) 2012</td><td>2531</td><td>0.001</td></tr>
+<tr><td>http</td><td>AVT1100</td><td>2525</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>use home media gateway.</td><td>2521</td><td>0.001</td></tr>
+<tr><td>http</td><td>Xitami httpd</td><td>2521</td><td>0.001</td></tr>
+<tr><td>http</td><td>http server</td><td>2521</td><td>0.001</td></tr>
+<tr><td>http</td><td>NetDNA-cache</td><td>2517</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Efficient router telnetd</td><td>2516</td><td>0.001</td></tr>
+<tr><td>xml-rpc</td><td>ABYSS httpd</td><td>2514</td><td>0.001</td></tr>
+<tr><td>http</td><td>ESET NOD32 anti-virus update httpd</td><td>2509</td><td>0.001</td></tr>
+<tr><td>irc</td><td>ratbox ircd</td><td>2508</td><td>0.001</td></tr>
+<tr><td>sip</td><td>TANDBERG/4103 (X7.1)</td><td>2503</td><td>0.001</td></tr>
+<tr><td>http</td><td>VoIP/POTS gateway http config</td><td>2503</td><td>0.001</td></tr>
+<tr><td>http</td><td>Play</td><td>2503</td><td>0.001</td></tr>
+<tr><td>http</td><td>Motorola Canopy WAP http config</td><td>2502</td><td>0.001</td></tr>
+<tr><td>http</td><td>DataflexViNE-Webserver</td><td>2492</td><td>0.001</td></tr>
+<tr><td>http</td><td>ViewSonic PJD6521 projector http config</td><td>2491</td><td>0.001</td></tr>
+<tr><td>http</td><td>iBall-Baton</td><td>2491</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Synolgy NAS ftpd</td><td>2474</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Datacom DM991CR router telnetd</td><td>2467</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Funkwerk bintec R232b router</td><td>2465</td><td>0.001</td></tr>
+<tr><td>http</td><td>IPC</td><td>2464</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Funkwerk bintec RS230a router</td><td>2463</td><td>0.001</td></tr>
+<tr><td>http</td><td>Netgear DG834N router http config</td><td>2456</td><td>0.001</td></tr>
+<tr><td>http</td><td>Oracle-Application-Server-11g</td><td>2454</td><td>0.001</td></tr>
+<tr><td>http</td><td>go1984</td><td>2454</td><td>0.001</td></tr>
+<tr><td>http</td><td>Billion/TeleWell ADSL modem http config</td><td>2448</td><td>0.001</td></tr>
+<tr><td>hp-pjl</td><td>LASERJET 4000</td><td>2442</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>Cerberus FTP Server sshd</td><td>2439</td><td>0.001</td></tr>
+<tr><td>ipp</td><td>Epson ippd</td><td>2438</td><td>0.001</td></tr>
+<tr><td>http</td><td>Tandberg Border Controller VoIP proxy</td><td>2433</td><td>0.001</td></tr>
+<tr><td>finger</td><td>Linux fingerd</td><td>2432</td><td>0.001</td></tr>
+<tr><td>socks4</td><td>Connection failed; ident required</td><td>2423</td><td>0.001</td></tr>
+<tr><td>http</td><td>KS_HTTP</td><td>2420</td><td>0.001</td></tr>
+<tr><td>http</td><td>MF50</td><td>2410</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>OEM FTPD 1.01</td><td>2409</td><td>0.001</td></tr>
+<tr><td>http</td><td>Phoenix PowerAgent eXM with Equalization</td><td>2396</td><td>0.001</td></tr>
+<tr><td>http</td><td>DrayTek Vigor 3300 router http config</td><td>2395</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>AMX NetLinx A/V control system ftpd</td><td>2392</td><td>0.001</td></tr>
+<tr><td>http</td><td>SAP J2EE Engine httpd</td><td>2391</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Tilgin Vood HG13xxx_CSx700-01_07_06_06</td><td>2375</td><td>0.001</td></tr>
+<tr><td>http</td><td>httpserver</td><td>2374</td><td>0.001</td></tr>
+<tr><td>http</td><td>Extremeware XOS httpd</td><td>2373</td><td>0.001</td></tr>
+<tr><td>http</td><td>JDVR</td><td>2368</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Golden ftpd</td><td>2368</td><td>0.001</td></tr>
+<tr><td>http</td><td>Catwalk</td><td>2367</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>NET+ARM ftpd</td><td>2367</td><td>0.001</td></tr>
+<tr><td>http</td><td>IQ3</td><td>2365</td><td>0.001</td></tr>
+<tr><td>http</td><td>MultView WEB Server V1.1</td><td>2361</td><td>0.001</td></tr>
+<tr><td>http</td><td>HP Photosmart 6510 series printer http config</td><td>2355</td><td>0.001</td></tr>
+<tr><td>http</td><td>PasteWSGIServer</td><td>2353</td><td>0.001</td></tr>
+<tr><td>http</td><td>Panasonic DVR slinger http config</td><td>2351</td><td>0.001</td></tr>
+<tr><td>http</td><td>HomeSeer Home Control Web Interface</td><td>2342</td><td>0.001</td></tr>
+<tr><td>http</td><td>D-Link DCS-2120 webcam http config</td><td>2340</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Dreambox 4.6.0 telnetd</td><td>2335</td><td>0.001</td></tr>
+<tr><td>http</td><td>FLC 0.52</td><td>2333</td><td>0.001</td></tr>
+<tr><td>http</td><td>ADAM-6000</td><td>2332</td><td>0.001</td></tr>
+<tr><td>http</td><td>ZK Web Server</td><td>2330</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>FreeFTPd</td><td>2314</td><td>0.001</td></tr>
+<tr><td>http</td><td>gunicorn</td><td>2306</td><td>0.001</td></tr>
+<tr><td>http</td><td>LogMeIn httpd</td><td>2305</td><td>0.001</td></tr>
+<tr><td>http-proxy</td><td>Varnish</td><td>2303</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>602LAN Suite pop3</td><td>2301</td><td>0.001</td></tr>
+<tr><td>upnp</td><td>PS3 Media Server UPnP</td><td>2300</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Axis 214 PTZ Network Camera ftpd</td><td>2300</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Linksys/PAP2T-3.1.15(LS)</td><td>2297</td><td>0.001</td></tr>
+<tr><td>http</td><td>SEPM</td><td>2297</td><td>0.001</td></tr>
+<tr><td>http</td><td>HP Deskjet 3050 series printer http config</td><td>2292</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>SlimFTPd</td><td>2292</td><td>0.001</td></tr>
+<tr><td>http</td><td>2.56</td><td>2289</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>PBT PowerAgent eXM-EQ LMM</td><td>2288</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Linux (ZEM510) for MIPS</td><td>2284</td><td>0.001</td></tr>
+<tr><td>http</td><td>Logitech Media Server (7.7.2 - 33893)</td><td>2283</td><td>0.001</td></tr>
+<tr><td>http</td><td>HP Officejet 6500 E710a-f printer http config</td><td>2283</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>3Com OfficeConnect router telnetd</td><td>2282</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Aethra StarVoice SV1042 telnetd</td><td>2275</td><td>0.001</td></tr>
+<tr><td>telnet</td><td>Alcatel OmniSwitch 6400 or 8600 switch telnetd</td><td>2266</td><td>0.001</td></tr>
+<tr><td>http</td><td>Linktivity ConnectionPoint</td><td>2260</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Mercury/32 pop3d</td><td>2257</td><td>0.0</td></tr>
+<tr><td>uucp</td><td>Solaris uucpd</td><td>2254</td><td>0.0</td></tr>
+<tr><td>http</td><td>LANCOM 821</td><td>2252</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>IBM OS/400 telnetd</td><td>2244</td><td>0.0</td></tr>
+<tr><td>http</td><td>VOD server</td><td>2244</td><td>0.0</td></tr>
+<tr><td>http</td><td>AtermWARPSTAR</td><td>2237</td><td>0.0</td></tr>
+<tr><td>http</td><td>TOS httpd</td><td>2234</td><td>0.0</td></tr>
+<tr><td>http</td><td>D-Link DSL-502T http config</td><td>2229</td><td>0.0</td></tr>
+<tr><td>http</td><td>Topsec</td><td>2228</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Novell GroupWise</td><td>2226</td><td>0.0</td></tr>
+<tr><td>http</td><td>TBS</td><td>2226</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Brother printer smtpd</td><td>2222</td><td>0.0</td></tr>
+<tr><td>nntp</td><td>Symantic Enterprise Firewall nntpd</td><td>2214</td><td>0.0</td></tr>
+<tr><td>http</td><td>D-Link MiniAVServer</td><td>2214</td><td>0.0</td></tr>
+<tr><td>H.323-gatekeeper</td><td>CompTek AquaGateKeeper</td><td>2208</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Cisco 2514 router telnetd</td><td>2204</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Unrecognized SMTP service</td><td>2204</td><td>0.0</td></tr>
+<tr><td>http</td><td>go1984 httpd</td><td>2204</td><td>0.0</td></tr>
+<tr><td>http</td><td>NHN</td><td>2197</td><td>0.0</td></tr>
+<tr><td>http</td><td>Netgear WNR3500v2 WAP http config</td><td>2197</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>MailEnable Enterprise smptd</td><td>2188</td><td>0.0</td></tr>
+<tr><td>http</td><td>Vivotek IP7131 Network Camera http config</td><td>2187</td><td>0.0</td></tr>
+<tr><td>http</td><td>D-Link 500G DSL router http config</td><td>2185</td><td>0.0</td></tr>
+<tr><td>http</td><td>TRMB</td><td>2178</td><td>0.0</td></tr>
+<tr><td>http</td><td>QZHTTP-2.35.2</td><td>2178</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>NetWare NWFTPD</td><td>2172</td><td>0.0</td></tr>
+<tr><td>http</td><td>apache</td><td>2168</td><td>0.0</td></tr>
+<tr><td>http</td><td>Netgear DG834 FR WAP http config</td><td>2163</td><td>0.0</td></tr>
+<tr><td>http</td><td>TP-LINK WR641G/642G WAP http config</td><td>2156</td><td>0.0</td></tr>
+<tr><td>socks4</td><td>Connection ok</td><td>2154</td><td>0.0</td></tr>
+<tr><td>http</td><td>SmarterTools SmarterStats httpd</td><td>2152</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Cisco 4400 wireless LAN controller telnetd</td><td>2150</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>ZXR10 Fast and Intelligent 3906 Switch of ZTE Corporation</td><td>2149</td><td>0.0</td></tr>
+<tr><td>ms-wbt-server</td><td>Microsoft NetMeeting Remote Desktop Service</td><td>2148</td><td>0.0</td></tr>
+<tr><td>http</td><td>NT</td><td>2145</td><td>0.0</td></tr>
+<tr><td>http</td><td>D-Link router http config</td><td>2143</td><td>0.0</td></tr>
+<tr><td>http</td><td>IceWarp</td><td>2142</td><td>0.0</td></tr>
+<tr><td>http</td><td>ZyXEL ZyAIR G-4100v2 WAP http config</td><td>2138</td><td>0.0</td></tr>
+<tr><td>ident</td><td></td><td>2133</td><td>0.0</td></tr>
+<tr><td>hp-pjl</td><td>HP Color LaserJet CP3525</td><td>2127</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>IRIX telnetd</td><td>2123</td><td>0.0</td></tr>
+<tr><td>http</td><td>SNF</td><td>2116</td><td>0.0</td></tr>
+<tr><td>sip-proxy</td><td>OpenSIPS SIP Server</td><td>2113</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>pSOSystem ftpd</td><td>2108</td><td>0.0</td></tr>
+<tr><td>http</td><td>XGATE-Webs</td><td>2106</td><td>0.0</td></tr>
+<tr><td>http</td><td>Medusa httpd</td><td>2105</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Cisco SRW2016 or SRW2024 router telnetd</td><td>2098</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Arris tm602g cable modem telnetd</td><td>2098</td><td>0.0</td></tr>
+<tr><td>http</td><td>4D WebStar D</td><td>2094</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Efficient Networks Speedstream router telnetd</td><td>2093</td><td>0.0</td></tr>
+<tr><td>jabber</td><td>jabberd instant messaging server</td><td>2083</td><td>0.0</td></tr>
+<tr><td>http</td><td>gen5th</td><td>2083</td><td>0.0</td></tr>
+<tr><td>http</td><td>Kyocera FS-3900DN printer http config</td><td>2077</td><td>0.0</td></tr>
+<tr><td>finger</td><td>FreeBSD fingerd</td><td>2077</td><td>0.0</td></tr>
+<tr><td>giop</td><td>omniORB omniNames</td><td>2069</td><td>0.0</td></tr>
+<tr><td>http</td><td>Google Mini search appliance httpd</td><td>2065</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Viking router telnetd</td><td>2061</td><td>0.0</td></tr>
+<tr><td>imap</td><td>DBMail imapd</td><td>2058</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Funkwerk bintec R232bw router</td><td>2057</td><td>0.0</td></tr>
+<tr><td>http</td><td>GlassFish Server Open Source Edition 3.0.1</td><td>2057</td><td>0.0</td></tr>
+<tr><td>http</td><td>Axigen webmail httpd</td><td>2056</td><td>0.0</td></tr>
+<tr><td>http</td><td>HP Photosmart Prem C310 series printer http config</td><td>2055</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Dreambox 500 media device telnetd</td><td>2053</td><td>0.0</td></tr>
+<tr><td>donkey</td><td>MLDonkey multi-network P2P server control port</td><td>2048</td><td>0.0</td></tr>
+<tr><td>http</td><td>build-in http server</td><td>2046</td><td>0.0</td></tr>
+<tr><td>sip</td><td>YACOM/YACOM WLAN IAD-0.20.045</td><td>2044</td><td>0.0</td></tr>
+<tr><td>pc-anywhere</td><td>Symantec PC-Anywhere</td><td>2042</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>ModusMail pop3d</td><td>2040</td><td>0.0</td></tr>
+<tr><td>http</td><td>Linksys E3200 WAP http config</td><td>2037</td><td>0.0</td></tr>
+<tr><td>http</td><td>Linksys WRV54G router http config</td><td>2036</td><td>0.0</td></tr>
+<tr><td>bittorrent</td><td>Bittorrent P2P client</td><td>2035</td><td>0.0</td></tr>
+<tr><td>http</td><td>JC-SHTTPD</td><td>2034</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.11.0)</td><td>2032</td><td>0.0</td></tr>
+<tr><td>jd-gui</td><td>JD-GUI Java decompiler</td><td>2030</td><td>0.0</td></tr>
+<tr><td>http</td><td>Video server</td><td>2028</td><td>0.0</td></tr>
+<tr><td>http</td><td>ValuePoint Controller 3500</td><td>2023</td><td>0.0</td></tr>
+<tr><td>http</td><td>Linksys WRT300N wireless-G router http config</td><td>2022</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Hawking/TRENDnet Print Server telnetd</td><td>2019</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA2102-3.3.6</td><td>2016</td><td>0.0</td></tr>
+<tr><td>http</td><td>TP-LINK WR940N WAP http config</td><td>2010</td><td>0.0</td></tr>
+<tr><td>http</td><td>mhttpd v1.1</td><td>2009</td><td>0.0</td></tr>
+<tr><td>nntp</td><td>Hamster Playground/Kerio nntpd</td><td>2008</td><td>0.0</td></tr>
+<tr><td>http</td><td>Linksys RV082 VPN router http config</td><td>2006</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>WAR-FTPD</td><td>2005</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Sony PCS-1 telnetd</td><td>2004</td><td>0.0</td></tr>
+<tr><td>http</td><td>TalkSwitch HTTP Server</td><td>2002</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>D-Link Access Point telnetd</td><td>1992</td><td>0.0</td></tr>
+<tr><td>http</td><td>sbcache</td><td>1988</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>CCProxy telnet configuration</td><td>1984</td><td>0.0</td></tr>
+<tr><td>http</td><td>Supermicro IPMI/Paradox Alarm http config</td><td>1983</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Pragma FortessSSH</td><td>1981</td><td>0.0</td></tr>
+<tr><td>http</td><td>XProxy/0.2.4 Python</td><td>1981</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>HP LaserJet printer telnetd</td><td>1974</td><td>0.0</td></tr>
+<tr><td>http</td><td>LG LW5700 TV HDCP server</td><td>1971</td><td>0.0</td></tr>
+<tr><td>http</td><td>TP-LINK MR3420 WAP http config</td><td>1964</td><td>0.0</td></tr>
+<tr><td>http</td><td>HP Color LaserJet 2600n http config</td><td>1964</td><td>0.0</td></tr>
+<tr><td>netsaint</td><td>Nagios Statd Server</td><td>1962</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Linksys WRT54G telnetd</td><td>1961</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Citadel pop3d</td><td>1959</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>T64E/T128 Carrier-Class High-end Router of ZTE Corporation</td><td>1955</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Lantronix MSS100 serial interface telnetd</td><td>1951</td><td>0.0</td></tr>
+<tr><td>http</td><td>TP-LINK WR1043N WAP http config</td><td>1934</td><td>0.0</td></tr>
+<tr><td>http</td><td>Chain Cast support service</td><td>1929</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>eSafe mail gateway</td><td>1925</td><td>0.0</td></tr>
+<tr><td>http</td><td>D-Link DSL router http config</td><td>1922</td><td>0.0</td></tr>
+<tr><td>printer</td><td>Solaris lpd</td><td>1920</td><td>0.0</td></tr>
+<tr><td>ident</td><td>Linux-identd</td><td>1920</td><td>0.0</td></tr>
+<tr><td>http</td><td>D-Link web camera http config</td><td>1917</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>DeskNow smtpd</td><td>1916</td><td>0.0</td></tr>
+<tr><td>http</td><td>Yawcam webcam viewer httpd</td><td>1914</td><td>0.0</td></tr>
+<tr><td>ftp-proxy</td><td>AnalogX FTP proxy</td><td>1914</td><td>0.0</td></tr>
+<tr><td>http</td><td>CenteHTTPd</td><td>1913</td><td>0.0</td></tr>
+<tr><td>http</td><td>Symantec Endpoint Protection httpd</td><td>1911</td><td>0.0</td></tr>
+<tr><td>http</td><td>RCTTools (Web configuration Tools) v2</td><td>1910</td><td>0.0</td></tr>
+<tr><td>http</td><td>D-Link DSL-504G ADSL router http config</td><td>1909</td><td>0.0</td></tr>
+<tr><td>sieve</td><td>Dovecot Pigeonhole sieve</td><td>1907</td><td>0.0</td></tr>
+<tr><td>hp-pjl</td><td>hp LaserJet 4350</td><td>1907</td><td>0.0</td></tr>
+<tr><td>http</td><td>TP-LINK WA5210G WAP http config</td><td>1903</td><td>0.0</td></tr>
+<tr><td>http</td><td>Tor directory</td><td>1903</td><td>0.0</td></tr>
+<tr><td>http</td><td>Control4 Web Server</td><td>1902</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA2102-5.2.5</td><td>1900</td><td>0.0</td></tr>
+<tr><td>http</td><td>Lexmark printer webadmin</td><td>1898</td><td>0.0</td></tr>
+<tr><td>http</td><td>Siemens Gigaset A580 or S450 VoIP phone http config</td><td>1896</td><td>0.0</td></tr>
+<tr><td>http</td><td>LocalAccess</td><td>1896</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>MAILsweeper SMTP proxy</td><td>1887</td><td>0.0</td></tr>
+<tr><td>jsonrpc</td><td>XBMC JSON-RPC</td><td>1884</td><td>0.0</td></tr>
+<tr><td>http</td><td>NETWORK</td><td>1884</td><td>0.0</td></tr>
+<tr><td>http</td><td>UltiDev Cassini httpd</td><td>1882</td><td>0.0</td></tr>
+<tr><td>http</td><td>OpenWRT</td><td>1879</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Cisco C300  DebugShell</td><td>1874</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Enterasys C2H124-48 switch telnetd</td><td>1873</td><td>0.0</td></tr>
+<tr><td>gnutella</td><td>LimeWire Gnutella P2P client</td><td>1870</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>ZyWALL USG 200 firewall ftpd</td><td>1868</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>GuildFTPd</td><td>1868</td><td>0.0</td></tr>
+<tr><td>rtsp</td><td>Axis 207W Webcam rtspd</td><td>1862</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Actiontec DSL router</td><td>1855</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Linux (ZEM600) for ARM</td><td>1851</td><td>0.0</td></tr>
+<tr><td>http</td><td>awweb</td><td>1850</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>DSL-X402</td><td>1848</td><td>0.0</td></tr>
+<tr><td>sip</td><td>X-Lite SIP phone</td><td>1847</td><td>0.0</td></tr>
+<tr><td>http</td><td>ViaXML</td><td>1844</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Code-Crafters Ability Mail Server smtpd</td><td>1841</td><td>0.0</td></tr>
+<tr><td>xmpp-transport</td><td>Spectrum XMPP file transfer</td><td>1840</td><td>0.0</td></tr>
+<tr><td>http</td><td>E-2 (9.3.3 patch-0.1</td><td>1836</td><td>0.0</td></tr>
+<tr><td>http</td><td>HttpComponents</td><td>1835</td><td>0.0</td></tr>
+<tr><td>smtp-proxy</td><td>Symantec Brightmail smtp proxy</td><td>1826</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>AMBIT Cable Modem</td><td>1823</td><td>0.0</td></tr>
+<tr><td>http</td><td>GS-Webs</td><td>1821</td><td>0.0</td></tr>
+<tr><td>chargen</td><td>xinetd chargen</td><td>1820</td><td>0.0</td></tr>
+<tr><td>http</td><td>tdlived1.11.0414.0</td><td>1814</td><td>0.0</td></tr>
+<tr><td>http</td><td>streamts (ps)</td><td>1811</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Sonic FTP Server</td><td>1803</td><td>0.0</td></tr>
+<tr><td>http</td><td>Vivotek Video Server</td><td>1787</td><td>0.0</td></tr>
+<tr><td>http</td><td>HP Deskjet 3070 series printer http config</td><td>1786</td><td>0.0</td></tr>
+<tr><td>domain</td><td>v6rev</td><td>1783</td><td>0.0</td></tr>
+<tr><td>http</td><td>Netgear DGN3500 router http config</td><td>1782</td><td>0.0</td></tr>
+<tr><td>sip</td><td>DPX2203-120531</td><td>1781</td><td>0.0</td></tr>
+<tr><td>http</td><td>BlueIris</td><td>1780</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Procurve Secure Router telnetd</td><td>1779</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>XWall smtpd</td><td>1777</td><td>0.0</td></tr>
+<tr><td>fms-core</td><td>Adobe Flash Media Server core</td><td>1777</td><td>0.0</td></tr>
+<tr><td>http</td><td>WatchGuard SOHO 6 TC http config</td><td>1774</td><td>0.0</td></tr>
+<tr><td>hp-pjl</td><td>HP Color LaserJet 2600n</td><td>1774</td><td>0.0</td></tr>
+<tr><td>http</td><td>IBM_HTTP_Server</td><td>1773</td><td>0.0</td></tr>
+<tr><td>http</td><td>CCcam card sharing system http config</td><td>1766</td><td>0.0</td></tr>
+<tr><td>http</td><td>ISOS</td><td>1762</td><td>0.0</td></tr>
+<tr><td>hp-pjl</td><td>HP Color LaserJet 4700</td><td>1760</td><td>0.0</td></tr>
+<tr><td>http</td><td>NCDN</td><td>1759</td><td>0.0</td></tr>
+<tr><td>http</td><td>netTALK Duo http config</td><td>1757</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Lancom 1621 DSL/ISDN router telnetd</td><td>1754</td><td>0.0</td></tr>
+<tr><td>hp-pjl</td><td>HP Color LaserJet 3600</td><td>1753</td><td>0.0</td></tr>
+<tr><td>microsoft-ds</td><td>Microsoft Windows 2000 microsoft-ds</td><td>1748</td><td>0.0</td></tr>
+<tr><td>sip</td><td>YACOM/YACOM WLAN IAD-0.10.046</td><td>1746</td><td>0.0</td></tr>
+<tr><td>http</td><td>Xitami httpd admin port</td><td>1743</td><td>0.0</td></tr>
+<tr><td>http</td><td>HP JetDirect Card in a LaserJet printer</td><td>1743</td><td>0.0</td></tr>
+<tr><td>http</td><td>D-Link DCS-2121 webcam http config</td><td>1742</td><td>0.0</td></tr>
+<tr><td>http</td><td>BSkyB DG934G http config</td><td>1742</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Netcomm V300 VoIP adapter telnetd</td><td>1737</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Efficient 5851 DSL router telnetd</td><td>1731</td><td>0.0</td></tr>
+<tr><td>http</td><td>Network Camera with Pan</td><td>1730</td><td>0.0</td></tr>
+<tr><td>websm</td><td>AIX wsmserver</td><td>1729</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Broadcom BCM96362 ADSL router telnetd</td><td>1729</td><td>0.0</td></tr>
+<tr><td>http</td><td>TP-LINK R406 WAP http config</td><td>1726</td><td>0.0</td></tr>
+<tr><td>http</td><td>Linksys Wireless-G DSL router http config</td><td>1725</td><td>0.0</td></tr>
+<tr><td>postx-reporting</td><td>PostX IP Reporting alarm system</td><td>1723</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Symantec Raptor firewall secure gateway telnetd</td><td>1721</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>InterTel IPRC VoIP management card telnetd</td><td>1720</td><td>0.0</td></tr>
+<tr><td>redis-server</td><td>Redis key-value store</td><td>1720</td><td>0.0</td></tr>
+<tr><td>http</td><td>D-Link DCS-5220 webcam http config</td><td>1720</td><td>0.0</td></tr>
+<tr><td>as-sts</td><td>IBM Service Tool Server AS-STS</td><td>1718</td><td>0.0</td></tr>
+<tr><td>http</td><td>scamd</td><td>1715</td><td>0.0</td></tr>
+<tr><td>http</td><td>WWW Server</td><td>1710</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Linux (ZEM500) for MIPS</td><td>1707</td><td>0.0</td></tr>
+<tr><td>http</td><td>Satel ETHM-1 alarm control unit</td><td>1705</td><td>0.0</td></tr>
+<tr><td>http</td><td>SLWebMail Supervisor http config</td><td>1702</td><td>0.0</td></tr>
+<tr><td>http</td><td>ALTAI-Webs</td><td>1701</td><td>0.0</td></tr>
+<tr><td>http</td><td>Teradici PCoIP remote management http config</td><td>1694</td><td>0.0</td></tr>
+<tr><td>hp-pjl</td><td>hp LaserJet 2420</td><td>1689</td><td>0.0</td></tr>
+<tr><td>caldav</td><td>Zarafa CalDav Gateway</td><td>1689</td><td>0.0</td></tr>
+<tr><td>http</td><td>WebBox-20</td><td>1686</td><td>0.0</td></tr>
+<tr><td>http</td><td>MWS</td><td>1685</td><td>0.0</td></tr>
+<tr><td>pop3-proxy</td><td>Astaro firewall pop3 proxy</td><td>1681</td><td>0.0</td></tr>
+<tr><td>http</td><td>DI-LB604 HTTP Server</td><td>1681</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>QUIDWAY A8010 Access Server</td><td>1680</td><td>0.0</td></tr>
+<tr><td>http</td><td>Netgear DG834GL router http config</td><td>1680</td><td>0.0</td></tr>
+<tr><td>http</td><td>LimeWire</td><td>1679</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Dreambox 5.0.0 telnetd</td><td>1677</td><td>0.0</td></tr>
+<tr><td>http</td><td>Keil-EWEB</td><td>1676</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Dell PowerConnect M6220-series switch telnetd</td><td>1674</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Nortel Alteon switch telnetd</td><td>1670</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Novell NetWare GroupWise Internet Agent smtpd</td><td>1668</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Tandberg VCS VoIP server</td><td>1666</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Rockliffe MailSite</td><td>1664</td><td>0.0</td></tr>
+<tr><td>http</td><td>Cassini</td><td>1663</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>stupid-ftpd</td><td>1661</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA2102-5.2.10</td><td>1658</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v3 74.04.89 SIP</td><td>1656</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v3 74.05.05 SIP</td><td>1649</td><td>0.0</td></tr>
+<tr><td>http</td><td>Mono.WebServer2</td><td>1648</td><td>0.0</td></tr>
+<tr><td>http</td><td>IQinVision Embedded 1.0</td><td>1648</td><td>0.0</td></tr>
+<tr><td>routersetup</td><td>Nortel/D-Link router instant setup</td><td>1643</td><td>0.0</td></tr>
+<tr><td>http</td><td>Ipswitch WhatsUp Professional httpd</td><td>1639</td><td>0.0</td></tr>
+<tr><td>http</td><td>Linksys WAG200G WAP http config</td><td>1638</td><td>0.0</td></tr>
+<tr><td>http</td><td>D-Link printer/webcam http config</td><td>1632</td><td>0.0</td></tr>
+<tr><td>http</td><td>Deerfield VisNetic WebSite Professional</td><td>1632</td><td>0.0</td></tr>
+<tr><td>tcpmux</td><td></td><td>1631</td><td>0.0</td></tr>
+<tr><td>hp-pjl</td><td>HP LaserJet M1536dnf MFP</td><td>1629</td><td>0.0</td></tr>
+<tr><td>http</td><td>Linksys E900 WAP http config</td><td>1627</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Lantronix UDS10 ethernet-serial telnetd</td><td>1626</td><td>0.0</td></tr>
+<tr><td>http</td><td>AR7 embedded httpd</td><td>1618</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Huawei APT Cli</td><td>1617</td><td>0.0</td></tr>
+<tr><td>http</td><td>NEC Electra Elite IPK II WebPro</td><td>1614</td><td>0.0</td></tr>
+<tr><td>http</td><td>UNO</td><td>1608</td><td>0.0</td></tr>
+<tr><td>http</td><td>Linksys WRT150N wireless-G router http config</td><td>1607</td><td>0.0</td></tr>
+<tr><td>http</td><td>Syabas Popcorn Hour media player BitTorrent interface</td><td>1605</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>ZXR10 Fast and Intelligent 3928 Switch of ZTE Corporation</td><td>1604</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Force10 S50N switch telnetd</td><td>1601</td><td>0.0</td></tr>
+<tr><td>http</td><td>IX Series IX2010 (magellan-sec) Software</td><td>1601</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>IA Mailserver smtpd</td><td>1600</td><td>0.0</td></tr>
+<tr><td>http</td><td>QNAP TS-419P+ NAS http config</td><td>1599</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark Pro800-Pro900 series printer ftpd</td><td>1598</td><td>0.0</td></tr>
+<tr><td>http</td><td>TP-LINK TL-R402 router http config</td><td>1597</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Intel NetportExpress print server ftpd</td><td>1597</td><td>0.0</td></tr>
+<tr><td>http</td><td>Netgear DG834 http config</td><td>1592</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>WinFtpd</td><td>1592</td><td>0.0</td></tr>
+<tr><td>http</td><td>Minitar MVA11A VoIP gateway http config</td><td>1588</td><td>0.0</td></tr>
+<tr><td>http</td><td>ise GmbH HTTP-Server v2.0</td><td>1587</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>ZXDSL 531BII</td><td>1585</td><td>0.0</td></tr>
+<tr><td>raid-mon</td><td>Promise RAID message agent</td><td>1585</td><td>0.0</td></tr>
+<tr><td>http</td><td>Debian</td><td>1584</td><td>0.0</td></tr>
+<tr><td>http</td><td>Cisco ATA186 VoIP adapter http config</td><td>1583</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Netgear WG102 WAP telnetd</td><td>1581</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Code-Crafters Ability Mail Server pop3d</td><td>1577</td><td>0.0</td></tr>
+<tr><td>http</td><td>E-1 (9.3.3 patch-0.1</td><td>1577</td><td>0.0</td></tr>
+<tr><td>http</td><td>D-Link Web Server 0.01</td><td>1573</td><td>0.0</td></tr>
+<tr><td>http</td><td>Wireless Network Camera with Pan</td><td>1572</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Siemens C2-010-I ADSL router telnetd</td><td>1571</td><td>0.0</td></tr>
+<tr><td>hp-pjl</td><td>HP LaserJet P4014</td><td>1571</td><td>0.0</td></tr>
+<tr><td>http</td><td>NetEVI</td><td>1570</td><td>0.0</td></tr>
+<tr><td>http</td><td>HTTPD-HR Server powered by Apache</td><td>1566</td><td>0.0</td></tr>
+<tr><td>http</td><td>HP LaserJet P1606dn printer http config</td><td>1565</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7390 84.05.20 SIP</td><td>1563</td><td>0.0</td></tr>
+<tr><td>powerchute</td><td>APC PowerChute Agent</td><td>1556</td><td>0.0</td></tr>
+<tr><td>hp-pjl</td><td>HYDRA</td><td>1556</td><td>0.0</td></tr>
+<tr><td>upnp</td><td>Lexmark C524 Laser Printer UPnP</td><td>1554</td><td>0.0</td></tr>
+<tr><td>http</td><td>HP Photosmart Prem C410 series printer http config</td><td>1554</td><td>0.0</td></tr>
+<tr><td>http</td><td>H264DVR 1.0</td><td>1553</td><td>0.0</td></tr>
+<tr><td>ftp-proxy</td><td>JanaServer ftp proxy</td><td>1553</td><td>0.0</td></tr>
+<tr><td>http</td><td>Tntnet</td><td>1551</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Motorola SBV5220-SIP-1.2.6-SCM-00-SHTW</td><td>1550</td><td>0.0</td></tr>
+<tr><td>http</td><td>calibre</td><td>1550</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Cisco catalyst switch telnetd</td><td>1549</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Tandberg MXP VoIP server</td><td>1549</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>ZXAN product C300 of ZTE Corporation</td><td>1548</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN Annex A SIP</td><td>1548</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Actiontec GT704-WGB WAP telnetd</td><td>1546</td><td>0.0</td></tr>
+<tr><td>http</td><td>MLC 226 IP</td><td>1543</td><td>0.0</td></tr>
+<tr><td>hp-pjl</td><td>hp color LaserJet 5550</td><td>1543</td><td>0.0</td></tr>
+<tr><td>http</td><td>FusionReactor web server monitor</td><td>1541</td><td>0.0</td></tr>
+<tr><td>hp-pjl</td><td>hp LaserJet 2300 series</td><td>1539</td><td>0.0</td></tr>
+<tr><td>http</td><td>NOYB</td><td>1535</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>FreeProxy http proxy</td><td>1534</td><td>0.0</td></tr>
+<tr><td>http</td><td>Hiawatha v7.6</td><td>1534</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Dell PowerConnect switch telnetd</td><td>1533</td><td>0.0</td></tr>
+<tr><td>omniback</td><td>HP OpenView Omniback</td><td>1533</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Wing FTP Server</td><td>1532</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>APC AP9630 network management telnetd</td><td>1529</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>PBT PowerAgent eXM2 LMM</td><td>1527</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7140 SIP</td><td>1526</td><td>0.0</td></tr>
+<tr><td>http</td><td>grabtofile</td><td>1524</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Eudora Internet Mail Server X pop3d</td><td>1522</td><td>0.0</td></tr>
+<tr><td>http</td><td>D-Link print server http config</td><td>1521</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Netgear FVS338 router telnetd</td><td>1519</td><td>0.0</td></tr>
+<tr><td>http</td><td>Oracle Application Server</td><td>1515</td><td>0.0</td></tr>
+<tr><td>http</td><td>Helix Mobile Server</td><td>1511</td><td>0.0</td></tr>
+<tr><td>http</td><td>AverMedia WebCamX httpd</td><td>1510</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>FortiSSH</td><td>1509</td><td>0.0</td></tr>
+<tr><td>imap</td><td>Nortel CallPilot imapd</td><td>1505</td><td>0.0</td></tr>
+<tr><td>finger</td><td>ffingerd</td><td>1505</td><td>0.0</td></tr>
+<tr><td>ident</td><td>gidentd</td><td>1499</td><td>0.0</td></tr>
+<tr><td>http</td><td>FLPS</td><td>1499</td><td>0.0</td></tr>
+<tr><td>http</td><td>Cisco AWARE 2.0</td><td>1498</td><td>0.0</td></tr>
+<tr><td>upnp</td><td>MediaTomb UPnP</td><td>1497</td><td>0.0</td></tr>
+<tr><td>quake3</td><td>Quake 3 game server</td><td>1494</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>ZyXEL ZyWALL USG 20 firewall ftpd</td><td>1493</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Ovislink WLA-9000AP WAP telnetd</td><td>1491</td><td>0.0</td></tr>
+<tr><td>http</td><td>HP ProCurve 1800-24G switch http config</td><td>1488</td><td>0.0</td></tr>
+<tr><td>http</td><td>ZoneAlarm Z100G firewall http config</td><td>1486</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Post.Office</td><td>1475</td><td>0.0</td></tr>
+<tr><td>imap</td><td>Scalix imapd</td><td>1475</td><td>0.0</td></tr>
+<tr><td>http</td><td>Hydra</td><td>1475</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Zoiper VoIP software</td><td>1471</td><td>0.0</td></tr>
+<tr><td>http</td><td>Aterm</td><td>1469</td><td>0.0</td></tr>
+<tr><td>http</td><td>mcas</td><td>1467</td><td>0.0</td></tr>
+<tr><td>http</td><td>IBM Lotus Sametime httpd</td><td>1464</td><td>0.0</td></tr>
+<tr><td>http</td><td>TP-LINK MR3220 WAP http config</td><td>1463</td><td>0.0</td></tr>
+<tr><td>tinc</td><td>tinc vpn daemon</td><td>1458</td><td>0.0</td></tr>
+<tr><td>http</td><td>OS</td><td>1452</td><td>0.0</td></tr>
+<tr><td>http</td><td>VMware Server http config</td><td>1450</td><td>0.0</td></tr>
+<tr><td>http</td><td>Netgear DG834GB router http config</td><td>1444</td><td>0.0</td></tr>
+<tr><td>http</td><td>NetPort Software 1.1</td><td>1443</td><td>0.0</td></tr>
+<tr><td>http</td><td>WANFlex HTTP Daemon v1.1</td><td>1440</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>ZyWALL USG 300 firewall ftpd</td><td>1440</td><td>0.0</td></tr>
+<tr><td>http</td><td>ZyCfg</td><td>1438</td><td>0.0</td></tr>
+<tr><td>http</td><td>Aten httpd</td><td>1438</td><td>0.0</td></tr>
+<tr><td>slingbox</td><td>Slingbox streaming video</td><td>1437</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.12.0)</td><td>1437</td><td>0.0</td></tr>
+<tr><td>http</td><td>LANCOM 1721</td><td>1437</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>Apache Traffic Server</td><td>1436</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/PAP2T-5.1.6(LS)</td><td>1433</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>the 1531 N-Band DSL Router</td><td>1432</td><td>0.0</td></tr>
+<tr><td>http</td><td>PPEngine</td><td>1431</td><td>0.0</td></tr>
+<tr><td>http</td><td>POSIX</td><td>1428</td><td>0.0</td></tr>
+<tr><td>http</td><td>VOIP</td><td>1427</td><td>0.0</td></tr>
+<tr><td>http</td><td>Alcatel-Lucent OmniPCX PBX httpd</td><td>1427</td><td>0.0</td></tr>
+<tr><td>http</td><td>DirectAdmin httpd</td><td>1426</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Funkwerk bintec RS230aw router</td><td>1424</td><td>0.0</td></tr>
+<tr><td>http</td><td>Lancom 1621 DSL/ISDN router http config</td><td>1420</td><td>0.0</td></tr>
+<tr><td>http</td><td>2.2.24B74</td><td>1419</td><td>0.0</td></tr>
+<tr><td>http</td><td>ngx_openresty</td><td>1416</td><td>0.0</td></tr>
+<tr><td>sip</td><td>DSL Router/DSL Router WLAN IAD-00.95.005</td><td>1414</td><td>0.0</td></tr>
+<tr><td>http</td><td>NewCS satellite card sharing system http config</td><td>1414</td><td>0.0</td></tr>
+<tr><td>irc</td><td>ngircd</td><td>1413</td><td>0.0</td></tr>
+<tr><td>afp</td><td>Novell NetWare AFP</td><td>1413</td><td>0.0</td></tr>
+<tr><td>http</td><td>Octoshape P2P streaming web service</td><td>1404</td><td>0.0</td></tr>
+<tr><td>http</td><td>TAC Xenta 911 programmable logic controller httpd</td><td>1401</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>JAMES pop3d</td><td>1400</td><td>0.0</td></tr>
+<tr><td>http</td><td>Phoenix PowerAgent eXM2</td><td>1400</td><td>0.0</td></tr>
+<tr><td>http</td><td>CWS</td><td>1398</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>DBMail pop3d</td><td>1386</td><td>0.0</td></tr>
+<tr><td>http</td><td>CZ-CZMOBILE-02_211_103_1_153 --</td><td>1386</td><td>0.0</td></tr>
+<tr><td>vnc</td><td>RealVNC</td><td>1383</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Linksys SRW2024 switch telnetd</td><td>1383</td><td>0.0</td></tr>
+<tr><td>hpilo-virtual-media</td><td>HP Integrated Lights-Out Virtual Media</td><td>1383</td><td>0.0</td></tr>
+<tr><td>spy-net</td><td>Spy-Net or CyberGate backdoor</td><td>1381</td><td>0.0</td></tr>
+<tr><td>http</td><td>HP Officejet 6700 printer http config</td><td>1381</td><td>0.0</td></tr>
+<tr><td>hp-pjl</td><td>HP LaserJet 5200</td><td>1377</td><td>0.0</td></tr>
+<tr><td>smtp-proxy</td><td>MailFoundry antispam smtp proxy</td><td>1375</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>DSL-X202</td><td>1374</td><td>0.0</td></tr>
+<tr><td>hp-pjl</td><td>HP LaserJet Professional P1606dn</td><td>1374</td><td>0.0</td></tr>
+<tr><td>smtp-proxy</td><td>GData AntiVirenKit MailGateway smtp proxy</td><td>1373</td><td>0.0</td></tr>
+<tr><td>insight-manager</td><td>Consul InSight Manager</td><td>1373</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Personal FTPd</td><td>1373</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>ZyXEL ZyWALL USG 100 firewall ftpd</td><td>1372</td><td>0.0</td></tr>
+<tr><td>http</td><td>TP-LINK WR741ND WAP http config</td><td>1371</td><td>0.0</td></tr>
+<tr><td>http</td><td>D-Link DCS-3220 webcam http config</td><td>1367</td><td>0.0</td></tr>
+<tr><td>http</td><td>Linksys WAP54G WAP http config</td><td>1364</td><td>0.0</td></tr>
+<tr><td>daap</td><td>Apple iTunes DAAP</td><td>1362</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>ZyWALL USG 50 firewall ftpd</td><td>1360</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Nortel Networks Instant Internet broadband router telnetd</td><td>1359</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>DSL-500G</td><td>1359</td><td>0.0</td></tr>
+<tr><td>http</td><td>Tornado</td><td>1359</td><td>0.0</td></tr>
+<tr><td>http</td><td>HP Officejet 7500 E910 printer http config</td><td>1358</td><td>0.0</td></tr>
+<tr><td>ident</td><td>GTA GB-Ware firewall identd</td><td>1356</td><td>0.0</td></tr>
+<tr><td>http</td><td>w3httpd</td><td>1356</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>StrongMail smtpd</td><td>1355</td><td>0.0</td></tr>
+<tr><td>http</td><td>Radware-web-server</td><td>1353</td><td>0.0</td></tr>
+<tr><td>uucp</td><td>Taylor uucpd</td><td>1352</td><td>0.0</td></tr>
+<tr><td>http</td><td>Z-World Rabbit microcontroller httpd</td><td>1352</td><td>0.0</td></tr>
+<tr><td>http</td><td>Kerio Connect webmail httpd</td><td>1352</td><td>0.0</td></tr>
+<tr><td>http</td><td>COMPanion Web Server</td><td>1352</td><td>0.0</td></tr>
+<tr><td>http</td><td>ghs</td><td>1351</td><td>0.0</td></tr>
+<tr><td>imap</td><td>FirstClass imapd</td><td>1350</td><td>0.0</td></tr>
+<tr><td>http</td><td>RHTTPD</td><td>1348</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>SrSshServer</td><td>1347</td><td>0.0</td></tr>
+<tr><td>http</td><td>Sun Integrated Lights-Out httpd</td><td>1344</td><td>0.0</td></tr>
+<tr><td>damewaremr</td><td>DameWare Mini Remote Control</td><td>1344</td><td>0.0</td></tr>
+<tr><td>backdoor</td><td>No-auth shell</td><td>1340</td><td>0.0</td></tr>
+<tr><td>http</td><td>VCS-VideoJet-Webserver</td><td>1339</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>GlobespanVirata Viking II telnetd</td><td>1335</td><td>0.0</td></tr>
+<tr><td>http</td><td>Traffic inspector HTTP</td><td>1334</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Solid pop3d</td><td>1329</td><td>0.0</td></tr>
+<tr><td>nntp</td><td>InterNetNews (INN)</td><td>1328</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Huawei SmartAX MT880</td><td>1325</td><td>0.0</td></tr>
+<tr><td>memcache</td><td>memcached</td><td>1321</td><td>0.0</td></tr>
+<tr><td>http</td><td>Gateway Controller 3560</td><td>1321</td><td>0.0</td></tr>
+<tr><td>smtp-proxy</td><td>CCProxy smtp proxy</td><td>1320</td><td>0.0</td></tr>
+<tr><td>http</td><td>SimpleHelp</td><td>1319</td><td>0.0</td></tr>
+<tr><td>smtp-proxy</td><td>UserGate smtp proxy</td><td>1318</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Aastra A150 VoIP phone ftpd</td><td>1318</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Funkwerk bintec RS120 router</td><td>1315</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>FirstClass SMTP server</td><td>1315</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Polycom SoundPoint 335</td><td>1315</td><td>0.0</td></tr>
+<tr><td>http</td><td>hlhttpd</td><td>1315</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Alteon Networks ACEDirector switch telnetd</td><td>1314</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Digium Switchvox PBX</td><td>1314</td><td>0.0</td></tr>
+<tr><td>http</td><td>i-Catcher Console</td><td>1308</td><td>0.0</td></tr>
+<tr><td>http</td><td>UPS_Server</td><td>1305</td><td>0.0</td></tr>
+<tr><td>http</td><td>D-Link DIR-815 WAP http config</td><td>1305</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Communigate Pro ftpd</td><td>1304</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>3Com 5500G-EI switch telnetd</td><td>1303</td><td>0.0</td></tr>
+<tr><td>http</td><td>ATR httpd</td><td>1303</td><td>0.0</td></tr>
+<tr><td>http</td><td>Mediabolic http config</td><td>1302</td><td>0.0</td></tr>
+<tr><td>http</td><td>XMS (724Solutions HTA XFW_004_M00_B237 20101125.131631)</td><td>1300</td><td>0.0</td></tr>
+<tr><td>http</td><td>XBMC http interface</td><td>1296</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>use MERCURY Router Module !!!</td><td>1295</td><td>0.0</td></tr>
+<tr><td>imap</td><td>SCO imapd</td><td>1295</td><td>0.0</td></tr>
+<tr><td>http</td><td>CloudFront</td><td>1292</td><td>0.0</td></tr>
+<tr><td>http</td><td>Mono-HTTPAPI</td><td>1290</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Moxa NPort 5110 serial-to-IP converter telnetd</td><td>1289</td><td>0.0</td></tr>
+<tr><td>http</td><td>AXIS 205 network camera web interface</td><td>1288</td><td>0.0</td></tr>
+<tr><td>http</td><td>Toshiba e-STUDIO printer http config</td><td>1286</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Callisto 821+R3</td><td>1285</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Adtran NetVanta 6355 VoIP gateway telnetd</td><td>1284</td><td>0.0</td></tr>
+<tr><td>http</td><td>BarracudaHTTP 2.0</td><td>1282</td><td>0.0</td></tr>
+<tr><td>http</td><td>Pirelli DRG A125G WAP http config</td><td>1278</td><td>0.0</td></tr>
+<tr><td>hp-pjl</td><td>HP Color LaserJet 3800</td><td>1276</td><td>0.0</td></tr>
+<tr><td>http</td><td>Atera Networks Citadel firewall http config</td><td>1275</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Precidia serial2ethernet gateway telnetd</td><td>1274</td><td>0.0</td></tr>
+<tr><td>http</td><td>Ajenti admin httpd</td><td>1274</td><td>0.0</td></tr>
+<tr><td>http</td><td>Lancom 1811 wireless router http config</td><td>1271</td><td>0.0</td></tr>
+<tr><td>http</td><td>HP Web Jetadmin print server http config</td><td>1269</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>CLI</td><td>1267</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>CMailServer pop3d</td><td>1267</td><td>0.0</td></tr>
+<tr><td>http</td><td>LANCOM 1821</td><td>1267</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis M1011 Network Camera ftpd</td><td>1265</td><td>0.0</td></tr>
+<tr><td>http</td><td>Huawei VPP EWS</td><td>1262</td><td>0.0</td></tr>
+<tr><td>opinionsquare</td><td>OpinionSquare application</td><td>1260</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>ZKSoftware ZEM510 access control device</td><td>1256</td><td>0.0</td></tr>
+<tr><td>honeypot</td><td>honeyd cmdexe.pl</td><td>1256</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>Kerio WinRoute http proxy</td><td>1255</td><td>0.0</td></tr>
+<tr><td>http</td><td>Envysion Embedded RTSP Server (2.0.0 120516-1158)</td><td>1255</td><td>0.0</td></tr>
+<tr><td>http</td><td>TP-LINK WR743ND WAP http config</td><td>1254</td><td>0.0</td></tr>
+<tr><td>http</td><td>D-Link 502G DSL router http config</td><td>1253</td><td>0.0</td></tr>
+<tr><td>http</td><td>TP-LINK Web Smart Switch http config</td><td>1252</td><td>0.0</td></tr>
+<tr><td>http</td><td>MarkLogic</td><td>1249</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Teapop pop3d</td><td>1248</td><td>0.0</td></tr>
+<tr><td>ibm-mqseries</td><td>IBM WebSphere MQ</td><td>1248</td><td>0.0</td></tr>
+<tr><td>rtsp</td><td>Amino AmiNET set-top box rtspd</td><td>1246</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>ALT-N SecurityGateway smtpd</td><td>1242</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SMC/SMC WLAN IAD-0.10.046</td><td>1242</td><td>0.0</td></tr>
+<tr><td>sip</td><td>iiNet/IINET WLAN IAD-1.00.000</td><td>1242</td><td>0.0</td></tr>
+<tr><td>X11</td><td>X.Org</td><td>1239</td><td>0.0</td></tr>
+<tr><td>http</td><td>Cisco ATA 186 SIP http config</td><td>1239</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Quarkmail smtpd</td><td>1238</td><td>0.0</td></tr>
+<tr><td>http</td><td>yawcam</td><td>1237</td><td>0.0</td></tr>
+<tr><td>http</td><td>Netgear WGR614v5 WAP http config</td><td>1237</td><td>0.0</td></tr>
+<tr><td>afp</td><td></td><td>1235</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>GlobalSCAPE Secure FTPd</td><td>1234</td><td>0.0</td></tr>
+<tr><td>http</td><td>jdbhttpd</td><td>1232</td><td>0.0</td></tr>
+<tr><td>cvspserver</td><td>CVSNT cvs pserver</td><td>1232</td><td>0.0</td></tr>
+<tr><td>http</td><td>FujiXerox ApeosPort-IV C4470 http config</td><td>1231</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>ArGoSoft ftpd</td><td>1230</td><td>0.0</td></tr>
+<tr><td>cache</td><td>InterSystems Cache database</td><td>1230</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>HP-UX telnetd</td><td>1226</td><td>0.0</td></tr>
+<tr><td>http</td><td>embedded http dameon</td><td>1226</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Command Shell!</td><td>1218</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Tobit David.fx pop3d</td><td>1218</td><td>0.0</td></tr>
+<tr><td>http</td><td>HP LaserJet P2035n printer http config</td><td>1217</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>UTStarcom Inc.'s UT4110A</td><td>1213</td><td>0.0</td></tr>
+<tr><td>http</td><td>Omniture DC</td><td>1210</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Siemens 5940-001 T1E1 router</td><td>1209</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Dreambox dm800 telnetd</td><td>1208</td><td>0.0</td></tr>
+<tr><td>exec</td><td>AIX rexecd</td><td>1207</td><td>0.0</td></tr>
+<tr><td>achat</td><td>AChat chat system</td><td>1207</td><td>0.0</td></tr>
+<tr><td>upnp</td><td>SuperMicro IPMI UPnP</td><td>1206</td><td>0.0</td></tr>
+<tr><td>http</td><td>Unreal Tournament http admin</td><td>1205</td><td>0.0</td></tr>
+<tr><td>sip</td><td>InnoMedia SIP MTA6328-2Re v3.0.77</td><td>1204</td><td>0.0</td></tr>
+<tr><td>http</td><td>picoIP HTTPd 10</td><td>1204</td><td>0.0</td></tr>
+<tr><td>http</td><td>Kannel SMS proxy httpd</td><td>1203</td><td>0.0</td></tr>
+<tr><td>upnp</td><td>D-Link DIR-615 WAP UPnP</td><td>1202</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>ZXUAS Broadband Remote Access Server of ZTE Corporation</td><td>1202</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>FirstClass messaging system telnetd</td><td>1201</td><td>0.0</td></tr>
+<tr><td>http</td><td>Plex Media Center httpd</td><td>1201</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>FirstClass pop3d</td><td>1200</td><td>0.0</td></tr>
+<tr><td>http</td><td>TreeNeWS httpd</td><td>1198</td><td>0.0</td></tr>
+<tr><td>http</td><td>SMC Broadband router 7004ABR http config</td><td>1197</td><td>0.0</td></tr>
+<tr><td>http</td><td>iSpy</td><td>1197</td><td>0.0</td></tr>
+<tr><td>http</td><td>Axigen webadmin httpd</td><td>1197</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>PacketShaper ftpd</td><td>1196</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache Stronghold httpd</td><td>1193</td><td>0.0</td></tr>
+<tr><td>http</td><td>TP-LINK R402M WAP http config</td><td>1192</td><td>0.0</td></tr>
+<tr><td>http</td><td>PENNY web server. Signalsync Co.</td><td>1191</td><td>0.0</td></tr>
+<tr><td>hp-pjl</td><td></td><td>1189</td><td>0.0</td></tr>
+<tr><td>http</td><td>Envysion Embedded RTSP Server (2.0.0 121001-1023)</td><td>1188</td><td>0.0</td></tr>
+<tr><td>http</td><td>TopsecOS</td><td>1186</td><td>0.0</td></tr>
+<tr><td>http</td><td>D-Link DI-824VUP http config</td><td>1185</td><td>0.0</td></tr>
+<tr><td>http</td><td>Phoenix PowerAgent eXM2 with Equalization</td><td>1183</td><td>0.0</td></tr>
+<tr><td>http</td><td>Gunicorn</td><td>1183</td><td>0.0</td></tr>
+<tr><td>xml-rpc</td><td>Apache XML-RPC</td><td>1182</td><td>0.0</td></tr>
+<tr><td>http</td><td>Cisco IP Phone http config</td><td>1182</td><td>0.0</td></tr>
+<tr><td>hp-pjl</td><td>hp LaserJet 2430</td><td>1182</td><td>0.0</td></tr>
+<tr><td>upnp</td><td>Portable SDK for UPnP</td><td>1180</td><td>0.0</td></tr>
+<tr><td>http</td><td>UserGate Firewall and Proxy Server</td><td>1179</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Netgear FVS336GV2 router telnetd</td><td>1175</td><td>0.0</td></tr>
+<tr><td>http</td><td>NetApp filer httpd</td><td>1167</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>ZKSoftware ZEM500 fingerprint reader telnetd</td><td>1165</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>ALFTP</td><td>1165</td><td>0.0</td></tr>
+<tr><td>audioworks</td><td>AudioWorks sound server</td><td>1165</td><td>0.0</td></tr>
+<tr><td>http</td><td>Hidden</td><td>1163</td><td>0.0</td></tr>
+<tr><td>http</td><td>Webserver</td><td>1161</td><td>0.0</td></tr>
+<tr><td>http</td><td>QNAP TS-219, TS-239, or TS-509 NAS http config</td><td>1161</td><td>0.0</td></tr>
+<tr><td>http</td><td>Linksys WRT54GSV4 wireless-G router http config</td><td>1160</td><td>0.0</td></tr>
+<tr><td>http</td><td>dptech server</td><td>1159</td><td>0.0</td></tr>
+<tr><td>hp-pjl</td><td>HP LaserJet M2727nf MFP</td><td>1159</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Sagem F@st 2404 ADSL router telnetd</td><td>1152</td><td>0.0</td></tr>
+<tr><td>http</td><td>uIP</td><td>1151</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>SCS NetScreen sshd</td><td>1149</td><td>0.0</td></tr>
+<tr><td>socks4</td><td>Connection failed; username required</td><td>1149</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Netgear FVS336G router telnetd</td><td>1148</td><td>0.0</td></tr>
+<tr><td>netop</td><td>NetOp Remote Control</td><td>1146</td><td>0.0</td></tr>
+<tr><td>http</td><td>iCanSystem</td><td>1144</td><td>0.0</td></tr>
+<tr><td>bittorrent-utp</td><td></td><td>1144</td><td>0.0</td></tr>
+<tr><td>ssl</td><td>SSLv2</td><td>1143</td><td>0.0</td></tr>
+<tr><td>hp-pjl</td><td>HP LaserJet P2035n</td><td>1141</td><td>0.0</td></tr>
+<tr><td>http</td><td>BladeCenter/IBM RSA2 http config</td><td>1140</td><td>0.0</td></tr>
+<tr><td>imap</td><td>Eudora Internet Mail Server X imapd</td><td>1137</td><td>0.0</td></tr>
+<tr><td>http</td><td>TELES AG</td><td>1136</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Polycom SoundPoint 501</td><td>1133</td><td>0.0</td></tr>
+<tr><td>irc</td><td>IRCnet-based ircd</td><td>1133</td><td>0.0</td></tr>
+<tr><td>http</td><td>MicroWeb</td><td>1131</td><td>0.0</td></tr>
+<tr><td>hp-pjl</td><td>HP LaserJet P4515</td><td>1130</td><td>0.0</td></tr>
+<tr><td>vnetd</td><td>Veritas Netbackup Network Utility</td><td>1129</td><td>0.0</td></tr>
+<tr><td>smtp-proxy</td><td>Scalix smtp relay</td><td>1129</td><td>0.0</td></tr>
+<tr><td>http</td><td>5.0_Pub</td><td>1129</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Heimdal Kerberized ftpd</td><td>1129</td><td>0.0</td></tr>
+<tr><td>http</td><td>Web r</td><td>1128</td><td>0.0</td></tr>
+<tr><td>http</td><td>InterNiche Technologies httpd</td><td>1128</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Vivotek 3102 Camera ftpd</td><td>1127</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>F5 BIG-IP load balancer telnetd</td><td>1126</td><td>0.0</td></tr>
+<tr><td>http</td><td>Sophos Email Appliance</td><td>1126</td><td>0.0</td></tr>
+<tr><td>ftp-proxy</td><td>jftpgw ftp proxy</td><td>1126</td><td>0.0</td></tr>
+<tr><td>omniback</td><td>HP OpenView Omniback/Data Protector</td><td>1125</td><td>0.0</td></tr>
+<tr><td>http</td><td>TWS</td><td>1125</td><td>0.0</td></tr>
+<tr><td>http</td><td>Thomson WebServer</td><td>1125</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis 2100 Network Camera ftpd</td><td>1125</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark T640 printer ftpd</td><td>1124</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>ZXAN product C200 of ZTE Corporation</td><td>1122</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Grandstream GXP2000 VoIP phone telnetd</td><td>1120</td><td>0.0</td></tr>
+<tr><td>http</td><td>httpd_gargoyle</td><td>1120</td><td>0.0</td></tr>
+<tr><td>http</td><td>LevelOne WBR-6002 http config</td><td>1118</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Mail Server Pro pop3d</td><td>1114</td><td>0.0</td></tr>
+<tr><td>http</td><td>Intellex-Http Server 1.0</td><td>1114</td><td>0.0</td></tr>
+<tr><td>http</td><td>sinuid</td><td>1112</td><td>0.0</td></tr>
+<tr><td>http</td><td>Panasonic WV-NS202A webcam http config</td><td>1112</td><td>0.0</td></tr>
+<tr><td>http</td><td>Coretek-Webs</td><td>1112</td><td>0.0</td></tr>
+<tr><td>http</td><td>A10WS</td><td>1112</td><td>0.0</td></tr>
+<tr><td>http</td><td>InterTel IPRC VoIP management card</td><td>1110</td><td>0.0</td></tr>
+<tr><td>hp-pjl</td><td>hp color LaserJet 4600</td><td>1110</td><td>0.0</td></tr>
+<tr><td>diablo2</td><td>Diablo 2 game server</td><td>1109</td><td>0.0</td></tr>
+<tr><td>rtsp</td><td>VLC rtspd</td><td>1107</td><td>0.0</td></tr>
+<tr><td>pop3-proxy</td><td>UserGate pop3 proxy</td><td>1106</td><td>0.0</td></tr>
+<tr><td>http</td><td>H3C HTTPD</td><td>1106</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Vyatta</td><td>1104</td><td>0.0</td></tr>
+<tr><td>ldap</td><td>Cisco LDAP server</td><td>1104</td><td>0.0</td></tr>
+<tr><td>http</td><td>Gateway Controller 3550</td><td>1103</td><td>0.0</td></tr>
+<tr><td>http</td><td>AirLive WT-2000R WAP http config</td><td>1103</td><td>0.0</td></tr>
+<tr><td>hp-pjl</td><td>HP Color LaserJet CP2025n</td><td>1102</td><td>0.0</td></tr>
+<tr><td>http</td><td>LANCOM 1781A 8.50.0161 / 09.08.2011</td><td>1101</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>3Com 3CDaemon ftpd</td><td>1100</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>HP Integrated Lights-Out 2 remote configuration telnetd</td><td>1098</td><td>0.0</td></tr>
+<tr><td>rtsp</td><td>Sanyo VCC-HD2300 webcam rtspd</td><td>1095</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Blackjumbodog FTPd</td><td>1093</td><td>0.0</td></tr>
+<tr><td>http</td><td>IPCamera-Webs</td><td>1091</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>ZXDSL  831AII</td><td>1088</td><td>0.0</td></tr>
+<tr><td>http</td><td>Roxen</td><td>1086</td><td>0.0</td></tr>
+<tr><td>http</td><td>DECORUM</td><td>1085</td><td>0.0</td></tr>
+<tr><td>http</td><td>Atheme</td><td>1085</td><td>0.0</td></tr>
+<tr><td>http</td><td>Gateway Controller 3500</td><td>1082</td><td>0.0</td></tr>
+<tr><td>http</td><td>Grandstream GXP2000 http config</td><td>1079</td><td>0.0</td></tr>
+<tr><td>http</td><td>Dell OpenManage switch http config</td><td>1075</td><td>0.0</td></tr>
+<tr><td>http</td><td>GoAhead</td><td>1074</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>CrushFTPd</td><td>1074</td><td>0.0</td></tr>
+<tr><td>http</td><td>TED 5000 power use monitor</td><td>1073</td><td>0.0</td></tr>
+<tr><td>http</td><td>BW HTTP Server</td><td>1073</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 2022 ftpd</td><td>1072</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Panasonic WJ-HD316 Digital Disk Recorder</td><td>1072</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>ZXAN product F420 of ZTE Corporation</td><td>1069</td><td>0.0</td></tr>
+<tr><td>http</td><td>Micro-Web</td><td>1067</td><td>0.0</td></tr>
+<tr><td>http</td><td>Lantronix Universal Device Server http config</td><td>1066</td><td>0.0</td></tr>
+<tr><td>http</td><td>Ipswitch WS_FTP http config</td><td>1065</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Cisco VoIP Gateway/ IOS 12.x/ SIP enabled</td><td>1062</td><td>0.0</td></tr>
+<tr><td>http</td><td>Areca RAID-Controller http config</td><td>1061</td><td>0.0</td></tr>
+<tr><td>http</td><td>TAC Xenta 511 programmable logic controller httpd</td><td>1060</td><td>0.0</td></tr>
+<tr><td>http</td><td>Mojolicious (Perl)</td><td>1059</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Lexmark T640 printer telnetd</td><td>1058</td><td>0.0</td></tr>
+<tr><td>wyse-devmgr</td><td>Wyse Device Manager</td><td>1056</td><td>0.0</td></tr>
+<tr><td>http</td><td>Henry httpd</td><td>1056</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>PBT PowerAgent eXM2-EQ LMM</td><td>1055</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Tru64 UNIX gated</td><td>1054</td><td>0.0</td></tr>
+<tr><td>http</td><td>Orion Java Application Server httpd</td><td>1054</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>National Instruments LabVIEW ftpd</td><td>1054</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Vivotek 3102 Camera telnetd</td><td>1052</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Ingate-Firewall/4.8.1</td><td>1050</td><td>0.0</td></tr>
+<tr><td>boinc</td><td>Boinc GUI RPC port</td><td>1045</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 29.04.76 SIP</td><td>1044</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Mail Server pop3d</td><td>1043</td><td>0.0</td></tr>
+<tr><td>http</td><td>Syabas Popcorn Hour media player XML command server httpd</td><td>1043</td><td>0.0</td></tr>
+<tr><td>http</td><td>nws 1.2.15</td><td>1043</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Network Box smtpd</td><td>1042</td><td>0.0</td></tr>
+<tr><td>http</td><td>Siemens Gigaset PBX/TARGA DIP VoIP phone http config</td><td>1041</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>RaidenFTPd</td><td>1040</td><td>0.0</td></tr>
+
+   </tbody>
+  </table>
+ </div>
+</div>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+<title>Internet Census 2012</title>
+<head>
+ <link rel="stylesheet" type="text/css" href="style.css">
+ <script>
+	function counter() { document.getElementById("cntimg").src = "http://www.supercounters.com/fc.php?id=518660"; }
+ </script>
+</head>
+
+<body onload="counter()">
+<div id="main">
+
+ <table id = "nav">
+ <col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" />
+ <tr>
+ <td class="highlight1"><a href="paper.html">Paper</a></td>
+ <td><a href="images.html">Images</a></td>
+ <td><a href="download.html">Download</a></td>
+ <td><a href="hilbert.html">Hilbert Browser</a></td>
+ <td><a href="serviceprobe_overview.html">Service Probe Overview</a></td>
+ <td><a href="tld_overview.html">rDNS Overview</a></td>
+ </tr>
+ </table>
+ 
+ <div id="content">
+
+  <P LANG="" ALIGN=CENTER STYLE="margin-bottom: 0.35cm; line-height: 115%">
+   <FONT SIZE=5 STYLE="font-size: 20pt"><B>Internet Census 2012</B></FONT>
+   <br><br><br>
+   
+   <FONT SIZE=4 STYLE="font-size: 16pt"><B>Port scanning /0 using insecure embedded devices</B></FONT>
+   <br><br><br>
+   <FONT SIZE=3><B>Carna Botnet</B></FONT>
+   
+   <br><br><br>
+  
+   <br><br><br>
+  
+  </P>
+
+
+  <P ALIGN=JUSTIFY STYLE="margin-left: 10%; margin-right: 10%; margin-bottom: 0.35cm; line-height: 115%">
+   <B>Abstract</B> While playing around with the Nmap Scripting Engine (NSE) we discovered an amazing number of open embedded devices on the Internet. Many of them are based on Linux and allow login to standard BusyBox with empty or default credentials. We used these devices to build a distributed port scanner to scan all IPv4 addresses. These scans include service probes for the most common ports, ICMP ping, reverse DNS and SYN scans. We analyzed some of the data to get an estimation of the IP address usage.
+   <br><br>
+
+   All data gathered during our research is released into the public domain for further study.
+   <br>
+  </p>
+
+  <br>
+  
+  <br><br>
+  <FONT SIZE=4 STYLE="font-size: 16pt"><B>1 Introduction</B></FONT>
+  <br><br>
+  Two years ago while spending some time with the Nmap Scripting Engine (NSE) someone mentioned that we should try the classic telnet login root:root on random IP addresses. This was meant as a joke, but was given a try. We started scanning and quickly realized that there should be several thousand unprotected devices on the Internet. <br>
+  <br>
+  After completing the scan of roughly one hundred thousand IP addresses, we realized the number of insecure devices must be at least one hundred thousand. Starting with one device and assuming a scan speed of ten IP addresses per second, it should find the next open device within one hour. The scan rate would be doubled if we deployed a scanner to the newly found device. After doubling the scan rate in this way about 16.5 times, all unprotected devices would be found; this would take only 16.5 hours. Additionally, with one hundred thousand devices scanning at ten probes per second we would have a distributed port scanner to port scan the entire IPv4 Internet within one hour.<br>
+
+  <br><br>
+  <FONT SIZE=4 STYLE="font-size: 16pt"><B>2 Proof of Concept</B></FONT>
+  <br><br>
+  To further verify our sample data, we developed a small binary that could be uploaded to insecure devices.<br>
+  <br>
+  To minimize interference with normal system operation, our binary was set to run with a watchdog and on the lowest possible system priority. Furthermore, it was not permanently installed and stopped itself after a few days. We also deployed a readme file containing a description of the project as well as a contact email address.<br>
+  <br>
+  The binary consists of two parts. The first one is a telnet scanner which tries a few different login combinations, e.g. root:root, admin:admin and both without passwords. The second part manages the scanner, gives it IP ranges to scan and uploads scan results to a specified IP address. We deployed our binary on IP addresses we had gathered from our sample data and started scanning on port 23 (Telnet) on every IPv4 address. Our telnet scanner was also started on every newly found device, so the complete scan took only roughly one night. We stopped the automatic deployment after our binary was started on approximately thirty thousand devices. <br>
+  <br>
+  The completed scan proved our assumption was true. There were in fact several hundred thousand unprotected devices on the Internet making it possible to build a super fast distributed port scanner.<br>
+
+  <br><br>
+  <FONT SIZE=4 STYLE="font-size: 16pt"><B>3 Design and Implementation</B></FONT>
+  
+  <br><br>
+  <FONT SIZE=3><B>3.1 Be Nice</B></FONT>
+  <br><br>
+  We had no interest to interfere with default device operation so we did not change passwords and did not make any permanent changes. After a reboot the device was back in its original state including weak or no password with none of our binaries or data stored on the device anymore. Our binaries were running with the lowest possible priority and included a watchdog that would stop the executable in case anything went wrong. Our scanner was limited to 128 simultaneous connections and had a connection timeout of 12 seconds. This limits the effective scanning speed to ~10 IPs per second per client. We also uploaded a readme file containing a short explanation of the project as well as a contact email address to provide feedback for security researchers, ISPs and law enforcement who may notice the project.<br>
+  <br>
+  The vast majority of all unprotected devices are consumer routers or set-top boxes which can be found in groups of thousands of devices. A group consists of machines that have the same CPU and the same amount of RAM. However, there are many small groups of machines that are only available a few to a few hundred times. We took a closer look at some of those devices to see what their purpose might be and quickly found IPSec routers, BGP routers, x86 equipment with crypto accelerator cards, industrial control systems, physical door security systems, big Cisco/Juniper equipment and so on. We decided to completely ignore all traffic going through the devices and everything behind the routers. This implies no arp, dhcp statistics, no monitoring or counting of traffic, no port scanning of LAN devices and no playing around with all the fun things that might be waiting in the local networks. <br>
+  <br>
+  We used the devices as a tool to work at the Internet scale. We did this in the least invasive way possible and with the maximum respect to the privacy of the regular device users.<br>
+  
+  <br><br>
+  <FONT SIZE=3><B>3.2 Target Platforms</B></FONT>
+  <br><br>
+  As could be seen from the sample data, insecure devices are located basically everywhere on the Internet. They are not specific to one ISP or country. So the problem of default or empty passwords is an Internet and industry wide phenomenon.<br>
+  <br>
+  We used a strict set of rules to identify the target devices' CPU and RAM to ensure our binary was only deployed to systems where it was known to work. We also excluded all smaller groups of devices since we did not want to interfere with industrial controls or mission critical hardware in any way. Our binary ran on approximately 420 thousand devices. These are only about 25 percent of all unprotected devices found. There are hundreds of thousands of devices that do not have a real shell so we could not upload or run a binary, a hundred thousand mips4kce machines that are mostly too small and not capable enough for our purposes as well as many unidentifiable configuration interfaces for random hardware. We were able to use <FONT FACE="Courier, monospace">ifconfig</FONT> to get the MAC address on most devices. We collected these MAC addresses for some time and identified about 1.2 million unique unprotected devices. This number does not include devices that do not have ifconfig.<br>
+  
+  <br><br>
+  <FONT SIZE=3><B>3.3 C&amp;C less Infrastructure</B></FONT>
+  <br><br>
+  A classic botnet usually requires one or more command and control (C&amp;C) servers the clients can connect to. A C&amp;C server comes with several disadvantages: it requires constant updates, protection from abuse and a hosting method that is both secure and anonymous.<br>
+  <br>
+  In our scenario this server is not necessary because all devices are reachable directly from the Internet. Therefore we could open a port that provided our own secure login method and a command interface to the bot. Our infrastructure still needs a central server to keep track of and connect to the clients, but it can stay behind NAT and is not reachable from the Internet. Our clients themselves have no possibility to contact a server once their IP address changes, so the central client database may contain an outdated IP address. Another way had to be found to keep client IP addresses up to date.<br>
+  <br>
+  If one client scans ten IP addresses per second, it requires approximately 4000 clients to scan one port on all 3.6 billion IP addresses of the Internet in one day. Since our botnet targets many more clients, it is no problem to scan for devices that change their IP address every twenty four hours. Many devices reboot every few days so it is necessary to constantly scan on Port 23 (Telnet) to find restarted devices and re-upload our binary for the botnet to remain active.<br>
+  <br>
+  This method allows a botnet without a central server that must be known to any client. This has the slight disadvantage that if clients change their IP address it may take some time until they get scanned again and the IP is updated in the database. The experience gathered with our infrastructure later on showed that approximately 85% of all clients are available at any time.<br>
+  
+
+  <br><br>
+  <FONT SIZE=3><B>3.4 Middle Nodes</B></FONT>
+  <br><br>
+  To collect the scan results, approximately one thousand of the devices with most RAM and CPU power were turned into middle nodes. Middle Nodes accept data from the clients and keep it for download by the master server. The IP addresses of the middle nodes were distributed to the clients by the master server when deploying a command. The middle nodes were frequently changed to prevent too much bandwidth usage on a single node.<br>
+  <br>
+  Overall roughly nine thousand devices are needed for constant background scans to update client IP addresses, find restarted devices and act as middle nodes. So this kind of infrastructure only makes sense if you have way more than nine thousand clients.<br>
+   
+  <br><br>
+  <FONT SIZE=3><B>3.5 Scan Coordination</B></FONT>
+  <br><br>
+
+  To coordinate the scans without deploying large IP address lists and to keep track of what has to be scanned, we used an interleaving method. Scan jobs were split up into 240k sub-jobs or parts, each responsible for for scanning approximately 15 thousand IP addresses. Each part was described in terms of a <FONT FACE="Courier, monospace">part id</FONT>, a <FONT FACE="Courier, monospace">starting IP</FONT> address, <FONT FACE="Courier, monospace">stepwidth</FONT> and an <FONT FACE="Courier, monospace">end IP</FONT> address. In this way we only had to deploy a few numbers to every client and they could generate the necessary IP addresses themselves. Individual parts were assigned randomly to clients. Finished scan jobs returned by the clients still contained the <FONT FACE="Courier, monospace">part id</FONT> so the master server could keep track of finished and timed out parts. 
+  
+  <br><br>
+  <FONT SIZE=3><B>3.6 Toolchain</B></FONT>
+  <br><br>
+  
+  It took six months to work out the scanning strategy, develop the backend and setup the infrastructure.<br>
+  <br>
+  The binary on the router was written in plain C. It was compiled for 9 different architectures using the OpenWRT Buildroot. In its latest and largest version this binary was between 46 and 60 kb in size depending on the target architecture.<br>
+  <br>
+  The backend consisted of two parts, a web interface with an API and a set of Python scripts. The web interface, written in PHP using the Symfony framework, provided a frontend to a database as well as an overview of the deployment rates and the overall activity of the infrastructure. The web API provided functions to update the database, get deployable jobs and do life cycle checks, e.g. checking for timed out jobs or deleting clients from the database that have been unreachable for a long time.<br>
+  <br>
+  The Python scripts called the API of the web interface and connected to clients. They sent commands to the clients but also constantly accessed middle nodes to download completed jobs. They loaded parsers to convert the returned binary data into tab separated log files. These parsers also identified open devices in the telnet scans and added their IP addresses to the API so our binary could be deployed to them later. <br>
+  <br>
+  We used Apache Hadoop with PIG (a high-level platform for creating MapReduce programs) so we could filter and analyze this amount of data efficiently. 
+  <br><br>
+  We will not release any source code of the bot or the backend because we consider the risk of abuse as too high. We do however provide a modified version of Nmap that can be used to match service probe records, as well as code to generate Hilbert image tiles. Click <a href="download/code.tar.bz2">here</a> to download this code. <br>
+  
+  
+  <br><br>
+  <FONT SIZE=4 STYLE="font-size: 16pt"><B>4 Deployment Challenges </B></FONT>
+  <br><br>
+  
+  After development of most of the code we began debugging our infrastructure. We used a few thousand devices randomly chosen for this purpose. We noticed at this time that one of the machines already had an unknown binary in the <FONT FACE="Courier, monospace">/tmp</FONT> directory that looked suspicious. A simple <FONT FACE="Courier, monospace">strings</FONT> command used on that binary revealed contents like <FONT FACE="Courier, monospace">synflood, ackflood,</FONT> etc., the usual abuse stuff one would find in malicious botnet binaries. We quickly discovered that this was a bot called Aidra, published only a few days before. <br>
+   <br>
+  Aidra is a classic bot that needs an IRC C&amp;C server. With over 250 KB its binary is quite large and requires <FONT FACE="Courier, monospace">wget</FONT> on the target machines. Apparently its author only built it for a few platforms, so a majority of our target devices could not be infected with Aidra. Since Aidra was clearly made for malicious actions and we could actually see their Internet scale deployment at that moment, we decided to let our bot stop telnet after deployment and applied the same iptable rules Aidra does, if <FONT FACE="Courier, monospace">iptables</FONT> was available. This step was required to block Aidra from exploiting these machines for malicious activity. Since we did not change anything permanently, restarting the device undid these changes. We figured that the collateral damage as a result of this action would be far less than Aidra exploiting these devices. <br>
+   <br>
+  Within one day our binary was deployed to around one hundred thousand devices - enough for our research purposes. We believe Aidra gained a litte more than half of that amount. The weeks after our initial deployment we were able to build binaries for a few more platforms. We also probed telnet every 24 hours on every IP address. Since many devices restart every few days and needed to be reinstalled again, over time we gained machines that Aidra lost. Aidra apparently installed itself permanently on a few devices like Dreambox and a few other Mips platforms. This most likely affects less than 30 thousand devices. <br>
+  <br>
+  With our binary running on all major platforms, our botnet was available at a size of around 420 Thousand Clients. <br>
+   <br>
+  <a href="images/clientmap_16to9_1600x900.jpg"><img style="width:600px" src="images/clientmap_16to9_small.jpg"></a><br>
+  Figure 1: Carna Botnet client distribution March to December 2012. ~420K Clients<br>
+
+
+  <br><br>
+  <FONT SIZE=4 STYLE="font-size: 16pt"><B>5 Scanning Methods</B></FONT>
+  
+  <br><br>
+  <FONT SIZE=3><B>5.1 ICMP Ping</B></FONT>
+  <br><br>
+  A modified version of fping was used to send ICMP ping requests to every IP address. We did fast scans where we probed the IPv4 address space within a day, as well as a long term scan where the IP address space was probed for 6 weeks on a rate of approximately one scan of the complete IPv4 address space every few days. In total we have sent and stored 52 billion ICMP probes.<br>
+  
+  <br><br>
+  <FONT SIZE=3><B>5.2 Reverse DNS</B></FONT>
+  <br><br>
+  A modified version of libevents asynchronous reverse DNS sample code was used to request the DNS name for every IPv4 address. Most clients use their Internet provider's nameserver. The size and capacity of these nameservers may not be suitable for large scale DNS requests so we chose the biggest 16 DNS servers we discovered, e.g. Google, Level3, Verizon and some others. This job ran several times in 2012, resulting in 10.5 billion stored records.<br>
+  
+  <br><br>
+  <FONT SIZE=3><B>5.3 Nmap</B></FONT>
+  <br><br>
+  A number of the MIPS machines had enough RAM and computing power to run a downsized version of Nmap.<br>
+  <br>
+  We used these machines to run sync scans of the top 100 ports and several scans on random ports to get sample data of all ports. These scans resulted in 2.8 billion records for ~660 million IPs with 71 billion ports tested.<br>
+  <br>
+  Before doing a sync scan Nmap did hostprobes to determine if the host was alive. The Nmap hostprobe sends an ICMP echo request, a TCP SYN packet to port 443, a TCP ACK packet to port 80, and an ICMP timestamp request. This resulted in 19.5 billion stored hostprobe records.<br>
+  <br>
+  For some reachable IP addresses Nmap was able to get an IP ID sequence and TCP/IP fingerprint. Since that was only possible on some IP addresses and not all of our deployed Nmap versions contained these abilities, this resulted in 75 million stored IP ID sequence records and 80 million stored TCP/IP fingerprints.<br>
+  
+  <br><br>
+  <FONT SIZE=3><B>5.4 Service Probes</B></FONT>
+  <br><br>
+  Nmap comes with a file called <FONT FACE="Courier New, monospace">nmap-service-probes</FONT>. This file contains probe data that is sent to ports as well as matching rules for the data that may be given in response. For details on how Nmap version detection works and the grammar of this file see <A HREF="http://nmap.org/book/vscan.html">nmap.org</A>.<br>
+  <br>
+  We used the Nmap service probe file as a reference to build a binary that contained all 85 service probes Nmap provides. We used that binary to send these probes to every port proposed in the Nmap service probe file as well as a few missing ports that seemed interesting. 632 TCP and 110 UDP ports were probed on every IPv4 address, some ports were tested with multiple probes. To keep the size of the returned files smaller, and due to the fact that the vast majority of all probes timeout anyway, we reported back only every ~30th timed out or closed port. For the closed ports, this was later changed to report back every 5th closed port.<br>
+  <br>
+  Over the course of three months in mid-2012 we sent approximately 4000 billion service probes, 175 billion of which where reported back and saved. On 15th and 16th of December we probed the top 30 ports so we would have a more up to date version on release. This provided approximately 5 billion additional saved service probes.<br>
+  <br>
+  A detailed overview of what probes were sent to which ports is available <a href="serviceprobe_overview.html">here</a><br>
+  
+  <br><br>
+  <FONT SIZE=3><B>5.5 Traceroute</B></FONT>
+  <br><br>
+  Approximately 70% of all open devices are either too small, don't run linux or only have a very limited telnet interface making it impossible to start or even upload a binary. Some of these machines provided a few diagnosis commands like ping, and interestingly traceroute on a limited shell.<br>
+  <br>
+  We developed a modified version of our telnet scanner to find and log into theses devices. After login the connection was kept active and traceroute was called on the remote shell. The results were compressed by our binary and sent to the middle nodes. Since most IP ranges are empty, choosing random IPs as targets for these traceroutes would result in a very slow scanning speed, because it needed some time for the traceroute to timeout. So instead of choosing random targets the telnet scanner was used to determine target IPs. If the telnet scan got a response from the IP then the IP address was added to a queue for tracerouting. <br>
+  <br>
+  This was started because it was a fun idea to let very small devices log into even smaller and less capable devices to use them for something. We kept this running only for a few days to prove that it works. The result is 68 million traceroute records.<br>
+  
+  
+  <br><br>
+  <FONT SIZE=4 STYLE="font-size: 16pt"><B>6 Analysis</B></FONT>
+  
+  <br><br>
+  <FONT SIZE=3><B>6.1 Hilbert Curves</B></FONT>
+  <br><br>
+  
+  To get a visual overview of ICMP records we converted the one-dimensional, 32-bit IP addresses into two dimensions using a <a href="http://en.wikipedia.org/wiki/Hilbert_curve">Hilbert Curve</a>, inspired by <a href="http://xkcd.com/195/">xkcd</a>. This curve keeps nearby addresses physically near each other and it is fractal, so we can zoom in or out to control detail. Figure 2 shows 420 Million IP addresses that responded to ICMP ping requests at least two times between June and October 2012. Address blocks are labeled based on IANA's list of IPv4 allocations that can be found <a href="http://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.xml">here</a>. Each pixel in the original 4096 x 4096 image represents a single /24 network containing up to 256 hosts. The pixel color shows the utilization of each /24 based on the number of probe responses. Black areas represent addresses that did not respond to the probes. Blue represents low utilization (at least one response), and red represents 100% utilization. This image was generated to be comparable to Figure 3, created 2006 by CAIDA in an Internet census project [<a href="http://www.isi.edu/ant/lander/">isi.edu</a>].<br> 
+  <div style="float:left;width:100%;padding-top:30px;padding-bottom:30px">
+   <div style="float:left;padding-right:20px">
+   
+   
+   <a class="link" href="images/hilbert_icmp_map_lowquality.jpg"> <img style="width:500px" src="images/2012_hilbert_icmp_map_small.jpg"></a><br>
+    Figure 2: 2012 IPv4 Census Map, Carna Botnet
+   </div>
+   <div style="float:left">
+    <img style="width:500px" src="images/2006_hilbert_icmp_map_small.jpg"><br>
+    Figure 3: 2006 IPv4 Census Map, Source: <a class="link" href="http://www.caida.org/research/id-consumption/census-map/">caida.org</a>
+   </div>
+  </div>
+   
+  <br>
+  
+  We also modified the Hilbert browser, developed by ISI in their Internet mapping project [<a href="http://www.isi.edu/ant/address/">isi.edu</a>]. This browser shows ICMP ping records, as well as service probe and reverse DNS information. It allows zooming in and out into the IP space and an optional overlay allows highlighting of IP ranges. All images as well as the Hilbert browser use data from June to October 2012. There is more data available for download, but we concentrated the analysis on this time frame. Our version of this browser is available <a href="hilbert/index.html">here</a>. The sourcecode of this version as well as code to generate image tiles is part of the <a class="link" href="download/code.tar.bz2">code pack</a>. <br>
+  <br>
+  We should mention that we are in no way associated to ISI or any researcher who worked at the ISI census project. We just took over the design for the Hilbert maps they made to have comparable images, as well as their Hilbert browser because it would have been a waste of time to code our own version.<br>
+  <br>
+  <img style="width:600px" src="images/hilbert_interface.jpg"><br>
+  Figure 4: Hilbert web browser<br>
+  <br>
+  
+  <br><br>
+  <FONT SIZE=3><B>6.2 World Maps</B></FONT>
+  <br><br>
+
+  To get a geographic overview we determined the geolocation of all IP addresses that respond to ICMP ping requests or have open ports. We used MaxMinds freely available GeoLite database [<a href="http://dev.maxmind.com/geoip/geolite">maxmind.com</a>] for geolocation mapping. Different versions of this image are available for download <a href="images.html">here</a><br>
+  <br>
+ <a href="images/worldmap_lowres_16to9_1600x900.png"> <img style="width:600px" src="images/worldmap_lowres_16to9_small.jpg"></a><br>
+  Figure 5: ~460 Million IP addresses on worldmap<br>
+  <br>
+  <br>
+  To test if we could see a day night rhythm in the utilization of IP spaces we used all ICMP records to generate a series of images that show the difference from daily average utilization per half an hour. We composed theses images to a GIF animation that clearly shows a day night rhythm. The difference between day and night is lower for US and Central Europe because of the higher number of "always on" Internet connections. Full resolution GIFs and single images are available for download <a href="images.html">here</a>.<br>
+  <div style="float:left;width:100%;padding-top:30px;padding-bottom:40px">
+   <div style="float:left;padding-right:20px">
+     <img id="gif1" style="width:600px" src="images/geovideo_frame_000_lowres.jpg"><br>
+     <span class="link"  onclick='document.getElementById("gif1").src="images/geovideo_lowres.gif"'>Click here </span> to start animation
+   </div>
+   <div style="float:left">
+    <div id="hilbertmap_youtube">
+     <img id="gif2" style="width:350px" src="images/hilbertvideo_frame_0000.jpg"><br>
+     <span class="link"  onclick='document.getElementById("gif2").src="images/hilbertvideo_lowres.gif"'>Click here </span> to start animation
+    </div>    
+   </div>
+  </div>
+  
+  <br><br>
+  <FONT SIZE=3><B>6.3 Reverse DNS</B></FONT>
+  <br><br>
+  
+  To get an overview of reverse DNS records we made a series of lists showing the top, most used names for the first four domain hierarchy levels. A few examples are shown below. Full lists are available <a href="tld_overview.html">here</a>.<br>
+
+  <div style="float:left;width:100%;padding-top:30px;padding-bottom:30px">
+   <div style="float:left;width:200px;padding-right:30px">
+    <table id = "sortable" style="width:200px">
+     <thead>
+      <th>Count </th>
+      <th>TLD </th>
+     </thead>
+     <tbody>
+     <tr><td>374670873</td><td>.net</td></tr>
+     <tr><td>199029228</td><td>.com</td></tr>
+     <tr><td>75612578</td><td>.jp</td></tr>
+     <tr><td>28059515</td><td>.it</td></tr> 
+     <tr><td style="text-align:right"><a href="tld_overview.html">more..</a></td><td></td></tr> 
+     </tbody>
+    </table>
+   </div>
+
+   <div style="float:left;width:200px;padding-right:30px">
+    <table id = "sortable" style="width:200px">
+     <thead>
+      <th>Count </th>
+      <th>Domain </th>
+      <th>TLD </th>
+     </thead>
+     <tbody>
+      <tr><td>61327865</td><td>ne</td><td>jp</td></tr>
+      <tr><td>34434270</td><td>bbtec</td><td>net</td></tr>
+      <tr><td>30352347</td><td>comcast</td><td>net</td></tr>
+      <tr><td>27949325</td><td>myvzw</td><td>com</td></tr>
+      <tr><td>24919353</td><td>rr</td><td>com</td></tr>
+      <tr><td>22117491</td><td>sbcglobal</td><td>net</td></tr>
+      <tr><td></td><td><a href="domain_overview.html">more..</a></td></tr> 
+     </tbody>
+    </table>
+   </div>
+
+   <div style="float:left;width:200px;">
+    <table id = "sortable" style="width:200px">
+     <thead>
+      <th>Count </th>
+      <th>Subdomain </th>
+      <th>Domain </th>
+      <th>TLD </th>
+     </thead>
+     <tbody>
+      <tr><td>16492585</td><td>res</td><td>rr</td><td>com</td></tr>
+      <tr><td>16378226</td><td>static</td><td>ge</td><td>com</td></tr>
+      <tr><td>15550342</td><td>pools</td><td>spcsDNS</td><td>net</td></tr>
+      <tr><td>14902477</td><td>163data</td><td>com</td><td>cn</td></tr>
+      <tr><td></td><td><a href="subdomain_overview.html">more..</a></td></tr> 
+     </tbody>
+    </table>
+   </div>
+  </div>
+
+  <br><br>
+  <FONT SIZE=3><B>6.4 Service Probes</B></FONT>
+  <br><br>
+  
+
+  All records returned in response to service probes were matched against rules from Nmap's <FONT FACE="Courier, monospace">nmap-service-probes</FONT> file to determine service names and versions where possible. The quality of these matches depends on Nmap's matching rules. We added some more rules to catch several further services we noticed during debugging. For most services the matching is quite accurate. If a port had been probed multiple times we chose the most likely match based on how often that match had occurred and how much information it contained so that the lists only contained one match per port and per IP. Full matching results can be found as <a href="serviceprobe_overview.html">browsable lists</a> as well as tab separated raw lists in the <a href="download.html">downloads</a> section.<br>
+  
+  <div style="float:left;width:100%;padding-top:30px;">
+   <div style="float:left;width:500px;padding-right:30px;">
+    Port 80 Tcp, ~70.84 Million IP addresses<br>
+    Allegro RomPager is the second most used webserver
+    <table id = "nicetable" style="width:500px">
+     <thead>
+      <th>Servicename </th>
+      <th>Product </th>
+      <th>Count </th>
+      <th>Percent </th>
+     </thead>
+     <tbody>
+      <tr><td>http</td><td>Apache</td><td>14208112</td><td>20.057</td></tr>
+      <tr><td>http</td><td>Allegro RomPager</td><td>13116974</td><td>18.517</td></tr>
+      <tr><td>http</td><td></td><td>8881082</td><td>12.537</td></tr>
+      <tr><td>http</td><td>Microsoft IIS httpd</td><td>6071267</td><td>8.571</td></tr>
+      <tr><td>http</td><td>AkamaiGHost</td><td>4064402</td><td>5.738</td></tr>
+      <tr><td>http</td><td>nginx</td><td>4045993</td><td>5.712</td></tr>
+      <tr><td>http</td><td>micro_httpd</td><td>1991840</td><td>2.812</td></tr>
+      <tr><td></td><td><a href="serviceprobes/80_TCP_product.html">..more</a></td><td></td><td></td></tr>
+     </tbody>
+    </table>
+   </div>
+   <div style="float:left;width:500px;">
+    
+    Port 9100 Tcp, ~244 Thousand IP addresses<br> 
+    ~200 Thousand identifiable printers
+    <table id = "nicetable" style="width:500px">
+     <thead>
+      <th>Servicename </th>
+      <th>Product </th>
+      <th>Count </th>
+      <th>Percent </th>
+     </thead>
+     <tbody>
+      <tr><td>no match</td><td>-/-</td><td>29994</td><td>12.264</td></tr>
+      <tr><td>hp-pjl</td><td>HP LaserJet P2055 Series</td><td>6628</td><td>2.71</td></tr>
+      <tr><td>hp-pjl</td><td>hp LaserJet 4250</td><td>4678</td><td>1.913</td></tr>
+      <tr><td>irc</td><td>Dancer ircd</td><td>4095</td><td>1.674</td></tr>
+      <tr><td>hp-pjl</td><td>LASERJET 4050</td><td>3554</td><td>1.453</td></tr>
+      <tr><td>telnet</td><td>Cisco router telnetd</td><td>3497</td><td>1.43</td></tr>
+      <tr><td>hp-pjl</td><td>HP LaserJet P2015 Series</td><td>3237</td><td>1.324</td></tr>
+      <tr><td></td><td><a href="serviceprobes/9100_TCP_product.html">..more</a></td><td></td><td></td></tr>
+     </tbody>
+    </table>
+   </div>
+  </div>
+
+  <div style="float:left;width:100%;padding-top:30px;padding-bottom:30px"> 
+   <div style="float:left;width:500px;">
+    
+    Port 49152 Tcp, ~4.11  Million IP addresses<br> 
+    ~2.4 Million devices <a class="link" href="https://community.rapid7.com/docs/DOC-2150">Portable SDK for UPnP devices</a>
+    <table id = "nicetable" style="width:500px">
+     <thead>
+      <th>Servicename </th>
+      <th>Product </th>
+      <th>Count </th>
+      <th>Percent </th>
+     </thead>
+     <tbody>
+      <tr><td>upnp</td><td>Portable SDK for UPnP devices</td><td>2405517</td><td>58.479</td></tr>
+      <tr><td>upnp</td><td>Intel UPnP reference SDK</td><td>1268457</td><td>30.836</td></tr>
+      <tr><td>http</td><td></td><td>237412</td><td>5.772</td></tr>
+      <tr><td>http</td><td>Linux</td><td>101333</td><td>2.463</td></tr>
+      <tr><td>http</td><td>Apple ODS DVD/CD Sharing Agent httpd</td><td>36321</td><td>0.883</td></tr>
+      <tr><td>http</td><td>Apache</td><td>12737</td><td>0.31</td></tr>
+      <tr><td>rtsp</td><td>Apple AirTunes rtspd</td><td>9856</td><td>0.24</td></tr>
+      
+      <tr><td></td><td><a href="serviceprobes/49152_TCP_product.html">..more</a></td><td></td><td></td></tr>
+     </tbody>
+    </table>
+   </div>
+   
+  </div>
+  
+  <br><br>
+  <FONT SIZE=3><B>6.5 Numbers</B></FONT>
+  <br><br>  
+  
+  The numbers below were filtered to eliminate noise and match a timeperiod from June 2012 to October 2012.<br>
+  The data used for these numbers is the same that was used for the <a href="hilbert/index.html">browsable Hilbert map</a>.<br><br>
+  <P STYLE="line-height: 120%">
+  <ul> 
+  <li>420 Million IPs responded to ICMP ping requests more than once. [<a class="link" href="hilbert/index.html?kind=ICMP%20echo">Map</a>]</li> 
+  <li>165 Million IPs had one or more of the top 150 ports open. 36 Million of these IPs did not respond to ICMP ping. [<a  class="link" href="hilbert/index.html?kind=Port%20open">Map</a>]</li>
+  <li>141 Million IPs had only closed/reset ports and did not respond to ICMP ping. Most of these were firewalled IP ranges where it was uncertain if they had actual computers behind them. [<a  class="link" href="hilbert/index.html?kind=Port%20reset/closed">Map</a>]</li>
+  <li>1051 Million IPs had a reverse DNS record. [<a class="link" href="hilbert/index.html?kind=Reverse%20DNS">Map</a>] 729 Million of these IPs had nothing more and did not respond to any probe.</li>
+  <li>30000 /16 networks contained IPs that responded to ICMP ping, 14000 /16 networks contained 90% of all pingable IPs.</li>
+  <li>4.3 Million /24 networks contained all 420 Million pingable IPs.</li>
+  </ul>
+  <br><br> 
+  <I>So, how big is the Internet?</I><br> 
+  That depends on how you count. 420 Million pingable IPs + 36 Million more that had one or more ports open, making 450 Million that were definitely in use and reachable from the rest of the Internet. 141 Million IPs were firewalled, so they could count as "in use". Together this would be 591 Million used IPs. 729 Million more IPs just had reverse DNS records. If you added those, it would make for a total of 1.3 Billion used IP addresses. The other 2.3 Billion addresses showed no sign of usage. <br>
+  </p>
+  
+  <br><br>
+  <FONT SIZE=3><B>6.6 Noise</B></FONT>
+  <br><br> 
+  
+  While analyzing the data we had gathered we noticed some noise. IP ranges that should have been empty, seemed to show a very low level of usage. A closer look revealed that some of our scanning machines seem to have been behind enforced proxies or provider firewalls. They rerouted some of the probes to different IPs, leading to false responses. This noise could be filtered out quite easily because it was mostly present on very common services that had been probed several times. For the service probes, the most noisy ports are 80, 443 and 8080. This seems to result from enforced provider proxies. Port 53 also contains noise because providers redirect this port to their own nameservers. Port 25 contains some noise because of provider firewalls, probably to prevent spam. The noise on port 80 and 443 also affects Nmap's hostprobes because it uses these ports to determine if a host is alive. Because of the large number of different probes we recorded for each IP address, this noise can be filtered out almost completely.<br>
+
+
+  <br><br>
+  <FONT SIZE=4 STYLE="font-size: 16pt"><B>7 Conclusion</B></FONT>
+  <br><br>
+  This was a fun project and there are many more things we could have done, but this concludes our work. The binary stops itself after some time and most of the deployed versions have already done that by now. All of our initial goals as well as some extras like traceroute were achieved, we have completed, to our knowledge, the largest and most comprehensive IPv4 census ever. With a growing number of IPv6 hosts on the Internet, 2012 may have been the last time a census like this was possible.<br>
+  <br>
+  We hope other researchers will find the data we have collected useful and that this publication will help raise some awareness that, while everybody is talking about high class exploits and cyberwar, four simple stupid default telnet passwords can give you access to hundreds of thousands of consumer as well as tens of thousands of industrial devices all over the world.<br>
+
+
+  <br><br>
+  <FONT SIZE=4 STYLE="font-size: 16pt"><B>8 Trivia</B></FONT>
+  <br><br>
+  Since it seems to be somewhat of a tradition to name bots after Roman or Greek divinities we chose &quot;Carna&quot; as the name for our bot. Carna was the roman goddess for the protection of inner organs and health and was later confused with the goddess of doorsteps and hinges. This name seems like a good choice for a bot that runs mostly on embedded routers.<br>
+  <br>
+  If you are watching port scans that run at rates from 3 to 5 billion IPs per hour for weeks, the Internet shrinks and seems small and empty. If you try to analyze, visualize, sort and compress the collected data, it quickly gets annoyingly gigantic again.<br>
+  <br>
+  A lot of devices and services we have seen during our research should never be connected to the public Internet at all. 
+  As a rule of thumb, if you believe that "nobody would connect that to the Internet, really nobody", there are at least 1000 people who did. Whenever you think &quot;that shouldn't be on the Internet but will probably be found a few times&quot; it's there a few hundred thousand times. Like half a million printers, or a Million Webcams, or devices that have root as a root password.<br>
+  <br>
+  We would also like to mention that building and running a gigantic botnet and then watching it as it scans nothing less than the whole Internet at rates of billions of IPs per hour over and over again is really as much fun as it sounds like.<br>
+  
+  <br><br>
+  <FONT SIZE=4 STYLE="font-size: 16pt"><B>9 Who and Why</B></FONT>
+  <br><br>
+
+  You may ask yourself who we are and why we did what we did.<br>
+  <br>
+  In reality, we is me. I chose we as a form for this documentation because its nicer to read, and mentioning myself a thousand times just sounded egotistical.<br>
+  <br>
+  The why is also simple: I did not want to ask myself for the rest of my life how much fun it could have been or if the infrastructure I imagined in my head would have worked as expected. I saw the chance to really work on an Internet scale, command hundred thousands of devices with a click of my mouse, portscan and map the whole Internet in a way nobody had done before, basically have fun with computers and the Internet in a way very few people ever will. I decided it would be worth my time.<br>
+  <br>
+  Just in case someone else tries to take credit for my work: My <a href="download/InternetCensus2012.asc"> PGP public key</a>
+  <br>
+  <br>
+  <br>
+ </div> 
+ <div style="display:none">
+  <img id = "cntimg" src="">
+ </div>
+</BODY>

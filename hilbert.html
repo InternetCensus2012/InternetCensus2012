@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Internet Census 2012</title>
+ <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="main">
+ <table id = "nav">
+ <col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" />
+ <tr>
+ <td><a href="paper.html">Paper</a></td>
+ <td><a href="images.html">Images</a></td>
+ <td><a href="download.html">Download</a></td>
+ <td class="highlight1"><a href="hilbert.html">Hilbert Browser</a></td>
+ <td><a href="serviceprobe_overview.html">Service Probe Overview</a></td>
+ <td><a href="tld_overview.html">rDNS Overview</a></td>
+ </tr>
+ </table>
+
+ <div id="content">
+  <div style="float:left;width:100%">
+   
+   <div style="float:left;width:50%;">
+    <img style="width:500px" src="images/2012_hilbert_icmp_map_small.jpg"><br>
+    Figure 1: 2012 IPv4 Census Map, Hilbert Projection <br><br>
+    <img style="width:500px" src="images/hilbert_interface.jpg"><br>
+    Figure 2: Browseable Hilbert map<br><br>
+   </div>
+   <div style="padding-left:520px;">
+   <br><br><br>
+   Figure 1 shows 420 Million IP addresses that responded to ICMP ping requests at least two times between June and October 2012. The IP space is mapped to a 2-dimensional <a class="link" href="http://en.wikipedia.org/wiki/Hilbert_curve">Hilbert Curve</a> as inspired by <a class="link" href="http://xkcd.com/195/">xkcd</a>. This curve keeps adjacent addresses physically near each other, and it is fractal, so we can zoom in or out to control detail. For an explanation how the data for this image was obtained, see <a class="link" href="paper.html">Paper</a><br>
+   <br>
+   This image as well as images that represent reverse DNS and portscan information are available as a
+   <a class="link" target="_blank" href="hilbert/index.html"> <b>Zoomable, Clickable map</b></a>. <br>
+   <br> 
+  
+   This Hilbert browser was originaly developed by ISI in their Internet mapping project [<a class="link" href="http://www.isi.edu/ant/address/">isi.edu</a>]. We have modified it and added a few more features. The sourcecode for our version as well as code to generate image tiles is available at for <a class="link" href="download/code.tar.bz2">download</a>. We should mention that we are in no way associated to ISI or any researcher who worked at the ISI census project. We just took over the design for the Hilbert maps they made to have comparable images, as well as their Hilbert browser because it would have been a waste of time to code our own version.<br>
+  </div>
+  </div>
+ </div> 
+</div>

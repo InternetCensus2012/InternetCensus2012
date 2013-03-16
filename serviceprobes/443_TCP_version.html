@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Internet Census 2012</title>
+ <script type="text/javascript" src="../js/jquery-latest.js"></script> 
+ <script type="text/javascript" src="../js/__jquery.tablesorter.min.js"></script> 
+ <link rel="stylesheet" type="text/css" href="../style.css">
+
+ <script>
+ $(document).ready(function() 
+  { 
+   generate(1);
+   $("#sortable").tablesorter(); 
+  } 
+ ); 
+
+ function generate(index) {
+    
+  var pages=[
+   ["1t","3t","7t","7u","9t","13u","17u","19t","21t","22t","23t","25t","26t","35t","37u","42t","42u","43t","44t","53t","53u","69u","70t","79t","80t","81t","82t","83t","84t","85t","88t","88u","98t","100t","106t","110t","111t","111u","113t","119t","123u","130t","135t","135u","137u","139t","143t","144t","161t","161u","177u","179t","199t"],
+   ["214t","254t","255t","256t","257t","264t","280t","311t","389t","390t","406t","407u","427t","443t","444t","445t","449t","464t","465t","497t","500u","505t","510t","512t","513t","514t","515t","517u","518u","523t","523u","524t","540t","543t","544t","548t","554t","587t","591t","593t","616t","620t","625t","626u","628t","631t","636t","641t","646t","660t","666t"],
+   ["706t","710t","711t","731t","771t","782t","783t","787t","808t","873t","888t","898t","900t","901t","902t","990t","993t","995t","1000t","1010t","1022t","1024t","1025t","1026t","1027t","1028t","1029t","1030t","1031t","1032t","1033t","1035t","1036t","1037t","1038t","1039t","1040t","1041t","1042t","1043t","1044t","1048t","1049t","1050t","1053t","1054t","1056t","1058t","1059t"],
+   ["1064t","1065t","1066t","1068t","1069t","1071t","1074t","1080t","1090t","1095t","1098t","1099t","1100t","1105t","1109t","1110t","1111t","1112t","1200t","1212t","1214t","1217t","1220t","1234t","1241t","1248t","1302t","1311t","1314t","1344t","1352t","1400t","1414t","1415t","1416t","1417t","1418t","1419t","1419u","1420t","1432t","1433t","1434u","1467t","1494t"],
+   ["1500t","1501t","1503t","1505t","1505u","1521t","1522t","1526t","1527t","1549t","1550t","1574t","1583t","1604u","1610t","1611t","1666t","1687t","1688t","1702t","1720t","1723t","1748t","1754t","1755t","1761t","1761u","1762t","1763t","1801t","1830t","1900t","1935t","1967u","1972t","1981t","1998t","2000t","2001t","2002t","2003t","2005t","2010t","2024t","2030t","2040t","2049t","2064t","2068t"],
+   ["2100t","2103t","2105t","2107t","2121t","2160t","2161t","2301t","2303u","2306t","2383t","2396t","2401t","2427t","2427u","2525t","2600t","2601t","2627t","2638u","2701t","2715t","2717t","2869t","2947t","2967t","2967u","3000t","3001t","3002t","3003t","3004t","3005t","3006t","3025t","3031t","3050t","3052t","3128t","3268t","3280t","3306t","3310t","3333t","3351t","3372t","3389t","3483u","3493t","3531t"],
+   ["3632t","3689t","3690t","3703t","3872t","3892t","3900t","3940t","3986t","4000t","4001t","4045t","4045u","4155t","4369t","4443t","4444t","4567t","4660t","4711t","4868t","4899t","4999t","5000t","5001t","5003t","5009t","5050t","5051t","5060t","5060u","5061t","5101t","5120t","5190t","5222t","5232t","5269t","5280t","5302t","5323t","5353u","5357t","5400t","5427t","5432t","5520t","5530t","5550t","5555t","5556t","5570t"],
+   ["5600t","5631t","5632u","5666t","5800t","5801t","5802t","5803t","5900t","5901t","6000t","6001t","6002t","6003t","6004t","6005t","6006t","6007t","6008t","6009t","6010t","6011t","6012t","6013t","6014t","6015t","6016t","6017t","6018t","6019t","6020t","6050t","6103t","6112t","6163t","6346t","6379t","6543t","6544t","6560t","6588t","6600t","6646t","6660t","6661t","6662t","6663t","6664t","6665t","6666t","6667t","6668t","6669t","6670t","6699t"],
+   ["6802t","6969t","7000t","7001u","7002t","7007t","7008t","7070t","7100t","7101t","7144t","7145t","7171t","7180t","7200t","7210t","7272t","7402t","7461t","7776t","7777t","7780t","7937t","7938t","8000t","8001t","8002t","8003t","8004t","8005t","8006t","8007t","8008t","8009t","8010t","8031t","8080t","8081t","8082t","8083t","8084t","8085t","8087t","8088t","8118t","8138t","8181t","8194t","8307t","8333t","8443t","8770t"],
+   ["8880t","8881t","8882t","8883t","8884t","8885t","8886t","8887t","8888t","9000t","9001t","9002t","9003t","9030t","9050t","9080t","9088t","9089t","9090t","9091t","9092t","9093t","9094t","9095t","9096t","9097t","9098t","9099t","9100t","9100u","9101t","9102t","9103t","9104t","9105t","9106t","9107t","9481t","9801t","9999t","10000t","10000u","10001t","10005t","10010t","10031t","10080u","11210t","11211t","11211u","11371t","11965t","12203u","12345t"],
+   ["13013t","13666t","13720t","13722t","13783t","14238t","14534t","15000t","15001t","15002t","17007t","17555u","17988t","18086t","18182t","18264t","19150t","19350t","20000t","22001t","22490t","26214t","26470t","27000t","27001t","27002t","27003t","27004t","27005t","27006t","27007t","27008t","27009t","27010t","27017t","27960u","30444t","31337t","31416t","32211t","32750t","32750u","32751t","32751u","32752t","32752u","32753t","32753u","32754t","32754u"],
+   ["32755t","32755u","32756t","32756u","32757t","32757u","32758t","32758u","32759t","32759u","32760t","32760u","32761t","32761u","32762t","32762u","32763t","32763u","32764t","32764u","32765t","32765u","32766t","32766u","32767t","32767u","32768t","32768u","32769t","32769u","32770t","32770u","32771t","32771u","32772t","32772u","32773t","32773u","32774t","32774u","32775t","32775u","32776t","32776u","32777t","32777u"],
+   ["32778t","32778u","32779t","32779u","32780t","32780u","32781t","32781u","32782t","32782u","32783t","32783u","32784t","32784u","32785t","32785u","32786t","32786u","32787t","32787u","32788t","32788u","32789t","32789u","32790t","32790u","32791t","32791u","32792t","32792u","32793t","32793u","32794t","32794u","32795t","32795u","32796t","32796u","32797t","32797u","32798t","32798u","32799t","32799u"],
+   ["32800t","32800u","32801t","32801u","32802t","32802u","32803t","32803u","32804t","32804u","32805t","32805u","32806t","32806u","32807t","32807u","32808t","32808u","32809t","32809u","32810t","32810u","33015t","34012t","37435t","38978t","38978u","40193t","41523t","49152t","49152u","49153u","49154u","49155u","49156u","49157t","49400t","50000t","50001t","50002t","50003t","50004t","50005t","50006t","50007t","50008t","50009t"],
+   ["50010t","50011t","50012t","50013t","50014t","50015t","50016t","50017t","50018t","50019t","50020t","50021t","50022t","50023t","50024t","50025t","50030t","55553t","55555t","56667t","60000t","60001t","60002t","60003t","60004t","60006t","60007t","60008t","60009t","60010t","60011t","60012t","60013t","60014t","60015t","60016t","60017t","60018t","60019t","60020t","60021t","60022t","60023t","60024t","60025t","Combinedt"]
+  ];
+  current = "443t"
+
+  var html = ""
+  var col = 0;
+  for (var i = 0; i < pages[index].length; ++i){
+   if (col == 0){
+    html = html + "<tr>"
+   }
+   if(pages[index][i].indexOf("u") != -1){
+    port = pages[index][i].replace(/u/g, " UDP");
+    link = pages[index][i].replace(/u/g, "_UDP_product.html");
+   }else{
+    port = pages[index][i].replace(/t/g, "");
+    link = pages[index][i].replace(/t/g, "_TCP_product.html");
+   }
+   if(pages[index][i] == ("" + current)){
+    html = html + "<td style=\"background-color:#e9e9e9\"><a href=\""+link+"\">"+port+"</a></td>"
+   }else{
+    html = html + "<td><a href=\""+link+"\">"+port+"</a></td>"
+   }
+   
+   col = col +1;
+   if (col == 14){
+    col = 0;
+    html = html + "</tr>"
+   }
+  }
+  $("#submenu").html(html);
+  $(".clicks").css({'background-color': ''})
+  $("#click"+index).css({'background-color': '#e9e9e9'})
+ }
+ </script>
+ 
+</head>
+
+<body>
+<div id="main">
+
+ <table id = "nav">
+ <col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" />
+ <tr>
+ <td><a href="../paper.html">Paper</a></td>
+ <td><a href="../images.html">Images</a></td>
+ <td><a href="../download.html">Download</a></td>
+ <td><a href="../hilbert.html">Hilbert Browser</a></td>
+ <td class="highlight1"><a href="../serviceprobe_overview.html">Service Probe Overview</a></td>
+ <td><a href="../tld_overview.html">rDNS Overview</a></td>
+ </tr>
+ </table>
+
+ 
+ <table id="nav1">
+ <tr>
+  <td style="width:10%"><a href="../serviceprobe_overview.html"><span style="font-size: 14px;">Overview</span></a></td>
+  <td> 
+  <span style="font-size: 14px;">Port Details</span>
+   <table id = "nav">
+    <tr>
+     <td id="click0" class="clicks" onclick="generate(0)">< 200</td>
+     <td id="click1" class="clicks" onclick="generate(1)">< 700</td>
+     <td id="click2" class="clicks" onclick="generate(2)">< 1060 </td>
+     <td id="click3" class="clicks" onclick="generate(3)">< 1500 </td>
+     <td id="click4" class="clicks" onclick="generate(4)">< 2100 </td>
+     <td id="click5" class="clicks" onclick="generate(5)">< 3600 </td>
+     <td id="click6" class="clicks" onclick="generate(6)">< 5600 </td>
+     <td id="click7" class="clicks" onclick="generate(7)">< 6700 </td>
+     <td id="click8" class="clicks" onclick="generate(8)">< 8800 </td>
+     <td id="click9" class="clicks" onclick="generate(9)">< 13000</td>
+     <td id="click10" class="clicks" onclick="generate(10)">< 32755</td>
+     <td id="click11" class="clicks" onclick="generate(11)">< 32778</td>
+     <td id="click12" class="clicks" onclick="generate(12)">< 32800</td>
+     <td id="click13" class="clicks" onclick="generate(13)">< 50010</td>
+     <td id="click14" class="clicks" onclick="generate(14)">< 65536</td>
+    </tr>
+   </table>
+
+   <table  id = "submenu">
+    <tr><td>This menu requires javascript, sorry<td><tr>
+   </table>
+  </td>
+ </tr>
+ </table>
+ <table id = "nav">
+ <tr>
+  <td style ="width:12.5%" ><a href="427_TCP_version.html">Prev Port</a></td>
+  <td style ="width:25% ;"><a href="443_TCP_product.html">Products</a></td>
+  <td style ="width:25% ; background-color: #e4e4e4" ><a href="443_TCP_version.html">Versions</a></td>
+  <td style ="width:25% ;"><a href="443_TCP_full.html">Full</a></td>
+  <td style ="width:12.5%" ><a href="444_TCP_version.html">Next Port</a></td>
+ <tr>
+ </table>
+ 
+ 
+ <div id="content">
+  Overview of services running on Port 443 TCP.<br>
+  ~29.5 Million IP addresses observed from May to December 2012  <br>
+  To get raw lists of the data go to <a href="../download.html">Download</a>. For an explanation of what this data is and how it was obtained, see <a href="../paper.html">Paper</a>.<br><br>
+
+
+  <table id="sortable" class="tablesorter" style ="text-align:center;border:none"> 
+   	<col width="15%" /><col width="45%" /><col width="20%" /><col width="10%" /><col width="10%" />
+   <thead>
+    <th>Servicename <img src="../icon_sort.png"></th>
+<th>Product <img src="../icon_sort.png"></th>
+<th>Version <img src="../icon_sort.png"></th><th>Count <img src="../icon_sort.png"></th>
+<th>Percent <img src="../icon_sort.png"></th>
+ 
+   </thead>
+   <tbody>
+    <tr><td>ssl</td><td>SSLv3</td><td></td><td>15539932</td><td>52.674</td></tr>
+<tr><td>ssl</td><td>TLSv1</td><td></td><td>2861263</td><td>9.699</td></tr>
+<tr><td>http</td><td></td><td></td><td>2409925</td><td>8.169</td></tr>
+<tr><td>http</td><td>Apache</td><td></td><td>2030300</td><td>6.882</td></tr>
+<tr><td>no match</td><td>-/-</td><td>-/-</td><td>1920473</td><td>6.51</td></tr>
+<tr><td>osiris</td><td>osiris host IDS agent</td><td></td><td>732010</td><td>2.481</td></tr>
+<tr><td>ssl</td><td>Microsoft IIS SSL</td><td></td><td>540916</td><td>1.833</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>483453</td><td>1.639</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.3</td><td>435608</td><td>1.477</td></tr>
+<tr><td>http</td><td>Secure Computing Sidewinder firewall http admin</td><td></td><td>267615</td><td>0.907</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.21</td><td>144554</td><td>0.49</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.16</td><td>134898</td><td>0.457</td></tr>
+<tr><td>http</td><td>Apache</td><td>2</td><td>95030</td><td>0.322</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.23</td><td>87517</td><td>0.297</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.15</td><td>86683</td><td>0.294</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.17</td><td>86205</td><td>0.292</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.63</td><td>78801</td><td>0.267</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.14</td><td>73089</td><td>0.248</td></tr>
+<tr><td>xml</td><td></td><td></td><td>69472</td><td>0.235</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.41</td><td>64733</td><td>0.219</td></tr>
+<tr><td>http</td><td>nginx</td><td></td><td>64059</td><td>0.217</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.42</td><td>63129</td><td>0.214</td></tr>
+<tr><td>http</td><td>LiteSpeed httpd</td><td></td><td>57964</td><td>0.196</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.9</td><td>56139</td><td>0.19</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.19</td><td>52308</td><td>0.177</td></tr>
+<tr><td>ssl</td><td>TLS</td><td>1.0</td><td>50875</td><td>0.172</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.64</td><td>43443</td><td>0.147</td></tr>
+<tr><td>http</td><td>Rapidsite/Apa httpd</td><td>1.3.33</td><td>34921</td><td>0.118</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.37</td><td>34335</td><td>0.116</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.8</td><td>34240</td><td>0.116</td></tr>
+<tr><td>socks5</td><td></td><td></td><td>33232</td><td>0.113</td></tr>
+<tr><td>netbios-ssn</td><td></td><td></td><td>33229</td><td>0.113</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.20</td><td>25968</td><td>0.088</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.7.67</td><td>24793</td><td>0.084</td></tr>
+<tr><td>openvpn</td><td>OpenVPN</td><td></td><td>24392</td><td>0.083</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.54</td><td>24012</td><td>0.081</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.52</td><td>22387</td><td>0.076</td></tr>
+<tr><td>http</td><td>GoAhead-Webs httpd</td><td></td><td>20886</td><td>0.071</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.33</td><td>19416</td><td>0.066</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.11</td><td>19359</td><td>0.066</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.26</td><td>16445</td><td>0.056</td></tr>
+<tr><td>http</td><td>alphapd</td><td></td><td>14369</td><td>0.049</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.27</td><td>14229</td><td>0.048</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>2.6.STABLE21</td><td>14098</td><td>0.048</td></tr>
+<tr><td>http</td><td>EdgePrismSSL</td><td></td><td>13095</td><td>0.044</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.7.65</td><td>13076</td><td>0.044</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.34</td><td>11873</td><td>0.04</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.15</td><td>10496</td><td>0.036</td></tr>
+<tr><td>http</td><td>Rapidsite/Apa httpd</td><td></td><td>9562</td><td>0.032</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.39</td><td>9313</td><td>0.032</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.1.19</td><td>9131</td><td>0.031</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.2.1</td><td>8345</td><td>0.028</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.54</td><td>8167</td><td>0.028</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.0</td><td>8140</td><td>0.028</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.10</td><td>7742</td><td>0.026</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.13</td><td>7552</td><td>0.026</td></tr>
+<tr><td>ssh</td><td>Dropbear sshd</td><td>0.52</td><td>7331</td><td>0.025</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.31</td><td>7287</td><td>0.025</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.46</td><td>7259</td><td>0.025</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.2.0</td><td>7210</td><td>0.024</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.14</td><td>6667</td><td>0.023</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.35</td><td>6611</td><td>0.022</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.5</td><td>6193</td><td>0.021</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.2.2</td><td>6056</td><td>0.021</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.29</td><td>5808</td><td>0.02</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.28</td><td>5630</td><td>0.019</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.40</td><td>5336</td><td>0.018</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.2.3</td><td>5003</td><td>0.017</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.22</td><td>4780</td><td>0.016</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.4</td><td>4644</td><td>0.016</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.18</td><td>4590</td><td>0.016</td></tr>
+<tr><td>http</td><td>FlashCom httpd</td><td>3.5.7</td><td>4582</td><td>0.016</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td>6.0</td><td>4559</td><td>0.015</td></tr>
+<tr><td>http</td><td>GoAhead-Webs embedded httpd</td><td></td><td>4380</td><td>0.015</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.59</td><td>4240</td><td>0.014</td></tr>
+<tr><td>http</td><td>Rapidsite/Apa httpd</td><td>1.3.31</td><td>4232</td><td>0.014</td></tr>
+<tr><td>irc</td><td>Dancer ircd</td><td></td><td>4097</td><td>0.014</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.10</td><td>4055</td><td>0.014</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.2.4</td><td>3996</td><td>0.014</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.4.3</td><td>3993</td><td>0.014</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.6</td><td>3940</td><td>0.013</td></tr>
+<tr><td>http</td><td>SonicWALL</td><td></td><td>3885</td><td>0.013</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.53</td><td>3872</td><td>0.013</td></tr>
+<tr><td>http</td><td>letv</td><td>2012-07-16</td><td>3853</td><td>0.013</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2</td><td>3742</td><td>0.013</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.4</td><td>3712</td><td>0.013</td></tr>
+<tr><td>socks-proxy</td><td>Socks4A</td><td></td><td>3599</td><td>0.012</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.36</td><td>3547</td><td>0.012</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.6</td><td>3305</td><td>0.011</td></tr>
+<tr><td>http</td><td>WEB SERVER</td><td></td><td>3292</td><td>0.011</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td></td><td>3256</td><td>0.011</td></tr>
+<tr><td>http</td><td>dcs-lig-httpd</td><td></td><td>3242</td><td>0.011</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.3</td><td>3237</td><td>0.011</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.11</td><td>3187</td><td>0.011</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.12</td><td>3173</td><td>0.011</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.5p1 Debian 6+squeeze2</td><td>3159</td><td>0.011</td></tr>
+<tr><td>http</td><td>PWS httpd</td><td>1.7.3.13</td><td>3128</td><td>0.011</td></tr>
+<tr><td>http</td><td>Draytek Vigor ADSL router webadmin</td><td></td><td>2888</td><td>0.01</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.0</td><td>2800</td><td>0.009</td></tr>
+<tr><td>http</td><td>TP-LINK Router</td><td></td><td>2750</td><td>0.009</td></tr>
+<tr><td>chat</td><td>AIM or ICQ server</td><td></td><td>2656</td><td>0.009</td></tr>
+<tr><td>ssh</td><td></td><td></td><td>2641</td><td>0.009</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.12</td><td>2613</td><td>0.009</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.9p1 Debian 5ubuntu1</td><td>2605</td><td>0.009</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.3p1 Debian 3ubuntu7</td><td>2566</td><td>0.009</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.55</td><td>2512</td><td>0.009</td></tr>
+<tr><td>vnc</td><td>VNC</td><td></td><td>2505</td><td>0.008</td></tr>
+<tr><td>http</td><td>Oracle HTTP Server Powered by Apache</td><td>1.3.22</td><td>2496</td><td>0.008</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.7.64</td><td>2490</td><td>0.008</td></tr>
+<tr><td>http</td><td>Boa HTTPd</td><td>0.94.14rc20-JBMv3</td><td>2415</td><td>0.008</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.55</td><td>2391</td><td>0.008</td></tr>
+<tr><td>http</td><td>cloudflare-nginx</td><td></td><td>2367</td><td>0.008</td></tr>
+<tr><td>http</td><td>GeoVision GeoHttpServer for webcams</td><td></td><td>2366</td><td>0.008</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.9</td><td>2327</td><td>0.008</td></tr>
+<tr><td>http</td><td>Microsoft HTTPAPI httpd</td><td>2.0</td><td>2313</td><td>0.008</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.6</td><td>2171</td><td>0.007</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.1p1 Debian 5</td><td>2152</td><td>0.007</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>3.9p1</td><td>2129</td><td>0.007</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.2</td><td>2120</td><td>0.007</td></tr>
+<tr><td>http</td><td>Apache Tomcat/Coyote JSP engine</td><td>1.1</td><td>2105</td><td>0.007</td></tr>
+<tr><td>http</td><td>CloudFront httpd</td><td></td><td>2039</td><td>0.007</td></tr>
+<tr><td>http</td><td>WebServerX</td><td></td><td>2032</td><td>0.007</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.2.5</td><td>1949</td><td>0.007</td></tr>
+<tr><td>http-proxy</td><td>EZproxy web proxy</td><td></td><td>1883</td><td>0.006</td></tr>
+<tr><td>http</td><td>MiniServ</td><td>0.01</td><td>1850</td><td>0.006</td></tr>
+<tr><td>http</td><td>tdlived1.11.0414.0</td><td></td><td>1814</td><td>0.006</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.8</td><td>1747</td><td>0.006</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.13</td><td>1730</td><td>0.006</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.19</td><td>1697</td><td>0.006</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.53</td><td>1657</td><td>0.006</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.8p2</td><td>1625</td><td>0.006</td></tr>
+<tr><td>http</td><td>FlashCom</td><td>3.5.7</td><td>1596</td><td>0.005</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.6.32</td><td>1591</td><td>0.005</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.12</td><td>1582</td><td>0.005</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.3</td><td>1567</td><td>0.005</td></tr>
+<tr><td>http</td><td>Oracle-iPlanet-Web-Server</td><td>7.0</td><td>1557</td><td>0.005</td></tr>
+<tr><td>http</td><td>Sun Java System httpd</td><td>7.0</td><td>1532</td><td>0.005</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.4</td><td>1446</td><td>0.005</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.5p1 Debian 6+squeeze1</td><td>1402</td><td>0.005</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.2p1</td><td>1389</td><td>0.005</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td>5.0</td><td>1364</td><td>0.005</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.51</td><td>1359</td><td>0.005</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.3.4</td><td>1338</td><td>0.005</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.5.33</td><td>1334</td><td>0.005</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.7.62</td><td>1309</td><td>0.004</td></tr>
+<tr><td>ssh</td><td>Dropbear sshd</td><td>2011.54</td><td>1302</td><td>0.004</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.13</td><td>1279</td><td>0.004</td></tr>
+<tr><td>http</td><td>Topsec</td><td></td><td>1251</td><td>0.004</td></tr>
+<tr><td>http</td><td>Check Point SVN foundation httpd</td><td></td><td>1236</td><td>0.004</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.5p1 Debian 6</td><td>1221</td><td>0.004</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.3.1</td><td>1221</td><td>0.004</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td>7.5</td><td>1219</td><td>0.004</td></tr>
+<tr><td>http</td><td>TOS httpd</td><td></td><td>1212</td><td>0.004</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.3.0</td><td>1204</td><td>0.004</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.5.36</td><td>1203</td><td>0.004</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>2.7.STABLE9</td><td>1183</td><td>0.004</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.8</td><td>1172</td><td>0.004</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>12.0.0.2</td><td>1122</td><td>0.004</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.8p1 Debian 7ubuntu1</td><td>1109</td><td>0.004</td></tr>
+<tr><td>http</td><td>thttpd</td><td></td><td>1096</td><td>0.004</td></tr>
+<tr><td>http</td><td>NetDNA-cache</td><td>2.2</td><td>1088</td><td>0.004</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.4p1</td><td>1050</td><td>0.004</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.9</td><td>1046</td><td>0.004</td></tr>
+<tr><td>ssh</td><td>Dropbear sshd</td><td>0.53.1</td><td>1039</td><td>0.004</td></tr>
+<tr><td>ssh</td><td>Dropbear sshd</td><td>0.51</td><td>1027</td><td>0.003</td></tr>
+<tr><td>ssl</td><td>SSLv2</td><td></td><td>991</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.x</td><td>971</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.2</td><td>971</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.50</td><td>970</td><td>0.003</td></tr>
+<tr><td>http</td><td>Omniture DC</td><td>2.0.0</td><td>964</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.23</td><td>934</td><td>0.003</td></tr>
+<tr><td>citrix-ica</td><td>Citrix Metaframe XP ICA</td><td></td><td>922</td><td>0.003</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>10.2.0.2</td><td>921</td><td>0.003</td></tr>
+<tr><td>http</td><td>TOS httpd</td><td>3.0.1 (TosOS) mod_ssl</td><td>898</td><td>0.003</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td></td><td>890</td><td>0.003</td></tr>
+<tr><td>http</td><td>Boa HTTPd</td><td>0.94.14rc20-JBMv2</td><td>883</td><td>0.003</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.5p1</td><td>850</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.20</td><td>830</td><td>0.003</td></tr>
+<tr><td>http</td><td>DrayTek Vigor 2800-series ADSL router httpd</td><td></td><td>828</td><td>0.003</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.6.39</td><td>819</td><td>0.003</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.8p1 Debian 1ubuntu3</td><td>809</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.61</td><td>809</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0</td><td>808</td><td>0.003</td></tr>
+<tr><td>http-proxy</td><td>MikroTik http proxy</td><td></td><td>785</td><td>0.003</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>11.2.0.0</td><td>772</td><td>0.003</td></tr>
+<tr><td>http</td><td>HTTPD-HR Server powered by Apache</td><td></td><td>763</td><td>0.003</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.5</td><td>761</td><td>0.003</td></tr>
+<tr><td>http</td><td>IBM HTTP Server</td><td></td><td>750</td><td>0.003</td></tr>
+<tr><td>http</td><td>Linktivity ConnectionPoint</td><td></td><td>743</td><td>0.003</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.26</td><td>729</td><td>0.002</td></tr>
+<tr><td>ssh</td><td>Dropbear sshd</td><td>2012.55</td><td>723</td><td>0.002</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>3.8.1p1</td><td>721</td><td>0.002</td></tr>
+<tr><td>ssl</td><td>multi-vendor SSL</td><td></td><td>710</td><td>0.002</td></tr>
+<tr><td>http</td><td>SAP Web Application Server</td><td></td><td>710</td><td>0.002</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>10.5.0.11</td><td>671</td><td>0.002</td></tr>
+<tr><td>http</td><td>HomeLogic Gateway</td><td></td><td>662</td><td>0.002</td></tr>
+<tr><td>http-proxy</td><td>CCProxy http proxy</td><td></td><td>659</td><td>0.002</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>11.1.0.5</td><td>653</td><td>0.002</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.1</td><td>650</td><td>0.002</td></tr>
+<tr><td>ssh</td><td>Bitvise WinSSHD</td><td>5.26</td><td>635</td><td>0.002</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.1.0</td><td>622</td><td>0.002</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>6.0</td><td>618</td><td>0.002</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.2</td><td>610</td><td>0.002</td></tr>
+<tr><td>http</td><td>Netwave IP camera http config</td><td></td><td>607</td><td>0.002</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.1.17</td><td>603</td><td>0.002</td></tr>
+<tr><td>ssh</td><td>MikroTik RouterOS sshd</td><td></td><td>600</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.49</td><td>585</td><td>0.002</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.52</td><td>577</td><td>0.002</td></tr>
+<tr><td>ssh</td><td>WeOnlyDo sshd</td><td>2.1.3</td><td>576</td><td>0.002</td></tr>
+<tr><td>http</td><td>AIM</td><td>1.0</td><td>568</td><td>0.002</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>11.3.0.0</td><td>544</td><td>0.002</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.8p2_hpn13v11</td><td>539</td><td>0.002</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>11.0.0.4</td><td>539</td><td>0.002</td></tr>
+<tr><td>http</td><td>httpd</td><td></td><td>532</td><td>0.002</td></tr>
+<tr><td>http</td><td>Boa HTTPd</td><td>0.94.14rc20-JBMv1</td><td>532</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.48</td><td>525</td><td>0.002</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.1.14</td><td>518</td><td>0.002</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.3p2 Debian 9etch3</td><td>516</td><td>0.002</td></tr>
+<tr><td>http</td><td>SinforSSLWeb</td><td></td><td>512</td><td>0.002</td></tr>
+<tr><td>http</td><td>Sophos Email Appliance</td><td></td><td>508</td><td>0.002</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>6.0p1 Debian 2</td><td>497</td><td>0.002</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.2.6</td><td>495</td><td>0.002</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.29</td><td>488</td><td>0.002</td></tr>
+<tr><td>http</td><td>Oracle HTTP Server Powered by Apache</td><td>1.3.12</td><td>480</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.58</td><td>479</td><td>0.002</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.3.7</td><td>477</td><td>0.002</td></tr>
+<tr><td>http</td><td>Patchy</td><td>1.3.31 (Unix) ApacheJServ</td><td>461</td><td>0.002</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td>7.0</td><td>461</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>Draytek Vigor ADSL router telnetd</td><td></td><td>459</td><td>0.002</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>8.0.0.7</td><td>458</td><td>0.002</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>11.1.0.7</td><td>458</td><td>0.002</td></tr>
+<tr><td>jabber</td><td>ejabberd</td><td></td><td>450</td><td>0.002</td></tr>
+<tr><td>java-rmi</td><td>Java RMI</td><td>3.2.1</td><td>446</td><td>0.002</td></tr>
+<tr><td>http</td><td>Mbedthis-Appweb</td><td>2.4.2</td><td>442</td><td>0.001</td></tr>
+<tr><td>http</td><td>Jetty</td><td>6.1.25</td><td>442</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.7.63</td><td>434</td><td>0.001</td></tr>
+<tr><td>http</td><td>SAP NetWeaver Application Server (ICM)</td><td></td><td>427</td><td>0.001</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>14.0.0.6</td><td>424</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.0</td><td>422</td><td>0.001</td></tr>
+<tr><td>http</td><td>Apache Advanced Extranet Server httpd</td><td>1.3.23</td><td>419</td><td>0.001</td></tr>
+<tr><td>http</td><td>MiniServ</td><td>1.590</td><td>418</td><td>0.001</td></tr>
+<tr><td>http</td><td>MiniServ</td><td>1.580</td><td>416</td><td>0.001</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>9.4.0.2</td><td>412</td><td>0.001</td></tr>
+<tr><td>http-proxy</td><td>F5 BIG-IP load balancer http proxy</td><td></td><td>407</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.8p1-hpn13v11</td><td>397</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>Dropbear sshd</td><td>0.48</td><td>395</td><td>0.001</td></tr>
+<tr><td>vnc</td><td>RealVNC Enterprise</td><td></td><td>390</td><td>0.001</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>10.3.0.1</td><td>385</td><td>0.001</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>10.4.0.0</td><td>383</td><td>0.001</td></tr>
+<tr><td>java-rmi</td><td>Java RMI</td><td></td><td>382</td><td>0.001</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>11.3.0.4</td><td>382</td><td>0.001</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.14</td><td>381</td><td>0.001</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>10.0.0.7</td><td>376</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.6.35</td><td>376</td><td>0.001</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>7.2.0.0</td><td>374</td><td>0.001</td></tr>
+<tr><td>http</td><td>Avtech AVN801 network camera</td><td>1.0</td><td>371</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.6.33</td><td>369</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>Bitvise WinSSHD</td><td>5.23</td><td>368</td><td>0.001</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>3.1.6</td><td>367</td><td>0.001</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.4.2</td><td>367</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.4</td><td>364</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.1p1</td><td>361</td><td>0.001</td></tr>
+<tr><td>adobe-crossdomain</td><td>Adobe cross-domain policy</td><td></td><td>357</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.9p1-hpn13v11</td><td>356</td><td>0.001</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>9.3.0.1</td><td>353</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.5p1 Debian 4ubuntu6</td><td>348</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.7</td><td>344</td><td>0.001</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>12.1.0.6</td><td>338</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.7.69</td><td>331</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.7p1 Debian 8ubuntu3</td><td>327</td><td>0.001</td></tr>
+<tr><td>http</td><td>spanner</td><td>1.0.6</td><td>326</td><td>0.001</td></tr>
+<tr><td>http</td><td>Tengine</td><td></td><td>325</td><td>0.001</td></tr>
+<tr><td>http</td><td>RemotelyAnywhere remote PC management httpd</td><td>10.0.1086</td><td>325</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.3.8</td><td>317</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.3.3</td><td>316</td><td>0.001</td></tr>
+<tr><td>http</td><td>mini_httpd</td><td>1.19 19dec2003</td><td>315</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.1.5</td><td>314</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.1.7</td><td>312</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>Dropbear sshd</td><td>0.50</td><td>310</td><td>0.001</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>12.1.0.8</td><td>307</td><td>0.001</td></tr>
+<tr><td>http</td><td>HTTPD</td><td>2.5.49 (Unix)  (ANTLABS</td><td>306</td><td>0.001</td></tr>
+<tr><td>http-proxy</td><td>SonicWALL SSL-VPN http proxy</td><td></td><td>300</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.7.61</td><td>295</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.1p1 Debian 6ubuntu2</td><td>293</td><td>0.001</td></tr>
+<tr><td>http</td><td>Web Server</td><td></td><td>293</td><td>0.001</td></tr>
+<tr><td>http</td><td>FlashCom</td><td>3.5.4</td><td>290</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Microsoft ftpd</td><td></td><td>289</td><td>0.001</td></tr>
+<tr><td>http</td><td>SAP NetWeaver Application Server</td><td></td><td>287</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.1.8</td><td>287</td><td>0.001</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>11.0.0.0</td><td>285</td><td>0.001</td></tr>
+<tr><td>http</td><td>GotoMeeting httpd</td><td></td><td>284</td><td>0.001</td></tr>
+<tr><td>http</td><td>Slingbox remote streaming httpd</td><td></td><td>283</td><td>0.001</td></tr>
+<tr><td>http</td><td>FlashCom</td><td>3.5.5</td><td>283</td><td>0.001</td></tr>
+<tr><td>http</td><td>Bunker</td><td></td><td>278</td><td>0.001</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.19</td><td>278</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.7p1 Debian 8ubuntu1.2</td><td>271</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.5.35</td><td>269</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.1</td><td>268</td><td>0.001</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.28</td><td>267</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>2.3.0 mikrotik 2.9</td><td>264</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.3</td><td>263</td><td>0.001</td></tr>
+<tr><td>http</td><td>Pershing LLC</td><td></td><td>258</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>3.5p1</td><td>256</td><td>0.001</td></tr>
+<tr><td>http</td><td>FlashCom</td><td>3.5.2</td><td>255</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.1p1 Debian 5ubuntu1</td><td>252</td><td>0.001</td></tr>
+<tr><td>http</td><td>Oracle HTTP Server Powered by Apache</td><td>1.3.19</td><td>249</td><td>0.001</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.18</td><td>248</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.39</td><td>247</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.5p1-hpn13v9 Debian 6+squeeze2Linode1</td><td>245</td><td>0.001</td></tr>
+<tr><td>http</td><td>Allegro RomPager</td><td>4.51 UPnP/1.0</td><td>244</td><td>0.001</td></tr>
+<tr><td>http</td><td>Secured</td><td></td><td>237</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.1.16</td><td>235</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.4p1_hpn13v11</td><td>234</td><td>0.001</td></tr>
+<tr><td>http</td><td>WP Engine</td><td>1.2.0</td><td>234</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.6</td><td>231</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.9p1 Debian 2</td><td>229</td><td>0.001</td></tr>
+<tr><td>http</td><td>NOYB</td><td></td><td>229</td><td>0.001</td></tr>
+<tr><td>smtp</td><td></td><td></td><td>228</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.3.6</td><td>227</td><td>0.001</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.47</td><td>227</td><td>0.001</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>10.0.0.3</td><td>225</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.1.4</td><td>223</td><td>0.001</td></tr>
+<tr><td>http</td><td>Boa httpd</td><td></td><td>221</td><td>0.001</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>11.0.0.2</td><td>220</td><td>0.001</td></tr>
+<tr><td>http</td><td>Boa HTTPd</td><td>0.94.14rc21</td><td>220</td><td>0.001</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>3.1.19</td><td>219</td><td>0.001</td></tr>
+<tr><td>http</td><td>NYOB</td><td></td><td>219</td><td>0.001</td></tr>
+<tr><td>http</td><td>Connectra Check Point Web Security httpd</td><td></td><td>218</td><td>0.001</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>7.4.0.1</td><td>213</td><td>0.001</td></tr>
+<tr><td>http</td><td>Microsoft ISA httpd</td><td></td><td>213</td><td>0.001</td></tr>
+<tr><td>smtp</td><td>Postfix smtpd</td><td></td><td>212</td><td>0.001</td></tr>
+<tr><td>zebedee</td><td>Zebedee encrypted tunnel</td><td></td><td>209</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.1.1</td><td>207</td><td>0.001</td></tr>
+<tr><td>http</td><td>micro_httpd</td><td></td><td>207</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.8p1-hpn13v10</td><td>205</td><td>0.001</td></tr>
+<tr><td>http</td><td>Apache2</td><td></td><td>205</td><td>0.001</td></tr>
+<tr><td>http</td><td>webserver</td><td></td><td>203</td><td>0.001</td></tr>
+<tr><td>http</td><td>FC</td><td></td><td>200</td><td>0.001</td></tr>
+<tr><td>http</td><td>Apache Stronghold httpd</td><td>3.0</td><td>200</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.2p1</td><td>198</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.15</td><td>196</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>6.1</td><td>193</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.1.12</td><td>193</td><td>0.001</td></tr>
+<tr><td>http</td><td>FlashCom</td><td>3.0.2</td><td>193</td><td>0.001</td></tr>
+<tr><td>http</td><td>rhttpd</td><td></td><td>192</td><td>0.001</td></tr>
+<tr><td>http</td><td>fastmirror</td><td></td><td>192</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.3p1 Debian 3ubuntu4</td><td>190</td><td>0.001</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>7.3.0.0</td><td>190</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.17</td><td>189</td><td>0.001</td></tr>
+<tr><td>remoting</td><td>MS .NET Remoting services</td><td></td><td>188</td><td>0.001</td></tr>
+<tr><td>http</td><td>Microsoft Windows Media Server</td><td>9.01.01.5001</td><td>185</td><td>0.001</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>10.1.0.1</td><td>184</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.3p1 Debian 3ubuntu6</td><td>183</td><td>0.001</td></tr>
+<tr><td>http</td><td>Sun ONE Web Server</td><td>6.1</td><td>180</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.3p2 Debian 9</td><td>179</td><td>0.001</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>11.2.0.1</td><td>179</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.1.18</td><td>179</td><td>0.001</td></tr>
+<tr><td>jetdirect</td><td>JetDirect</td><td></td><td>177</td><td>0.001</td></tr>
+<tr><td>http</td><td>TAFE</td><td></td><td>177</td><td>0.001</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.25b</td><td>175</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.2</td><td>172</td><td>0.001</td></tr>
+<tr><td>http</td><td>letv</td><td>2012-06-21</td><td>172</td><td>0.001</td></tr>
+<tr><td>http</td><td>MikroTik router config httpd</td><td></td><td>171</td><td>0.001</td></tr>
+<tr><td>http</td><td>Secured by AraServ</td><td></td><td>170</td><td>0.001</td></tr>
+<tr><td>http</td><td>ShellInABox httpd</td><td></td><td>169</td><td>0.001</td></tr>
+<tr><td>http</td><td>GameServer</td><td></td><td>169</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx-catap</td><td>1.1.0</td><td>168</td><td>0.001</td></tr>
+<tr><td>http</td><td>443/</td><td></td><td>167</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.46</td><td>164</td><td>0.001</td></tr>
+<tr><td>vnc</td><td></td><td></td><td>161</td><td>0.001</td></tr>
+<tr><td>http</td><td>RemotelyAnywhere remote PC management httpd</td><td>8.0.668</td><td>161</td><td>0.001</td></tr>
+<tr><td>vnc</td><td>RealVNC Personal</td><td></td><td>159</td><td>0.001</td></tr>
+<tr><td>http</td><td>f5</td><td></td><td>159</td><td>0.001</td></tr>
+<tr><td>ftp</td><td></td><td></td><td>159</td><td>0.001</td></tr>
+<tr><td>printer</td><td>Panasonic mfpscdl.exe service</td><td></td><td>158</td><td>0.001</td></tr>
+<tr><td>http</td><td>Apache Stronghold httpd</td><td>2.1.1</td><td>158</td><td>0.001</td></tr>
+<tr><td>arcserve</td><td>ARCserve Discovery</td><td></td><td>157</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.3p1 Debian 3ubuntu3</td><td>156</td><td>0.001</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.19-MX Jul 11 2012</td><td>156</td><td>0.001</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>3.1.10</td><td>155</td><td>0.001</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>9.4.0.0</td><td>154</td><td>0.001</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>11.3.0.2</td><td>154</td><td>0.001</td></tr>
+<tr><td>http</td><td>WebServer</td><td></td><td>153</td><td>0.001</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>2.0.0</td><td>153</td><td>0.001</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>10.5.0.14</td><td>151</td><td>0.001</td></tr>
+<tr><td>telnet</td><td></td><td></td><td>150</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.2p1-hpn13v6</td><td>150</td><td>0.001</td></tr>
+<tr><td>http</td><td>uTorrent WebUI</td><td></td><td>150</td><td>0.001</td></tr>
+<tr><td>http</td><td>Boa HTTPd</td><td>0.94.13</td><td>150</td><td>0.001</td></tr>
+<tr><td>http</td><td>SSL</td><td>5.x.x (Unix)</td><td>148</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>403</td><td>148</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.5</td><td>147</td><td>0.0</td></tr>
+<tr><td>socks4</td><td>Connection failed; ident required</td><td></td><td>147</td><td>0.0</td></tr>
+<tr><td>http</td><td>UserGate http report area</td><td></td><td>147</td><td>0.0</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.24</td><td>147</td><td>0.0</td></tr>
+<tr><td>http</td><td>Secured By sawa4.com</td><td></td><td>146</td><td>0.0</td></tr>
+<tr><td>http</td><td>TimmiT HTTPD Server powered by Apache</td><td></td><td>145</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.1.11</td><td>145</td><td>0.0</td></tr>
+<tr><td>socks4</td><td>Connection rejected or failed; connections possibly ok</td><td></td><td>144</td><td>0.0</td></tr>
+<tr><td>http</td><td>SimpleHelp</td><td>SSuite-3-12-20120715-140546</td><td>144</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.33</td><td>144</td><td>0.0</td></tr>
+<tr><td>http</td><td>Tinyweb httpd</td><td>1.93</td><td>143</td><td>0.0</td></tr>
+<tr><td>http</td><td>RemotelyAnywhere remote PC management httpd</td><td>8.0.747</td><td>142</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.3.2</td><td>142</td><td>0.0</td></tr>
+<tr><td>nagios-nsca</td><td>Nagios NSCA</td><td></td><td>141</td><td>0.0</td></tr>
+<tr><td>http</td><td>Netgear DG834G router http config</td><td></td><td>141</td><td>0.0</td></tr>
+<tr><td>http</td><td>InterSpace HTTP Tunneling</td><td>1.01</td><td>140</td><td>0.0</td></tr>
+<tr><td>svnserve</td><td>Subversion</td><td></td><td>139</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.9p1 Debian 5</td><td>139</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.4.1</td><td>139</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.39</td><td>138</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>6.6.6</td><td>137</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.9</td><td>137</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>0.6.5</td><td>137</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Pure-FTPd</td><td></td><td>137</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>NASLite-SMB/Sveasoft Alchemy firmware telnetd</td><td></td><td>136</td><td>0.0</td></tr>
+<tr><td>socks4</td><td>Connection failed; username required</td><td></td><td>136</td><td>0.0</td></tr>
+<tr><td>http</td><td>PWS httpd</td><td>1.7.3.9</td><td>136</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>Haproxy http proxy</td><td></td><td>135</td><td>0.0</td></tr>
+<tr><td>http</td><td>Unknown</td><td></td><td>133</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.7.66</td><td>133</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.6.36</td><td>133</td><td>0.0</td></tr>
+<tr><td>http</td><td>DD-WRT milli_httpd</td><td></td><td>133</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.6.34</td><td>131</td><td>0.0</td></tr>
+<tr><td>http</td><td>eSoft</td><td></td><td>131</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.1p1 Debian 3ubuntu1</td><td>129</td><td>0.0</td></tr>
+<tr><td>http</td><td>Transmission BitTorrent management httpd</td><td></td><td>129</td><td>0.0</td></tr>
+<tr><td>http</td><td>AvantiHTTPd</td><td>1.0.2_0.9.7_0.9</td><td>129</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.7.59</td><td>128</td><td>0.0</td></tr>
+<tr><td>http</td><td>RemotelyAnywhere remote PC management httpd</td><td>9.0.856</td><td>127</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.1.15</td><td>126</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>6.0p1 Debian 1</td><td>125</td><td>0.0</td></tr>
+<tr><td>socks4</td><td>Connection ok</td><td></td><td>124</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.50</td><td>124</td><td>0.0</td></tr>
+<tr><td>http</td><td>CCProxy</td><td></td><td>123</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.5p1 Debian 4ubuntu5</td><td>122</td><td>0.0</td></tr>
+<tr><td>http</td><td>Secured By</td><td></td><td>120</td><td>0.0</td></tr>
+<tr><td>http</td><td>NetDNA-nginx</td><td>2.1</td><td>119</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>10.5.0.16</td><td>118</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2 (Centos)</td><td>118</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.1.6</td><td>116</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>3.7.1p2</td><td>115</td><td>0.0</td></tr>
+<tr><td>http</td><td>JS Apache Server powered by Transformers</td><td></td><td>114</td><td>0.0</td></tr>
+<tr><td>http</td><td>Tengine</td><td>1.2.3</td><td>113</td><td>0.0</td></tr>
+<tr><td>http</td><td>NCDN</td><td>2.0</td><td>113</td><td>0.0</td></tr>
+<tr><td>http</td><td>Secured By tl4s.com.sa</td><td></td><td>112</td><td>0.0</td></tr>
+<tr><td>http</td><td>MiniServ</td><td>1.570</td><td>112</td><td>0.0</td></tr>
+<tr><td>http</td><td>http server 1.0</td><td></td><td>112</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.1.9</td><td>110</td><td>0.0</td></tr>
+<tr><td>http</td><td>RemotelyAnywhere remote PC management httpd</td><td>10.0.2100</td><td>109</td><td>0.0</td></tr>
+<tr><td>http</td><td>O2micro</td><td>2.3.33 (Unix) mod_fastcgi</td><td>109</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.36</td><td>109</td><td>0.0</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.19-MX Jul  1 2010</td><td>108</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache Advanced Extranet Server httpd</td><td>1.3.26</td><td>108</td><td>0.0</td></tr>
+<tr><td>http</td><td>Unknown Web Server</td><td></td><td>107</td><td>0.0</td></tr>
+<tr><td>http</td><td>Tengine</td><td>1.3.0</td><td>107</td><td>0.0</td></tr>
+<tr><td>http</td><td>Hikvision-Webs</td><td></td><td>107</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache Advanced Extranet Server httpd</td><td></td><td>107</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>2 (CentOS)</td><td>107</td><td>0.0</td></tr>
+<tr><td>http</td><td>TheHTTPd</td><td>1.2</td><td>106</td><td>0.0</td></tr>
+<tr><td>http</td><td>SABnzbd newsreader http interface</td><td></td><td>106</td><td>0.0</td></tr>
+<tr><td>http</td><td>Drsrv.com Servers</td><td></td><td>105</td><td>0.0</td></tr>
+<tr><td>http</td><td>Lotus Domino httpd</td><td></td><td>104</td><td>0.0</td></tr>
+<tr><td>http</td><td>P560plus.GSI.2.22.4G118</td><td></td><td>103</td><td>0.0</td></tr>
+<tr><td>http</td><td>Cross Web Server</td><td></td><td>103</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>3.0.STABLE26</td><td>102</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.1.13</td><td>102</td><td>0.0</td></tr>
+<tr><td>tinc</td><td>tinc vpn daemon</td><td></td><td>101</td><td>0.0</td></tr>
+<tr><td>http</td><td>Atlas</td><td>2.0</td><td>101</td><td>0.0</td></tr>
+<tr><td>http</td><td>SC HTTPD Server powered by Apache</td><td></td><td>100</td><td>0.0</td></tr>
+<tr><td>http</td><td>MiniServ</td><td>1.550</td><td>100</td><td>0.0</td></tr>
+<tr><td>http</td><td>LOOKSERV</td><td></td><td>100</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.3.5</td><td>99</td><td>0.0</td></tr>
+<tr><td>http</td><td>360Server</td><td></td><td>99</td><td>0.0</td></tr>
+<tr><td>http</td><td>SimpleHelp</td><td>SSuite-3-11-20111020-110852</td><td>98</td><td>0.0</td></tr>
+<tr><td>http</td><td>lighttpd</td><td></td><td>98</td><td>0.0</td></tr>
+<tr><td>http</td><td>letv</td><td>2012-11-21</td><td>97</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.1.10</td><td>96</td><td>0.0</td></tr>
+<tr><td>http</td><td>Boa HTTPd</td><td>0.93.15</td><td>96</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.9.3</td><td>95</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.49</td><td>95</td><td>0.0</td></tr>
+<tr><td>http</td><td>World Client WDaemon httpd</td><td>4.0</td><td>94</td><td>0.0</td></tr>
+<tr><td>http</td><td>SGS</td><td></td><td>94</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>10.5.0.24</td><td>94</td><td>0.0</td></tr>
+<tr><td>http</td><td>Oracle Application Server 10g httpd</td><td>10.1.3.0.0</td><td>94</td><td>0.0</td></tr>
+<tr><td>http</td><td>Medusa httpd</td><td>1.12</td><td>94</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>SunSSH</td><td>1.5</td><td>92</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Bitvise WinSSHD</td><td>5.15</td><td>90</td><td>0.0</td></tr>
+<tr><td>http</td><td>iSET - www.iset.com.br - Apache</td><td></td><td>90</td><td>0.0</td></tr>
+<tr><td>http</td><td>G4200.GSI.2.22.0151</td><td></td><td>90</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>7.1.0.2</td><td>89</td><td>0.0</td></tr>
+<tr><td>http</td><td>Secured By UltimateServ.com Inc.</td><td></td><td>89</td><td>0.0</td></tr>
+<tr><td>http</td><td>SAP Web Application Server (ICM)</td><td></td><td>89</td><td>0.0</td></tr>
+<tr><td>http</td><td>IIS</td><td></td><td>89</td><td>0.0</td></tr>
+<tr><td>http</td><td>HitDirector.com Mega Max Server</td><td></td><td>89</td><td>0.0</td></tr>
+<tr><td>http</td><td>Arvento-Server</td><td>2.2</td><td>89</td><td>0.0</td></tr>
+<tr><td>loglogic</td><td>LogLogic protocol</td><td></td><td>88</td><td>0.0</td></tr>
+<tr><td>http</td><td>CFS 1228</td><td></td><td>88</td><td>0.0</td></tr>
+<tr><td>vnc</td><td>Apple remote desktop vnc</td><td></td><td>87</td><td>0.0</td></tr>
+<tr><td>http</td><td>DVR Systems webcam http interface</td><td></td><td>87</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Dropbear sshd</td><td>0.49</td><td>86</td><td>0.0</td></tr>
+<tr><td>http</td><td>tdlived1.7.0820.5</td><td></td><td>86</td><td>0.0</td></tr>
+<tr><td>http</td><td>SH</td><td></td><td>86</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>9.2.0.1</td><td>86</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.34</td><td>86</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>8.2.0.3</td><td>85</td><td>0.0</td></tr>
+<tr><td>http</td><td>Security Filter running in this server</td><td></td><td>85</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>2.7.STABLE7</td><td>85</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.5.30</td><td>85</td><td>0.0</td></tr>
+<tr><td>http</td><td>Icecast streaming media server</td><td></td><td>85</td><td>0.0</td></tr>
+<tr><td>http</td><td>DWS</td><td>1.0</td><td>85</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>6.0p1 Debian 3</td><td>84</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.3.9</td><td>84</td><td>0.0</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td>5.1</td><td>84</td><td>0.0</td></tr>
+<tr><td>http</td><td>Microsoft-IIS</td><td>6.0 mod_auth_passthrough</td><td>84</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apachenginx</td><td>1.0.6p1</td><td>84</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.4</td><td>84</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>2.7.STABLE3</td><td>83</td><td>0.0</td></tr>
+<tr><td>http</td><td>Mbedthis-Appweb</td><td>2.0.4</td><td>83</td><td>0.0</td></tr>
+<tr><td>shoutcast</td><td>SHOUTcast server</td><td>1.9.8</td><td>82</td><td>0.0</td></tr>
+<tr><td>rsync</td><td></td><td></td><td>82</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.6.31</td><td>82</td><td>0.0</td></tr>
+<tr><td>http</td><td>Firewall</td><td>2.3.33 (Unix) mod_fastcgi</td><td>82</td><td>0.0</td></tr>
+<tr><td>http</td><td>Allegro RomPager</td><td>4.07 UPnP/1.0</td><td>82</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>9.0.0.5</td><td>81</td><td>0.0</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td>4.0</td><td>81</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>ASJ2010022300SF.42 (Unix)</td><td>81</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>3.8.1p1 Debian 8.sarge.6</td><td>79</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx/</td><td></td><td>79</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache Advanced Extranet Server httpd</td><td>1.3.33</td><td>79</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.9p1-hpn13v11lpk</td><td>78</td><td>0.0</td></tr>
+<tr><td>irc</td><td>Unreal ircd</td><td></td><td>78</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>8.0.0.2</td><td>78</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.9.5</td><td>78</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>team2work.SEC.Stick.Server_1.1</td><td>77</td><td>0.0</td></tr>
+<tr><td>http</td><td>Ubicom</td><td>1.1</td><td>77</td><td>0.0</td></tr>
+<tr><td>http</td><td>QWS</td><td></td><td>77</td><td>0.0</td></tr>
+<tr><td>http</td><td>uc-httpd</td><td>1.0.0</td><td>76</td><td>0.0</td></tr>
+<tr><td>http</td><td>SnapStream Web Server</td><td>4.9.3.6535</td><td>76</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>7.3.0.2</td><td>76</td><td>0.0</td></tr>
+<tr><td>http</td><td>none</td><td></td><td>76</td><td>0.0</td></tr>
+<tr><td>http</td><td>RemotelyAnywhere remote PC management httpd</td><td>8.0.605</td><td>75</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.5p1 Debian 4ubuntu4</td><td>74</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>3.6.1p2</td><td>74</td><td>0.0</td></tr>
+<tr><td>http</td><td>Router Webserver</td><td></td><td>74</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.3p1 Debian 3ubuntu5</td><td>73</td><td>0.0</td></tr>
+<tr><td>http</td><td>WYM httpd</td><td>1.0</td><td>73</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.51</td><td>73</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.35</td><td>73</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.63-lk.d</td><td>73</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache Stronghold httpd</td><td>2.2</td><td>72</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.6</td><td>72</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.24</td><td>72</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Bitvise WinSSHD</td><td>4.23</td><td>71</td><td>0.0</td></tr>
+<tr><td>http</td><td>n0</td><td></td><td>71</td><td>0.0</td></tr>
+<tr><td>http</td><td>don-http-client</td><td></td><td>71</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache Stronghold httpd</td><td>2.4.2</td><td>71</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.7.68</td><td>70</td><td>0.0</td></tr>
+<tr><td>http</td><td>letv</td><td>2012-08-03</td><td>70</td><td>0.0</td></tr>
+<tr><td>http</td><td>uTorrent utserver web interface</td><td></td><td>69</td><td>0.0</td></tr>
+<tr><td>http</td><td>tdlived1.11.0729.0</td><td></td><td>69</td><td>0.0</td></tr>
+<tr><td>http</td><td>StorageServer</td><td>6.2.3.9 (Attix5)</td><td>69</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.32</td><td>69</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Serv-U ftpd</td><td>6.0</td><td>69</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>DrayTek Vigor 2820n ADSL router sshd</td><td>2.0</td><td>68</td><td>0.0</td></tr>
+<tr><td>http</td><td>SERVER</td><td></td><td>68</td><td>0.0</td></tr>
+<tr><td>http</td><td>NetSupport Gateway httpd</td><td>1.1</td><td>68</td><td>0.0</td></tr>
+<tr><td>http</td><td>CherryPy httpd</td><td>3.2.0</td><td>68</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Bitvise WinSSHD</td><td>5.22</td><td>67</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.9.4</td><td>67</td><td>0.0</td></tr>
+<tr><td>http</td><td>HostingBay</td><td></td><td>67</td><td>0.0</td></tr>
+<tr><td>http</td><td>BlockDOS</td><td></td><td>67</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache Advanced Extranet Server httpd</td><td>2.0.50</td><td>67</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache Advanced Extranet Server httpd</td><td>2.0.47</td><td>67</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Bitvise WinSSHD</td><td>5.20</td><td>66</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>7.0.0.1</td><td>66</td><td>0.0</td></tr>
+<tr><td>http</td><td>HTTP</td><td></td><td>66</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.43</td><td>66</td><td>0.0</td></tr>
+<tr><td>http</td><td>RemotelyAnywhere remote PC management httpd</td><td>9.1.1016</td><td>65</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.1.2</td><td>65</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.38</td><td>65</td><td>0.0</td></tr>
+<tr><td>http</td><td>HBHTTP POGOPLUG - 3.2.7 - Linux</td><td></td><td>65</td><td>0.0</td></tr>
+<tr><td>http</td><td>ConferenceRoom</td><td>1.9.1-SEC.win32-ws2</td><td>65</td><td>0.0</td></tr>
+<tr><td>vnc</td><td>Ultr@VNC Repeater</td><td></td><td>64</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.1</td><td>63</td><td>0.0</td></tr>
+<tr><td>http</td><td>Buffalo AirStation http config</td><td></td><td>63</td><td>0.0</td></tr>
+<tr><td>http</td><td>MiniServ</td><td>1.610</td><td>62</td><td>0.0</td></tr>
+<tr><td>http</td><td>Kvchosting.com web</td><td></td><td>62</td><td>0.0</td></tr>
+<tr><td>http</td><td>Accio Web Server</td><td></td><td>62</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>vsftpd</td><td>2.0.8 or later</td><td>62</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Netopia ADSL router telnetd</td><td></td><td>61</td><td>0.0</td></tr>
+<tr><td>meterpreter</td><td>Metasploit meterpreter</td><td></td><td>61</td><td>0.0</td></tr>
+<tr><td>http</td><td>WebLogic httpd</td><td></td><td>61</td><td>0.0</td></tr>
+<tr><td>http</td><td>Gadspot/Avtech AV787 webcam http config</td><td></td><td>61</td><td>0.0</td></tr>
+<tr><td>http</td><td>ethProxy</td><td></td><td>61</td><td>0.0</td></tr>
+<tr><td>http</td><td>Octoshape P2P streaming web service</td><td></td><td>60</td><td>0.0</td></tr>
+<tr><td>http</td><td>Nginx / Varnish</td><td></td><td>60</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.45</td><td>60</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.32</td><td>60</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>3.8.1p1 Debian 8.sarge.4</td><td>59</td><td>0.0</td></tr>
+<tr><td>http</td><td>Wookiesoft-Chewbacca-v2</td><td></td><td>59</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>3.1.16</td><td>59</td><td>0.0</td></tr>
+<tr><td>http</td><td>ngx_openresty</td><td></td><td>59</td><td>0.0</td></tr>
+<tr><td>http</td><td>WEB</td><td></td><td>58</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>8.0.0.5</td><td>58</td><td>0.0</td></tr>
+<tr><td>http</td><td>Microsoft-HTTPAPI</td><td>2.0</td><td>58</td><td>0.0</td></tr>
+<tr><td>http</td><td>Airlink 101 or TRENDnet TVIP-422w webcam http config</td><td></td><td>58</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>6.0p1-hpn13v11</td><td>57</td><td>0.0</td></tr>
+<tr><td>http</td><td>Microsoft-IIS</td><td>5.0 PHP</td><td>57</td><td>0.0</td></tr>
+<tr><td>http</td><td>FSS</td><td></td><td>57</td><td>0.0</td></tr>
+<tr><td>bluecoat-logd</td><td>Blue Coat Reporter log server</td><td></td><td>57</td><td>0.0</td></tr>
+<tr><td>upnp</td><td>Microsoft Windows UPnP</td><td></td><td>56</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Bitvise WinSSHD</td><td></td><td>56</td><td>0.0</td></tr>
+<tr><td>http</td><td>TwistedWeb httpd</td><td>8.2.0</td><td>56</td><td>0.0</td></tr>
+<tr><td>http</td><td>Oracle-Application-Server-11g</td><td></td><td>56</td><td>0.0</td></tr>
+<tr><td>http</td><td>MikroTik router http config</td><td></td><td>55</td><td>0.0</td></tr>
+<tr><td>http</td><td>PDR-M800</td><td>1.0</td><td>54</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.5.37</td><td>54</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Microsoft ESMTP</td><td>6.0.3790.4675</td><td>53</td><td>0.0</td></tr>
+<tr><td>http</td><td>zen</td><td></td><td>53</td><td>0.0</td></tr>
+<tr><td>http</td><td>Webserver</td><td></td><td>53</td><td>0.0</td></tr>
+<tr><td>tandem-print</td><td>Sharp printer tandem printing</td><td></td><td>52</td><td>0.0</td></tr>
+<tr><td>mongodb</td><td>MongoDB</td><td>0</td><td>52</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.1.3</td><td>52</td><td>0.0</td></tr>
+<tr><td>http</td><td>naukri.comnginx</td><td>0.7.62</td><td>52</td><td>0.0</td></tr>
+<tr><td>http</td><td>Jetty</td><td>6.1.x</td><td>52</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Bitvise WinSSHD</td><td>5.24</td><td>51</td><td>0.0</td></tr>
+<tr><td>pop3</td><td></td><td></td><td>51</td><td>0.0</td></tr>
+<tr><td>http</td><td>Sagem F@st router httpd</td><td></td><td>51</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.31</td><td>51</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.5.32</td><td>51</td><td>0.0</td></tr>
+<tr><td>http</td><td>D-Link DIR-300 WAP http admin</td><td></td><td>51</td><td>0.0</td></tr>
+<tr><td>directconnect</td><td>Direct Connect P2P</td><td></td><td>51</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Bitvise WinSSHD</td><td>5.18</td><td>50</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>10.5.0.19</td><td>50</td><td>0.0</td></tr>
+<tr><td>http</td><td>PPX</td><td>3.4x (Unix) PHP</td><td>50</td><td>0.0</td></tr>
+<tr><td>http</td><td>Pacific WebWorks</td><td>Visual WebTools V5</td><td>50</td><td>0.0</td></tr>
+<tr><td>http</td><td>kisa</td><td></td><td>50</td><td>0.0</td></tr>
+<tr><td>http</td><td>Jetty</td><td>6.1.19</td><td>50</td><td>0.0</td></tr>
+<tr><td>http</td><td>IBM HTTP Server</td><td>7.0.0.0</td><td>50</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>WeOnlyDo sshd</td><td>1.2.7</td><td>49</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>9.0.0.3</td><td>49</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>7.2.0.1</td><td>49</td><td>0.0</td></tr>
+<tr><td>http</td><td>SecureTransport</td><td>4.8.1</td><td>49</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>3.1.20</td><td>49</td><td>0.0</td></tr>
+<tr><td>http</td><td>BW1330.BRO.2.22.0029</td><td></td><td>49</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache Advanced Extranet Server httpd</td><td>2.0.53</td><td>49</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.9p1 Debian 3</td><td>48</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Exim smtpd</td><td></td><td>48</td><td>0.0</td></tr>
+<tr><td>http</td><td>unknown</td><td></td><td>48</td><td>0.0</td></tr>
+<tr><td>http</td><td>Ubicom httpd</td><td>1.1</td><td>48</td><td>0.0</td></tr>
+<tr><td>http</td><td>TRENDnet TV-IP110w or TV-IP422W webcam display httpd</td><td></td><td>48</td><td>0.0</td></tr>
+<tr><td>http</td><td>Traidnt-Security</td><td></td><td>48</td><td>0.0</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.19-MX Jan 25 2010</td><td>48</td><td>0.0</td></tr>
+<tr><td>http</td><td>HBHTTP POGOPLUG - 3.3.0 - Linux</td><td></td><td>48</td><td>0.0</td></tr>
+<tr><td>http</td><td>BladeCenter/IBM RSA2 http config</td><td></td><td>48</td><td>0.0</td></tr>
+<tr><td>http</td><td>Allegro RomPager</td><td>4.03</td><td>48</td><td>0.0</td></tr>
+<tr><td>damewaremr</td><td>DameWare Mini Remote Control</td><td></td><td>48</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Dropbear sshd</td><td>0.46</td><td>47</td><td>0.0</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.24 26oct2003</td><td>47</td><td>0.0</td></tr>
+<tr><td>http</td><td>Server Secured By yourdomainhere</td><td></td><td>47</td><td>0.0</td></tr>
+<tr><td>http</td><td>Router</td><td>1.2</td><td>47</td><td>0.0</td></tr>
+<tr><td>http</td><td>RemotelyAnywhere remote PC management httpd</td><td>7.10.552</td><td>47</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.9.6</td><td>47</td><td>0.0</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.20</td><td>47</td><td>0.0</td></tr>
+<tr><td>http</td><td>Httpd</td><td>1.0</td><td>47</td><td>0.0</td></tr>
+<tr><td>http</td><td>BW1330.BRO.2.22.0036</td><td></td><td>47</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.7p1 Debian 8ubuntu1</td><td>46</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>11.1.0.3</td><td>46</td><td>0.0</td></tr>
+<tr><td>http</td><td>LOOKSERV.COM</td><td></td><td>46</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>AmEuro 04070331 (Unix) PHP</td><td>46</td><td>0.0</td></tr>
+<tr><td>http</td><td>Tengine</td><td>1.4.1</td><td>45</td><td>0.0</td></tr>
+<tr><td>http</td><td>Server</td><td></td><td>45</td><td>0.0</td></tr>
+<tr><td>http</td><td>Rowaad.com.sa</td><td></td><td>45</td><td>0.0</td></tr>
+<tr><td>http</td><td>HTTPD</td><td>1.1 (Unix) SSL SUPPORT OpenSSL</td><td>45</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>SunSSH</td><td>1.1</td><td>44</td><td>0.0</td></tr>
+<tr><td>http</td><td>Profense</td><td></td><td>44</td><td>0.0</td></tr>
+<tr><td>http</td><td>Power MOD by web4host.net</td><td></td><td>44</td><td>0.0</td></tr>
+<tr><td>http</td><td>Oracle Application Server 10g httpd</td><td>10.1.2.2.0</td><td>44</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.13</td><td>44</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>6.0p1 Debian 3ubuntu1</td><td>43</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>3.4p1</td><td>43</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.5.26</td><td>43</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>MdeRS.SEC.Stick.Server_1.1</td><td>42</td><td>0.0</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.19-MX Oct 19 2011</td><td>42</td><td>0.0</td></tr>
+<tr><td>http</td><td>Sun-Java-System-Web-Server</td><td>6.1</td><td>42</td><td>0.0</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.25</td><td>42</td><td>0.0</td></tr>
+<tr><td>http</td><td>Fortinet FortiGate 50B firewall http config</td><td></td><td>42</td><td>0.0</td></tr>
+<tr><td>http</td><td>Barracuda</td><td>NGFirewall</td><td>42</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>SunSSH</td><td>1.1.3</td><td>41</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.3p2 Debian 5~bpo.1.netgear1</td><td>41</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Bitvise WinSSHD</td><td>5.19</td><td>41</td><td>0.0</td></tr>
+<tr><td>http</td><td>UnisFw</td><td>2.5</td><td>41</td><td>0.0</td></tr>
+<tr><td>http</td><td>ucdn</td><td></td><td>41</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>7.0.0.4</td><td>41</td><td>0.0</td></tr>
+<tr><td>http</td><td>Rowaad.com.sa ( Anass Atef )</td><td></td><td>41</td><td>0.0</td></tr>
+<tr><td>http</td><td>GNU Httptunnel</td><td></td><td>41</td><td>0.0</td></tr>
+<tr><td>http</td><td>FlexWATCH-Webs</td><td></td><td>41</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>team2work.SEC.Stick.Server_1.0</td><td>40</td><td>0.0</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.25b 29dec2003</td><td>40</td><td>0.0</td></tr>
+<tr><td>http</td><td>Microsoft IIS</td><td></td><td>40</td><td>0.0</td></tr>
+<tr><td>dominoconsole</td><td>Lotus Domino Console</td><td></td><td>40</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.0p1</td><td>39</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.3p2 Debian 9etch2</td><td>39</td><td>0.0</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.19-MX Apr 26 2011</td><td>39</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>10.5.0.21</td><td>39</td><td>0.0</td></tr>
+<tr><td>http</td><td>Secured By Dr. Ehab Diab</td><td></td><td>39</td><td>0.0</td></tr>
+<tr><td>http</td><td>RemotelyAnywhere remote PC management httpd</td><td>6.20.467</td><td>39</td><td>0.0</td></tr>
+<tr><td>http</td><td>PWS</td><td>7.0</td><td>39</td><td>0.0</td></tr>
+<tr><td>http</td><td>Oracle Application Server 10g httpd</td><td>10.1.2.0.2</td><td>39</td><td>0.0</td></tr>
+<tr><td>http</td><td>MiniServ</td><td>1.560</td><td>39</td><td>0.0</td></tr>
+<tr><td>http</td><td>LITBWS</td><td>1.0.10</td><td>39</td><td>0.0</td></tr>
+<tr><td>http</td><td>Alize</td><td>1.5</td><td>39</td><td>0.0</td></tr>
+<tr><td>http</td><td>(Ahmed-Hamdy) EMail</td><td></td><td>39</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.8p2-hpn13v11</td><td>38</td><td>0.0</td></tr>
+<tr><td>http</td><td>Pogoplug HBHTTP</td><td>3.2.6</td><td>38</td><td>0.0</td></tr>
+<tr><td>http</td><td>OMCnet-WebServer</td><td></td><td>38</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.2 r3.7.70-nodeAPI</td><td>38</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.19</td><td>38</td><td>0.0</td></tr>
+<tr><td>http</td><td>Microsoft-IIS</td><td></td><td>38</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.37p4</td><td>38</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.0</td><td>37</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Bitvise WinSSHD</td><td>5.05</td><td>37</td><td>0.0</td></tr>
+<tr><td>nntp</td><td>INN nntpd</td><td></td><td>37</td><td>0.0</td></tr>
+<tr><td>http</td><td>WEBrick httpd</td><td>1.3.1</td><td>37</td><td>0.0</td></tr>
+<tr><td>http</td><td>web</td><td></td><td>37</td><td>0.0</td></tr>
+<tr><td>http</td><td>w4</td><td></td><td>37</td><td>0.0</td></tr>
+<tr><td>http</td><td>SnapStream Web Server</td><td>4.9.2.6323</td><td>37</td><td>0.0</td></tr>
+<tr><td>http</td><td>QNAP TS-219P NAS http config</td><td>1.0</td><td>37</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>2.6.STABLE18</td><td>37</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>BlueCoat SG-400 http proxy</td><td></td><td>37</td><td>0.0</td></tr>
+<tr><td>http</td><td>Plex Media Center httpd</td><td></td><td>37</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>4.5.61</td><td>37</td><td>0.0</td></tr>
+<tr><td>http</td><td>MiniServ</td><td>1.530</td><td>37</td><td>0.0</td></tr>
+<tr><td>http</td><td>FlashCom httpd</td><td>3.5.5</td><td>37</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.11</td><td>37</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>3.1p1</td><td>36</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Dropbear sshd</td><td>0.53</td><td>36</td><td>0.0</td></tr>
+<tr><td>http</td><td>WP Engine</td><td>4.0</td><td>36</td><td>0.0</td></tr>
+<tr><td>http</td><td>SnapWebServer</td><td></td><td>36</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>3Proxy http proxy</td><td></td><td>36</td><td>0.0</td></tr>
+<tr><td>http</td><td>Oracle Application Server 10g httpd</td><td>10.1.2.0.0</td><td>36</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.6.22</td><td>36</td><td>0.0</td></tr>
+<tr><td>http</td><td>LiteSpeed httpd</td><td>4.1.12 Enterprise</td><td>36</td><td>0.0</td></tr>
+<tr><td>http</td><td>3jenan.Com Security Apache</td><td></td><td>36</td><td>0.0</td></tr>
+<tr><td>echolink</td><td>EchoLink radio-over-VoIP</td><td></td><td>36</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Linux telnetd</td><td></td><td>35</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.5p1 Debian 4</td><td>35</td><td>0.0</td></tr>
+<tr><td>http</td><td>WatchGuard SOHO 6 TC http config</td><td></td><td>35</td><td>0.0</td></tr>
+<tr><td>http</td><td>theproxy</td><td>0.5.37</td><td>35</td><td>0.0</td></tr>
+<tr><td>http</td><td>StarmpProxy</td><td>1.0</td><td>35</td><td>0.0</td></tr>
+<tr><td>http</td><td>Secured mod_bwlimited</td><td>1.4 mod_fcgid</td><td>35</td><td>0.0</td></tr>
+<tr><td>http</td><td>OpenSA httpd</td><td>1.0.4</td><td>35</td><td>0.0</td></tr>
+<tr><td>http</td><td>noViA Web Services</td><td></td><td>35</td><td>0.0</td></tr>
+<tr><td>http</td><td>MiniServ</td><td>1.600</td><td>35</td><td>0.0</td></tr>
+<tr><td>http</td><td>brandscreen-sslproxy</td><td></td><td>35</td><td>0.0</td></tr>
+<tr><td>http</td><td>simpletwist</td><td></td><td>34</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>9.1.0.4</td><td>34</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>10.5.0.6</td><td>34</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.1.17(Begun v4.0)</td><td>34</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.41</td><td>34</td><td>0.0</td></tr>
+<tr><td>http</td><td>Microsoft HTTPAPI httpd</td><td>1.0</td><td>34</td><td>0.0</td></tr>
+<tr><td>http</td><td>IP_SHARER WEB</td><td>1.0</td><td>34</td><td>0.0</td></tr>
+<tr><td>http</td><td>HttpFileServer httpd</td><td>2.2f</td><td>34</td><td>0.0</td></tr>
+<tr><td>http</td><td>HBHTTP</td><td>3.2.6</td><td>34</td><td>0.0</td></tr>
+<tr><td>http</td><td>FRITZ!Box http config</td><td></td><td>34</td><td>0.0</td></tr>
+<tr><td>http</td><td>Embedthis-Appweb</td><td>3.2.1</td><td>34</td><td>0.0</td></tr>
+<tr><td>http</td><td>DataPalm</td><td>3.5</td><td>34</td><td>0.0</td></tr>
+<tr><td>http</td><td>Avangate</td><td></td><td>34</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>not4your eyes PHP</td><td>34</td><td>0.0</td></tr>
+<tr><td>vnc</td><td>Microsoft Virtual Server remote control</td><td></td><td>33</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>SCS sshd</td><td>3.2.9.1</td><td>33</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>SCS sshd</td><td>2.0.13</td><td>33</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Sendmail</td><td>8.14.2/8.14.1</td><td>33</td><td>0.0</td></tr>
+<tr><td>http</td><td>X2 Network HT wS</td><td></td><td>33</td><td>0.0</td></tr>
+<tr><td>http</td><td>SimpleHelp</td><td>SSuite-3-12-20120419-123521</td><td>33</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>Tinyproxy</td><td>1.8.2</td><td>33</td><td>0.0</td></tr>
+<tr><td>http</td><td>justin.tv chat server httpd</td><td></td><td>33</td><td>0.0</td></tr>
+<tr><td>http</td><td>Cisco ACNS httpd</td><td>5.5.9</td><td>33</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apashi Serv</td><td></td><td>33</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.2p1 Debian 7ubuntu3.5</td><td>32</td><td>0.0</td></tr>
+<tr><td>netsupport</td><td>NetSupport PC remote control</td><td></td><td>32</td><td>0.0</td></tr>
+<tr><td>http</td><td>www.ahict.com</td><td></td><td>32</td><td>0.0</td></tr>
+<tr><td>http</td><td>/  (Unix)</td><td></td><td>32</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>10.0.0.5</td><td>32</td><td>0.0</td></tr>
+<tr><td>http</td><td>SecureTransport</td><td>4.7</td><td>32</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>FreeProxy http proxy</td><td>4.50</td><td>32</td><td>0.0</td></tr>
+<tr><td>http</td><td>Oracle HTTP Server Powered by Apache</td><td></td><td>32</td><td>0.0</td></tr>
+<tr><td>http</td><td>HBHTTP</td><td>3.3.0</td><td>32</td><td>0.0</td></tr>
+<tr><td>http</td><td>EWS</td><td></td><td>32</td><td>0.0</td></tr>
+<tr><td>http</td><td>53KF</td><td></td><td>32</td><td>0.0</td></tr>
+<tr><td>jabber</td><td>Jabber instant messaging server</td><td></td><td>31</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>7.0.0.2</td><td>31</td><td>0.0</td></tr>
+<tr><td>http</td><td>SaaSplaza</td><td></td><td>31</td><td>0.0</td></tr>
+<tr><td>http</td><td>pxweb</td><td>1.0</td><td>31</td><td>0.0</td></tr>
+<tr><td>http</td><td>PPX</td><td></td><td>31</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.2.0 r12081019-9bcf6ae</td><td>31</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.5.31</td><td>31</td><td>0.0</td></tr>
+<tr><td>http</td><td>Jetty</td><td>4.2.9rc2</td><td>31</td><td>0.0</td></tr>
+<tr><td>http</td><td>Go Home Web Server</td><td></td><td>31</td><td>0.0</td></tr>
+<tr><td>http</td><td>DnionOS</td><td>1.0</td><td>31</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache-Use-IT</td><td>1.3.26 (Prologue Software SA</td><td>31</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.8p1-hpn13v10lpk</td><td>30</td><td>0.0</td></tr>
+<tr><td>rtsp</td><td>Avtech MPEG4 DVR control rtspd</td><td></td><td>30</td><td>0.0</td></tr>
+<tr><td>ovm-manager</td><td>Oracle VM Manager</td><td></td><td>30</td><td>0.0</td></tr>
+<tr><td>http</td><td>TWS</td><td></td><td>30</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>2.6.STABLE22</td><td>30</td><td>0.0</td></tr>
+<tr><td>http</td><td>OmikronHTTPOrigin httpd</td><td>1.0</td><td>30</td><td>0.0</td></tr>
+<tr><td>http</td><td>NeuLion Adaptive Streaming Server</td><td></td><td>30</td><td>0.0</td></tr>
+<tr><td>http</td><td>Internet</td><td></td><td>30</td><td>0.0</td></tr>
+<tr><td>http</td><td>iCore proxy module</td><td></td><td>30</td><td>0.0</td></tr>
+<tr><td>http</td><td>HTTPD2</td><td></td><td>30</td><td>0.0</td></tr>
+<tr><td>http</td><td>BaseHTTPServer</td><td>0.2</td><td>30</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>FileZilla ftpd</td><td>0.9.41 beta</td><td>30</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Dropbear sshd</td><td>0.47</td><td>29</td><td>0.0</td></tr>
+<tr><td>http</td><td>XO.webservant</td><td></td><td>29</td><td>0.0</td></tr>
+<tr><td>http</td><td>TheSecure HTTPD Server powered by Apache</td><td></td><td>29</td><td>0.0</td></tr>
+<tr><td>http</td><td>StorageServer</td><td>StorageServer</td><td>29</td><td>0.0</td></tr>
+<tr><td>http</td><td>SecretHTTPd5.0</td><td></td><td>29</td><td>0.0</td></tr>
+<tr><td>http</td><td>RealVNC</td><td>4.0</td><td>29</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>3.2.0.7</td><td>29</td><td>0.0</td></tr>
+<tr><td>http</td><td>Panasonic webcam http config</td><td></td><td>29</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.6.30</td><td>29</td><td>0.0</td></tr>
+<tr><td>http</td><td>GoldStar iPECS 50B PBX http config</td><td></td><td>29</td><td>0.0</td></tr>
+<tr><td>http</td><td>Fwaselhost.Com Security Apache</td><td></td><td>29</td><td>0.0</td></tr>
+<tr><td>http</td><td>BW1330.BRO.2.22.VN0039</td><td></td><td>29</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>WeOnlyDo sshd</td><td>2.0.3</td><td>28</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>6.0p1</td><td>28</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>3.7.1p1</td><td>28</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Dropbear sshd</td><td>0.45</td><td>28</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Bitvise WinSSHD</td><td>5.10</td><td>28</td><td>0.0</td></tr>
+<tr><td>netsync</td><td>Netsync</td><td>6</td><td>28</td><td>0.0</td></tr>
+<tr><td>http</td><td>WWW Server</td><td>1.1</td><td>28</td><td>0.0</td></tr>
+<tr><td>http</td><td>w5</td><td></td><td>28</td><td>0.0</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.19-MX Dec  8 2009</td><td>28</td><td>0.0</td></tr>
+<tr><td>http</td><td>StorageServer</td><td>6.2.2.1 (Attix5)</td><td>28</td><td>0.0</td></tr>
+<tr><td>http</td><td>Secures By waslh.net</td><td></td><td>28</td><td>0.0</td></tr>
+<tr><td>http</td><td>Secured By FS4HOST.COM</td><td></td><td>28</td><td>0.0</td></tr>
+<tr><td>http</td><td>OMCnet Webserver</td><td></td><td>28</td><td>0.0</td></tr>
+<tr><td>http</td><td>Node.js</td><td></td><td>28</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.7</td><td>28</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.20</td><td>28</td><td>0.0</td></tr>
+<tr><td>http</td><td>inSORS</td><td>2.0</td><td>28</td><td>0.0</td></tr>
+<tr><td>http</td><td>HTTP-SERVER</td><td></td><td>28</td><td>0.0</td></tr>
+<tr><td>http</td><td>Host2Need.Com Security Apache</td><td></td><td>28</td><td>0.0</td></tr>
+<tr><td>http</td><td>ENIAC</td><td></td><td>28</td><td>0.0</td></tr>
+<tr><td>http</td><td>CNWylie</td><td></td><td>28</td><td>0.0</td></tr>
+<tr><td>http</td><td>BLCServer</td><td>5.0</td><td>28</td><td>0.0</td></tr>
+<tr><td>http</td><td>ArabHosters.com</td><td></td><td>28</td><td>0.0</td></tr>
+<tr><td>http</td><td>ACE XML Gateway</td><td></td><td>28</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>SunSSH</td><td>1.1.4</td><td>27</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.5p1</td><td>27</td><td>0.0</td></tr>
+<tr><td>http</td><td>TP-LINK WR841N WAP http config</td><td></td><td>27</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>9.1.0.2</td><td>27</td><td>0.0</td></tr>
+<tr><td>http</td><td>server</td><td></td><td>27</td><td>0.0</td></tr>
+<tr><td>http</td><td>Router</td><td></td><td>27</td><td>0.0</td></tr>
+<tr><td>http</td><td>Oracle Application Server 10g httpd</td><td>10.1.3.1.0</td><td>27</td><td>0.0</td></tr>
+<tr><td>http</td><td>OpenSA</td><td>1.0.4</td><td>27</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.37</td><td>27</td><td>0.0</td></tr>
+<tr><td>http</td><td>Netscape Enterprise httpd</td><td>6.0</td><td>27</td><td>0.0</td></tr>
+<tr><td>http</td><td>Netgear DGN2000 router http config</td><td></td><td>27</td><td>0.0</td></tr>
+<tr><td>http</td><td>Mbedthis-Appweb</td><td>2.2.2</td><td>27</td><td>0.0</td></tr>
+<tr><td>http</td><td>liveHttp</td><td>1.0</td><td>27</td><td>0.0</td></tr>
+<tr><td>http</td><td>Duo</td><td>1.0</td><td>27</td><td>0.0</td></tr>
+<tr><td>http</td><td>Dungeon8</td><td></td><td>27</td><td>0.0</td></tr>
+<tr><td>http</td><td>D-Link/Airlink IP webcam http config</td><td>1.0</td><td>27</td><td>0.0</td></tr>
+<tr><td>http</td><td>Darth-Vader</td><td></td><td>27</td><td>0.0</td></tr>
+<tr><td>http</td><td>CherryPy httpd</td><td>3.1.2</td><td>27</td><td>0.0</td></tr>
+<tr><td>http</td><td>AvantGo</td><td></td><td>27</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.59-CHS-1</td><td>27</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.44</td><td>27</td><td>0.0</td></tr>
+<tr><td>soap</td><td>gSOAP soap</td><td>2.7</td><td>26</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Exim smtpd</td><td>4.67</td><td>26</td><td>0.0</td></tr>
+<tr><td>http</td><td>Pogoplug HBHTTP</td><td>3.3.0</td><td>26</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.29</td><td>26</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.7.60</td><td>26</td><td>0.0</td></tr>
+<tr><td>http</td><td>Microsoft Windows Media Server</td><td>9.6.7600.16564</td><td>26</td><td>0.0</td></tr>
+<tr><td>http</td><td>HBHTTP POGOMOBILE - 3.2.7 - Linux</td><td></td><td>26</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache Tomcat</td><td>5.5</td><td>26</td><td>0.0</td></tr>
+<tr><td>http</td><td>13</td><td></td><td>26</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SlimFTPd</td><td>3.181</td><td>26</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Bitvise WinSSHD</td><td>5.12</td><td>25</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Sendmail</td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>secure-socket</td><td>CA Secure Socket Adapter</td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>http</td><td>www.limaar.com</td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>http</td><td>web1.qa.qbn.ie.intuit.com</td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>10.2.0.0</td><td>25</td><td>0.0</td></tr>
+<tr><td>http</td><td>Secured By Bearjob.com</td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>http</td><td>proxy05</td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>http</td><td>pan</td><td>0.0.2</td><td>25</td><td>0.0</td></tr>
+<tr><td>http</td><td>OHS.COM.SA</td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>http</td><td>Netgear DG834 FR WAP http config</td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>http</td><td>MS .NET Remoting httpd</td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>http</td><td>Jetty</td><td>6.1.5</td><td>25</td><td>0.0</td></tr>
+<tr><td>http</td><td>IBM HTTP Server</td><td>6.1.0.41</td><td>25</td><td>0.0</td></tr>
+<tr><td>http</td><td>httpsa</td><td>1.1.18</td><td>25</td><td>0.0</td></tr>
+<tr><td>http</td><td>David WebBox httpd</td><td>11.00a.0717</td><td>25</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>x.x.x (Unix) mod_ssl</td><td>25</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.17</td><td>25</td><td>0.0</td></tr>
+<tr><td>desktop-central</td><td>ManageEngine Desktop Central DesktopCentralServer</td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>vtun</td><td>Vtun Virtual Tunnel</td><td>3.X 09/27/2010</td><td>24</td><td>0.0</td></tr>
+<tr><td>vnc-http</td><td>Ultr@VNC</td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.9p1 Debian 4</td><td>24</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Cisco SSH</td><td>1.25</td><td>24</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Microsoft Exchange smtpd</td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>rtsp</td><td></td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>http</td><td>Zimbra http config</td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>http</td><td>WYLTK</td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>http</td><td>SW</td><td>3.0.20090811T</td><td>24</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>9.1.0.5</td><td>24</td><td>0.0</td></tr>
+<tr><td>http</td><td>SecureTransport</td><td>4.8.2</td><td>24</td><td>0.0</td></tr>
+<tr><td>http</td><td>RG4000.CMC.2.02</td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>http</td><td>Oracle WebLogic Server</td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx admin</td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>http</td><td>Networks</td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>http</td><td>Mongrel httpd</td><td>1.1.5</td><td>24</td><td>0.0</td></tr>
+<tr><td>http</td><td>MiniServ</td><td>1.540</td><td>24</td><td>0.0</td></tr>
+<tr><td>http</td><td>Microsoft Windows Media Server</td><td>9.01.01.5002</td><td>24</td><td>0.0</td></tr>
+<tr><td>http</td><td>D-Link DCS-920 webcam http config</td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>http</td><td>Desk.com</td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>http</td><td>Cisco ACNS httpd</td><td>5.5.15</td><td>24</td><td>0.0</td></tr>
+<tr><td>http</td><td>APN HTTPD V1.4</td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache Advanced Extranet Server httpd</td><td>2.0.48</td><td>24</td><td>0.0</td></tr>
+<tr><td>http</td><td>A66fm</td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>SunSSH</td><td>2.0</td><td>23</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>2.9p2</td><td>23</td><td>0.0</td></tr>
+<tr><td>http</td><td>Zope httpd</td><td>2.10.6-final</td><td>23</td><td>0.0</td></tr>
+<tr><td>http</td><td>WebOTX_Web_Server</td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>http</td><td>VNC Server Enterprise Edition</td><td>E4.5.1 (r27892)</td><td>23</td><td>0.0</td></tr>
+<tr><td>http</td><td>Papache</td><td>0.0.05</td><td>23</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.7.51</td><td>23</td><td>0.0</td></tr>
+<tr><td>http</td><td>NetApp DFM httpd</td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.30</td><td>23</td><td>0.0</td></tr>
+<tr><td>http</td><td>Jetty</td><td>6.1.26</td><td>23</td><td>0.0</td></tr>
+<tr><td>http</td><td>BlueIris-HTTP</td><td>1.1</td><td>23</td><td>0.0</td></tr>
+<tr><td>http</td><td>apache</td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>DrayTek Vigor router ftpd</td><td>1.0</td><td>23</td><td>0.0</td></tr>
+<tr><td>upnp</td><td>Conexant-EmWeb</td><td>6.1.0</td><td>22</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>3.8p1</td><td>22</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>3.4p1 Debian 1:3.4p1-1.woody.3</td><td>22</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Bitvise WinSSHD</td><td>5.21</td><td>22</td><td>0.0</td></tr>
+<tr><td>http</td><td>webserver v1.0</td><td></td><td>22</td><td>0.0</td></tr>
+<tr><td>http</td><td>web2.qa.qbn.ie.intuit.com</td><td></td><td>22</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.7.17</td><td>22</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.6.29</td><td>22</td><td>0.0</td></tr>
+<tr><td>http</td><td>Netgear DG834GT router http config</td><td></td><td>22</td><td>0.0</td></tr>
+<tr><td>http</td><td>NessusWWW</td><td></td><td>22</td><td>0.0</td></tr>
+<tr><td>http</td><td>mod_perl</td><td>2.0.4 Perl</td><td>22</td><td>0.0</td></tr>
+<tr><td>http</td><td>HP StorageWorks AG118A tape autoloader http config</td><td></td><td>22</td><td>0.0</td></tr>
+<tr><td>http</td><td>GoAhead-Webs</td><td></td><td>22</td><td>0.0</td></tr>
+<tr><td>http</td><td>Dart WebServer Tool</td><td>1.0</td><td>22</td><td>0.0</td></tr>
+<tr><td>http</td><td>Boa HTTPd</td><td>0.92o</td><td>22</td><td>0.0</td></tr>
+<tr><td>http</td><td>AWS</td><td>1.0</td><td>22</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache Tomcat/Coyote JSP engine</td><td>1.0</td><td>22</td><td>0.0</td></tr>
+<tr><td>http</td><td>AnyWebApp</td><td></td><td>22</td><td>0.0</td></tr>
+<tr><td>activemq</td><td>Apache ActiveMQ</td><td></td><td>22</td><td>0.0</td></tr>
+<tr><td>vnc-http</td><td>RealVNC</td><td>E4</td><td>21</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Netgear broadband router or ZyXel VoIP adapter telnetd</td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>WeOnlyDo sshd</td><td>2.3.6.165</td><td>21</td><td>0.0</td></tr>
+<tr><td>http</td><td>TP-LINK WR740N WAP http config</td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>http</td><td>TheHosting ME</td><td>1.1</td><td>21</td><td>0.0</td></tr>
+<tr><td>http</td><td>taunton</td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>http</td><td>RemotelyAnywhere remote PC management httpd</td><td>7.00.531</td><td>21</td><td>0.0</td></tr>
+<tr><td>http</td><td>RealVNC</td><td>E4</td><td>21</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>3.0.STABLE19</td><td>21</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>BlueCoat http proxy</td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>http</td><td>ngx_openresty</td><td>1.0.11.28</td><td>21</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx-perl</td><td>1.2.0.4</td><td>21</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.42</td><td>21</td><td>0.0</td></tr>
+<tr><td>http</td><td>Microsoft Windows Media Server</td><td>9.01.01.3841</td><td>21</td><td>0.0</td></tr>
+<tr><td>http</td><td>Go Home WebServer</td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>http</td><td>Barracuda</td><td>1.0.8</td><td>21</td><td>0.0</td></tr>
+<tr><td>http</td><td>AR7 embedded httpd</td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>Unix</td><td>21</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>ProFTPD</td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>6.0p1-hpn13v12</td><td>20</td><td>0.0</td></tr>
+<tr><td>http</td><td>Zeus</td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>http</td><td>YEEPAY-WBS</td><td>1.0</td><td>20</td><td>0.0</td></tr>
+<tr><td>http</td><td>TP-LINK WR1043ND WAP http config</td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>http</td><td>Tomato WAP firmware httpd</td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.19-MX Feb 27 2009</td><td>20</td><td>0.0</td></tr>
+<tr><td>http</td><td>TeamViewer httpd</td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>http</td><td>Oracle Application Server 10g httpd</td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.9.1</td><td>20</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.5.34</td><td>20</td><td>0.0</td></tr>
+<tr><td>http</td><td>NetSupport Gateway httpd</td><td>1.3</td><td>20</td><td>0.0</td></tr>
+<tr><td>http</td><td>mru-gpr</td><td>0.4-r13771</td><td>20</td><td>0.0</td></tr>
+<tr><td>http</td><td>Kerio MailServer http config</td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>http</td><td>ICT WebServer 1.1</td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>http</td><td>BaseHTTP</td><td>0.3 Python</td><td>20</td><td>0.0</td></tr>
+<tr><td>http</td><td>Avocent DSView 3</td><td>3.7.2.123</td><td>20</td><td>0.0</td></tr>
+<tr><td>vnc-http</td><td>RealVNC</td><td>4.0</td><td>19</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>SCS sshd</td><td>6.1.7.139</td><td>19</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.9p1 Debian 1</td><td>19</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.1p1 Debian 3</td><td>19</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.3p2</td><td>19</td><td>0.0</td></tr>
+<tr><td>minecraft</td><td>Minecraft game server</td><td></td><td>19</td><td>0.0</td></tr>
+<tr><td>http</td><td>web2.ptc.qbn.ie.intuit.com</td><td></td><td>19</td><td>0.0</td></tr>
+<tr><td>http</td><td>w2</td><td></td><td>19</td><td>0.0</td></tr>
+<tr><td>http</td><td>StorageServer</td><td>6.2.4.1 (Attix5)</td><td>19</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>3.2.0.19</td><td>19</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>3.1.18</td><td>19</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>3.1.11</td><td>19</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>2.7.STABLE6</td><td>19</td><td>0.0</td></tr>
+<tr><td>http</td><td>Port25 PowerMTA mail gateway http admin</td><td></td><td>19</td><td>0.0</td></tr>
+<tr><td>http</td><td>Panasonic BB-HCM331 Network Camera http config</td><td></td><td>19</td><td>0.0</td></tr>
+<tr><td>http</td><td>Oracle Application Server 10g httpd</td><td>10.1.3.5.0</td><td>19</td><td>0.0</td></tr>
+<tr><td>http</td><td>Nokia</td><td></td><td>19</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.45</td><td>19</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.4</td><td>19</td><td>0.0</td></tr>
+<tr><td>http</td><td>MSjr</td><td></td><td>19</td><td>0.0</td></tr>
+<tr><td>http</td><td>Jetty</td><td>6.1.7</td><td>19</td><td>0.0</td></tr>
+<tr><td>http</td><td>EA-HTTP</td><td>1.0</td><td>19</td><td>0.0</td></tr>
+<tr><td>http</td><td>BW1330.BRO.2.22.0033</td><td></td><td>19</td><td>0.0</td></tr>
+<tr><td>http</td><td>BusyBox httpd</td><td></td><td>19</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.52-CHS-1</td><td>19</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>3.6.1p1</td><td>18</td><td>0.0</td></tr>
+<tr><td>imap</td><td>Dovecot imapd</td><td></td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>Zope httpd</td><td>unreleased version</td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>WindWeb</td><td>2.0</td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>WebtoB</td><td>4.1</td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>web1.ptc.qbn.ie.intuit.com</td><td></td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>TRENDnet TV-IP100 or TV-IP110 webcam display httpd</td><td></td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.19-MX Sep  9 2010</td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>9.1.0.0</td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>Secured By FILMAHOSTING</td><td></td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>Rowaad.com.sa ( Anass Atef ) mod_perl</td><td>2.0.5 Perl</td><td>18</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>3.1.8</td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>PPWS</td><td>1.0.0</td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>PIRANA</td><td></td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>paywhale.com</td><td></td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>NRPd</td><td></td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.9.7</td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.44</td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.5.38</td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>mru-gpr</td><td>0.4-r9993</td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>Miscrosoft-IIS</td><td>4.0</td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>HTTPD-HR Server powered by Apache mod_auth_passthrough</td><td>2.1 mod_bwlimited</td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>gws</td><td></td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>D-LINK Corporation</td><td></td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>ddosdefend</td><td></td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>BotDefeat</td><td></td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>Boa HTTPd</td><td>0.94.14rc18-ipcam</td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache</td><td>9.9.9</td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>A p a c h e</td><td></td><td>18</td><td>0.0</td></tr>
+<tr><td>time</td><td></td><td></td><td>17</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>BSD-derived telnetd</td><td></td><td>17</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.5p1 Debian 5+b1</td><td>17</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Kojoney SSH honeypot</td><td></td><td>17</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Microsoft ESMTP</td><td>6.0.3790.3959</td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>WEB SERVER INFOCERT</td><td></td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>Tengine</td><td>1.4.2</td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>server.pl</td><td></td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>Server</td><td>1.3.0</td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>SecureWeb</td><td>1.0</td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>SecureTransport</td><td>4.8</td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>SecureTransport</td><td>4.6.1</td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>Secured By el5olfaa.com</td><td></td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>Resin</td><td>4.0.13</td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>RemotelyAnywhere remote PC management httpd</td><td>10.0.1068</td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>rackcorpcdn</td><td>1.0.6</td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>NHN</td><td></td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.2.3-gamepoint</td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.2.0 r12051717-105e135</td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.30</td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.16</td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.6.37</td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>MyProxy1.8</td><td></td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>monit httpd</td><td>4.8.1</td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.5.0</td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>KwartzCtl</td><td>2.0</td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>Indy</td><td>9.0.11</td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>IBS Data Feeder</td><td></td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>IBM HTTP Server</td><td>2.0.47.1</td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>Dimofinf Hosting</td><td></td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>CherryPy httpd</td><td>3.2.0rc1</td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>Avocent DSView 3</td><td>3.7.1.27</td><td>17</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>vsftpd (before 2.0.8) or WU-FTPD</td><td></td><td>17</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Gene6 ftpd</td><td>3.10.0 build 2</td><td>17</td><td>0.0</td></tr>
+<tr><td>storagecraft-image</td><td>StorageCraft Image Manager</td><td></td><td>16</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>6.1p1-hpn13v11</td><td>16</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.8</td><td>16</td><td>0.0</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.37-community-nt</td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>Varnish</td><td></td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>TP-LINK WR941N WAP http config</td><td></td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>Sun GlassFish Open Source Edition</td><td>3.1.1</td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>Serv-U</td><td>8.1.0.1</td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>SecureTransport</td><td>4.5.1</td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>Secured By ModServ</td><td></td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>Secured By 1500GB.COM.EG</td><td></td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>RemotelyAnywhere remote PC management httpd</td><td>6.10.459</td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>rackcorpcdn</td><td>1.0.7</td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>QRATOR</td><td></td><td>16</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>HTTHost TCP over HTTP tunneling proxy</td><td></td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>paul</td><td></td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>NetSupport Gateway</td><td>1.1 (Windows NT)</td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>Loxone 3.5.5.8</td><td></td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.31</td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.23</td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>ise GmbH HTTP-Server v2.0</td><td></td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>IBM WebSphere Application Server</td><td>7.0</td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>IBM_HTTP_SERVER</td><td></td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>HttpFileServer httpd</td><td>2.3 beta</td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>HBHTTP DISCOVERY - 3.2.7 - Linux</td><td></td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>Foundry Networks</td><td>2.20</td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>Esnet.com.tr mod_bwlimited</td><td>1.4</td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>D-Link DCS-900 webcam http config</td><td></td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>Barracuda</td><td>1.0.6</td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache Stronghold httpd</td><td></td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>antid</td><td></td><td>16</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>FileZilla ftpd</td><td>0.9.37 beta</td><td>16</td><td>0.0</td></tr>
+<tr><td>vnc-http</td><td>VNC Server Enterprise Edition httpd</td><td>E4.5.1 r27892</td><td>15</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Microsoft Windows 2000 telnetd</td><td></td><td>15</td><td>0.0</td></tr>
+<tr><td>tcpwrapped</td><td>BSD TCP Wrappers</td><td></td><td>15</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Seagate GoFlex NAS device sshd</td><td>4.3</td><td>15</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.6p1 Debian 5ubuntu0.1</td><td>15</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Bitvise WinSSHD</td><td>5.09</td><td>15</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Bitvise WinSSHD</td><td>4.27</td><td>15</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Bitvise WinSSHD</td><td>4.21</td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>Xerox WorkCentre Pro httpd</td><td></td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>X2 Network MT wS</td><td></td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>Web-Server</td><td></td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>Web Desjardins</td><td></td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>Virata-EmWeb</td><td>6.2.1</td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>Virata-EmWeb</td><td>6.2.0</td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>TP-LINK MR3220 WAP http config</td><td></td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>Tor directory</td><td></td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>Secured By WWW.EBLANET.NET</td><td></td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>rackcorpcdn</td><td>1.0.2</td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>QNAP TS-109-II NAS http config</td><td>1.0</td><td>15</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>Varnish</td><td></td><td>15</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>2.7.STABLE8</td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>proxy07</td><td></td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>Powered by Apache</td><td></td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>Pogoplug HBHTTP</td><td>3.2.7</td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>ODERLAND Webbhotell AB Apache</td><td></td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>OCP</td><td>1.3.33 (Unix) PHP</td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx mod_bwlimited</td><td>1.4 mod_fcgid</td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.24</td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.4.13</td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.4.11</td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>Netscape</td><td></td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td>6.5beta</td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>Linux GroupWise POA 8.0.2</td><td></td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>KONT</td><td></td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>IIT</td><td>3.12</td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>IBM HTTP Server</td><td>6.0.2.43</td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>ghianda</td><td></td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>cPanel httpd</td><td>11.32.3.23</td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>CNRI</td><td></td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>cgios</td><td>6.0.724</td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>Boa HTTPd</td><td>0.94.11</td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>AsyncWeb</td><td></td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache Advanced Extranet Server httpd</td><td>1.3.14</td><td>15</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>FileZilla ftpd</td><td>0.9.40 beta</td><td>15</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>DrayTek Vigor 2820 ADSL router ftpd</td><td>1.0</td><td>15</td><td>0.0</td></tr>
+<tr><td>amqp</td><td>Advanced Message Queue Protocol</td><td></td><td>15</td><td>0.0</td></tr>
+
+   </tbody>
+  </table>
+ </div>
+</div>

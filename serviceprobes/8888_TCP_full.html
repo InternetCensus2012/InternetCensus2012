@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Internet Census 2012</title>
+ <script type="text/javascript" src="../js/jquery-latest.js"></script> 
+ <script type="text/javascript" src="../js/__jquery.tablesorter.min.js"></script> 
+ <link rel="stylesheet" type="text/css" href="../style.css">
+
+ <script>
+ $(document).ready(function() 
+  { 
+   generate(9);
+   $("#sortable").tablesorter(); 
+  } 
+ ); 
+
+ function generate(index) {
+    
+  var pages=[
+   ["1t","3t","7t","7u","9t","13u","17u","19t","21t","22t","23t","25t","26t","35t","37u","42t","42u","43t","44t","53t","53u","69u","70t","79t","80t","81t","82t","83t","84t","85t","88t","88u","98t","100t","106t","110t","111t","111u","113t","119t","123u","130t","135t","135u","137u","139t","143t","144t","161t","161u","177u","179t","199t"],
+   ["214t","254t","255t","256t","257t","264t","280t","311t","389t","390t","406t","407u","427t","443t","444t","445t","449t","464t","465t","497t","500u","505t","510t","512t","513t","514t","515t","517u","518u","523t","523u","524t","540t","543t","544t","548t","554t","587t","591t","593t","616t","620t","625t","626u","628t","631t","636t","641t","646t","660t","666t"],
+   ["706t","710t","711t","731t","771t","782t","783t","787t","808t","873t","888t","898t","900t","901t","902t","990t","993t","995t","1000t","1010t","1022t","1024t","1025t","1026t","1027t","1028t","1029t","1030t","1031t","1032t","1033t","1035t","1036t","1037t","1038t","1039t","1040t","1041t","1042t","1043t","1044t","1048t","1049t","1050t","1053t","1054t","1056t","1058t","1059t"],
+   ["1064t","1065t","1066t","1068t","1069t","1071t","1074t","1080t","1090t","1095t","1098t","1099t","1100t","1105t","1109t","1110t","1111t","1112t","1200t","1212t","1214t","1217t","1220t","1234t","1241t","1248t","1302t","1311t","1314t","1344t","1352t","1400t","1414t","1415t","1416t","1417t","1418t","1419t","1419u","1420t","1432t","1433t","1434u","1467t","1494t"],
+   ["1500t","1501t","1503t","1505t","1505u","1521t","1522t","1526t","1527t","1549t","1550t","1574t","1583t","1604u","1610t","1611t","1666t","1687t","1688t","1702t","1720t","1723t","1748t","1754t","1755t","1761t","1761u","1762t","1763t","1801t","1830t","1900t","1935t","1967u","1972t","1981t","1998t","2000t","2001t","2002t","2003t","2005t","2010t","2024t","2030t","2040t","2049t","2064t","2068t"],
+   ["2100t","2103t","2105t","2107t","2121t","2160t","2161t","2301t","2303u","2306t","2383t","2396t","2401t","2427t","2427u","2525t","2600t","2601t","2627t","2638u","2701t","2715t","2717t","2869t","2947t","2967t","2967u","3000t","3001t","3002t","3003t","3004t","3005t","3006t","3025t","3031t","3050t","3052t","3128t","3268t","3280t","3306t","3310t","3333t","3351t","3372t","3389t","3483u","3493t","3531t"],
+   ["3632t","3689t","3690t","3703t","3872t","3892t","3900t","3940t","3986t","4000t","4001t","4045t","4045u","4155t","4369t","4443t","4444t","4567t","4660t","4711t","4868t","4899t","4999t","5000t","5001t","5003t","5009t","5050t","5051t","5060t","5060u","5061t","5101t","5120t","5190t","5222t","5232t","5269t","5280t","5302t","5323t","5353u","5357t","5400t","5427t","5432t","5520t","5530t","5550t","5555t","5556t","5570t"],
+   ["5600t","5631t","5632u","5666t","5800t","5801t","5802t","5803t","5900t","5901t","6000t","6001t","6002t","6003t","6004t","6005t","6006t","6007t","6008t","6009t","6010t","6011t","6012t","6013t","6014t","6015t","6016t","6017t","6018t","6019t","6020t","6050t","6103t","6112t","6163t","6346t","6379t","6543t","6544t","6560t","6588t","6600t","6646t","6660t","6661t","6662t","6663t","6664t","6665t","6666t","6667t","6668t","6669t","6670t","6699t"],
+   ["6802t","6969t","7000t","7001u","7002t","7007t","7008t","7070t","7100t","7101t","7144t","7145t","7171t","7180t","7200t","7210t","7272t","7402t","7461t","7776t","7777t","7780t","7937t","7938t","8000t","8001t","8002t","8003t","8004t","8005t","8006t","8007t","8008t","8009t","8010t","8031t","8080t","8081t","8082t","8083t","8084t","8085t","8087t","8088t","8118t","8138t","8181t","8194t","8307t","8333t","8443t","8770t"],
+   ["8880t","8881t","8882t","8883t","8884t","8885t","8886t","8887t","8888t","9000t","9001t","9002t","9003t","9030t","9050t","9080t","9088t","9089t","9090t","9091t","9092t","9093t","9094t","9095t","9096t","9097t","9098t","9099t","9100t","9100u","9101t","9102t","9103t","9104t","9105t","9106t","9107t","9481t","9801t","9999t","10000t","10000u","10001t","10005t","10010t","10031t","10080u","11210t","11211t","11211u","11371t","11965t","12203u","12345t"],
+   ["13013t","13666t","13720t","13722t","13783t","14238t","14534t","15000t","15001t","15002t","17007t","17555u","17988t","18086t","18182t","18264t","19150t","19350t","20000t","22001t","22490t","26214t","26470t","27000t","27001t","27002t","27003t","27004t","27005t","27006t","27007t","27008t","27009t","27010t","27017t","27960u","30444t","31337t","31416t","32211t","32750t","32750u","32751t","32751u","32752t","32752u","32753t","32753u","32754t","32754u"],
+   ["32755t","32755u","32756t","32756u","32757t","32757u","32758t","32758u","32759t","32759u","32760t","32760u","32761t","32761u","32762t","32762u","32763t","32763u","32764t","32764u","32765t","32765u","32766t","32766u","32767t","32767u","32768t","32768u","32769t","32769u","32770t","32770u","32771t","32771u","32772t","32772u","32773t","32773u","32774t","32774u","32775t","32775u","32776t","32776u","32777t","32777u"],
+   ["32778t","32778u","32779t","32779u","32780t","32780u","32781t","32781u","32782t","32782u","32783t","32783u","32784t","32784u","32785t","32785u","32786t","32786u","32787t","32787u","32788t","32788u","32789t","32789u","32790t","32790u","32791t","32791u","32792t","32792u","32793t","32793u","32794t","32794u","32795t","32795u","32796t","32796u","32797t","32797u","32798t","32798u","32799t","32799u"],
+   ["32800t","32800u","32801t","32801u","32802t","32802u","32803t","32803u","32804t","32804u","32805t","32805u","32806t","32806u","32807t","32807u","32808t","32808u","32809t","32809u","32810t","32810u","33015t","34012t","37435t","38978t","38978u","40193t","41523t","49152t","49152u","49153u","49154u","49155u","49156u","49157t","49400t","50000t","50001t","50002t","50003t","50004t","50005t","50006t","50007t","50008t","50009t"],
+   ["50010t","50011t","50012t","50013t","50014t","50015t","50016t","50017t","50018t","50019t","50020t","50021t","50022t","50023t","50024t","50025t","50030t","55553t","55555t","56667t","60000t","60001t","60002t","60003t","60004t","60006t","60007t","60008t","60009t","60010t","60011t","60012t","60013t","60014t","60015t","60016t","60017t","60018t","60019t","60020t","60021t","60022t","60023t","60024t","60025t","Combinedt"]
+  ];
+  current = "8888t"
+
+  var html = ""
+  var col = 0;
+  for (var i = 0; i < pages[index].length; ++i){
+   if (col == 0){
+    html = html + "<tr>"
+   }
+   if(pages[index][i].indexOf("u") != -1){
+    port = pages[index][i].replace(/u/g, " UDP");
+    link = pages[index][i].replace(/u/g, "_UDP_product.html");
+   }else{
+    port = pages[index][i].replace(/t/g, "");
+    link = pages[index][i].replace(/t/g, "_TCP_product.html");
+   }
+   if(pages[index][i] == ("" + current)){
+    html = html + "<td style=\"background-color:#e9e9e9\"><a href=\""+link+"\">"+port+"</a></td>"
+   }else{
+    html = html + "<td><a href=\""+link+"\">"+port+"</a></td>"
+   }
+   
+   col = col +1;
+   if (col == 14){
+    col = 0;
+    html = html + "</tr>"
+   }
+  }
+  $("#submenu").html(html);
+  $(".clicks").css({'background-color': ''})
+  $("#click"+index).css({'background-color': '#e9e9e9'})
+ }
+ </script>
+ 
+</head>
+
+<body>
+<div id="main">
+
+ <table id = "nav">
+ <col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" />
+ <tr>
+ <td><a href="../paper.html">Paper</a></td>
+ <td><a href="../images.html">Images</a></td>
+ <td><a href="../download.html">Download</a></td>
+ <td><a href="../hilbert.html">Hilbert Browser</a></td>
+ <td class="highlight1"><a href="../serviceprobe_overview.html">Service Probe Overview</a></td>
+ <td><a href="../tld_overview.html">rDNS Overview</a></td>
+ </tr>
+ </table>
+
+ 
+ <table id="nav1">
+ <tr>
+  <td style="width:10%"><a href="../serviceprobe_overview.html"><span style="font-size: 14px;">Overview</span></a></td>
+  <td> 
+  <span style="font-size: 14px;">Port Details</span>
+   <table id = "nav">
+    <tr>
+     <td id="click0" class="clicks" onclick="generate(0)">< 200</td>
+     <td id="click1" class="clicks" onclick="generate(1)">< 700</td>
+     <td id="click2" class="clicks" onclick="generate(2)">< 1060 </td>
+     <td id="click3" class="clicks" onclick="generate(3)">< 1500 </td>
+     <td id="click4" class="clicks" onclick="generate(4)">< 2100 </td>
+     <td id="click5" class="clicks" onclick="generate(5)">< 3600 </td>
+     <td id="click6" class="clicks" onclick="generate(6)">< 5600 </td>
+     <td id="click7" class="clicks" onclick="generate(7)">< 6700 </td>
+     <td id="click8" class="clicks" onclick="generate(8)">< 8800 </td>
+     <td id="click9" class="clicks" onclick="generate(9)">< 13000</td>
+     <td id="click10" class="clicks" onclick="generate(10)">< 32755</td>
+     <td id="click11" class="clicks" onclick="generate(11)">< 32778</td>
+     <td id="click12" class="clicks" onclick="generate(12)">< 32800</td>
+     <td id="click13" class="clicks" onclick="generate(13)">< 50010</td>
+     <td id="click14" class="clicks" onclick="generate(14)">< 65536</td>
+    </tr>
+   </table>
+
+   <table  id = "submenu">
+    <tr><td>This menu requires javascript, sorry<td><tr>
+   </table>
+  </td>
+ </tr>
+ </table>
+ <table id = "nav">
+ <tr>
+  <td style ="width:12.5%" ><a href="8887_TCP_full.html">Prev Port</a></td>
+  <td style ="width:25% ;"><a href="8888_TCP_product.html">Products</a></td>
+  <td style ="width:25% ;"><a href="8888_TCP_version.html">Versions</a></td>
+  <td style ="width:25% ; background-color: #e4e4e4" ><a href="8888_TCP_full.html">Full</a></td>
+  <td style ="width:12.5%" ><a href="9000_TCP_full.html">Next Port</a></td>
+ <tr>
+ </table>
+ 
+ 
+ <div id="content">
+  Overview of services running on Port 8888 TCP.<br>
+  ~1.22 Million IP addresses observed from May to December 2012  <br>
+  To get raw lists of the data go to <a href="../download.html">Download</a>. For an explanation of what this data is and how it was obtained, see <a href="../paper.html">Paper</a>.<br><br>
+
+
+  <table id="sortable" class="tablesorter" style ="text-align:center;border:none"> 
+   
+   <thead>
+    <th>Servicename <img src="../icon_sort.png"></th>
+<th>Product <img src="../icon_sort.png"></th>
+<th>Version <img src="../icon_sort.png"></th><th>Info<img src="../icon_sort.png"></th><th>OS<img src="../icon_sort.png"></th><th>Devicetype<img src="../icon_sort.png"></th><th>Count <img src="../icon_sort.png"></th>
+<th>Percent <img src="../icon_sort.png"></th>
+ 
+   </thead>
+   <tbody>
+    <tr><td>http</td><td>GoAhead-Webs httpd</td><td></td><td></td><td></td><td></td><td>323316</td><td>26.413</td></tr>
+<tr><td>http</td><td></td><td></td><td></td><td></td><td></td><td>165816</td><td>13.546</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.28</td><td></td><td></td><td></td><td>108427</td><td>8.858</td></tr>
+<tr><td>no match</td><td></td><td></td><td></td><td></td><td></td><td>68742</td><td>5.616</td></tr>
+<tr><td>http</td><td>GoAhead-Webs embedded httpd</td><td></td><td></td><td></td><td></td><td>57690</td><td>4.713</td></tr>
+<tr><td>http</td><td>Port25 PowerMTA mail gateway http admin</td><td></td><td></td><td></td><td></td><td>47408</td><td>3.873</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.11</td><td></td><td></td><td></td><td>25718</td><td>2.101</td></tr>
+<tr><td>http</td><td>Httpd</td><td>1.0</td><td></td><td></td><td></td><td>23584</td><td>1.927</td></tr>
+<tr><td>http</td><td>Waveplus HTTPD</td><td></td><td>Thomson TG508 DSL router</td><td></td><td>broadband router</td><td>14699</td><td>1.201</td></tr>
+<tr><td>http</td><td>Apache Tomcat/Coyote JSP engine</td><td>1.1</td><td></td><td></td><td></td><td>14620</td><td>1.194</td></tr>
+<tr><td>http</td><td>Waveplus HTTPD</td><td></td><td>XM-700A</td><td></td><td></td><td>13911</td><td>1.136</td></tr>
+<tr><td>http</td><td>Boa HTTPd</td><td>0.94.14rc21</td><td></td><td></td><td></td><td>13561</td><td>1.108</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.21b</td><td>PHP 20030920</td><td></td><td></td><td>12428</td><td>1.015</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td>6.0</td><td></td><td>Windows</td><td></td><td>12346</td><td>1.009</td></tr>
+<tr><td>http</td><td>Boa HTTPd</td><td>0.94.13</td><td></td><td></td><td></td><td>12137</td><td>0.992</td></tr>
+<tr><td>http</td><td>Waveplus HTTPD</td><td></td><td>GW-1000A</td><td></td><td></td><td>11037</td><td>0.902</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td></td><td></td><td></td><td></td><td>8945</td><td>0.731</td></tr>
+<tr><td>http-proxy</td><td>Tinyproxy</td><td>1.8.2</td><td></td><td></td><td></td><td>7103</td><td>0.58</td></tr>
+<tr><td>http</td><td>MikroTik router http config</td><td></td><td></td><td></td><td>router</td><td>7090</td><td>0.579</td></tr>
+<tr><td>http</td><td>Apache</td><td></td><td></td><td></td><td></td><td>6714</td><td>0.548</td></tr>
+<tr><td>http-proxy</td><td>Tinyproxy</td><td>1.8.3</td><td></td><td></td><td></td><td>4933</td><td>0.403</td></tr>
+<tr><td>http</td><td>Synacast Media Server</td><td>1.0</td><td></td><td></td><td></td><td>4740</td><td>0.387</td></tr>
+<tr><td>http</td><td>mini_httpd</td><td>1.19 19dec2003</td><td></td><td></td><td></td><td>4698</td><td>0.384</td></tr>
+<tr><td>http</td><td>Avtech AVN801 network camera</td><td>1.0</td><td>UPnP 1.0</td><td></td><td>webcam</td><td>4634</td><td>0.379</td></tr>
+<tr><td>http</td><td>Boa httpd</td><td></td><td></td><td></td><td></td><td>4620</td><td>0.377</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.21</td><td>(Unix) PHP/5.2.17p1</td><td></td><td></td><td>4487</td><td>0.367</td></tr>
+<tr><td>http</td><td>Cdn Cache Server V2.0</td><td></td><td></td><td></td><td></td><td>4152</td><td>0.339</td></tr>
+<tr><td>irc</td><td>Dancer ircd</td><td></td><td></td><td></td><td></td><td>4087</td><td>0.334</td></tr>
+<tr><td>http</td><td>SonicWALL</td><td></td><td></td><td></td><td>firewall</td><td>4040</td><td>0.33</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.26</td><td></td><td></td><td></td><td>3691</td><td>0.302</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td>7.5</td><td></td><td>Windows</td><td></td><td>3584</td><td>0.293</td></tr>
+<tr><td>http</td><td>bukkit MusicService</td><td></td><td></td><td></td><td></td><td>3378</td><td>0.276</td></tr>
+<tr><td>http</td><td>GoAhead-Webs httpd</td><td></td><td>Ovislink WAP http config</td><td></td><td>WAP</td><td>3094</td><td>0.253</td></tr>
+<tr><td>http</td><td>MikroTik router config httpd</td><td></td><td></td><td>RouterOS</td><td>router</td><td>3021</td><td>0.247</td></tr>
+<tr><td>http</td><td>webserver</td><td>1.0</td><td></td><td></td><td></td><td>2908</td><td>0.238</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.29</td><td></td><td></td><td></td><td>2857</td><td>0.233</td></tr>
+<tr><td>http</td><td>Apache</td><td></td><td>SSL-only mode</td><td></td><td></td><td>2850</td><td>0.233</td></tr>
+<tr><td>http</td><td>Pike v7.8 release 517</td><td></td><td></td><td></td><td></td><td>2683</td><td>0.219</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.3</td><td>protocol 2.0</td><td></td><td></td><td>2597</td><td>0.212</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.3</td><td>(CentOS)</td><td></td><td></td><td>2500</td><td>0.204</td></tr>
+<tr><td>chat</td><td>AIM or ICQ server</td><td></td><td></td><td></td><td></td><td>2386</td><td>0.195</td></tr>
+<tr><td>eggdrop</td><td>Eggdrop IRC bot console</td><td>1.6.21</td><td></td><td></td><td></td><td>2305</td><td>0.188</td></tr>
+<tr><td>http</td><td>nginx</td><td></td><td></td><td></td><td></td><td>2223</td><td>0.182</td></tr>
+<tr><td>http</td><td>Buffalo AirStation http config</td><td></td><td></td><td></td><td>WAP</td><td>2176</td><td>0.178</td></tr>
+<tr><td>ssl</td><td>TLS</td><td>1.0</td><td></td><td></td><td></td><td>2154</td><td>0.176</td></tr>
+<tr><td>http</td><td>Gnway Web Server</td><td></td><td></td><td></td><td></td><td>2071</td><td>0.169</td></tr>
+<tr><td>http</td><td>DrayTek Vigor 2800-series ADSL router httpd</td><td></td><td></td><td></td><td>broadband router</td><td>2052</td><td>0.168</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td>7.0</td><td></td><td>Windows</td><td></td><td>2029</td><td>0.166</td></tr>
+<tr><td>http</td><td>uc-httpd</td><td>1.0.0</td><td></td><td></td><td></td><td>1942</td><td>0.159</td></tr>
+<tr><td>http</td><td>MS .NET Remoting</td><td></td><td></td><td></td><td></td><td>1885</td><td>0.154</td></tr>
+<tr><td>http</td><td>lighttpd</td><td></td><td></td><td></td><td></td><td>1867</td><td>0.153</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.25b 29dec2003</td><td></td><td></td><td></td><td>1810</td><td>0.148</td></tr>
+<tr><td>http</td><td>Allegro RomPager</td><td>4.51 UPnP/1.0</td><td>ZyXEL ZyWALL 2</td><td></td><td></td><td>1810</td><td>0.148</td></tr>
+<tr><td>http</td><td>No Information</td><td></td><td>Array Networks WebUI</td><td></td><td></td><td>1747</td><td>0.143</td></tr>
+<tr><td>http</td><td>Netwave webcam http config</td><td></td><td></td><td></td><td>webcam</td><td>1658</td><td>0.135</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.52</td><td>(Win32) PHP/5.2.6</td><td></td><td></td><td>1622</td><td>0.133</td></tr>
+<tr><td>http</td><td>Hikvision-Webs</td><td></td><td></td><td></td><td></td><td>1596</td><td>0.13</td></tr>
+<tr><td>http</td><td>Ipswitch IMail web service</td><td>8.22</td><td></td><td>Windows</td><td></td><td>1581</td><td>0.129</td></tr>
+<tr><td>http-proxy</td><td>Tinyproxy</td><td>1.6.3</td><td></td><td></td><td></td><td>1524</td><td>0.125</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.1p1 Debian 5</td><td>protocol 2.0</td><td>Linux</td><td></td><td>1521</td><td>0.124</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.3</td><td>(Red Hat)</td><td></td><td></td><td>1518</td><td>0.124</td></tr>
+<tr><td>http</td><td>nginx</td><td>5.0</td><td></td><td></td><td></td><td>1506</td><td>0.123</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.9</td><td>(Debian) PHP/5.3.3-7+squeeze8 with Suhosin-Patch mod_ssl/2.2.9 OpenSSL/0.9.8o mod_perl/2.0.4 Perl/v5.10.1</td><td></td><td></td><td>1446</td><td>0.118</td></tr>
+<tr><td>http</td><td>Linux</td><td>2.x UPnP</td><td></td><td></td><td></td><td>1427</td><td>0.117</td></tr>
+<tr><td>http</td><td>HTTPD  1.0</td><td></td><td></td><td></td><td></td><td>1406</td><td>0.115</td></tr>
+<tr><td>http</td><td>Virata-EmWeb</td><td>6.0.1</td><td>Netscreen administrative web server</td><td></td><td>firewall</td><td>1352</td><td>0.11</td></tr>
+<tr><td>http</td><td>Boa HTTPd</td><td>0.93.15</td><td></td><td></td><td></td><td>1301</td><td>0.106</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.30</td><td></td><td></td><td></td><td>1294</td><td>0.106</td></tr>
+<tr><td>http</td><td>GeoVision GeoHttpServer for webcams</td><td></td><td></td><td></td><td>webcam</td><td>1226</td><td>0.1</td></tr>
+<tr><td>opinionsquare</td><td>OpinionSquare application</td><td></td><td></td><td></td><td></td><td>1213</td><td>0.099</td></tr>
+<tr><td>http</td><td>Indy</td><td>10.0.52</td><td></td><td></td><td></td><td>1146</td><td>0.094</td></tr>
+<tr><td>http</td><td>Netwave IP camera http config</td><td></td><td></td><td></td><td>webcam</td><td>1138</td><td>0.093</td></tr>
+<tr><td>http</td><td>HTTPD  1.0</td><td></td><td>WayOS</td><td></td><td></td><td>1095</td><td>0.089</td></tr>
+<tr><td>http</td><td>Mediabolic http config</td><td>1.8.225</td><td></td><td></td><td>storage-misc</td><td>1072</td><td>0.088</td></tr>
+<tr><td>http</td><td>DVR Systems webcam http interface</td><td></td><td></td><td></td><td>webcam</td><td>1010</td><td>0.083</td></tr>
+<tr><td>http</td><td>No Information</td><td></td><td></td><td></td><td></td><td>968</td><td>0.079</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.14</td><td>(Ubuntu)</td><td></td><td></td><td>966</td><td>0.079</td></tr>
+<tr><td>http</td><td>Indy</td><td>9.00.11</td><td></td><td></td><td></td><td>959</td><td>0.078</td></tr>
+<tr><td>http</td><td>WYM httpd</td><td>1.0</td><td>Grandtec wifi webcam http config</td><td></td><td>webcam</td><td>891</td><td>0.073</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.16</td><td>(Debian)</td><td></td><td></td><td>887</td><td>0.072</td></tr>
+<tr><td>http</td><td>Microsoft HTTPAPI httpd</td><td>2.0</td><td>SSDP/UPnP</td><td>Windows</td><td></td><td>883</td><td>0.072</td></tr>
+<tr><td>arcserve</td><td>ARCserve Discovery</td><td></td><td></td><td></td><td></td><td>881</td><td>0.072</td></tr>
+<tr><td>http</td><td>uTorrent utserver web interface</td><td></td><td></td><td>Linux</td><td></td><td>875</td><td>0.071</td></tr>
+<tr><td>http</td><td>Sagem F@st router httpd</td><td></td><td></td><td></td><td>router</td><td>822</td><td>0.067</td></tr>
+<tr><td>http</td><td>Http Redirect Server</td><td>1.0</td><td></td><td></td><td></td><td>820</td><td>0.067</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.20</td><td></td><td></td><td></td><td>810</td><td>0.066</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.15</td><td>(CentOS)</td><td></td><td></td><td>786</td><td>0.064</td></tr>
+<tr><td>http</td><td>TP-LINK WR340G WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>775</td><td>0.063</td></tr>
+<tr><td>http</td><td>Intoto httpd</td><td>1.0</td><td></td><td></td><td></td><td>767</td><td>0.063</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.16</td><td>(Debian) PHP/5.3.3-7+squeeze1 with Suhosin-Patch mod_ssl/2.2.16 OpenSSL/0.9.8o</td><td></td><td></td><td>759</td><td>0.062</td></tr>
+<tr><td>http</td><td>Gordano Messaging Suite Web Server v17.01.3793</td><td></td><td></td><td></td><td></td><td>753</td><td>0.062</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.17</td><td>(Unix) PHP/5.2.17</td><td></td><td></td><td>747</td><td>0.061</td></tr>
+<tr><td>http</td><td>AIM</td><td>1.0</td><td></td><td></td><td></td><td>721</td><td>0.059</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td>5.1</td><td></td><td>Windows</td><td></td><td>719</td><td>0.059</td></tr>
+<tr><td>http</td><td>Secure Computing Sidewinder firewall http admin</td><td></td><td></td><td></td><td>firewall</td><td>717</td><td>0.059</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.27</td><td>(Unix)  (Red-Hat/Linux) mod_jk mod_ssl/2.8.12 OpenSSL/0.9.6m</td><td></td><td></td><td>706</td><td>0.058</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>3.9p1</td><td>protocol 2.0</td><td></td><td></td><td>704</td><td>0.058</td></tr>
+<tr><td>http</td><td>DD-WRT milli_httpd</td><td></td><td></td><td>Linux</td><td>WAP</td><td>697</td><td>0.057</td></tr>
+<tr><td>http</td><td>Gadspot/Avtech AV787 webcam http config</td><td></td><td></td><td></td><td>webcam</td><td>685</td><td>0.056</td></tr>
+<tr><td>http</td><td>Apache</td><td>0.6.5</td><td></td><td></td><td></td><td>672</td><td>0.055</td></tr>
+<tr><td>http</td><td>Ubicom</td><td>1.1</td><td></td><td></td><td></td><td>643</td><td>0.053</td></tr>
+<tr><td>http</td><td>D-Link DIR-300 WAP http admin</td><td></td><td></td><td></td><td>WAP</td><td>637</td><td>0.052</td></tr>
+<tr><td>printer</td><td>Panasonic mfpscdl.exe service</td><td></td><td></td><td></td><td></td><td>636</td><td>0.052</td></tr>
+<tr><td>http</td><td>Cross Web Server</td><td></td><td></td><td></td><td></td><td>625</td><td>0.051</td></tr>
+<tr><td>http</td><td>Allegro RomPager</td><td>4.07 UPnP/1.0</td><td>ZyXEL ZyWALL 2</td><td></td><td></td><td>624</td><td>0.051</td></tr>
+<tr><td>http</td><td>httpd</td><td></td><td></td><td></td><td></td><td>622</td><td>0.051</td></tr>
+<tr><td>http</td><td>TwistedWeb httpd</td><td>8.2.0</td><td></td><td></td><td></td><td>618</td><td>0.05</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.19</td><td></td><td></td><td></td><td>614</td><td>0.05</td></tr>
+<tr><td>http</td><td>redirecthttpd</td><td>1.0</td><td></td><td></td><td></td><td>607</td><td>0.05</td></tr>
+<tr><td>http</td><td>MiniServ</td><td>0.01</td><td>Webmin httpd</td><td></td><td></td><td>568</td><td>0.046</td></tr>
+<tr><td>http</td><td>Mbedthis-Appweb</td><td>2.4.0</td><td>Iomega StorCenter sohoclient</td><td>Windows</td><td></td><td>565</td><td>0.046</td></tr>
+<tr><td>http</td><td>http server 1.0</td><td></td><td></td><td></td><td></td><td>561</td><td>0.046</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.7.67</td><td></td><td></td><td></td><td>556</td><td>0.045</td></tr>
+<tr><td>telnet</td><td></td><td></td><td></td><td></td><td></td><td>554</td><td>0.045</td></tr>
+<tr><td>http</td><td>APC SmartUPS http config</td><td></td><td></td><td></td><td>power-device</td><td>539</td><td>0.044</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td>5.0</td><td></td><td>Windows</td><td></td><td>529</td><td>0.043</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) PHP/5.2.17p1</td><td></td><td></td><td>528</td><td>0.043</td></tr>
+<tr><td>http</td><td>Apache</td><td>2</td><td></td><td></td><td></td><td>528</td><td>0.043</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.21</td><td>(Unix) mod_ssl/2.2.21 OpenSSL/0.9.8r DAV/2 PHP/5.3.6</td><td></td><td></td><td>523</td><td>0.043</td></tr>
+<tr><td>http</td><td>SonicWALL firewall http config</td><td></td><td></td><td></td><td>firewall</td><td>520</td><td>0.042</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td></td><td></td><td></td><td></td><td>506</td><td>0.041</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Ubuntu)</td><td></td><td></td><td>504</td><td>0.041</td></tr>
+<tr><td>http</td><td>Caucho Resin JSP engine</td><td>3.0.19</td><td></td><td></td><td></td><td>491</td><td>0.04</td></tr>
+<tr><td>irc-proxy</td><td>psyBNC</td><td>2.3.2-9</td><td></td><td></td><td></td><td>488</td><td>0.04</td></tr>
+<tr><td>http</td><td>uTorrent WebUI</td><td></td><td></td><td>Windows</td><td></td><td>463</td><td>0.038</td></tr>
+<tr><td>http</td><td>WYM httpd</td><td>1.0</td><td></td><td></td><td></td><td>461</td><td>0.038</td></tr>
+<tr><td>http</td><td>POSIX</td><td>1.0 UPnP</td><td></td><td></td><td></td><td>458</td><td>0.037</td></tr>
+<tr><td>http</td><td>Oracle Containers for J2EE</td><td></td><td></td><td></td><td></td><td>458</td><td>0.037</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.17</td><td>(Unix) PHP/5.2.17p1</td><td></td><td></td><td>452</td><td>0.037</td></tr>
+<tr><td>http-proxy</td><td>CCProxy http proxy</td><td></td><td>unauthorized</td><td>Windows</td><td></td><td>440</td><td>0.036</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.46</td><td>(Red Hat)</td><td></td><td></td><td>423</td><td>0.035</td></tr>
+<tr><td>http</td><td>HTTP Software 1.1</td><td></td><td></td><td></td><td></td><td>422</td><td>0.034</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>2.7.STABLE9</td><td></td><td></td><td></td><td>421</td><td>0.034</td></tr>
+<tr><td>http</td><td>Sipura SPA VoIP http config</td><td></td><td></td><td></td><td>VoIP adapter</td><td>414</td><td>0.034</td></tr>
+<tr><td>remoting</td><td>MS .NET Remoting services</td><td></td><td></td><td></td><td></td><td>408</td><td>0.033</td></tr>
+<tr><td>http</td><td>Linksys router http config</td><td></td><td>device model BEFSR41</td><td></td><td>WAP</td><td>407</td><td>0.033</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.2.1</td><td></td><td></td><td></td><td>398</td><td>0.033</td></tr>
+<tr><td>http-proxy</td><td>Tinyproxy</td><td>1.8.1</td><td></td><td></td><td></td><td>397</td><td>0.032</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.8</td><td>(Win32) PHP/5.2.6</td><td></td><td></td><td>396</td><td>0.032</td></tr>
+<tr><td>http</td><td>CherryPy httpd</td><td>3.2.0</td><td></td><td></td><td></td><td>394</td><td>0.032</td></tr>
+<tr><td>http</td><td>Hoson Embedded Web System</td><td></td><td></td><td></td><td></td><td>388</td><td>0.032</td></tr>
+<tr><td>http</td><td>Virata-EmWeb</td><td>6.0.1</td><td></td><td></td><td></td><td>385</td><td>0.031</td></tr>
+<tr><td>http</td><td>Jetty</td><td>6.1.x</td><td></td><td></td><td></td><td>384</td><td>0.031</td></tr>
+<tr><td>http</td><td>TP-LINK Router</td><td></td><td>TP-LINK Router R478</td><td></td><td></td><td>382</td><td>0.031</td></tr>
+<tr><td>http</td><td>Draytek Vigor ADSL router webadmin</td><td></td><td></td><td></td><td>broadband router</td><td>381</td><td>0.031</td></tr>
+<tr><td>vnc</td><td>VNC</td><td></td><td>protocol 3.8</td><td></td><td></td><td>376</td><td>0.031</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.53</td><td>(Win32) PHP/4.3.9</td><td></td><td></td><td>373</td><td>0.03</td></tr>
+<tr><td>http</td><td>yawcam</td><td>0.3.8</td><td></td><td></td><td></td><td>370</td><td>0.03</td></tr>
+<tr><td>http-proxy</td><td>MikroTik http proxy</td><td></td><td></td><td></td><td></td><td>370</td><td>0.03</td></tr>
+<tr><td>http</td><td>Mbedthis-Appweb</td><td>2.0.4</td><td></td><td></td><td></td><td>368</td><td>0.03</td></tr>
+<tr><td>http</td><td>Sun ONE Web Server</td><td>6.1</td><td></td><td></td><td></td><td>367</td><td>0.03</td></tr>
+<tr><td>jabber</td><td>jit-transport jabber-ICQ transport</td><td></td><td></td><td></td><td></td><td>363</td><td>0.03</td></tr>
+<tr><td>http</td><td>Netgear DG834G router http config</td><td></td><td></td><td></td><td>router</td><td>361</td><td>0.029</td></tr>
+<tr><td>http</td><td>ACproxy</td><td>1.0.0</td><td></td><td></td><td></td><td>361</td><td>0.029</td></tr>
+<tr><td>http</td><td>Jetty</td><td>8.0.y.z-SNAPSHOT</td><td></td><td></td><td></td><td>359</td><td>0.029</td></tr>
+<tr><td>bittorrent-tracker</td><td>MLDonkey P2P client http config</td><td></td><td></td><td></td><td></td><td>358</td><td>0.029</td></tr>
+<tr><td>ftp</td><td>Microsoft ftpd</td><td></td><td></td><td>Windows</td><td></td><td>356</td><td>0.029</td></tr>
+<tr><td>soap</td><td>gSOAP soap</td><td>2.7</td><td></td><td></td><td></td><td>351</td><td>0.029</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.15</td><td></td><td></td><td></td><td>349</td><td>0.029</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.3</td><td>protocol 2.0</td><td></td><td></td><td>339</td><td>0.028</td></tr>
+<tr><td>http</td><td>TP-LINK WR740N WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>339</td><td>0.028</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) PHP/5.3.10</td><td></td><td></td><td>337</td><td>0.028</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>2.6.STABLE21</td><td></td><td></td><td></td><td>332</td><td>0.027</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.18</td><td></td><td></td><td></td><td>330</td><td>0.027</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>3.8.1p1 Debian 8.sarge.4</td><td>protocol 2.0</td><td>Linux</td><td></td><td>328</td><td>0.027</td></tr>
+<tr><td>http</td><td>Mbedthis-Appweb</td><td>2.4.0</td><td></td><td></td><td></td><td>327</td><td>0.027</td></tr>
+<tr><td>http</td><td>Apache Tomcat/Coyote JSP engine</td><td>1.1</td><td>Tomcat 5.5</td><td></td><td></td><td>326</td><td>0.027</td></tr>
+<tr><td>http</td><td>Icecast streaming media server</td><td></td><td></td><td></td><td></td><td>324</td><td>0.026</td></tr>
+<tr><td>http</td><td>BusyBox httpd</td><td></td><td></td><td>Linux</td><td>media device</td><td>324</td><td>0.026</td></tr>
+<tr><td>vnc</td><td>RealVNC Personal</td><td></td><td>protocol 4.0</td><td></td><td></td><td>308</td><td>0.025</td></tr>
+<tr><td>http</td><td>Embedded Web Server</td><td></td><td></td><td></td><td></td><td>303</td><td>0.025</td></tr>
+<tr><td>http-proxy</td><td>Haproxy http proxy</td><td></td><td></td><td></td><td>load balancer</td><td>295</td><td>0.024</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.52</td><td>(Red Hat)</td><td></td><td></td><td>295</td><td>0.024</td></tr>
+<tr><td>http</td><td>CherryPy httpd</td><td>3.2.0rc1</td><td></td><td></td><td></td><td>294</td><td>0.024</td></tr>
+<tr><td>http-proxy</td><td>Microsoft Foundation Class httpd</td><td>1.0</td><td></td><td>Windows</td><td></td><td>291</td><td>0.024</td></tr>
+<tr><td>http</td><td>GNUMP3d streaming server</td><td>3.0</td><td></td><td></td><td></td><td>290</td><td>0.024</td></tr>
+<tr><td>http</td><td>BusyBox httpd</td><td>1.13</td><td></td><td>Linux</td><td></td><td>290</td><td>0.024</td></tr>
+<tr><td>irc</td><td>Unreal ircd</td><td></td><td></td><td></td><td></td><td>286</td><td>0.023</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.20</td><td>(Ubuntu)</td><td></td><td></td><td>286</td><td>0.023</td></tr>
+<tr><td>http</td><td>H3C-Miniware-Webs</td><td></td><td></td><td></td><td></td><td>276</td><td>0.023</td></tr>
+<tr><td>http</td><td>Yawcam webcam viewer httpd</td><td>0.3.8</td><td></td><td></td><td></td><td>274</td><td>0.022</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.17</td><td>(Ubuntu)</td><td></td><td></td><td>272</td><td>0.022</td></tr>
+<tr><td>http</td><td>WindWeb</td><td>2.0</td><td></td><td></td><td></td><td>270</td><td>0.022</td></tr>
+<tr><td>rtsp</td><td>Avtech MPEG4 DVR control rtspd</td><td></td><td></td><td></td><td></td><td>265</td><td>0.022</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.21b 23apr2001</td><td></td><td></td><td></td><td>264</td><td>0.022</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td></td><td>unauthorized</td><td></td><td></td><td>261</td><td>0.021</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.22</td><td></td><td></td><td></td><td>260</td><td>0.021</td></tr>
+<tr><td>http</td><td>Router</td><td></td><td>TP-LINK Wireless Router WR340G</td><td></td><td></td><td>259</td><td>0.021</td></tr>
+<tr><td>http</td><td>KwartzCtl</td><td>2.0</td><td></td><td></td><td></td><td>259</td><td>0.021</td></tr>
+<tr><td>http</td><td>Jetty</td><td>6.1.14</td><td></td><td></td><td></td><td>258</td><td>0.021</td></tr>
+<tr><td>http</td><td>Cisco IOS http config</td><td></td><td></td><td>IOS</td><td></td><td>257</td><td>0.021</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) mod_ssl/2.2.22 OpenSSL/0.9.8e-fips-rhel5 mod_bwlimited/1.4 PHP/5.3.13</td><td></td><td></td><td>257</td><td>0.021</td></tr>
+<tr><td>http</td><td>dcs-lig-httpd</td><td></td><td></td><td></td><td></td><td>248</td><td>0.02</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.16</td><td>(Unix) DAV/2 PHP/5.2.14</td><td></td><td></td><td>245</td><td>0.02</td></tr>
+<tr><td>ssh</td><td>MikroTik RouterOS sshd</td><td></td><td>protocol 2.0</td><td>Linux</td><td>router</td><td>244</td><td>0.02</td></tr>
+<tr><td>http</td><td>Oracle-Application-Server-11g</td><td></td><td></td><td></td><td></td><td>244</td><td>0.02</td></tr>
+<tr><td>xml</td><td></td><td></td><td></td><td></td><td></td><td>239</td><td>0.02</td></tr>
+<tr><td>http</td><td>Netgear DG834 router http config</td><td></td><td></td><td></td><td>broadband router</td><td>239</td><td>0.02</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.23</td><td></td><td></td><td></td><td>238</td><td>0.019</td></tr>
+<tr><td>http</td><td>Boa</td><td>0.93.15</td><td></td><td></td><td></td><td>238</td><td>0.019</td></tr>
+<tr><td>http</td><td>TwistedWeb httpd</td><td>10.2.0</td><td></td><td></td><td></td><td>237</td><td>0.019</td></tr>
+<tr><td>http</td><td>thttpd</td><td></td><td>Panasonic BB-HCM511 IP camera http config</td><td></td><td></td><td>236</td><td>0.019</td></tr>
+<tr><td>http</td><td>YAMAHA-RT</td><td></td><td></td><td></td><td></td><td>234</td><td>0.019</td></tr>
+<tr><td>http</td><td>Jetty</td><td>8.0.0.M3</td><td></td><td></td><td></td><td>234</td><td>0.019</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.7.65</td><td></td><td></td><td></td><td>230</td><td>0.019</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.22</td><td></td><td></td><td></td><td>230</td><td>0.019</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(FreeBSD) PHP/5.3.10 with Suhosin-Patch mod_ssl/2.2.22 OpenSSL/0.9.8q DAV/2</td><td></td><td></td><td>228</td><td>0.019</td></tr>
+<tr><td>http</td><td>PDR-M800</td><td>1.0</td><td></td><td></td><td></td><td>227</td><td>0.019</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.16</td><td>(Ubuntu)</td><td></td><td></td><td>227</td><td>0.019</td></tr>
+<tr><td>http</td><td>TP-LINK WR841N WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>221</td><td>0.018</td></tr>
+<tr><td>http</td><td>Netgear WGR614v7 WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>221</td><td>0.018</td></tr>
+<tr><td>http</td><td></td><td></td><td>General User</td><td></td><td></td><td>221</td><td>0.018</td></tr>
+<tr><td>http</td><td>axhttpd</td><td>1.3.4</td><td></td><td></td><td></td><td>221</td><td>0.018</td></tr>
+<tr><td>upnp</td><td>Conexant-EmWeb</td><td>6.1.0</td><td>Billion 740- or 7400-series ADSL router UPnP; UPnP 1.0</td><td></td><td>WAP</td><td>220</td><td>0.018</td></tr>
+<tr><td>http</td><td>RemotelyAnywhere remote PC management httpd</td><td>8.0.668</td><td></td><td></td><td></td><td>220</td><td>0.018</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>2.7.STABLE7</td><td></td><td></td><td></td><td>216</td><td>0.018</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.2</td><td>(Unix)</td><td></td><td></td><td>212</td><td>0.017</td></tr>
+<tr><td>http</td><td>D-Link DI-804HV http config</td><td></td><td></td><td></td><td>WAP</td><td>211</td><td>0.017</td></tr>
+<tr><td>http</td><td>Netgear WGR614v9 WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>210</td><td>0.017</td></tr>
+<tr><td>http</td><td>TP-LINK WR541G/542G WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>209</td><td>0.017</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.19</td><td>(Win32) PHP/5.2.17</td><td></td><td></td><td>205</td><td>0.017</td></tr>
+<tr><td>http</td><td></td><td></td><td>NETGEAR DG834Gv5</td><td></td><td></td><td>203</td><td>0.017</td></tr>
+<tr><td>http</td><td>Jetty</td><td>6.1.26</td><td></td><td></td><td></td><td>200</td><td>0.016</td></tr>
+<tr><td>http</td><td>Netgear DGN1000 router http config</td><td></td><td></td><td></td><td>router</td><td>199</td><td>0.016</td></tr>
+<tr><td>http</td><td>Linksys router http config</td><td></td><td>device model BEFSX41</td><td></td><td>WAP</td><td>198</td><td>0.016</td></tr>
+<tr><td>http-proxy</td><td>Tinyproxy</td><td>1.6.5</td><td></td><td></td><td></td><td>197</td><td>0.016</td></tr>
+<tr><td>http</td><td>D-Link DI-524 http config</td><td></td><td></td><td></td><td>WAP</td><td>197</td><td>0.016</td></tr>
+<tr><td>http</td><td>QNAP TS-219P NAS http config</td><td>1.0</td><td></td><td></td><td>storage-misc</td><td>193</td><td>0.016</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.11</td><td>(Win32) PHP/5.3.0</td><td></td><td></td><td>193</td><td>0.016</td></tr>
+<tr><td>http</td><td>Boa HTTPd</td><td>0.94.11</td><td></td><td></td><td></td><td>192</td><td>0.016</td></tr>
+<tr><td>http</td><td>Microsoft IIS</td><td></td><td></td><td>Windows</td><td></td><td>191</td><td>0.016</td></tr>
+<tr><td>http</td><td>Embedded HTTP Server.</td><td></td><td></td><td></td><td></td><td>191</td><td>0.016</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.16</td><td>(Win32) PHP/5.2.14</td><td></td><td></td><td>190</td><td>0.016</td></tr>
+<tr><td>vnc</td><td>RealVNC Enterprise</td><td></td><td>protocol 4.1</td><td></td><td></td><td>184</td><td>0.015</td></tr>
+<tr><td>http</td><td>Gordano Messaging Suite Web Server v10.03.3304</td><td></td><td></td><td></td><td></td><td>184</td><td>0.015</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>3.9p1</td><td>protocol 1.99</td><td></td><td></td><td>182</td><td>0.015</td></tr>
+<tr><td>http</td><td>Zimbra http config</td><td></td><td></td><td></td><td></td><td>182</td><td>0.015</td></tr>
+<tr><td>http</td><td>Indy</td><td>9.00.10</td><td></td><td></td><td></td><td>182</td><td>0.015</td></tr>
+<tr><td>http</td><td>GoAhead-Webs httpd</td><td></td><td>Router with realtek 8181 chipset http config</td><td></td><td>router</td><td>181</td><td>0.015</td></tr>
+<tr><td>http</td><td>Tornado httpd</td><td>2.1.1</td><td></td><td></td><td></td><td>178</td><td>0.015</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.9</td><td>(Debian)</td><td></td><td></td><td>176</td><td>0.014</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.48</td><td>(Unix) mod_fastcgi/2.4.0</td><td></td><td></td><td>172</td><td>0.014</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.5p1 Debian 6+squeeze2</td><td>protocol 2.0</td><td>Linux</td><td></td><td>171</td><td>0.014</td></tr>
+<tr><td>http</td><td>WEB SERVER</td><td></td><td>Multi-Homing Gateway Administration Tools</td><td></td><td></td><td>171</td><td>0.014</td></tr>
+<tr><td>http</td><td>FusionReactor web server monitor</td><td></td><td></td><td></td><td></td><td>171</td><td>0.014</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.63</td><td>(Unix) PHP/5.3.2 DAV/2</td><td></td><td></td><td>168</td><td>0.014</td></tr>
+<tr><td>http</td><td>MiniServ</td><td>1.580</td><td>Webmin httpd</td><td></td><td></td><td>166</td><td>0.014</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.5</td><td>protocol 1.99</td><td></td><td></td><td>164</td><td>0.013</td></tr>
+<tr><td>http</td><td>siyou server</td><td></td><td></td><td></td><td></td><td>164</td><td>0.013</td></tr>
+<tr><td>http</td><td></td><td></td><td>NETGEAR DGN2200</td><td></td><td></td><td>164</td><td>0.013</td></tr>
+<tr><td>http</td><td>ZNC IRC bouncer http config</td><td>0.097 or later</td><td></td><td></td><td></td><td>163</td><td>0.013</td></tr>
+<tr><td>http</td><td>Router</td><td></td><td>TP-LINK Router R410</td><td></td><td></td><td>163</td><td>0.013</td></tr>
+<tr><td>directconnect</td><td>Direct Connect P2P</td><td></td><td></td><td>Windows</td><td></td><td>162</td><td>0.013</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.21</td><td>(Win32) mod_ssl/2.2.21 OpenSSL/1.0.0e PHP/5.3.8 mod_perl/2.0.4 Perl/v5.10.1</td><td></td><td></td><td>160</td><td>0.013</td></tr>
+<tr><td>http-proxy</td><td>Tinyproxy</td><td>1.6.4</td><td></td><td></td><td></td><td>159</td><td>0.013</td></tr>
+<tr><td>http</td><td>Yawcam webcam viewer httpd</td><td>0.3.7</td><td></td><td></td><td></td><td>157</td><td>0.013</td></tr>
+<tr><td>http</td><td>nexg_httpd</td><td></td><td></td><td></td><td></td><td>157</td><td>0.013</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.9</td><td>(Win32) PHP/5.2.6</td><td></td><td></td><td>156</td><td>0.013</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.37</td><td>(Unix) PHP/4.4.6 mod_ssl/2.8.28 OpenSSL/0.9.8d</td><td></td><td></td><td>155</td><td>0.013</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.5</td><td>protocol 2.0</td><td></td><td></td><td>153</td><td>0.012</td></tr>
+<tr><td>http</td><td>TopCMM Server</td><td></td><td></td><td></td><td></td><td>151</td><td>0.012</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.3</td><td></td><td></td><td></td><td>151</td><td>0.012</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.27</td><td>(Unix)  (Red-Hat/Linux) mod_ssl/2.8.12 OpenSSL/0.9.6b PHP/4.1.2</td><td></td><td></td><td>150</td><td>0.012</td></tr>
+<tr><td>http</td><td>Router Web Config System</td><td></td><td></td><td></td><td></td><td>149</td><td>0.012</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.17</td><td>(Win32) PHP/5.3.5</td><td></td><td></td><td>148</td><td>0.012</td></tr>
+<tr><td>http</td><td>TP-LINK WR941N WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>147</td><td>0.012</td></tr>
+<tr><td>http</td><td>LuCI Lua http config</td><td></td><td></td><td></td><td></td><td>147</td><td>0.012</td></tr>
+<tr><td>http</td><td>Gordano Web Server v7.02.3037</td><td></td><td></td><td></td><td></td><td>145</td><td>0.012</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix)</td><td></td><td></td><td>145</td><td>0.012</td></tr>
+<tr><td>http</td><td>Generic router http config</td><td></td><td></td><td></td><td>router</td><td>144</td><td>0.012</td></tr>
+<tr><td>http</td><td>authproxy http server</td><td>0.01</td><td></td><td></td><td></td><td>144</td><td>0.012</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.40</td><td>(Red Hat Linux)</td><td></td><td></td><td>144</td><td>0.012</td></tr>
+<tr><td>http</td><td>Waveplus HTTPD</td><td></td><td></td><td></td><td></td><td>142</td><td>0.012</td></tr>
+<tr><td>http</td><td>MS-SDK-HttpServer</td><td>1.0</td><td></td><td></td><td></td><td>142</td><td>0.012</td></tr>
+<tr><td>http</td><td>DD-WRT milli_httpd</td><td></td><td>Linksys WRT54G http config</td><td>Linux</td><td>WAP</td><td>141</td><td>0.012</td></tr>
+<tr><td>http</td><td>Lotus Domino httpd</td><td></td><td></td><td></td><td></td><td>140</td><td>0.011</td></tr>
+<tr><td>ftp</td><td></td><td></td><td></td><td></td><td></td><td>140</td><td>0.011</td></tr>
+<tr><td>irc-proxy</td><td>ShroudBNC irc-proxy</td><td>1.1 revision 371</td><td></td><td></td><td></td><td>139</td><td>0.011</td></tr>
+<tr><td>http</td><td>Switch</td><td></td><td></td><td></td><td></td><td>139</td><td>0.011</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.6</td><td></td><td></td><td></td><td>138</td><td>0.011</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.64</td><td>(Unix) PHP/5.3.5 DAV/2</td><td></td><td></td><td>137</td><td>0.011</td></tr>
+<tr><td>http</td><td>PunkBuster http config</td><td></td><td>Game: COD4</td><td></td><td></td><td>136</td><td>0.011</td></tr>
+<tr><td>irc-proxy</td><td>psyBNC</td><td>2.3.2-7</td><td></td><td></td><td></td><td>135</td><td>0.011</td></tr>
+<tr><td>http</td><td>Linksys PAP2 VoIP http config</td><td></td><td></td><td></td><td>VoIP adapter</td><td>135</td><td>0.011</td></tr>
+<tr><td>http</td><td>AddPac AP200B VoIP gateway http config</td><td></td><td></td><td></td><td>VoIP adapter</td><td>135</td><td>0.011</td></tr>
+<tr><td>http</td><td></td><td></td><td>2_WAN_QVM_Router</td><td></td><td></td><td>135</td><td>0.011</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.25b-lxc 29dec2003</td><td></td><td></td><td></td><td>134</td><td>0.011</td></tr>
+<tr><td>http</td><td>Sun AnswerBook2 httpd</td><td>4.2a7</td><td>Inso; sun5</td><td></td><td></td><td>134</td><td>0.011</td></tr>
+<tr><td>http</td><td>Microsoft Windows Media Server</td><td>9.01.01.5001</td><td></td><td>Windows</td><td></td><td>134</td><td>0.011</td></tr>
+<tr><td>http</td><td>FRITZ!Box http config</td><td></td><td></td><td></td><td>broadband router</td><td>133</td><td>0.011</td></tr>
+<tr><td>http</td><td>DrcomServer1.0</td><td></td><td></td><td></td><td></td><td>133</td><td>0.011</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.9</td><td>(Debian) PHP/5.2.6-1+lenny3 with Suhosin-Patch mod_perl/2.0.4 Perl/v5.10.0</td><td></td><td></td><td>132</td><td>0.011</td></tr>
+<tr><td>http</td><td>Dreambox httpd</td><td></td><td></td><td></td><td>media device</td><td>131</td><td>0.011</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.31</td><td>(Unix) PHP/4.3.3 mod_ssl/2.8.19 OpenSSL/0.9.7d</td><td></td><td></td><td>131</td><td>0.011</td></tr>
+<tr><td>ftp</td><td>vsftpd (before 2.0.8) or WU-FTPD</td><td></td><td></td><td></td><td></td><td>131</td><td>0.011</td></tr>
+<tr><td>http</td><td>Tornado httpd</td><td>2.2</td><td></td><td></td><td></td><td>130</td><td>0.011</td></tr>
+<tr><td>http</td><td>Kerio MailServer http config</td><td></td><td></td><td></td><td></td><td>130</td><td>0.011</td></tr>
+<tr><td>http</td><td>Netscape Enterprise httpd</td><td>6.0</td><td></td><td></td><td></td><td>129</td><td>0.011</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.13</td><td></td><td></td><td></td><td>127</td><td>0.01</td></tr>
+<tr><td>http</td><td>WebLogic httpd</td><td></td><td></td><td></td><td></td><td>126</td><td>0.01</td></tr>
+<tr><td>http</td><td>NormaCS Server</td><td></td><td></td><td></td><td></td><td>126</td><td>0.01</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.5</td><td></td><td></td><td></td><td>126</td><td>0.01</td></tr>
+<tr><td>http</td><td>ISS Autoscope</td><td></td><td></td><td></td><td></td><td>126</td><td>0.01</td></tr>
+<tr><td>http</td><td>HttpFileServer httpd</td><td>2.2f</td><td></td><td>Windows</td><td></td><td>126</td><td>0.01</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.41</td><td>(Unix) PHP/5.2.14 mod_ssl/2.8.31 OpenSSL/0.9.8o</td><td></td><td></td><td>126</td><td>0.01</td></tr>
+<tr><td>http</td><td>Techno Vision Security System http config</td><td>2.0</td><td></td><td></td><td>webcam</td><td>125</td><td>0.01</td></tr>
+<tr><td>http</td><td>linux</td><td></td><td></td><td></td><td></td><td>125</td><td>0.01</td></tr>
+<tr><td>http</td><td>Winstone Servlet Engine</td><td>0.9.10</td><td>Servlet 2.5</td><td></td><td></td><td>124</td><td>0.01</td></tr>
+<tr><td>http</td><td>Router</td><td></td><td>TP-LINK Router R860</td><td></td><td></td><td>124</td><td>0.01</td></tr>
+<tr><td>http</td><td>OpenDNS Guide</td><td></td><td></td><td></td><td></td><td>124</td><td>0.01</td></tr>
+<tr><td>http</td><td>TRENDnet TV-IP110w or TV-IP422W webcam display httpd</td><td></td><td></td><td></td><td>webcam</td><td>123</td><td>0.01</td></tr>
+<tr><td>http</td><td>Microsoft-HTTPAPI</td><td>2.0</td><td></td><td></td><td></td><td>123</td><td>0.01</td></tr>
+<tr><td>http</td><td>Allegro RomPager</td><td>4.03</td><td></td><td></td><td></td><td>123</td><td>0.01</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>3.9.0p1</td><td>protocol 2.0</td><td></td><td></td><td>120</td><td>0.01</td></tr>
+<tr><td>http</td><td>Tornado httpd</td><td>2.3</td><td></td><td></td><td></td><td>119</td><td>0.01</td></tr>
+<tr><td>http</td><td>Router</td><td></td><td>TP-LINK Wireless Router WR541G/542G</td><td></td><td></td><td>117</td><td>0.01</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.54</td><td></td><td></td><td></td><td>117</td><td>0.01</td></tr>
+<tr><td>http</td><td>IP_SHARER WEB 1.0</td><td></td><td></td><td></td><td></td><td>117</td><td>0.01</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) mod_ssl/2.2.22 OpenSSL/0.9.8r DAV/2 PHP/5.4.4</td><td></td><td></td><td>117</td><td>0.01</td></tr>
+<tr><td>http</td><td>uhttpd</td><td>1.0.0</td><td>Netgear WNDR3700 WAP http config</td><td></td><td>WAP</td><td>116</td><td>0.009</td></tr>
+<tr><td>http</td><td>TP-LINK Router</td><td></td><td>TP-LINK Router R488</td><td></td><td></td><td>116</td><td>0.009</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>2.5.STABLE14</td><td></td><td></td><td></td><td>116</td><td>0.009</td></tr>
+<tr><td>http</td><td>JDav server 1.0</td><td></td><td></td><td></td><td></td><td>116</td><td>0.009</td></tr>
+<tr><td>http</td><td>Oracle XML DB Enterprise Edition httpd</td><td></td><td></td><td></td><td></td><td>115</td><td>0.009</td></tr>
+<tr><td>http</td><td>Jetty</td><td></td><td></td><td></td><td></td><td>115</td><td>0.009</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.41</td><td>(Unix) PHP/5.2.14 mod_ssl/2.8.31 OpenSSL/0.9.8p</td><td></td><td></td><td>115</td><td>0.009</td></tr>
+<tr><td>http</td><td>webcamXP httpd</td><td>5</td><td></td><td>Windows</td><td></td><td>113</td><td>0.009</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.33</td><td></td><td></td><td></td><td>113</td><td>0.009</td></tr>
+<tr><td>http</td><td>Httpd</td><td></td><td></td><td></td><td></td><td>112</td><td>0.009</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.17</td><td>(Unix) mod_ssl/2.2.17 OpenSSL/0.9.8r DAV/2 PHP/5.3.6</td><td></td><td></td><td>111</td><td>0.009</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.15</td><td></td><td></td><td></td><td>110</td><td>0.009</td></tr>
+<tr><td>http</td><td>Oracle Application Server 11g httpd</td><td></td><td></td><td></td><td></td><td>109</td><td>0.009</td></tr>
+<tr><td>http</td><td>Node.js</td><td></td><td>Express middleware</td><td></td><td></td><td>109</td><td>0.009</td></tr>
+<tr><td>http</td><td>stats.mod</td><td>1.3.3dev1</td><td></td><td></td><td></td><td>108</td><td>0.009</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) mod_ssl/2.2.22 OpenSSL/0.9.8e-fips-rhel5 mod_bwlimited/1.4</td><td></td><td></td><td>108</td><td>0.009</td></tr>
+<tr><td>http</td><td>Western Digital My Book http config</td><td></td><td></td><td></td><td>storage-misc</td><td>107</td><td>0.009</td></tr>
+<tr><td>http</td><td>Router</td><td></td><td>TP-LINK Router R460</td><td></td><td></td><td>107</td><td>0.009</td></tr>
+<tr><td>http</td><td>Netgear or Linksys WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>107</td><td>0.009</td></tr>
+<tr><td>http</td><td>HttpFileServer httpd</td><td>2.3 beta</td><td></td><td>Windows</td><td></td><td>107</td><td>0.009</td></tr>
+<tr><td>http</td><td>Apache Tomcat/Coyote JSP engine</td><td>1.0</td><td></td><td></td><td></td><td>107</td><td>0.009</td></tr>
+<tr><td>http</td><td>TRENDnet TV-IP100 or TV-IP110 webcam display httpd</td><td></td><td></td><td></td><td>webcam</td><td>106</td><td>0.009</td></tr>
+<tr><td>http</td><td>HTTPServer</td><td></td><td></td><td></td><td></td><td>106</td><td>0.009</td></tr>
+<tr><td>http</td><td>CCcam card sharing system http config</td><td></td><td></td><td></td><td></td><td>106</td><td>0.009</td></tr>
+<tr><td>http</td><td>WYM httpd</td><td>1.0</td><td>IP-Video embedded camera http config</td><td></td><td>webcam</td><td>105</td><td>0.009</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>3.1.19</td><td></td><td></td><td></td><td>104</td><td>0.008</td></tr>
+<tr><td>http</td><td>GoAhead-Webs httpd</td><td></td><td>LogiLink WC0002B webcam http config</td><td></td><td></td><td>104</td><td>0.008</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.3</td><td>protocol 1.99</td><td></td><td></td><td>103</td><td>0.008</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.2.0 r12051717-105e135</td><td></td><td></td><td></td><td>103</td><td>0.008</td></tr>
+<tr><td>http</td><td>Airlink 101 or TRENDnet TVIP-422w webcam http config</td><td></td><td></td><td></td><td>webcam</td><td>103</td><td>0.008</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.4p1</td><td>FreeBSD 20100308; protocol 2.0</td><td>FreeBSD</td><td></td><td>102</td><td>0.008</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) mod_ssl/2.2.22 OpenSSL/1.0.0h PHP/5.3.10</td><td></td><td></td><td>102</td><td>0.008</td></tr>
+<tr><td>telnet</td><td>Linux telnetd</td><td></td><td></td><td>Linux</td><td></td><td>101</td><td>0.008</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.21b 23apr2001</td><td>Built-in PHP</td><td></td><td></td><td>101</td><td>0.008</td></tr>
+<tr><td>http</td><td>SentinelServer</td><td>Ymor 2009</td><td></td><td></td><td></td><td>101</td><td>0.008</td></tr>
+<tr><td>http</td><td>GoAhead-Webs</td><td></td><td></td><td></td><td></td><td>101</td><td>0.008</td></tr>
+<tr><td>http</td><td>Citrix Metaframe ICA Browser</td><td></td><td></td><td></td><td></td><td>101</td><td>0.008</td></tr>
+<tr><td>ssh</td><td></td><td></td><td>protocol 1.5</td><td></td><td></td><td>100</td><td>0.008</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.17</td><td>(Win32) mod_ssl/2.2.17 OpenSSL/0.9.8o PHP/5.3.4 mod_perl/2.0.4 Perl/v5.10.1</td><td></td><td></td><td>100</td><td>0.008</td></tr>
+<tr><td>http</td><td>Allegro-Software-RomPager</td><td>4.30b3</td><td></td><td></td><td></td><td>100</td><td>0.008</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.28</td><td>(Unix) mod_ssl/2.8.15 OpenSSL/0.9.8d</td><td></td><td></td><td>99</td><td>0.008</td></tr>
+<tr><td>http</td><td>Linksys WAG200G WAP http config</td><td></td><td></td><td>Linux</td><td>WAP</td><td>97</td><td>0.008</td></tr>
+<tr><td>http</td><td>Linksys router http config</td><td></td><td>device model BEFVP41</td><td></td><td>WAP</td><td>97</td><td>0.008</td></tr>
+<tr><td>ssh</td><td></td><td></td><td>protocol 2.0</td><td></td><td></td><td>96</td><td>0.008</td></tr>
+<tr><td>http</td><td>WindRiver-WebServer</td><td>4.7</td><td></td><td></td><td></td><td>96</td><td>0.008</td></tr>
+<tr><td>http</td><td>Mercury SiteScope Application Managment httpd</td><td>7.9.5.0</td><td></td><td></td><td></td><td>96</td><td>0.008</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.5p1 Debian 6+squeeze1</td><td>protocol 2.0</td><td>Linux</td><td></td><td>95</td><td>0.008</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.7.64</td><td></td><td></td><td></td><td>95</td><td>0.008</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.9</td><td>(Debian) PHP/5.2.6-1+lenny16 with Suhosin-Patch</td><td></td><td></td><td>95</td><td>0.008</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.12</td><td>(Ubuntu)</td><td></td><td></td><td>95</td><td>0.008</td></tr>
+<tr><td>ssh</td><td>Dropbear sshd</td><td>0.52</td><td>protocol 2.0</td><td>Linux</td><td></td><td>94</td><td>0.008</td></tr>
+<tr><td>socks-proxy</td><td>CCProxy socks proxy</td><td></td><td>unauthorized</td><td></td><td></td><td>94</td><td>0.008</td></tr>
+<tr><td>http</td><td>Microsoft HTTPAPI httpd</td><td>1.0</td><td>SSDP/UPnP</td><td>Windows</td><td></td><td>94</td><td>0.008</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.16</td><td>(Amazon)</td><td></td><td></td><td>94</td><td>0.008</td></tr>
+<tr><td>http</td><td>Allegro RomPager</td><td>4.01</td><td></td><td></td><td></td><td>94</td><td>0.008</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.3p1 Debian 3ubuntu7</td><td>Ubuntu Linux; protocol 2.0</td><td>Linux</td><td></td><td>93</td><td>0.008</td></tr>
+<tr><td>http</td><td>MiniServ</td><td>1.590</td><td>Webmin httpd</td><td></td><td></td><td>93</td><td>0.008</td></tr>
+<tr><td>http</td><td>LiteSpeed httpd</td><td></td><td></td><td></td><td></td><td>93</td><td>0.008</td></tr>
+<tr><td>http</td><td>httpd 1.1</td><td></td><td></td><td></td><td></td><td>93</td><td>0.008</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.6.37</td><td></td><td></td><td></td><td>92</td><td>0.008</td></tr>
+<tr><td>http</td><td>Linksys SPA942 VoIP phone http config</td><td></td><td></td><td></td><td>VoIP phone</td><td>92</td><td>0.008</td></tr>
+<tr><td>http</td><td>Grandstream HT502 VoIP router http config</td><td></td><td></td><td></td><td>VoIP adapter</td><td>92</td><td>0.008</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>2.7.STABLE3</td><td></td><td></td><td></td><td>91</td><td>0.007</td></tr>
+<tr><td>http</td><td>Henry</td><td>1.1</td><td></td><td></td><td></td><td>91</td><td>0.007</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.63</td><td>(Unix) PHP/5.2.11 DAV/2</td><td></td><td></td><td>91</td><td>0.007</td></tr>
+<tr><td>irc-proxy</td><td>psyBNC</td><td>2.3.1</td><td></td><td></td><td></td><td>90</td><td>0.007</td></tr>
+<tr><td>http</td><td>Boa HTTPd</td><td>0.92o</td><td></td><td></td><td></td><td>90</td><td>0.007</td></tr>
+<tr><td>http</td><td>Tornado httpd</td><td>2.0</td><td></td><td></td><td></td><td>89</td><td>0.007</td></tr>
+<tr><td>http</td><td>D-Link router/Airlink NAS http config</td><td></td><td></td><td></td><td></td><td>89</td><td>0.007</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.4</td><td>(Win32) PHP/5.2.3</td><td></td><td></td><td>89</td><td>0.007</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>2.6.STABLE18</td><td></td><td></td><td></td><td>88</td><td>0.007</td></tr>
+<tr><td>http</td><td></td><td></td><td>NETGEAR WGR614v10</td><td></td><td></td><td>88</td><td>0.007</td></tr>
+<tr><td>http</td><td>Mercury SiteScope Application Managment httpd</td><td>8.5</td><td></td><td></td><td></td><td>88</td><td>0.007</td></tr>
+<tr><td>http</td><td>IP_SHARER WEB</td><td>1.0</td><td>Airlink/Sitecom wireless router</td><td></td><td>router</td><td>88</td><td>0.007</td></tr>
+<tr><td>http</td><td>Rumpus httpd</td><td></td><td></td><td>Mac OS X</td><td></td><td>87</td><td>0.007</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.2.0 r12081314-e82dd0c</td><td></td><td></td><td></td><td>87</td><td>0.007</td></tr>
+<tr><td>http</td><td>Transmission BitTorrent management httpd</td><td></td><td>unauthorized</td><td></td><td></td><td>86</td><td>0.007</td></tr>
+<tr><td>svnserve</td><td>Subversion</td><td></td><td></td><td></td><td></td><td>85</td><td>0.007</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.9p1 Debian 5ubuntu1</td><td>Ubuntu Linux; protocol 2.0</td><td>Linux</td><td></td><td>85</td><td>0.007</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.5p1</td><td>FreeBSD 20061110; protocol 2.0</td><td>FreeBSD</td><td></td><td>85</td><td>0.007</td></tr>
+<tr><td>http</td><td>Zope httpd</td><td>2.5.1 (binary release</td><td>python 2.1, linux2-x86; python 2.1.3, linux2) ZServer/1.1b1</td><td></td><td></td><td>85</td><td>0.007</td></tr>
+<tr><td>http</td><td>TornadoServer</td><td>2.3</td><td></td><td></td><td></td><td>85</td><td>0.007</td></tr>
+<tr><td>http</td><td>Router</td><td></td><td>TP-LINK Wireless G Router WR340G</td><td></td><td></td><td>85</td><td>0.007</td></tr>
+<tr><td>http</td><td>dwhttpd</td><td>4.2a7 (Inso</td><td></td><td></td><td></td><td>85</td><td>0.007</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.21</td><td>(Win32) PHP/5.3.8</td><td></td><td></td><td>85</td><td>0.007</td></tr>
+<tr><td>http</td><td>Allegro RomPager</td><td>3.10</td><td></td><td></td><td></td><td>85</td><td>0.007</td></tr>
+<tr><td>http</td><td>TP-LINK Router</td><td></td><td>TP-LINK Router R4148</td><td></td><td></td><td>84</td><td>0.007</td></tr>
+<tr><td>http-proxy</td><td>Tinyproxy</td><td>1.6.2</td><td></td><td></td><td></td><td>84</td><td>0.007</td></tr>
+<tr><td>http</td><td>OwnServer1.0</td><td></td><td></td><td></td><td></td><td>84</td><td>0.007</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.2.0</td><td></td><td></td><td></td><td>84</td><td>0.007</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.14</td><td>(Unix) mod_ssl/2.2.14 OpenSSL/0.9.8e-fips-rhel5 PHP/5.2.11</td><td></td><td></td><td>84</td><td>0.007</td></tr>
+<tr><td>http</td><td>NetBox httpd</td><td>2.8 Build 4128</td><td></td><td></td><td></td><td>83</td><td>0.007</td></tr>
+<tr><td>http</td><td>Indy</td><td>8.0.25</td><td></td><td></td><td></td><td>82</td><td>0.007</td></tr>
+<tr><td>shoutcast</td><td>SHOUTcast server</td><td>1.9.8</td><td></td><td>Linux</td><td></td><td>81</td><td>0.007</td></tr>
+<tr><td>http</td><td>linux</td><td></td><td>LiteN</td><td></td><td></td><td>81</td><td>0.007</td></tr>
+<tr><td>http</td><td>Embedded HTTP Server</td><td></td><td>Linksys RVL200 VPN router http config</td><td></td><td>router</td><td>81</td><td>0.007</td></tr>
+<tr><td>http</td><td>D-Link DVS-4088S, DVS-5088S, or DVG-7062S VoIP gateway http config</td><td></td><td></td><td></td><td>VoIP adapter</td><td>81</td><td>0.007</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.16</td><td></td><td></td><td></td><td>81</td><td>0.007</td></tr>
+<tr><td>http</td><td></td><td></td><td>NETGEAR WNDR3400</td><td></td><td></td><td>80</td><td>0.007</td></tr>
+<tr><td>http</td><td>foobar2000 media player http config</td><td></td><td></td><td></td><td></td><td>80</td><td>0.007</td></tr>
+<tr><td>http</td><td>Fnord httpd</td><td>1.9</td><td></td><td></td><td></td><td>80</td><td>0.007</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.27</td><td>(Win32)</td><td></td><td></td><td>80</td><td>0.007</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>2.9p2</td><td>protocol 1.99</td><td></td><td></td><td>79</td><td>0.006</td></tr>
+<tr><td>http</td><td>Webs</td><td></td><td></td><td></td><td></td><td>79</td><td>0.006</td></tr>
+<tr><td>http</td><td>Boa HTTPd</td><td>0.94.14rc18-ipcam</td><td></td><td></td><td></td><td>79</td><td>0.006</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.17</td><td>(Fedora)</td><td></td><td></td><td>79</td><td>0.006</td></tr>
+<tr><td>http</td><td>Allegro RomPager</td><td>4.04</td><td>APC switched rack PDU http config</td><td></td><td>power-device</td><td>79</td><td>0.006</td></tr>
+<tr><td>upnp</td><td>Conexant-EmWeb</td><td>6.1.0</td><td>UPnP 1.0</td><td></td><td></td><td>78</td><td>0.006</td></tr>
+<tr><td>http</td><td>TornadoServer</td><td>2.2</td><td></td><td></td><td></td><td>78</td><td>0.006</td></tr>
+<tr><td>http</td><td>3Com switch http config</td><td></td><td></td><td></td><td>switch</td><td>78</td><td>0.006</td></tr>
+<tr><td>http</td><td>libwww-perl-daemon httpd</td><td>1.36</td><td></td><td></td><td></td><td>77</td><td>0.006</td></tr>
+<tr><td>http</td><td>antid</td><td></td><td></td><td></td><td></td><td>77</td><td>0.006</td></tr>
+<tr><td>http</td><td>Netgear WNR3500L WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>76</td><td>0.006</td></tr>
+<tr><td>http</td><td>CherryPy httpd</td><td>3.1.2</td><td></td><td></td><td></td><td>76</td><td>0.006</td></tr>
+<tr><td>http</td><td>Linksys router http config</td><td></td><td>device model BEFSR41v3</td><td></td><td>WAP</td><td>75</td><td>0.006</td></tr>
+<tr><td>http</td><td>D-Link DI-604 http config</td><td></td><td></td><td></td><td>WAP</td><td>75</td><td>0.006</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.11</td><td>(Win32) PHP/5.2.10</td><td></td><td></td><td>75</td><td>0.006</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.41</td><td>(Unix) PHP/5.2.6 mod_ssl/2.8.31 OpenSSL/0.9.8e</td><td></td><td></td><td>75</td><td>0.006</td></tr>
+<tr><td>http</td><td>Jetty</td><td>6.1.25</td><td></td><td></td><td></td><td>74</td><td>0.006</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.14</td><td></td><td></td><td></td><td>74</td><td>0.006</td></tr>
+<tr><td>freeswitch-event</td><td>FreeSWITCH mod_event_socket</td><td></td><td></td><td></td><td></td><td>74</td><td>0.006</td></tr>
+<tr><td>telnet</td><td>Enterasys XSR Security Router telnetd</td><td></td><td></td><td></td><td>router</td><td>73</td><td>0.006</td></tr>
+<tr><td>http</td><td>TP-LINK WR1043ND WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>73</td><td>0.006</td></tr>
+<tr><td>http</td><td>Miktotik Dude network monitor</td><td></td><td></td><td></td><td></td><td>73</td><td>0.006</td></tr>
+<tr><td>eggdrop</td><td>Eggdrop IRC bot console</td><td>1.6.20</td><td></td><td></td><td></td><td>73</td><td>0.006</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.8</td><td>protocol 2.0</td><td></td><td></td><td>72</td><td>0.006</td></tr>
+<tr><td>http</td><td>uClinux-httpd</td><td>0.2.2</td><td></td><td>Linux</td><td></td><td>72</td><td>0.006</td></tr>
+<tr><td>http</td><td>TwistedWeb httpd</td><td>10.0.0</td><td></td><td></td><td></td><td>72</td><td>0.006</td></tr>
+<tr><td>http</td><td>Synacast Media Server http config</td><td>1.0</td><td></td><td></td><td></td><td>72</td><td>0.006</td></tr>
+<tr><td>http</td><td>NewCS satellite card sharing system http config</td><td></td><td></td><td></td><td>media device</td><td>72</td><td>0.006</td></tr>
+<tr><td>http</td><td>go1984</td><td></td><td></td><td></td><td></td><td>72</td><td>0.006</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.15</td><td>(Red Hat)</td><td></td><td></td><td>72</td><td>0.006</td></tr>
+<tr><td>http</td><td>TP-LINK WR741N WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>71</td><td>0.006</td></tr>
+<tr><td>http-proxy</td><td>Ncat http proxy</td><td></td><td>Nmap 4.85BETA1 or later</td><td></td><td></td><td>71</td><td>0.006</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.1.19</td><td></td><td></td><td></td><td>71</td><td>0.006</td></tr>
+<tr><td>http</td><td>Netgear WNR2000v2 WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>71</td><td>0.006</td></tr>
+<tr><td>http</td><td>http</td><td></td><td>Login to Enterprise Router</td><td></td><td></td><td>71</td><td>0.006</td></tr>
+<tr><td>http</td><td></td><td></td><td>Authorization Required</td><td></td><td></td><td>71</td><td>0.006</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.63</td><td>(Win32) PHP/5.2.14</td><td></td><td></td><td>71</td><td>0.006</td></tr>
+<tr><td>http</td><td>ADH-Web</td><td></td><td></td><td></td><td></td><td>71</td><td>0.006</td></tr>
+<tr><td>http</td><td>GoldStar iPECS 50B PBX http config</td><td></td><td></td><td></td><td>PBX</td><td>70</td><td>0.006</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.15</td><td></td><td></td><td></td><td>70</td><td>0.006</td></tr>
+<tr><td>openvpn</td><td>OpenVPN</td><td></td><td></td><td></td><td></td><td>69</td><td>0.006</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.0</td><td></td><td></td><td></td><td>69</td><td>0.006</td></tr>
+<tr><td>http</td><td>NFW</td><td></td><td></td><td></td><td></td><td>69</td><td>0.006</td></tr>
+<tr><td>http</td><td>Dahlia</td><td>1.0.13o (x86</td><td></td><td></td><td></td><td>69</td><td>0.006</td></tr>
+<tr><td>vnc</td><td></td><td></td><td>protocol 3</td><td></td><td></td><td>68</td><td>0.006</td></tr>
+<tr><td>http</td><td>ZS Webserver</td><td></td><td></td><td></td><td></td><td>68</td><td>0.006</td></tr>
+<tr><td>geovision-mobile</td><td>Geovision mobile device support</td><td></td><td></td><td></td><td></td><td>68</td><td>0.006</td></tr>
+<tr><td>ftp</td><td>Serv-U ftpd</td><td>6.4</td><td></td><td>Windows</td><td></td><td>68</td><td>0.006</td></tr>
+<tr><td>vnc</td><td>VNC</td><td></td><td>protocol 3.6</td><td></td><td></td><td>67</td><td>0.005</td></tr>
+<tr><td>http</td><td>yawcam</td><td>0.3.7</td><td></td><td></td><td></td><td>67</td><td>0.005</td></tr>
+<tr><td>http</td><td>Router</td><td></td><td>TL-R402</td><td></td><td></td><td>67</td><td>0.005</td></tr>
+<tr><td>http</td><td></td><td></td><td>NETGEAR WGR614v9</td><td></td><td></td><td>67</td><td>0.005</td></tr>
+<tr><td>http</td><td>m0n0wall FreeBSD firewall web interface</td><td></td><td></td><td>FreeBSD</td><td>firewall</td><td>67</td><td>0.005</td></tr>
+<tr><td>smtp</td><td>Postfix smtpd</td><td></td><td></td><td></td><td></td><td>66</td><td>0.005</td></tr>
+<tr><td>http</td><td>Linksys router http config</td><td></td><td>device model BEFSR41v4</td><td></td><td>WAP</td><td>66</td><td>0.005</td></tr>
+<tr><td>http</td><td></td><td></td><td>Linksys BEFVP41 V2</td><td></td><td></td><td>66</td><td>0.005</td></tr>
+<tr><td>http</td><td>fec</td><td>1.0 (Funkwerk BOSS)</td><td></td><td></td><td></td><td>66</td><td>0.005</td></tr>
+<tr><td>http</td><td>D-Link DIR-600 WAP http config</td><td>2.10</td><td></td><td>Linux</td><td></td><td>66</td><td>0.005</td></tr>
+<tr><td>http</td><td>Apache</td><td></td><td>Administracao</td><td></td><td></td><td>66</td><td>0.005</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.14</td><td>(Win32) DAV/2 mod_ssl/2.2.14 OpenSSL/0.9.8l mod_autoindex_color PHP/5.3.1 mod_apreq2-20090110/2.7.1 mod_perl/2.0.4 Perl/v5.10.1</td><td></td><td></td><td>66</td><td>0.005</td></tr>
+<tr><td>http</td><td>Sun AnswerBook2 httpd</td><td>4.1a6</td><td>Inso; sun5</td><td></td><td></td><td>65</td><td>0.005</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) mod_ssl/2.2.22 OpenSSL/1.0.0-fips mod_auth_passthrough/2.1 mod_bwlimited/1.4 FrontPage/5.0.2.2635</td><td></td><td></td><td>65</td><td>0.005</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.17</td><td>(Linux/SUSE)</td><td></td><td></td><td>65</td><td>0.005</td></tr>
+<tr><td>http</td><td>TeamViewer httpd</td><td></td><td></td><td></td><td></td><td>64</td><td>0.005</td></tr>
+<tr><td>http</td><td>Jetty</td><td>7.x.y-SNAPSHOT</td><td></td><td></td><td></td><td>64</td><td>0.005</td></tr>
+<tr><td>http</td><td>Jetty</td><td>6.1.5</td><td></td><td></td><td></td><td>64</td><td>0.005</td></tr>
+<tr><td>http</td><td>iChat(www.ichat.net.cn)</td><td></td><td></td><td></td><td></td><td>64</td><td>0.005</td></tr>
+<tr><td>rtsp</td><td></td><td></td><td></td><td></td><td></td><td>63</td><td>0.005</td></tr>
+<tr><td>http</td><td>uClinux-httpd</td><td>0.2.2</td><td>DxClient NetViewer DVR viewer 2.6.8.97</td><td>Linux</td><td></td><td>63</td><td>0.005</td></tr>
+<tr><td>http</td><td>Router</td><td></td><td>TP-LINK Wireless N Router WR740N</td><td></td><td></td><td>63</td><td>0.005</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.2.2</td><td></td><td></td><td></td><td>63</td><td>0.005</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.21</td><td>(Win32) PHP/5.3.10</td><td></td><td></td><td>63</td><td>0.005</td></tr>
+<tr><td>http</td><td>XBMC Web Media Manager</td><td></td><td></td><td>Linux</td><td>media device</td><td>62</td><td>0.005</td></tr>
+<tr><td>http</td><td>ESET NOD32 anti-virus update httpd</td><td></td><td></td><td>Windows</td><td></td><td>62</td><td>0.005</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.21</td><td>(Win32) PHP/5.3.9</td><td></td><td></td><td>62</td><td>0.005</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.41</td><td>(Unix)</td><td></td><td></td><td>62</td><td>0.005</td></tr>
+<tr><td>shoutcast</td><td>SHOUTcast server</td><td>1.9.8</td><td>Name: Ehlikeyf  Radyo</td><td>Linux</td><td></td><td>61</td><td>0.005</td></tr>
+<tr><td>http</td><td>Transmission BitTorrent management httpd</td><td></td><td></td><td></td><td></td><td>61</td><td>0.005</td></tr>
+<tr><td>http</td><td>Start HTTP-Server</td><td>1.0</td><td></td><td></td><td></td><td>61</td><td>0.005</td></tr>
+<tr><td>http</td><td>Network Camera</td><td></td><td></td><td></td><td></td><td>61</td><td>0.005</td></tr>
+<tr><td>http</td><td>Netgear FVS318 router http config</td><td></td><td></td><td></td><td>router</td><td>61</td><td>0.005</td></tr>
+<tr><td>http</td><td>Fortinet VPN/firewall http config</td><td></td><td></td><td></td><td>firewall</td><td>61</td><td>0.005</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.9</td><td>(Debian) PHP/5.2.6-1+lenny9 with Suhosin-Patch</td><td></td><td></td><td>61</td><td>0.005</td></tr>
+<tr><td>http</td><td>Yawcam webcam viewer httpd</td><td>0.3.6</td><td></td><td></td><td></td><td>60</td><td>0.005</td></tr>
+<tr><td>http</td><td></td><td></td><td>WPN824v2</td><td></td><td></td><td>60</td><td>0.005</td></tr>
+<tr><td>http</td><td>Ubicom httpd</td><td>1.1</td><td>D-Link WAP http config</td><td></td><td>WAP</td><td>60</td><td>0.005</td></tr>
+<tr><td>http</td><td>TP-LINK TL-R402 router http config</td><td></td><td></td><td></td><td>router</td><td>60</td><td>0.005</td></tr>
+<tr><td>http</td><td>TP-LINK R406 WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>60</td><td>0.005</td></tr>
+<tr><td>http</td><td>Oracle WebLogic Server</td><td></td><td>Servlet 2.5; JSP 2.1</td><td></td><td></td><td>60</td><td>0.005</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.11</td><td></td><td></td><td></td><td>60</td><td>0.005</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) mod_ssl/2.2.22 OpenSSL/0.9.8e-fips-rhel5 mod_auth_passthrough/2.1 mod_bwlimited/1.4 FrontPage/5.0.2.2635</td><td></td><td></td><td>60</td><td>0.005</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Fedora)</td><td></td><td></td><td>60</td><td>0.005</td></tr>
+<tr><td>http</td><td>FC</td><td></td><td></td><td></td><td></td><td>59</td><td>0.005</td></tr>
+<tr><td>http</td><td>CherryPy httpd</td><td>3.2.2</td><td></td><td></td><td></td><td>59</td><td>0.005</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) DAV/2 PHP/5.3.13</td><td></td><td></td><td>59</td><td>0.005</td></tr>
+<tr><td>http</td><td>Telkonet</td><td></td><td></td><td></td><td></td><td>58</td><td>0.005</td></tr>
+<tr><td>http</td><td></td><td></td><td>server</td><td></td><td></td><td>58</td><td>0.005</td></tr>
+<tr><td>http</td><td>Netgear WNR1000v3 WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>58</td><td>0.005</td></tr>
+<tr><td>http</td><td>i3 micro or Linksys SPA400 VoIP gateway http config</td><td></td><td></td><td></td><td>VoIP adapter</td><td>58</td><td>0.005</td></tr>
+<tr><td>http</td><td>DrayTek Vigor 3300 router http config</td><td></td><td></td><td></td><td>router</td><td>58</td><td>0.005</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.4</td><td>(Unix) mod_ssl/2.2.4 OpenSSL/0.9.8e PHP/5.2.3</td><td></td><td></td><td>58</td><td>0.005</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.21</td><td>(Unix)</td><td></td><td></td><td>58</td><td>0.005</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.52</td><td>(CentOS)</td><td></td><td></td><td>58</td><td>0.005</td></tr>
+<tr><td>ftp</td><td>MikroTik router ftpd</td><td>3.30</td><td></td><td></td><td>router</td><td>58</td><td>0.005</td></tr>
+<tr><td>http</td><td>TP-LINK Router</td><td></td><td>TP-LINK Router R480T</td><td></td><td></td><td>57</td><td>0.005</td></tr>
+<tr><td>http</td><td>Sun Java System httpd</td><td>7.0</td><td></td><td></td><td></td><td>57</td><td>0.005</td></tr>
+<tr><td>http-proxy</td><td>Tinyproxy</td><td>1.7.0</td><td></td><td></td><td></td><td>57</td><td>0.005</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.6</td><td></td><td></td><td></td><td>57</td><td>0.005</td></tr>
+<tr><td>http</td><td>HP Integrated Lights-Out http config</td><td></td><td></td><td></td><td>remote management</td><td>57</td><td>0.005</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.9</td><td>(Debian) PHP/5.2.6-1+lenny10 with Suhosin-Patch</td><td></td><td></td><td>57</td><td>0.005</td></tr>
+<tr><td>http</td><td>W3MFC</td><td>1.68</td><td></td><td></td><td></td><td>56</td><td>0.005</td></tr>
+<tr><td>http</td><td>uhttpd</td><td>1.0.0</td><td>Netgear WNDR3700v2 WAP http config</td><td></td><td>WAP</td><td>56</td><td>0.005</td></tr>
+<tr><td>http</td><td>TP-LINK WR840N WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>56</td><td>0.005</td></tr>
+<tr><td>http</td><td>IP_SHARER WEB</td><td>1.0</td><td>Linksys WRT54GC http config</td><td></td><td>WAP</td><td>56</td><td>0.005</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.21</td><td>(Unix) mod_ssl/2.2.21 OpenSSL/1.0.0-fips mod_auth_passthrough/2.1 mod_bwlimited/1.4 FrontPage/5.0.2.2635 mod_qos/9.74 PHP/5.2.17</td><td></td><td></td><td>56</td><td>0.005</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.16</td><td>(Unix) PHP/5.3.3</td><td></td><td></td><td>56</td><td>0.005</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.15</td><td>(Fedora)</td><td></td><td></td><td>56</td><td>0.005</td></tr>
+<tr><td>http</td><td>ADAM-6000</td><td>8.1.0019</td><td></td><td></td><td></td><td>56</td><td>0.005</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.8</td><td></td><td></td><td></td><td>55</td><td>0.004</td></tr>
+<tr><td>http</td><td>Netgear WGR614v6 WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>55</td><td>0.004</td></tr>
+<tr><td>http</td><td>Jetty</td><td>6.1-SNAPSHOT</td><td></td><td></td><td></td><td>55</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.0</td><td>(Unix) DAV/2 PHP/5.1.2</td><td></td><td></td><td>55</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.39</td><td></td><td></td><td></td><td>55</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.37</td><td>(Unix) PHP/5.2.1 mod_ssl/2.8.28 OpenSSL/0.9.8e</td><td></td><td></td><td>55</td><td>0.004</td></tr>
+<tr><td>http</td><td>TP-LINK Router</td><td></td><td>TP-LINK Wireless N Router WR941N</td><td></td><td></td><td>54</td><td>0.004</td></tr>
+<tr><td>http</td><td>TP-LINK Router</td><td></td><td>TP-LINK Wireless N Router WR841N</td><td></td><td></td><td>54</td><td>0.004</td></tr>
+<tr><td>http</td><td>Router Web Config System</td><td></td><td>Router Web Config System</td><td></td><td></td><td>54</td><td>0.004</td></tr>
+<tr><td>http</td><td>Oracle Application Server 10g httpd</td><td>10.1.3.5.0</td><td>Oracle Containers for J2EE</td><td></td><td></td><td>54</td><td>0.004</td></tr>
+<tr><td>http</td><td>HTTPsrv</td><td></td><td></td><td></td><td></td><td>54</td><td>0.004</td></tr>
+<tr><td>http</td><td>GNU Httptunnel</td><td></td><td></td><td></td><td></td><td>54</td><td>0.004</td></tr>
+<tr><td>http</td><td>Eudemon Server 1.0</td><td></td><td></td><td></td><td></td><td>54</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache Embedded Server</td><td></td><td></td><td></td><td></td><td>54</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.17</td><td>(Win32)</td><td></td><td></td><td>54</td><td>0.004</td></tr>
+<tr><td>ftp</td><td>vsftpd</td><td>2.0.8 or later</td><td></td><td></td><td></td><td>54</td><td>0.004</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.7</td><td>protocol 2.0</td><td></td><td></td><td>53</td><td>0.004</td></tr>
+<tr><td>ssh</td><td>Dropbear sshd</td><td>0.48</td><td>protocol 2.0</td><td>Linux</td><td></td><td>53</td><td>0.004</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.20b 10oct00</td><td></td><td></td><td></td><td>53</td><td>0.004</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>3.1.6</td><td></td><td></td><td></td><td>53</td><td>0.004</td></tr>
+<tr><td>http</td><td>Oracle Application Server httpd</td><td>10.0.3.0.0</td><td>Developer preview</td><td></td><td></td><td>53</td><td>0.004</td></tr>
+<tr><td>http</td><td>Mbedthis-Appweb</td><td>2.4.2</td><td></td><td></td><td></td><td>53</td><td>0.004</td></tr>
+<tr><td>http</td><td>IP_SHARER WEB</td><td>1.0</td><td>TRENDnet TW100-BRV204 router http config; no admin pass</td><td></td><td>router</td><td>53</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.9</td><td>(Unix) mod_ssl/2.2.9 OpenSSL/0.9.8o mod_wsgi/2.4 Python/2.6.2</td><td></td><td></td><td>53</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.3</td><td>mod_ssl/2.2.3 OpenSSL/0.9.8e-fips-rhel5 mod_chroot/0.5</td><td></td><td></td><td>53</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.17</td><td>(Win32) PHP/5.3.6</td><td></td><td></td><td>53</td><td>0.004</td></tr>
+<tr><td>ftp</td><td>FileZilla ftpd</td><td>0.9.41 beta</td><td></td><td>Windows</td><td></td><td>53</td><td>0.004</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.2</td><td>protocol 2.0</td><td></td><td></td><td>52</td><td>0.004</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.1p1</td><td>FreeBSD 20080901; protocol 2.0</td><td>FreeBSD</td><td></td><td>52</td><td>0.004</td></tr>
+<tr><td>secure-socket</td><td>CA Secure Socket Adapter</td><td></td><td></td><td></td><td></td><td>52</td><td>0.004</td></tr>
+<tr><td>http</td><td>Sun GlassFish</td><td>2.1.1</td><td>Servlet 2.5</td><td></td><td></td><td>52</td><td>0.004</td></tr>
+<tr><td>http</td><td>Oracle Application Server 10g httpd</td><td>10.1.3.4.0</td><td>Oracle Containers for J2EE</td><td></td><td></td><td>52</td><td>0.004</td></tr>
+<tr><td>http</td><td>Mobotix Camera http config</td><td></td><td></td><td></td><td>webcam</td><td>52</td><td>0.004</td></tr>
+<tr><td>http</td><td>Jetty</td><td>5.1.10</td><td>Linux/2.6.21gum arm java/1.4.2 subset</td><td></td><td></td><td>52</td><td>0.004</td></tr>
+<tr><td>http</td><td>Caucho Resin JSP engine</td><td>2.1.16</td><td></td><td></td><td></td><td>52</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.41</td><td>(Unix) PHP/5.2.6 mod_ssl/2.8.31 OpenSSL/0.9.8i</td><td></td><td></td><td>52</td><td>0.004</td></tr>
+<tr><td>ftp</td><td>Pure-FTPd</td><td></td><td></td><td></td><td></td><td>52</td><td>0.004</td></tr>
+<tr><td>http</td><td>Netgear WNR3500 WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>51</td><td>0.004</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td></td><td></td><td>Windows</td><td></td><td>51</td><td>0.004</td></tr>
+<tr><td>http</td><td>IPShare6.0</td><td></td><td></td><td></td><td></td><td>51</td><td>0.004</td></tr>
+<tr><td>http</td><td>Embedded HTTP Server</td><td></td><td>NAT Router</td><td></td><td></td><td>51</td><td>0.004</td></tr>
+<tr><td>http</td><td>avtech</td><td>1.0</td><td></td><td></td><td></td><td>51</td><td>0.004</td></tr>
+<tr><td>http</td><td>Aterm(HT)</td><td>1.0.0</td><td></td><td></td><td></td><td>51</td><td>0.004</td></tr>
+<tr><td>http</td><td>Webbit</td><td></td><td></td><td></td><td></td><td>50</td><td>0.004</td></tr>
+<tr><td>http</td><td>uhttpd</td><td>1.0.0</td><td>Netgear WNR1000v2 WAP http config</td><td></td><td>WAP</td><td>50</td><td>0.004</td></tr>
+<tr><td>http</td><td>TP-LINK WR641G/642G WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>50</td><td>0.004</td></tr>
+<tr><td>http</td><td>TornadoServer</td><td>2.1.1</td><td></td><td></td><td></td><td>50</td><td>0.004</td></tr>
+<tr><td>http</td><td>Tornado httpd</td><td>2.2.1</td><td></td><td></td><td></td><td>50</td><td>0.004</td></tr>
+<tr><td>http</td><td>Router Webserver</td><td></td><td>TP-LINK Wireless N Router WR841N</td><td></td><td></td><td>50</td><td>0.004</td></tr>
+<tr><td>http</td><td>Router Webserver</td><td></td><td>TP-LINK Wireless Lite N Router WR740N</td><td></td><td></td><td>50</td><td>0.004</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>3.0.STABLE25</td><td></td><td></td><td></td><td>50</td><td>0.004</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>2.6.STABLE16</td><td></td><td></td><td></td><td>50</td><td>0.004</td></tr>
+<tr><td>http</td><td>MochiWeb</td><td>1.0 (Any of you quaids got a smint</td><td></td><td></td><td></td><td>50</td><td>0.004</td></tr>
+<tr><td>http</td><td>httpd</td><td>1.03</td><td></td><td></td><td></td><td>50</td><td>0.004</td></tr>
+<tr><td>http</td><td>Ews</td><td>0.1</td><td></td><td></td><td></td><td>50</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Win32)</td><td></td><td></td><td>50</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Debian)</td><td></td><td></td><td>50</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.10</td><td>(Linux/SUSE)</td><td></td><td></td><td>50</td><td>0.004</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>3.5p1</td><td>protocol 2.0</td><td></td><td></td><td>49</td><td>0.004</td></tr>
+<tr><td>http</td><td>WEB SERVER</td><td></td><td>Multi-Homing Security Gateway Administration Tools</td><td></td><td></td><td>49</td><td>0.004</td></tr>
+<tr><td>http</td><td>Indy</td><td>9.0.11</td><td></td><td></td><td></td><td>49</td><td>0.004</td></tr>
+<tr><td>http</td><td>HTTP Server</td><td></td><td></td><td></td><td></td><td>49</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) mod_ssl/2.2.22 OpenSSL/1.0.0h</td><td></td><td></td><td>49</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.59</td><td>(Unix) PHP/5.2.6 DAV/2</td><td></td><td></td><td>49</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.41</td><td>(Unix) PHP/5.2.9</td><td></td><td></td><td>49</td><td>0.004</td></tr>
+<tr><td>http</td><td></td><td></td><td>2_WAN_Broadband_Router</td><td></td><td></td><td>49</td><td>0.004</td></tr>
+<tr><td>http</td><td>Unreal Tournament http admin</td><td>Build 451</td><td></td><td></td><td></td><td>48</td><td>0.004</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.19-MX Jul  1 2010</td><td></td><td></td><td></td><td>48</td><td>0.004</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.6</td><td>Phusion Passenger 3.0.9 (mod_rails/mod_rack)</td><td></td><td></td><td>48</td><td>0.004</td></tr>
+<tr><td>http</td><td></td><td></td><td>netcam</td><td></td><td></td><td>48</td><td>0.004</td></tr>
+<tr><td>http</td><td>GNUMP3d streaming server</td><td>2.9.9.1</td><td></td><td></td><td></td><td>48</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.9</td><td>(Debian) PHP/5.2.6-1+lenny13 with Suhosin-Patch</td><td></td><td></td><td>48</td><td>0.004</td></tr>
+<tr><td>telnet</td><td>the console program.</td><td></td><td></td><td></td><td></td><td>47</td><td>0.004</td></tr>
+<tr><td>rsync</td><td></td><td></td><td>protocol version 30</td><td></td><td></td><td>47</td><td>0.004</td></tr>
+<tr><td>http</td><td>webcamXP httpd</td><td></td><td></td><td>Windows</td><td></td><td>47</td><td>0.004</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.19-MX Dec  8 2009</td><td></td><td></td><td></td><td>47</td><td>0.004</td></tr>
+<tr><td>http</td><td>NetApp DFM httpd</td><td></td><td></td><td></td><td></td><td>47</td><td>0.004</td></tr>
+<tr><td>http</td><td>BlueIris-HTTP</td><td>1.1</td><td></td><td></td><td></td><td>47</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.6</td><td>(Win32) PHP/5.2.5</td><td></td><td></td><td>47</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.13</td><td>(Win32) PHP/5.2.10</td><td></td><td></td><td>47</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.39</td><td>(Unix) PHP/5.2.4 mod_ssl/2.8.30 OpenSSL/0.9.8d</td><td></td><td></td><td>47</td><td>0.004</td></tr>
+<tr><td>http</td><td>AirDroid httpd</td><td>1.0.8</td><td></td><td>Android</td><td>phone</td><td>47</td><td>0.004</td></tr>
+<tr><td>socks-proxy</td><td>Socks4A</td><td></td><td></td><td></td><td></td><td>46</td><td>0.004</td></tr>
+<tr><td>http</td><td>UserGate http report area</td><td></td><td></td><td>Windows</td><td></td><td>46</td><td>0.004</td></tr>
+<tr><td>http</td><td>Unreal Tournament http admin</td><td>Build 3369</td><td></td><td></td><td></td><td>46</td><td>0.004</td></tr>
+<tr><td>http</td><td></td><td></td><td>NETGEAR WNDR3300</td><td></td><td></td><td>46</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.41</td><td>(Unix) DAV/1.0.3 PHP/4.3.11</td><td></td><td></td><td>46</td><td>0.004</td></tr>
+<tr><td>napster</td><td>WinMX or Lopster Napster P2P client</td><td></td><td></td><td></td><td></td><td>45</td><td>0.004</td></tr>
+<tr><td>http</td><td>uhttpd</td><td>1.0.0</td><td>Netgear wnr2000v3 WAP http config</td><td></td><td>WAP</td><td>45</td><td>0.004</td></tr>
+<tr><td>http</td><td>Ubicom httpd</td><td>1.1</td><td>D-Link DIR-615 WAP http config</td><td></td><td>WAP</td><td>45</td><td>0.004</td></tr>
+<tr><td>http</td><td>MiniServ</td><td>1.550</td><td>Webmin httpd</td><td></td><td></td><td>45</td><td>0.004</td></tr>
+<tr><td>http</td><td>Eudemon Auth-Http Server 1.0</td><td></td><td></td><td></td><td></td><td>45</td><td>0.004</td></tr>
+<tr><td>http</td><td>D-Link DCS-920 webcam http config</td><td></td><td></td><td></td><td>webcam</td><td>45</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td></td><td></td><td></td><td>45</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.21</td><td>(Unix) PHP/5.3.6</td><td></td><td></td><td>45</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.11</td><td>(Win32) DAV/2 mod_ssl/2.2.11 OpenSSL/0.9.8i PHP/5.2.9</td><td></td><td></td><td>45</td><td>0.004</td></tr>
+<tr><td>http</td><td>WindWeb</td><td>2.0</td><td>WallyWorld router http config</td><td></td><td>broadband router</td><td>44</td><td>0.004</td></tr>
+<tr><td>http</td><td>TP-LINK Router</td><td></td><td>TP-LINK Wireless Lite N Router WR740N</td><td></td><td></td><td>44</td><td>0.004</td></tr>
+<tr><td>http</td><td>TP-LINK Router</td><td></td><td>TP-LINK Router R4419</td><td></td><td></td><td>44</td><td>0.004</td></tr>
+<tr><td>http</td><td>Router</td><td></td><td>Mercury Wireless Router MW54R</td><td></td><td></td><td>44</td><td>0.004</td></tr>
+<tr><td>http</td><td>RemotelyAnywhere remote PC management httpd</td><td>10.0.1086</td><td></td><td></td><td></td><td>44</td><td>0.004</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>3.1.10</td><td></td><td></td><td></td><td>44</td><td>0.004</td></tr>
+<tr><td>http</td><td>Netgear DGN2000 router http config</td><td></td><td></td><td></td><td>router</td><td>44</td><td>0.004</td></tr>
+<tr><td>http</td><td></td><td></td><td>Netgear</td><td></td><td></td><td>44</td><td>0.004</td></tr>
+<tr><td>http</td><td>Linksys router http config</td><td></td><td>device model BEFSR81</td><td></td><td>WAP</td><td>44</td><td>0.004</td></tr>
+<tr><td>http</td><td>Hue Thrift plugin for Apache Hadoop</td><td></td><td></td><td></td><td></td><td>44</td><td>0.004</td></tr>
+<tr><td>http</td><td>Gloscom</td><td></td><td></td><td></td><td></td><td>44</td><td>0.004</td></tr>
+<tr><td>http</td><td>Fortinet FortiGate 50B firewall http config</td><td></td><td></td><td></td><td>firewall</td><td>44</td><td>0.004</td></tr>
+<tr><td>http</td><td>Cisco SPA112 VoIP adapter</td><td></td><td></td><td></td><td>VoIP adapter</td><td>44</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) DAV/2 PHP/5.3.10</td><td></td><td></td><td>44</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.27</td><td>(Unix)</td><td></td><td></td><td>44</td><td>0.004</td></tr>
+<tr><td>http</td><td>Tor directory</td><td></td><td></td><td></td><td></td><td>43</td><td>0.004</td></tr>
+<tr><td>http</td><td>SimpleHTTPServer</td><td>0.6</td><td>Python 2.2.2</td><td></td><td></td><td>43</td><td>0.004</td></tr>
+<tr><td>http</td><td>QNAP TS-109-II NAS http config</td><td>1.0</td><td></td><td></td><td>storage-misc</td><td>43</td><td>0.004</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.12</td><td></td><td></td><td></td><td>43</td><td>0.004</td></tr>
+<tr><td>http</td><td>Mongoose httpd</td><td></td><td></td><td></td><td></td><td>43</td><td>0.004</td></tr>
+<tr><td>http</td><td>MiniServ</td><td>1.570</td><td>Webmin httpd</td><td></td><td></td><td>43</td><td>0.004</td></tr>
+<tr><td>http</td><td>Maipu-Webs</td><td></td><td>MP1800</td><td></td><td></td><td>43</td><td>0.004</td></tr>
+<tr><td>http</td><td>fexsrv</td><td></td><td></td><td></td><td></td><td>43</td><td>0.004</td></tr>
+<tr><td>http</td><td>D-Link DFL-800 or DFL-860 firewall http config</td><td></td><td></td><td></td><td>firewall</td><td>43</td><td>0.004</td></tr>
+<tr><td>http</td><td>D-Link DCS-6620G webcam http config</td><td></td><td></td><td></td><td>webcam</td><td>43</td><td>0.004</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.9</td><td>(Fedora)</td><td></td><td></td><td>43</td><td>0.004</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.6</td><td>protocol 2.0</td><td></td><td></td><td>42</td><td>0.003</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.1</td><td>protocol 2.0</td><td></td><td></td><td>42</td><td>0.003</td></tr>
+<tr><td>http</td><td>Xgate</td><td>3.00 (Unix)</td><td></td><td></td><td></td><td>42</td><td>0.003</td></tr>
+<tr><td>http</td><td>No Information</td><td></td><td>INFOSEC NSAE WebUI</td><td></td><td></td><td>42</td><td>0.003</td></tr>
+<tr><td>http</td><td>Linksys router http config</td><td></td><td>device model RT31P2</td><td></td><td>WAP</td><td>42</td><td>0.003</td></tr>
+<tr><td>http</td><td>CrushFTP httpd</td><td></td><td></td><td></td><td></td><td>42</td><td>0.003</td></tr>
+<tr><td>http</td><td>avtech httpd</td><td>1.0</td><td>Postef-8840 ADSL router</td><td></td><td>broadband router</td><td>42</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.15</td><td>(Linux/SUSE)</td><td></td><td></td><td>42</td><td>0.003</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.8p1 Debian 7ubuntu1</td><td>Ubuntu Linux; protocol 2.0</td><td>Linux</td><td></td><td>41</td><td>0.003</td></tr>
+<tr><td>http</td><td>WindWeb</td><td>2.0</td><td>Home Gateway router http config</td><td></td><td>broadband router</td><td>41</td><td>0.003</td></tr>
+<tr><td>http</td><td>Tornado httpd</td><td>0.1</td><td></td><td></td><td></td><td>41</td><td>0.003</td></tr>
+<tr><td>http</td><td>thttpd</td><td></td><td></td><td></td><td></td><td>41</td><td>0.003</td></tr>
+<tr><td>http</td><td>RapidLogic httpd</td><td>1.1</td><td>3Com OfficeConnect WAP http config</td><td></td><td>WAP</td><td>41</td><td>0.003</td></tr>
+<tr><td>http</td><td></td><td></td><td>NETGEAR WNDR4000</td><td></td><td></td><td>41</td><td>0.003</td></tr>
+<tr><td>http</td><td>monit httpd</td><td>5.1.1</td><td></td><td>Unix</td><td></td><td>41</td><td>0.003</td></tr>
+<tr><td>http</td><td>HDWWW</td><td>1.1</td><td></td><td></td><td></td><td>41</td><td>0.003</td></tr>
+<tr><td>http</td><td>GNUMP3d streaming server</td><td>2.9.8</td><td></td><td></td><td></td><td>41</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.14</td><td>(Unix) mod_ssl/2.2.14 OpenSSL/0.9.8l mod_perl/2.0.4 Perl/v5.10.0</td><td></td><td></td><td>41</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.11</td><td>(Win32) PHP/5.2.8</td><td></td><td></td><td>41</td><td>0.003</td></tr>
+<tr><td>socks5</td><td></td><td></td><td></td><td></td><td></td><td>40</td><td>0.003</td></tr>
+<tr><td>smtp</td><td>Exim smtpd</td><td>4.77</td><td></td><td></td><td></td><td>40</td><td>0.003</td></tr>
+<tr><td>http</td><td>TP-LINK Router</td><td></td><td>TP-LINK SOHO Router R402M</td><td></td><td></td><td>40</td><td>0.003</td></tr>
+<tr><td>http</td><td>Seagate Black Armor 440 NAS http config</td><td></td><td>PHP 4.4.2</td><td></td><td></td><td>40</td><td>0.003</td></tr>
+<tr><td>http</td><td>NT</td><td>5.0 UPnP</td><td></td><td></td><td></td><td>40</td><td>0.003</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.10</td><td></td><td></td><td></td><td>40</td><td>0.003</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.53</td><td></td><td></td><td></td><td>40</td><td>0.003</td></tr>
+<tr><td>http</td><td>Indy</td><td>DevSnapshot</td><td></td><td></td><td></td><td>40</td><td>0.003</td></tr>
+<tr><td>http</td><td>HomeSeer Home Control Web Interface</td><td></td><td></td><td>Windows</td><td></td><td>40</td><td>0.003</td></tr>
+<tr><td>http</td><td>Gordano Messaging Suite Web Server v15.00.3626</td><td></td><td></td><td></td><td></td><td>40</td><td>0.003</td></tr>
+<tr><td>http</td><td>FSM-Webs</td><td></td><td></td><td></td><td></td><td>40</td><td>0.003</td></tr>
+<tr><td>http</td><td>D-Link/Airlink IP webcam http config</td><td>1.0</td><td></td><td></td><td>webcam</td><td>40</td><td>0.003</td></tr>
+<tr><td>http</td><td>David WebBox httpd</td><td>11.00a.0717</td><td></td><td></td><td></td><td>40</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Amazon)</td><td></td><td></td><td>40</td><td>0.003</td></tr>
+<tr><td>http</td><td>TP-LINK WR1043N WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>39</td><td>0.003</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.6.32</td><td></td><td></td><td></td><td>39</td><td>0.003</td></tr>
+<tr><td>http</td><td>Netgear DG834GT router http config</td><td></td><td></td><td></td><td>router</td><td>39</td><td>0.003</td></tr>
+<tr><td>http</td><td>Chain Cast support service</td><td>Rex/9.0.0.2980</td><td></td><td></td><td></td><td>39</td><td>0.003</td></tr>
+<tr><td>http</td><td>BlueIris</td><td>1.1</td><td></td><td></td><td></td><td>39</td><td>0.003</td></tr>
+<tr><td>http</td><td>Aruba router http config</td><td></td><td></td><td></td><td>router</td><td>39</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(FreeBSD) mod_fcgid/2.3.6</td><td></td><td></td><td>39</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.21</td><td>(Win32)</td><td></td><td></td><td>39</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.21</td><td>(Unix) mod_ssl/2.2.21 OpenSSL/0.9.8r DAV/2 PHP/5.3.10 with Suhosin-Patch</td><td></td><td></td><td>39</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.28</td><td>(SolutionIP) PHP/5.0.4 mod_perl/1.28 mod_ssl/2.8.15 OpenSSL/0.9.7b</td><td></td><td></td><td>39</td><td>0.003</td></tr>
+<tr><td>ssh</td><td>Force10 switch sshd</td><td></td><td>protocol 2.0</td><td></td><td></td><td>38</td><td>0.003</td></tr>
+<tr><td>http</td><td></td><td></td><td>WGT624v3</td><td></td><td></td><td>38</td><td>0.003</td></tr>
+<tr><td>http</td><td>Ubicom httpd</td><td>1.1</td><td>D-Link DIR-655 WAP http config</td><td></td><td>WAP</td><td>38</td><td>0.003</td></tr>
+<tr><td>http</td><td>TP-LINK Router</td><td></td><td>TP-LINK Router R4299G</td><td></td><td></td><td>38</td><td>0.003</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>3.1.18</td><td></td><td></td><td></td><td>38</td><td>0.003</td></tr>
+<tr><td>http</td><td>Netscape FastTrack web server</td><td>2.0a</td><td></td><td></td><td></td><td>38</td><td>0.003</td></tr>
+<tr><td>http</td><td>IP_SHARER WEB</td><td>1.0</td><td>Belkin 2307 wifi router http config</td><td></td><td>WAP</td><td>38</td><td>0.003</td></tr>
+<tr><td>http</td><td>Indy</td><td>10.1.5</td><td></td><td></td><td></td><td>38</td><td>0.003</td></tr>
+<tr><td>http</td><td>Hanbiro Server Centre(Powered by NetBSD)</td><td></td><td></td><td></td><td></td><td>38</td><td>0.003</td></tr>
+<tr><td>http</td><td>avtech</td><td>1.0..Expires</td><td></td><td></td><td></td><td>38</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Win32) PHP/5.3.10</td><td></td><td></td><td>38</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) mod_ssl/2.2.22 OpenSSL/0.9.8e-fips-rhel5 mod_bwlimited/1.4 mod_perl/2.0.5 Perl/v5.8.8</td><td></td><td></td><td>38</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.21</td><td>(Unix) DAV/2 mod_ssl/2.2.21 OpenSSL/1.0.0c PHP/5.3.8 mod_apreq2-20090110/2.7.1 mod_perl/2.0.5 Perl/v5.10.1</td><td></td><td></td><td>38</td><td>0.003</td></tr>
+<tr><td>http</td><td>Allegro RomPager</td><td>4.03</td><td>Netopia 3000 router http config</td><td></td><td>router</td><td>38</td><td>0.003</td></tr>
+<tr><td>http</td><td>Allegro RomPager</td><td>3.10</td><td>APC Management Web Server</td><td></td><td>power-device</td><td>38</td><td>0.003</td></tr>
+<tr><td>http</td><td>yawcam</td><td>0.3.6</td><td></td><td></td><td></td><td>37</td><td>0.003</td></tr>
+<tr><td>http</td><td>WebServer(IPCamera_Logo)</td><td></td><td></td><td></td><td></td><td>37</td><td>0.003</td></tr>
+<tr><td>http</td><td>Router</td><td></td><td></td><td></td><td></td><td>37</td><td>0.003</td></tr>
+<tr><td>http</td><td>Oracle Application Server 10g httpd</td><td>10.1.3.3.0</td><td>Oracle Containers for J2EE</td><td></td><td></td><td>37</td><td>0.003</td></tr>
+<tr><td>http</td><td>No Information</td><td></td><td>INFOSEC WebUI</td><td></td><td></td><td>37</td><td>0.003</td></tr>
+<tr><td>http</td><td>MiniServ</td><td>1.560</td><td>Webmin httpd</td><td></td><td></td><td>37</td><td>0.003</td></tr>
+<tr><td>http</td><td>MediaHouse ipMonitor httpd</td><td>6.1</td><td></td><td>Windows</td><td></td><td>37</td><td>0.003</td></tr>
+<tr><td>http</td><td>Lanswitch - V100R003 HttpServer 1.1</td><td></td><td></td><td></td><td></td><td>37</td><td>0.003</td></tr>
+<tr><td>http</td><td>Boa HTTPd</td><td>0.94.14rc18</td><td></td><td></td><td></td><td>37</td><td>0.003</td></tr>
+<tr><td>http</td><td>AR7 embedded httpd</td><td></td><td></td><td></td><td></td><td>37</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Win32) PHP/5.2.17</td><td></td><td></td><td>37</td><td>0.003</td></tr>
+<tr><td>http</td><td>Netgear CVG834G cable modem http config</td><td></td><td></td><td></td><td>broadband router</td><td>36</td><td>0.003</td></tr>
+<tr><td>http</td><td>Mono-HTTPAPI</td><td>1.0</td><td>Beagle desktop search</td><td></td><td></td><td>36</td><td>0.003</td></tr>
+<tr><td>http</td><td>Jetty</td><td>7.2.2.v20101205</td><td></td><td></td><td></td><td>36</td><td>0.003</td></tr>
+<tr><td>http</td><td>HTTP Software 1.1</td><td></td><td>NETCORE NR285P</td><td></td><td></td><td>36</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache Tomcat</td><td>4.0.1</td><td></td><td></td><td></td><td>36</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) DAV/2 PHP/5.3.14</td><td></td><td></td><td>36</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.21</td><td>(Unix) PHP/5.2.17</td><td></td><td></td><td>36</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.41</td><td>(Unix) PHP/5.2.6 mod_ssl/2.8.31 OpenSSL/0.9.8n</td><td></td><td></td><td>36</td><td>0.003</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.5p1 Debian 6</td><td>protocol 2.0</td><td>Linux</td><td></td><td>35</td><td>0.003</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>3.5p1</td><td>protocol 1.99</td><td></td><td></td><td>35</td><td>0.003</td></tr>
+<tr><td>http</td><td>World Client WDaemon httpd</td><td>4.0</td><td>Alt-N MDaemon webmail</td><td>Windows</td><td></td><td>35</td><td>0.003</td></tr>
+<tr><td>http</td><td>ViewSonic PJD6521 projector http config</td><td></td><td></td><td></td><td>media device</td><td>35</td><td>0.003</td></tr>
+<tr><td>http</td><td>TwistedWeb httpd</td><td>12.0.0</td><td></td><td></td><td></td><td>35</td><td>0.003</td></tr>
+<tr><td>http</td><td>TP-LINK WA5210G WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>35</td><td>0.003</td></tr>
+<tr><td>http</td><td>Tornado httpd</td><td>1.1</td><td></td><td></td><td></td><td>35</td><td>0.003</td></tr>
+<tr><td>http-proxy</td><td>Tinyproxy</td><td>1.9.0</td><td></td><td></td><td></td><td>35</td><td>0.003</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>3.0.STABLE19</td><td></td><td></td><td></td><td>35</td><td>0.003</td></tr>
+<tr><td>http</td><td>Private WebService System</td><td></td><td></td><td></td><td></td><td>35</td><td>0.003</td></tr>
+<tr><td>http</td><td>Oracle Application Server 10g httpd</td><td>10.1.2.0.0</td><td></td><td></td><td></td><td>35</td><td>0.003</td></tr>
+<tr><td>http</td><td>Oracle 9iAS J2EE httpd</td><td>9.0.2.0.0</td><td></td><td></td><td></td><td>35</td><td>0.003</td></tr>
+<tr><td>http</td><td>HTTP Server 1.0</td><td></td><td></td><td></td><td></td><td>35</td><td>0.003</td></tr>
+<tr><td>http</td><td>Eggdrop stats.mod web statistics module</td><td>1.3.3dev1</td><td></td><td></td><td></td><td>35</td><td>0.003</td></tr>
+<tr><td>http</td><td>D-Link DCS-5220 webcam http config</td><td></td><td></td><td></td><td>webcam</td><td>35</td><td>0.003</td></tr>
+<tr><td>http</td><td>cosbeta</td><td></td><td></td><td></td><td></td><td>35</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.17</td><td>(Win32) PHP/5.3.4</td><td></td><td></td><td>35</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.16</td><td>(Unix)</td><td></td><td></td><td>35</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.49</td><td>(Fedora)</td><td></td><td></td><td>35</td><td>0.003</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.8p2_hpn13v11</td><td>FreeBSD 20110503; protocol 2.0</td><td>FreeBSD</td><td></td><td>34</td><td>0.003</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.8p1 Debian 1ubuntu3</td><td>Ubuntu Linux; protocol 2.0</td><td>Linux</td><td></td><td>34</td><td>0.003</td></tr>
+<tr><td>http</td><td></td><td></td><td>WGT624</td><td></td><td></td><td>34</td><td>0.003</td></tr>
+<tr><td>http</td><td>Vivotek 3102 Camera http config</td><td></td><td></td><td></td><td>webcam</td><td>34</td><td>0.003</td></tr>
+<tr><td>http</td><td>RapidLogic</td><td>1.1</td><td></td><td></td><td></td><td>34</td><td>0.003</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>2.7.STABLE6</td><td></td><td></td><td></td><td>34</td><td>0.003</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.19</td><td>Win32</td><td></td><td></td><td>34</td><td>0.003</td></tr>
+<tr><td>http</td><td>FLC 0.47</td><td></td><td></td><td></td><td></td><td>34</td><td>0.003</td></tr>
+<tr><td>http</td><td>D-Link Internet Camera</td><td></td><td></td><td></td><td></td><td>34</td><td>0.003</td></tr>
+<tr><td>http</td><td>D-Link DI-808HV http config</td><td></td><td></td><td></td><td>WAP</td><td>34</td><td>0.003</td></tr>
+<tr><td>http</td><td>BaseHTTPServer</td><td>0.3</td><td>Python SimpleXMLRPCServer; Python 2.4.3</td><td></td><td></td><td>34</td><td>0.003</td></tr>
+<tr><td>http</td><td></td><td></td><td>Authorization</td><td></td><td></td><td>34</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.63</td><td>(Unix) PHP/5.2.13 DAV/2</td><td></td><td></td><td>34</td><td>0.003</td></tr>
+<tr><td>upnp</td><td>Portable SDK for UPnP devices</td><td>1.3.1</td><td>Linux 2.6.21; UPnP 1.0</td><td>Linux</td><td></td><td>33</td><td>0.003</td></tr>
+<tr><td>http</td><td>Unknow</td><td>1.0</td><td></td><td></td><td></td><td>33</td><td>0.003</td></tr>
+<tr><td>http</td><td>Router Webserver</td><td></td><td>TP-LINK Wireless Lite N Router WR741N</td><td></td><td></td><td>33</td><td>0.003</td></tr>
+<tr><td>http</td><td>Router</td><td></td><td>TP-LINK Wireless N Router WR841N</td><td></td><td></td><td>33</td><td>0.003</td></tr>
+<tr><td>http</td><td></td><td></td><td>NETGEAR DGND3700</td><td></td><td></td><td>33</td><td>0.003</td></tr>
+<tr><td>http</td><td>D-Link DIR-600 WAP http config</td><td>2.11</td><td></td><td>Linux</td><td></td><td>33</td><td>0.003</td></tr>
+<tr><td>http</td><td>Aterm(HT)</td><td>Aterm(HT)</td><td>Aterm</td><td></td><td></td><td>33</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.47</td><td>(Win32) PHP/5.2.5</td><td></td><td></td><td>33</td><td>0.003</td></tr>
+<tr><td>http</td><td>Allegro RomPager</td><td>4.06</td><td></td><td></td><td></td><td>33</td><td>0.003</td></tr>
+<tr><td>http</td><td>WSGIServer</td><td>0.1</td><td>Python 2.7.3</td><td></td><td></td><td>32</td><td>0.003</td></tr>
+<tr><td>http</td><td>WebServer</td><td></td><td></td><td></td><td></td><td>32</td><td>0.003</td></tr>
+<tr><td>http</td><td>VA Web Server</td><td></td><td></td><td></td><td></td><td>32</td><td>0.003</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.23beta1 26may2002</td><td></td><td></td><td></td><td>32</td><td>0.003</td></tr>
+<tr><td>http</td><td>Sambar</td><td></td><td></td><td></td><td></td><td>32</td><td>0.003</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>2.7.STABLE8</td><td></td><td></td><td></td><td>32</td><td>0.003</td></tr>
+<tr><td>http-proxy</td><td>3Proxy http proxy</td><td></td><td></td><td></td><td></td><td>32</td><td>0.003</td></tr>
+<tr><td>http</td><td>micro_httpd</td><td></td><td></td><td></td><td></td><td>32</td><td>0.003</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.31</td><td></td><td></td><td></td><td>32</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.8</td><td>(CentOS)</td><td></td><td></td><td>32</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.21</td><td>(Unix) mod_ssl/2.2.21 OpenSSL/0.9.8r DAV/2</td><td></td><td></td><td>32</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.17</td><td>(Win32) PHP/5.3.3</td><td></td><td></td><td>32</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.17</td><td>(Unix) PHP/5.3.6</td><td></td><td></td><td>32</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.10</td><td>(Win32) PHP/5.2.6</td><td></td><td></td><td>32</td><td>0.003</td></tr>
+<tr><td>java-rmi</td><td>Java RMI</td><td></td><td></td><td></td><td></td><td>31</td><td>0.003</td></tr>
+<tr><td>http</td><td>WSGIServer</td><td>0.1</td><td>Python 2.6.6</td><td></td><td></td><td>31</td><td>0.003</td></tr>
+<tr><td>http</td><td>WebFS httpd</td><td>1.21</td><td></td><td></td><td></td><td>31</td><td>0.003</td></tr>
+<tr><td>http</td><td>Virata-EmWeb</td><td>5.3.0</td><td></td><td></td><td></td><td>31</td><td>0.003</td></tr>
+<tr><td>http</td><td>TP-LINK Router</td><td></td><td>TP-LINK Router R4238</td><td></td><td></td><td>31</td><td>0.003</td></tr>
+<tr><td>http</td><td>Tornado httpd</td><td>1.2.1</td><td></td><td></td><td></td><td>31</td><td>0.003</td></tr>
+<tr><td>http</td><td>Router Webserver</td><td></td><td>TP-LINK Wireless N Gigabit Router WR1043ND</td><td></td><td></td><td>31</td><td>0.003</td></tr>
+<tr><td>http</td><td>Router</td><td></td><td>TP-LINK Wireless Router WR543G</td><td></td><td></td><td>31</td><td>0.003</td></tr>
+<tr><td>http</td><td>PNOS Web Server</td><td>Pumpkin Networks</td><td></td><td></td><td></td><td>31</td><td>0.003</td></tr>
+<tr><td>http</td><td></td><td></td><td>NETGEAR WNDR3400v2</td><td></td><td></td><td>31</td><td>0.003</td></tr>
+<tr><td>http</td><td>GoAhead-Webs</td><td></td><td>ZyXEL P-330W EE WAP http config; username: admin</td><td></td><td>WAP</td><td>31</td><td>0.003</td></tr>
+<tr><td>http</td><td>DnionOS</td><td>1.0</td><td></td><td></td><td></td><td>31</td><td>0.003</td></tr>
+<tr><td>http</td><td>CCProxy</td><td></td><td></td><td></td><td></td><td>31</td><td>0.003</td></tr>
+<tr><td>http</td><td>Beck IPC@CHIP embedded httpd</td><td></td><td>SolarLog 200 power monitor httpd</td><td></td><td>power-misc</td><td>31</td><td>0.003</td></tr>
+<tr><td>http</td><td>AquaController 4.0</td><td></td><td></td><td></td><td></td><td>31</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.11</td><td>(Unix)</td><td></td><td></td><td>31</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.59</td><td>(Win32) PHP/5.2.5</td><td></td><td></td><td>31</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.54</td><td>(Win32) PHP/5.0.4</td><td></td><td></td><td>31</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>FileZilla ftpd</td><td>0.9.40 beta</td><td></td><td>Windows</td><td></td><td>31</td><td>0.003</td></tr>
+<tr><td>smtp</td><td>Microsoft ESMTP</td><td>6.0.3790.4675</td><td></td><td>Windows</td><td></td><td>30</td><td>0.002</td></tr>
+<tr><td>http</td><td>Yawcam webcam viewer httpd</td><td>0.3.3</td><td></td><td></td><td></td><td>30</td><td>0.002</td></tr>
+<tr><td>http</td><td>Wireless Network Camera</td><td></td><td></td><td></td><td></td><td>30</td><td>0.002</td></tr>
+<tr><td>http</td><td>TP-LINK MR3420 WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>30</td><td>0.002</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.19-MX Apr 26 2011</td><td></td><td></td><td></td><td>30</td><td>0.002</td></tr>
+<tr><td>http</td><td>Oracle Application Server httpd</td><td>10.1.2.0.2</td><td></td><td></td><td></td><td>30</td><td>0.002</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.14</td><td></td><td></td><td></td><td>30</td><td>0.002</td></tr>
+<tr><td>http</td><td>Mongrel httpd</td><td>1.1.5</td><td></td><td></td><td></td><td>30</td><td>0.002</td></tr>
+<tr><td>http</td><td>INEOQUEST</td><td>INEOQUEST</td><td>IQ Cricket</td><td></td><td></td><td>30</td><td>0.002</td></tr>
+<tr><td>http</td><td>IBM HTTP Server</td><td></td><td>Derived from Apache</td><td></td><td></td><td>30</td><td>0.002</td></tr>
+<tr><td>http</td><td>GoAhead-Webs httpd</td><td></td><td>LinkSys SLM2024 or SRW2008 - SRW2016 switch http config</td><td></td><td>switch</td><td>30</td><td>0.002</td></tr>
+<tr><td>http</td><td>dvr1614n web-cam httpd</td><td></td><td></td><td></td><td>webcam</td><td>30</td><td>0.002</td></tr>
+<tr><td>http</td><td>Digifort Enterprise 6.5 httpd</td><td></td><td></td><td>Windows</td><td></td><td>30</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.3</td><td>(Linux/SUSE)</td><td></td><td></td><td>30</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) mod_ssl/2.2.22 OpenSSL/0.9.8e-fips-rhel5 mod_bwlimited/1.4 mod_qos/9.74</td><td></td><td></td><td>30</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.21</td><td>(Unix) mod_ssl/2.2.21 OpenSSL/0.9.8e-fips-rhel5 mod_auth_passthrough/2.1 mod_bwlimited/1.4 FrontPage/5.0.2.2635</td><td></td><td></td><td>30</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.17</td><td>(Unix) mod_ssl/2.2.17 OpenSSL/0.9.8o</td><td></td><td></td><td>30</td><td>0.002</td></tr>
+<tr><td>ssh</td><td>SCS sshd</td><td>2.0.0</td><td>protocol 2.0</td><td></td><td></td><td>29</td><td>0.002</td></tr>
+<tr><td>smtp</td><td>Microsoft Exchange smtpd</td><td></td><td></td><td>Windows</td><td></td><td>29</td><td>0.002</td></tr>
+<tr><td>http</td><td>WEB SERVER</td><td></td><td>Mail Security Gateway Administration Tools</td><td></td><td></td><td>29</td><td>0.002</td></tr>
+<tr><td>http</td><td>WebServer</td><td>4.6.2.0</td><td></td><td></td><td></td><td>29</td><td>0.002</td></tr>
+<tr><td>http</td><td>Vivotek Network Camera</td><td></td><td></td><td></td><td></td><td>29</td><td>0.002</td></tr>
+<tr><td>http</td><td>Ubicom httpd</td><td>1.1</td><td>D-Link DIR-625 WAP http config</td><td></td><td>WAP</td><td>29</td><td>0.002</td></tr>
+<tr><td>http</td><td>TP-LINK Router</td><td></td><td>TP-LINK Router R4239</td><td></td><td></td><td>29</td><td>0.002</td></tr>
+<tr><td>http</td><td>RemotelyAnywhere remote PC management httpd</td><td>8.0.747</td><td></td><td></td><td></td><td>29</td><td>0.002</td></tr>
+<tr><td>http</td><td>Mercury SiteScope Application Managment httpd</td><td>7.9.0.0</td><td></td><td></td><td></td><td>29</td><td>0.002</td></tr>
+<tr><td>http</td><td>Mercury SiteScope Application Managment httpd</td><td>7.6</td><td></td><td></td><td></td><td>29</td><td>0.002</td></tr>
+<tr><td>http</td><td>Jetty</td><td>6.1.8</td><td></td><td></td><td></td><td>29</td><td>0.002</td></tr>
+<tr><td>http</td><td></td><td></td><td>HUAWEI-3COM WBR-204g</td><td></td><td></td><td>29</td><td>0.002</td></tr>
+<tr><td>http</td><td>D-Link DIR-815 WAP http config</td><td>1.00</td><td></td><td>Linux</td><td></td><td>29</td><td>0.002</td></tr>
+<tr><td>http</td><td>Caucho Resin JSP engine</td><td>3.1.8</td><td></td><td></td><td></td><td>29</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) mod_ssl/2.2.22 OpenSSL/1.0.0h; SSL-only mode</td><td></td><td></td><td>29</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) mod_ssl/2.2.22 OpenSSL/0.9.8e-fips-rhel5 mod_bwlimited/1.4 PHP/5.3.10 mod_perl/2.0.5 Perl/v5.8.8</td><td></td><td></td><td>29</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.21</td><td>(EL)</td><td></td><td></td><td>29</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.31</td><td>(Unix)</td><td></td><td></td><td>29</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.27</td><td>(Unix) PHP/4.2.3</td><td></td><td></td><td>29</td><td>0.002</td></tr>
+<tr><td>mongodb</td><td>MongoDB</td><td>1</td><td></td><td></td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td>Western Digital My Book http config</td><td></td><td>PHP 4.4.2</td><td></td><td>storage-misc</td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td>WEB SERVER</td><td></td><td></td><td></td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td>TornadoServer</td><td>2.2.1</td><td></td><td></td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td>thttpd</td><td></td><td>Panasonic BB-HCM511A Network camera http config</td><td></td><td>webcam</td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td>SEEnergy SVR-116</td><td></td><td></td><td></td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http-proxy</td><td>FreeProxy http proxy</td><td>4.50</td><td></td><td>Windows</td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http-proxy</td><td>BlueCoat Sawmill http proxy config</td><td>7.2.15</td><td></td><td></td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td>Oracle Application Server 10g httpd</td><td>10.1.2.0.2</td><td></td><td></td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td>Mathopd httpd</td><td>1.5p6</td><td></td><td>Unix</td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td>JREntServer</td><td>1.1</td><td></td><td></td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td>Jetty</td><td>6.1.22</td><td></td><td></td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td></td><td></td><td>IP Camera</td><td></td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td>HTTPD  1.0</td><td></td><td>secnet</td><td></td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td>FileMaker Web Publishing httpd</td><td></td><td></td><td></td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td>Caucho Resin JSP engine</td><td>2.1.10</td><td></td><td></td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.9</td><td>(Win32)</td><td></td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) PHP/5.3.13</td><td></td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) mod_ssl/2.2.22 OpenSSL/0.9.8e-fips-rhel5 DAV/2 mod_auth_passthrough/2.1 mod_bwlimited/1.4 FrontPage/5.0.2.2635 PHP/5.3.14</td><td></td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) DAV/2 PHP/5.3.15</td><td></td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.19</td><td>(Unix) DAV/2 PHP/5.2.17</td><td></td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.17</td><td>(EL)</td><td></td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.14</td><td>(Win32)</td><td></td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.59</td><td>(Win32) mod_ssl/2.0.59 OpenSSL/0.9.8e PHP/5.2.5</td><td></td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.33</td><td>(Unix)</td><td></td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td>Abyss httpd</td><td>2.7.0.0-X1</td><td>AbyssLib/2.7.0.0</td><td>Windows</td><td></td><td>28</td><td>0.002</td></tr>
+<tr><td>http</td><td>ZyXEL ZyWALL USG 100 firewall http config</td><td></td><td></td><td></td><td>firewall</td><td>27</td><td>0.002</td></tr>
+<tr><td>http</td><td>Virgin Super Hub media player http config</td><td></td><td></td><td></td><td>media device</td><td>27</td><td>0.002</td></tr>
+<tr><td>http</td><td>Tornado httpd</td><td>2.1</td><td></td><td></td><td></td><td>27</td><td>0.002</td></tr>
+<tr><td>http</td><td>MiniServ</td><td>1.530</td><td>Webmin httpd</td><td></td><td></td><td>27</td><td>0.002</td></tr>
+<tr><td>http</td><td>Microsoft Windows Media Server</td><td>9.6.7600.16564</td><td></td><td>Windows</td><td></td><td>27</td><td>0.002</td></tr>
+<tr><td>http</td><td>localhost</td><td></td><td></td><td></td><td></td><td>27</td><td>0.002</td></tr>
+<tr><td>http</td><td>Linksys RV082 VPN router http config</td><td></td><td></td><td></td><td>router</td><td>27</td><td>0.002</td></tr>
+<tr><td>http</td><td>Jetty</td><td>6.1.20</td><td></td><td></td><td></td><td>27</td><td>0.002</td></tr>
+<tr><td>http</td><td>Jetty</td><td>6.1.19</td><td></td><td></td><td></td><td>27</td><td>0.002</td></tr>
+<tr><td>http</td><td>jDownloader httpd</td><td></td><td>unauthorized</td><td></td><td></td><td>27</td><td>0.002</td></tr>
+<tr><td>http</td><td>Harmonic Server</td><td></td><td></td><td></td><td></td><td>27</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.17</td><td></td><td></td><td></td><td>27</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.0</td><td>(Fedora)</td><td></td><td></td><td>27</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.42</td><td>(Unix) mod_auth_pam/1.1.1 DAV/1.0.3 mod_ssl/2.8.31 OpenSSL/0.9.8g</td><td></td><td></td><td>27</td><td>0.002</td></tr>
+<tr><td>zabbix</td><td>Zabbix Monitoring System</td><td></td><td></td><td></td><td></td><td>26</td><td>0.002</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>3.6.1p2</td><td>protocol 1.99</td><td></td><td></td><td>26</td><td>0.002</td></tr>
+<tr><td>http</td><td>Xitami httpd</td><td></td><td></td><td></td><td></td><td>26</td><td>0.002</td></tr>
+<tr><td>http</td><td>WEB SERVER</td><td></td><td>Multi Security Firewall Administration Tools</td><td></td><td></td><td>26</td><td>0.002</td></tr>
+<tr><td>http</td><td>WatchGuard Firewall http config</td><td></td><td></td><td></td><td>firewall</td><td>26</td><td>0.002</td></tr>
+<tr><td>http</td><td>TRMB</td><td>1.0</td><td>Trimble</td><td></td><td></td><td>26</td><td>0.002</td></tr>
+<tr><td>http</td><td>Netscape Enterprise httpd</td><td>4.1</td><td></td><td></td><td></td><td>26</td><td>0.002</td></tr>
+<tr><td>http</td><td></td><td></td><td>NETGEAR MBRN3000</td><td></td><td></td><td>26</td><td>0.002</td></tr>
+<tr><td>http</td><td>Motion Camera httpd</td><td>3.2.12</td><td></td><td></td><td>webcam</td><td>26</td><td>0.002</td></tr>
+<tr><td>http</td><td></td><td></td><td>Linksys BEFW11S4 V4</td><td></td><td></td><td>26</td><td>0.002</td></tr>
+<tr><td>http</td><td>Jetty</td><td>6.1.9</td><td></td><td></td><td></td><td>26</td><td>0.002</td></tr>
+<tr><td>http</td><td>Huawei-3Com HTTPD</td><td></td><td>H3C BR104H</td><td></td><td></td><td>26</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.63</td><td>(Win32) PHP/5.2.10</td><td></td><td></td><td>26</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.34</td><td>(Unix)</td><td></td><td></td><td>26</td><td>0.002</td></tr>
+<tr><td>http</td><td>Allegro RomPager</td><td>4.04</td><td></td><td></td><td></td><td>26</td><td>0.002</td></tr>
+<tr><td>eggdrop</td><td>Eggdrop irc bot console</td><td>1.6.19</td><td>botname: BitBurger</td><td></td><td></td><td>26</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>Draytek Vigor ADSL router telnetd</td><td></td><td></td><td></td><td>broadband router</td><td>25</td><td>0.002</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.7p1 Debian 8ubuntu1.2</td><td>protocol 2.0</td><td>Linux</td><td></td><td>25</td><td>0.002</td></tr>
+<tr><td>irc-proxy</td><td>ShroudBNC irc-proxy</td><td>1.2 revision 1080</td><td></td><td></td><td></td><td>25</td><td>0.002</td></tr>
+<tr><td>http</td><td>TwistedWeb httpd</td><td>10.1.0</td><td></td><td></td><td></td><td>25</td><td>0.002</td></tr>
+<tr><td>http</td><td>TP-LINK WR543G WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>25</td><td>0.002</td></tr>
+<tr><td>http</td><td>thttpd</td><td></td><td>Linksys RV082 WAP http config</td><td></td><td>WAP</td><td>25</td><td>0.002</td></tr>
+<tr><td>http</td><td>Rex media encoder http config</td><td>12.0.7601.17514</td><td></td><td>Windows</td><td></td><td>25</td><td>0.002</td></tr>
+<tr><td>http</td><td>Netgear DG834PN router http config</td><td></td><td></td><td></td><td>router</td><td>25</td><td>0.002</td></tr>
+<tr><td>http</td><td>MoxaHttp</td><td>1.0</td><td></td><td></td><td>specialized</td><td>25</td><td>0.002</td></tr>
+<tr><td>http</td><td>Mercury SiteScope Application Managment httpd</td><td>7.9.5.17</td><td></td><td></td><td></td><td>25</td><td>0.002</td></tr>
+<tr><td>http</td><td>Jetty</td><td>7.1.6.v20100715</td><td></td><td></td><td></td><td>25</td><td>0.002</td></tr>
+<tr><td>http</td><td>IPC</td><td></td><td></td><td></td><td></td><td>25</td><td>0.002</td></tr>
+<tr><td>http</td><td>http server</td><td>everfocus</td><td></td><td></td><td></td><td>25</td><td>0.002</td></tr>
+<tr><td>http</td><td>Gordano Messaging Suite Web Server v9.01.3158</td><td></td><td></td><td></td><td></td><td>25</td><td>0.002</td></tr>
+<tr><td>http</td><td>GM Streaming Server httpd</td><td></td><td></td><td></td><td>webcam</td><td>25</td><td>0.002</td></tr>
+<tr><td>http</td><td>gateway</td><td></td><td>Please input username/password</td><td></td><td></td><td>25</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.9</td><td>(APMServ) PHP/5.2.6</td><td></td><td></td><td>25</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) mod_ssl/2.2.22 OpenSSL/1.0.0-fips mod_bwlimited/1.4</td><td></td><td></td><td>25</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.21</td><td>(Unix) PHP/5.3.8</td><td></td><td></td><td>25</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.15</td><td>(Win32)</td><td></td><td></td><td>25</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.14</td><td>mod_ssl/2.2.14 OpenSSL/0.9.8e-fips-rhel5 DAV/2 PHP/5.2.11</td><td></td><td></td><td>25</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.59</td><td>(Win32) PHP/5.1.6</td><td></td><td></td><td>25</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.59</td><td>(Unix) PHP/5.2.5 DAV/2</td><td></td><td></td><td>25</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.54</td><td>mod_ssl/2.0.54 OpenSSL/0.9.8g PHP/5.2.13</td><td></td><td></td><td>25</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.42</td><td>(Unix) PHP/5.3.6 with Suhosin-Patch</td><td></td><td></td><td>25</td><td>0.002</td></tr>
+<tr><td>http</td><td></td><td></td><td>4_WAN_Broadband_Router</td><td></td><td></td><td>25</td><td>0.002</td></tr>
+<tr><td>smtp</td><td></td><td></td><td></td><td></td><td></td><td>24</td><td>0.002</td></tr>
+<tr><td>http</td><td></td><td></td><td>ZIO-ROUTER</td><td></td><td></td><td>24</td><td>0.002</td></tr>
+<tr><td>http</td><td>TwistedWeb httpd</td><td>11.0.0</td><td></td><td></td><td></td><td>24</td><td>0.002</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.19-MX Sep  9 2010</td><td></td><td></td><td></td><td>24</td><td>0.002</td></tr>
+<tr><td>http</td><td>Sun Iplanet httpd</td><td>2.0a</td><td></td><td></td><td></td><td>24</td><td>0.002</td></tr>
+<tr><td>http</td><td></td><td></td><td>PowerDNS</td><td></td><td></td><td>24</td><td>0.002</td></tr>
+<tr><td>http</td><td>Oracle Application Server httpd</td><td>9.0.4.0.0</td><td></td><td></td><td></td><td>24</td><td>0.002</td></tr>
+<tr><td>http</td><td>Oracle Application Server 10g httpd</td><td>10.1.3.1.0</td><td>Oracle Containers for J2EE</td><td></td><td></td><td>24</td><td>0.002</td></tr>
+<tr><td>http</td><td>nginx</td><td>1.0.4</td><td></td><td></td><td></td><td>24</td><td>0.002</td></tr>
+<tr><td>http</td><td>Netgear WNR834Bv2 WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>24</td><td>0.002</td></tr>
+<tr><td>http</td><td>Kerio MailServer http config</td><td></td><td></td><td>Windows</td><td></td><td>24</td><td>0.002</td></tr>
+<tr><td>http</td><td>fwnas</td><td>2.1.0</td><td></td><td></td><td></td><td>24</td><td>0.002</td></tr>
+<tr><td>http</td><td>AVM FRITZ!Box WLAN 7170 WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>24</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.4</td><td>(Unix) PHP/5.2.1</td><td></td><td></td><td>24</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) mod_ssl/2.2.22 OpenSSL/1.0.0g PHP/5.3.10</td><td></td><td></td><td>24</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) mod_ssl/2.2.22 OpenSSL/0.9.8e-fips-rhel5 mod_bwlimited/1.4 PHP/5.2.17</td><td></td><td></td><td>24</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.17</td><td>(Unix)</td><td></td><td></td><td>24</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.11</td><td>(Win32) PHP/5.2.9-2</td><td></td><td></td><td>24</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.64</td><td>(Unix) PHP/5.2.17 DAV/2</td><td></td><td></td><td>24</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.52</td><td></td><td></td><td></td><td>24</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.28</td><td>(Unix) PHP/5.0.2</td><td></td><td></td><td>24</td><td>0.002</td></tr>
+<tr><td>http</td><td>2Wire HomePortal touer http config</td><td></td><td></td><td></td><td>broadband router</td><td>24</td><td>0.002</td></tr>
+<tr><td>damewaremr</td><td>DameWare Mini Remote Control</td><td></td><td></td><td>Windows</td><td></td><td>24</td><td>0.002</td></tr>
+<tr><td>http</td><td>ZyXEL P-320W broadband router http config</td><td></td><td></td><td></td><td>broadband router</td><td>23</td><td>0.002</td></tr>
+<tr><td>http</td><td>Web Server</td><td></td><td></td><td></td><td></td><td>23</td><td>0.002</td></tr>
+<tr><td>http</td><td></td><td></td><td>VideoSphere</td><td></td><td></td><td>23</td><td>0.002</td></tr>
+<tr><td>http</td><td>Tridium Niagara httpd</td><td>1.1</td><td></td><td></td><td>specialized</td><td>23</td><td>0.002</td></tr>
+<tr><td>http</td><td>TP-LINK Router</td><td></td><td>TP-LINK Router R483</td><td></td><td></td><td>23</td><td>0.002</td></tr>
+<tr><td>http</td><td>Router</td><td></td><td>TP-LINK Wireless AP WA5210G</td><td></td><td></td><td>23</td><td>0.002</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>2.7.STABLE5</td><td></td><td></td><td></td><td>23</td><td>0.002</td></tr>
+<tr><td>http</td><td>nginx</td><td>0.8.55</td><td></td><td></td><td></td><td>23</td><td>0.002</td></tr>
+<tr><td>http</td><td>Netgear WNR3500v2 WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>23</td><td>0.002</td></tr>
+<tr><td>http</td><td></td><td></td><td>NETGEAR WNDR3700v3</td><td></td><td></td><td>23</td><td>0.002</td></tr>
+<tr><td>http</td><td>Microsoft Windows Media Server</td><td>9.5.6001.18281</td><td></td><td>Windows</td><td></td><td>23</td><td>0.002</td></tr>
+<tr><td>http</td><td>Mbedthis-Appweb</td><td>2.2.2</td><td></td><td></td><td></td><td>23</td><td>0.002</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.5.0</td><td></td><td></td><td></td><td>23</td><td>0.002</td></tr>
+<tr><td>http</td><td>GoAhead httpd</td><td></td><td>AirLink 101 SkyIPCam http config</td><td></td><td>webcam</td><td>23</td><td>0.002</td></tr>
+<tr><td>http</td><td>eMule P2P</td><td>0.50a</td><td></td><td></td><td></td><td>23</td><td>0.002</td></tr>
+<tr><td>http</td><td>Embedded HTTP Server</td><td></td><td></td><td></td><td></td><td>23</td><td>0.002</td></tr>
+<tr><td>http</td><td>Crestron MPS-200 AV routing system http config</td><td></td><td></td><td></td><td>media device</td><td>23</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.21</td><td>(Win32) PHP/5.2.17</td><td></td><td></td><td>23</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.16</td><td>(Win32) mod_ssl/2.2.16 OpenSSL/0.9.8o</td><td></td><td></td><td>23</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.11</td><td>(Win32) DAV/2 mod_ssl/2.2.11 OpenSSL/0.9.8i mod_autoindex_color PHP/5.2.8</td><td></td><td></td><td>23</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.41</td><td>(Unix) PHP/4.4.9 mod_ssl/2.8.31 OpenSSL/0.9.8g</td><td></td><td></td><td>23</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Serv-U ftpd</td><td>6.3</td><td></td><td>Windows</td><td></td><td>23</td><td>0.002</td></tr>
+<tr><td>vnc</td><td>Apple remote desktop vnc</td><td></td><td></td><td>Mac OS X</td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>ssh</td><td>Cisco SSH</td><td>1.25</td><td>protocol 2.0</td><td>IOS</td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>XWeb 1.0</td><td></td><td></td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>WebMgr</td><td>1.1 (Win32) PHP</td><td></td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>UltiDev Cassini httpd</td><td>2.1.4.3</td><td></td><td>Windows</td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>TwistedWeb httpd</td><td>11.1.0</td><td></td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>TP-LINK Router</td><td></td><td>TP-LINK Router R4199G</td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.19-MX Oct 19 2011</td><td></td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>Simple httpd 1.0</td><td></td><td></td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>Router</td><td></td><td>TP-LINK Wireless N Router WR840N</td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>Oracle Application Server 10g httpd</td><td>10.1.2.2.0</td><td></td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>Network Camera with Pan</td><td>Tilt</td><td>Network Camera with Pan/Tilt</td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>MiniWeb</td><td></td><td></td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>Mercury SiteScope Application Managment httpd</td><td>8.1.2.0</td><td></td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>IP_SHARER WEB</td><td>1.0</td><td>TRENDnet TW100-BRV204 router http config; admin pass set</td><td></td><td>router</td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>HyNetOS</td><td>2.0</td><td></td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>HTTP Software 1.1</td><td></td><td>D-Link DI-504N</td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>H3C-Miniware-Webs</td><td></td><td>H3C ICG 1000</td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>dwhttpd</td><td>4.1a6 (Inso</td><td></td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>Dreambox DVB Enigma httpd</td><td></td><td></td><td></td><td>media device</td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>D-Link DCS-900 webcam http config</td><td></td><td></td><td></td><td>webcam</td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>D-Link DCS-2120 webcam http config</td><td></td><td></td><td></td><td>webcam</td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>Caucho Resin JSP engine</td><td>3.1.10</td><td></td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>BlueIris-HTTP</td><td>BlueIris-HTTP</td><td>BlueIris</td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>BaseHTTP</td><td>0.3 Python</td><td></td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>ATL Arena Web Services Server</td><td></td><td></td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.9</td><td>(Unix) mod_ssl/2.2.9 OpenSSL/0.9.7e</td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.4</td><td>(Win32)</td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) mod_ssl/2.2.22 OpenSSL/0.9.8r DAV/2 PHP/5.4.3</td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.17</td><td>(Win32) PHP/5.2.17</td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.14</td><td>(Win32) PHP/5.2.10</td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.37</td><td>(Unix) PHP/4.3.3 mod_ssl/2.8.28 OpenSSL/0.9.8b</td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>http</td><td></td><td></td><td>4_WAN_QVM_Router</td><td></td><td></td><td>22</td><td>0.002</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>2.3.0 mikrotik 2.9</td><td>protocol 1.99</td><td></td><td>router</td><td>21</td><td>0.002</td></tr>
+<tr><td>socks5</td><td></td><td></td><td>GSSAPI authentication required</td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.18-max-nt</td><td></td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Z-World Rabbit</td><td></td><td></td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>WEB SERVER</td><td></td><td>Mail Server Administration Tools</td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>webcam 7</td><td></td><td></td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Unknown</td><td>0.0 UPnP</td><td></td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>udpxy multicast UDP-to-HTTP</td><td></td><td></td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>TP-LINK Router</td><td></td><td>TP-LINK Wireless ADSL2</td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>TP-LINK MR3220 WAP http config</td><td></td><td></td><td></td><td>WAP</td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>thttpd</td><td></td><td>Linksys RV042 VPN router http config</td><td></td><td>router</td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Sun GlassFish Open Source Edition</td><td>3.1.2</td><td>JSP 2.2; Servlet 3.0; Java 1.6</td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Sun GlassFish</td><td>2.1</td><td>Servlet 2.5</td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Router Webserver</td><td></td><td>TP-LINK Wireless N Router WR941N</td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Pike v7.6 release 92</td><td></td><td></td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Oracle Application Server 10g httpd</td><td>10.1.3.2.0</td><td>Oracle Containers for J2EE</td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Netgear DG834 http config</td><td></td><td></td><td></td><td>broadband router</td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Netgear DG834GB router http config</td><td></td><td></td><td></td><td>router</td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Mini ASP Web Server</td><td></td><td></td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td></td><td></td><td>Level 15 Access</td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Jetty</td><td>8.y.z-SNAPSHOT</td><td></td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Java PseudoHttpd</td><td>0.4.5</td><td></td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>ImagiaTek</td><td></td><td></td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Huawei-3Com HTTPD</td><td></td><td></td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Grandstream GXP2010 http config</td><td>1.2.5.3</td><td></td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Gordano Web Server v5.06.0014</td><td></td><td></td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Dart WebServer Tool</td><td>1.0</td><td></td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Comanche</td><td>kom-4.10</td><td></td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Caucho Resin JSP engine</td><td>3.0.26</td><td></td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>BellWin</td><td>1.00.00</td><td></td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.21</td><td>(Unix) mod_ssl/2.2.21 OpenSSL/0.9.8r DAV/2 PHP/5.3.8</td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.21</td><td>(Unix) DAV/2</td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.17</td><td>(Win32) mod_jk/1.2.31</td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.14</td><td>(Fedora)</td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.12</td><td>(Win32) DAV/2 mod_ssl/2.2.12 OpenSSL/0.9.8k mod_autoindex_color PHP/5.3.0 mod_perl/2.0.4 Perl/v5.10.0</td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Allegro RomPager</td><td>4.20</td><td></td><td></td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Abyss httpd</td><td>2.6.0.0-X1</td><td>AbyssLib/2.6.0.0</td><td>Windows</td><td></td><td>21</td><td>0.002</td></tr>
+<tr><td>http</td><td>Aastra 6731i VoIP phone http config</td><td></td><td></td><td></td><td>VoIP phone</td><td>21</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>NASLite-SMB/Sveasoft Alchemy firmware telnetd</td><td></td><td></td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>telnet</td><td>Cisco 1721 router telnetd</td><td></td><td></td><td>IOS</td><td>router</td><td>20</td><td>0.002</td></tr>
+<tr><td>ovm-manager</td><td>Oracle VM Manager</td><td></td><td></td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>WSGIServer</td><td>0.1</td><td>Python 2.6.5</td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td></td><td></td><td>WPN824</td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>WebBox-20</td><td></td><td></td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>Virata-EmWeb</td><td>5.3.0</td><td>Orinoco WAP http config</td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>Thin</td><td>1.3.1</td><td>codename Triple Espresso</td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>Stanley NT500 access control system httpd</td><td></td><td></td><td></td><td>security-misc</td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td></td><td></td><td>SmartLinc</td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>smartcds</td><td>7.5-gd</td><td></td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>Router</td><td></td><td>Mercury Wireless N Router MW150R</td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http-proxy</td><td>3proxy http proxy</td><td></td><td>authentication required</td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>PeerConnectionTestServer</td><td>0.1</td><td></td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td></td><td></td><td>Multi CardServer</td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>Microsoft-HTTPAPI</td><td>1.0</td><td></td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>Microsoft-Cassini</td><td>1.0.0.0</td><td></td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>Mbedthis-Appweb</td><td>2.4.0</td><td>J-Web http config</td><td>JUNOS</td><td>router</td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>Linksys WRV54G router http config</td><td></td><td></td><td></td><td>router</td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>libwww-perl-daemon httpd</td><td>5.827</td><td></td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>ise GmbH HTTP-Server v2.0</td><td></td><td></td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>IocpServer</td><td></td><td></td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>GoAhead-Webs</td><td>2.5.0</td><td></td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>Embedthis-Appweb</td><td>3.2.3</td><td></td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>CJServer</td><td>1.1</td><td></td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>CherryPy httpd</td><td>2.3.0</td><td></td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>Caucho Resin JSP engine</td><td>3.1.6</td><td></td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>AvigilonGateway</td><td>1.0 Microsoft-HTTPAPI</td><td></td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.9</td><td>(Debian) PHP/5.2.6-1+lenny9 with Suhosin-Patch mod_ssl/2.2.9 OpenSSL/0.9.8g</td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.8</td><td>(Win32) PHP/5.2.5</td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.8</td><td>(Ubuntu) PHP/5.2.4-2ubuntu5.17 with Suhosin-Patch</td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.8</td><td>(Linux/SUSE)</td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.4</td><td>(Fedora)</td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) mod_ssl/2.2.22 OpenSSL/1.0.0g</td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.22</td><td>(Unix) DAV/2 mod_ssl/2.2.22 OpenSSL/0.9.8r</td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.21</td><td>(Linux/SUSE)</td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.21</td><td>(CentOS)</td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.19</td><td>(Win32) PHP/5.3.6</td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.54</td><td>(Fedora)</td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.0.50</td><td>(Fedora)</td><td></td><td></td><td>20</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.33</td><td>(Win32)</td><td></td><td></td><td>20</td><td>0.002</td></tr>
+
+   </tbody>
+  </table>
+ </div>
+</div>

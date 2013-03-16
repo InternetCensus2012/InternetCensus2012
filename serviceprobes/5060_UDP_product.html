@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Internet Census 2012</title>
+ <script type="text/javascript" src="../js/jquery-latest.js"></script> 
+ <script type="text/javascript" src="../js/__jquery.tablesorter.min.js"></script> 
+ <link rel="stylesheet" type="text/css" href="../style.css">
+
+ <script>
+ $(document).ready(function() 
+  { 
+   generate(6);
+   $("#sortable").tablesorter(); 
+  } 
+ ); 
+
+ function generate(index) {
+    
+  var pages=[
+   ["1t","3t","7t","7u","9t","13u","17u","19t","21t","22t","23t","25t","26t","35t","37u","42t","42u","43t","44t","53t","53u","69u","70t","79t","80t","81t","82t","83t","84t","85t","88t","88u","98t","100t","106t","110t","111t","111u","113t","119t","123u","130t","135t","135u","137u","139t","143t","144t","161t","161u","177u","179t","199t"],
+   ["214t","254t","255t","256t","257t","264t","280t","311t","389t","390t","406t","407u","427t","443t","444t","445t","449t","464t","465t","497t","500u","505t","510t","512t","513t","514t","515t","517u","518u","523t","523u","524t","540t","543t","544t","548t","554t","587t","591t","593t","616t","620t","625t","626u","628t","631t","636t","641t","646t","660t","666t"],
+   ["706t","710t","711t","731t","771t","782t","783t","787t","808t","873t","888t","898t","900t","901t","902t","990t","993t","995t","1000t","1010t","1022t","1024t","1025t","1026t","1027t","1028t","1029t","1030t","1031t","1032t","1033t","1035t","1036t","1037t","1038t","1039t","1040t","1041t","1042t","1043t","1044t","1048t","1049t","1050t","1053t","1054t","1056t","1058t","1059t"],
+   ["1064t","1065t","1066t","1068t","1069t","1071t","1074t","1080t","1090t","1095t","1098t","1099t","1100t","1105t","1109t","1110t","1111t","1112t","1200t","1212t","1214t","1217t","1220t","1234t","1241t","1248t","1302t","1311t","1314t","1344t","1352t","1400t","1414t","1415t","1416t","1417t","1418t","1419t","1419u","1420t","1432t","1433t","1434u","1467t","1494t"],
+   ["1500t","1501t","1503t","1505t","1505u","1521t","1522t","1526t","1527t","1549t","1550t","1574t","1583t","1604u","1610t","1611t","1666t","1687t","1688t","1702t","1720t","1723t","1748t","1754t","1755t","1761t","1761u","1762t","1763t","1801t","1830t","1900t","1935t","1967u","1972t","1981t","1998t","2000t","2001t","2002t","2003t","2005t","2010t","2024t","2030t","2040t","2049t","2064t","2068t"],
+   ["2100t","2103t","2105t","2107t","2121t","2160t","2161t","2301t","2303u","2306t","2383t","2396t","2401t","2427t","2427u","2525t","2600t","2601t","2627t","2638u","2701t","2715t","2717t","2869t","2947t","2967t","2967u","3000t","3001t","3002t","3003t","3004t","3005t","3006t","3025t","3031t","3050t","3052t","3128t","3268t","3280t","3306t","3310t","3333t","3351t","3372t","3389t","3483u","3493t","3531t"],
+   ["3632t","3689t","3690t","3703t","3872t","3892t","3900t","3940t","3986t","4000t","4001t","4045t","4045u","4155t","4369t","4443t","4444t","4567t","4660t","4711t","4868t","4899t","4999t","5000t","5001t","5003t","5009t","5050t","5051t","5060t","5060u","5061t","5101t","5120t","5190t","5222t","5232t","5269t","5280t","5302t","5323t","5353u","5357t","5400t","5427t","5432t","5520t","5530t","5550t","5555t","5556t","5570t"],
+   ["5600t","5631t","5632u","5666t","5800t","5801t","5802t","5803t","5900t","5901t","6000t","6001t","6002t","6003t","6004t","6005t","6006t","6007t","6008t","6009t","6010t","6011t","6012t","6013t","6014t","6015t","6016t","6017t","6018t","6019t","6020t","6050t","6103t","6112t","6163t","6346t","6379t","6543t","6544t","6560t","6588t","6600t","6646t","6660t","6661t","6662t","6663t","6664t","6665t","6666t","6667t","6668t","6669t","6670t","6699t"],
+   ["6802t","6969t","7000t","7001u","7002t","7007t","7008t","7070t","7100t","7101t","7144t","7145t","7171t","7180t","7200t","7210t","7272t","7402t","7461t","7776t","7777t","7780t","7937t","7938t","8000t","8001t","8002t","8003t","8004t","8005t","8006t","8007t","8008t","8009t","8010t","8031t","8080t","8081t","8082t","8083t","8084t","8085t","8087t","8088t","8118t","8138t","8181t","8194t","8307t","8333t","8443t","8770t"],
+   ["8880t","8881t","8882t","8883t","8884t","8885t","8886t","8887t","8888t","9000t","9001t","9002t","9003t","9030t","9050t","9080t","9088t","9089t","9090t","9091t","9092t","9093t","9094t","9095t","9096t","9097t","9098t","9099t","9100t","9100u","9101t","9102t","9103t","9104t","9105t","9106t","9107t","9481t","9801t","9999t","10000t","10000u","10001t","10005t","10010t","10031t","10080u","11210t","11211t","11211u","11371t","11965t","12203u","12345t"],
+   ["13013t","13666t","13720t","13722t","13783t","14238t","14534t","15000t","15001t","15002t","17007t","17555u","17988t","18086t","18182t","18264t","19150t","19350t","20000t","22001t","22490t","26214t","26470t","27000t","27001t","27002t","27003t","27004t","27005t","27006t","27007t","27008t","27009t","27010t","27017t","27960u","30444t","31337t","31416t","32211t","32750t","32750u","32751t","32751u","32752t","32752u","32753t","32753u","32754t","32754u"],
+   ["32755t","32755u","32756t","32756u","32757t","32757u","32758t","32758u","32759t","32759u","32760t","32760u","32761t","32761u","32762t","32762u","32763t","32763u","32764t","32764u","32765t","32765u","32766t","32766u","32767t","32767u","32768t","32768u","32769t","32769u","32770t","32770u","32771t","32771u","32772t","32772u","32773t","32773u","32774t","32774u","32775t","32775u","32776t","32776u","32777t","32777u"],
+   ["32778t","32778u","32779t","32779u","32780t","32780u","32781t","32781u","32782t","32782u","32783t","32783u","32784t","32784u","32785t","32785u","32786t","32786u","32787t","32787u","32788t","32788u","32789t","32789u","32790t","32790u","32791t","32791u","32792t","32792u","32793t","32793u","32794t","32794u","32795t","32795u","32796t","32796u","32797t","32797u","32798t","32798u","32799t","32799u"],
+   ["32800t","32800u","32801t","32801u","32802t","32802u","32803t","32803u","32804t","32804u","32805t","32805u","32806t","32806u","32807t","32807u","32808t","32808u","32809t","32809u","32810t","32810u","33015t","34012t","37435t","38978t","38978u","40193t","41523t","49152t","49152u","49153u","49154u","49155u","49156u","49157t","49400t","50000t","50001t","50002t","50003t","50004t","50005t","50006t","50007t","50008t","50009t"],
+   ["50010t","50011t","50012t","50013t","50014t","50015t","50016t","50017t","50018t","50019t","50020t","50021t","50022t","50023t","50024t","50025t","50030t","55553t","55555t","56667t","60000t","60001t","60002t","60003t","60004t","60006t","60007t","60008t","60009t","60010t","60011t","60012t","60013t","60014t","60015t","60016t","60017t","60018t","60019t","60020t","60021t","60022t","60023t","60024t","60025t","Combinedt"]
+  ];
+  current = "5060u"
+
+  var html = ""
+  var col = 0;
+  for (var i = 0; i < pages[index].length; ++i){
+   if (col == 0){
+    html = html + "<tr>"
+   }
+   if(pages[index][i].indexOf("u") != -1){
+    port = pages[index][i].replace(/u/g, " UDP");
+    link = pages[index][i].replace(/u/g, "_UDP_product.html");
+   }else{
+    port = pages[index][i].replace(/t/g, "");
+    link = pages[index][i].replace(/t/g, "_TCP_product.html");
+   }
+   if(pages[index][i] == ("" + current)){
+    html = html + "<td style=\"background-color:#e9e9e9\"><a href=\""+link+"\">"+port+"</a></td>"
+   }else{
+    html = html + "<td><a href=\""+link+"\">"+port+"</a></td>"
+   }
+   
+   col = col +1;
+   if (col == 14){
+    col = 0;
+    html = html + "</tr>"
+   }
+  }
+  $("#submenu").html(html);
+  $(".clicks").css({'background-color': ''})
+  $("#click"+index).css({'background-color': '#e9e9e9'})
+ }
+ </script>
+ 
+</head>
+
+<body>
+<div id="main">
+
+ <table id = "nav">
+ <col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" />
+ <tr>
+ <td><a href="../paper.html">Paper</a></td>
+ <td><a href="../images.html">Images</a></td>
+ <td><a href="../download.html">Download</a></td>
+ <td><a href="../hilbert.html">Hilbert Browser</a></td>
+ <td class="highlight1"><a href="../serviceprobe_overview.html">Service Probe Overview</a></td>
+ <td><a href="../tld_overview.html">rDNS Overview</a></td>
+ </tr>
+ </table>
+
+ 
+ <table id="nav1">
+ <tr>
+  <td style="width:10%"><a href="../serviceprobe_overview.html"><span style="font-size: 14px;">Overview</span></a></td>
+  <td> 
+  <span style="font-size: 14px;">Port Details</span>
+   <table id = "nav">
+    <tr>
+     <td id="click0" class="clicks" onclick="generate(0)">< 200</td>
+     <td id="click1" class="clicks" onclick="generate(1)">< 700</td>
+     <td id="click2" class="clicks" onclick="generate(2)">< 1060 </td>
+     <td id="click3" class="clicks" onclick="generate(3)">< 1500 </td>
+     <td id="click4" class="clicks" onclick="generate(4)">< 2100 </td>
+     <td id="click5" class="clicks" onclick="generate(5)">< 3600 </td>
+     <td id="click6" class="clicks" onclick="generate(6)">< 5600 </td>
+     <td id="click7" class="clicks" onclick="generate(7)">< 6700 </td>
+     <td id="click8" class="clicks" onclick="generate(8)">< 8800 </td>
+     <td id="click9" class="clicks" onclick="generate(9)">< 13000</td>
+     <td id="click10" class="clicks" onclick="generate(10)">< 32755</td>
+     <td id="click11" class="clicks" onclick="generate(11)">< 32778</td>
+     <td id="click12" class="clicks" onclick="generate(12)">< 32800</td>
+     <td id="click13" class="clicks" onclick="generate(13)">< 50010</td>
+     <td id="click14" class="clicks" onclick="generate(14)">< 65536</td>
+    </tr>
+   </table>
+
+   <table  id = "submenu">
+    <tr><td>This menu requires javascript, sorry<td><tr>
+   </table>
+  </td>
+ </tr>
+ </table>
+ <table id = "nav">
+ <tr>
+  <td style ="width:12.5%" ><a href="5060_TCP_product.html">Prev Port</a></td>
+  <td style ="width:25% ; background-color: #e4e4e4" ><a href="5060_UDP_product.html">Products</a></td>
+  <td style ="width:25% ;"><a href="5060_UDP_version.html">Versions</a></td>
+  <td style ="width:25% ;"><a href="5060_UDP_full.html">Full</a></td>
+  <td style ="width:12.5%" ><a href="5061_TCP_product.html">Next Port</a></td>
+ <tr>
+ </table>
+ 
+ 
+ <div id="content">
+  Overview of services running on Port 5060 UDP.<br>
+  ~11.42 Million IP addresses observed from May to December 2012  <br>
+  To get raw lists of the data go to <a href="../download.html">Download</a>. For an explanation of what this data is and how it was obtained, see <a href="../paper.html">Paper</a>.<br><br>
+
+
+  <table id="sortable" class="tablesorter" style ="text-align:center;border:none"> 
+   <col width="20%" /><col width="50%" /><col width="15%" /><col width="15%" />
+   <thead>
+    <th>Servicename <img src="../icon_sort.png"></th>
+<th>Product <img src="../icon_sort.png"></th>
+<th>Count <img src="../icon_sort.png"></th>
+<th>Percent <img src="../icon_sort.png"></th>
+ 
+   </thead>
+   <tbody>
+    <tr><td>sip</td><td></td><td>5669291</td><td>49.646</td></tr>
+<tr><td>sip</td><td>T-Com Speedport</td><td>1634900</td><td>14.317</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 SIP</td><td>775683</td><td>6.793</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7112 SIP</td><td>490740</td><td>4.297</td></tr>
+<tr><td>no match</td><td>-/-</td><td>366971</td><td>3.214</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7113 SIP</td><td>299856</td><td>2.626</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7320 SIP</td><td>245299</td><td>2.148</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7390 SIP</td><td>223985</td><td>1.961</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v3 SIP</td><td>217963</td><td>1.909</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7240 SIP</td><td>214111</td><td>1.875</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7141 SIP</td><td>189438</td><td>1.659</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v2 SIP</td><td>158973</td><td>1.392</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7050 SIP</td><td>158213</td><td>1.385</td></tr>
+<tr><td>sip</td><td> M5T SIP Stack/4.1.2.2</td><td>129711</td><td>1.136</td></tr>
+<tr><td>sip</td><td>BT HomeHub</td><td>78967</td><td>0.692</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 SIP</td><td>65616</td><td>0.575</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 Annex A SIP</td><td>52268</td><td>0.458</td></tr>
+<tr><td>sip</td><td>QIP instant messenger SIP</td><td>42078</td><td>0.368</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7340 SIP</td><td>30265</td><td>0.265</td></tr>
+<tr><td>sip</td><td>Pirelli/Pirelli WLAN IAD-1.38S-M</td><td>27740</td><td>0.243</td></tr>
+<tr><td>sip-proxy</td><td>Asterisk PBX</td><td>26869</td><td>0.235</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7113 Annex A SIP</td><td>18271</td><td>0.16</td></tr>
+<tr><td>sip</td><td>Asterisk</td><td>17032</td><td>0.149</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7360 SL SIP</td><td>15137</td><td>0.133</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7570 vDSL SIP</td><td>12059</td><td>0.106</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7360 SIP</td><td>11579</td><td>0.101</td></tr>
+<tr><td>sip</td><td>Sipek VoIP</td><td>11488</td><td>0.101</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v1 SIP</td><td>10509</td><td>0.092</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7140 Annex A SIP</td><td>9625</td><td>0.084</td></tr>
+<tr><td>sip</td><td>Motorola SBV5220-SIP-1.2.6-SCM-01-SHTW</td><td>8895</td><td>0.078</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 29.04.87 SIP</td><td>8408</td><td>0.074</td></tr>
+<tr><td>sip-proxy</td><td>3CX PhoneSystem PBX</td><td>8059</td><td>0.071</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7390 84.05.22 SIP</td><td>7437</td><td>0.065</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>7281</td><td>0.064</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 29.04.80 SIP</td><td>5299</td><td>0.046</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v3 74.05.21 SIP</td><td>4553</td><td>0.04</td></tr>
+<tr><td>sip</td><td>Tilgin Vood HG13xxx_CSx000-01_09_05_09</td><td>4388</td><td>0.038</td></tr>
+<tr><td>sip</td><td>Telefonadapter - Telia Bredbandstelefoni</td><td>4258</td><td>0.037</td></tr>
+<tr><td>sip</td><td>Sagem ADSL router</td><td>3900</td><td>0.034</td></tr>
+<tr><td>sip</td><td>Motorola SBV5121-SIP-1.2.6-SCM-01-SHTW</td><td>3500</td><td>0.031</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v3 74.05.22 SIP</td><td>3167</td><td>0.028</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7050 Annex A SIP</td><td>2712</td><td>0.024</td></tr>
+<tr><td>sip</td><td>M5T UA SSP 2.0.4.6 / M5T SIP Stack/4.0.26.26</td><td>2669</td><td>0.023</td></tr>
+<tr><td>sip</td><td>Tilgin Vood HG13xxx_CSx700-01_07_06_06</td><td>2375</td><td>0.021</td></tr>
+<tr><td>sip</td><td>Linksys/PAP2T-3.1.15(LS)</td><td>2293</td><td>0.02</td></tr>
+<tr><td>sip-proxy</td><td>FreeSWITCH mod_sofia</td><td>2279</td><td>0.02</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v2 54.05.21 SIP</td><td>2155</td><td>0.019</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7390 84.05.21 SIP</td><td>2101</td><td>0.018</td></tr>
+<tr><td>sip-proxy</td><td>Cisco SIP Gateway</td><td>2064</td><td>0.018</td></tr>
+<tr><td>sip</td><td>Linksys/SPA2102-3.3.6</td><td>2016</td><td>0.018</td></tr>
+<tr><td>sip</td><td>Cisco 7940 IP Phone</td><td>1990</td><td>0.017</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.11.0)</td><td>1988</td><td>0.017</td></tr>
+<tr><td>sip</td><td>Linksys/SPA2102-5.2.5</td><td>1900</td><td>0.017</td></tr>
+<tr><td>sip</td><td>Motorola SBV5121-SIP-1.2.4-SCM-09-SHTW</td><td>1789</td><td>0.016</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v2 54.05.22 SIP</td><td>1741</td><td>0.015</td></tr>
+<tr><td>sip</td><td>Tandberg-515 VoIP server</td><td>1716</td><td>0.015</td></tr>
+<tr><td>sip</td><td>Linksys/SPA2102-5.2.10</td><td>1656</td><td>0.015</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v3 74.04.89 SIP</td><td>1656</td><td>0.015</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN Annex A SIP</td><td>1541</td><td>0.013</td></tr>
+<tr><td>sip</td><td>Linksys/PAP2T-5.1.6(LS)</td><td>1433</td><td>0.013</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.12.0)</td><td>1417</td><td>0.012</td></tr>
+<tr><td>sip</td><td>Digium Switchvox PBX</td><td>1314</td><td>0.012</td></tr>
+<tr><td>sip-proxy</td><td>CommuniGatePro VoIP Gateway</td><td>1290</td><td>0.011</td></tr>
+<tr><td>sip</td><td>Motorola SBV5222-SIP-2.0.6-SCM-01-SHTW</td><td>1282</td><td>0.011</td></tr>
+<tr><td>sip-proxy</td><td>OpenSIPS SIP Server</td><td>1247</td><td>0.011</td></tr>
+<tr><td>sip</td><td>Tandberg-516 VoIP server</td><td>1239</td><td>0.011</td></tr>
+<tr><td>sip</td><td>Ingate-Firewall/4.9.2</td><td>1207</td><td>0.011</td></tr>
+<tr><td>sip</td><td>InnoMedia SIP MTA6328-2Re v3.0.77</td><td>1204</td><td>0.011</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 29.04.76 SIP</td><td>1044</td><td>0.009</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7140 SIP</td><td>1026</td><td>0.009</td></tr>
+<tr><td>sip</td><td>Tilgin Vood HG23xx_DSx000-02_01_03_02</td><td>986</td><td>0.009</td></tr>
+<tr><td>sip</td><td>Tilgin Vood HG23xx_DSx000-02_02_03_11</td><td>983</td><td>0.009</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.7.0)</td><td>951</td><td>0.008</td></tr>
+<tr><td>sip</td><td>VOS2009 V2.1.1.5</td><td>931</td><td>0.008</td></tr>
+<tr><td>sip</td><td>Tilgin Vood HG135x_HG155x_CSx000-01_09_01_35</td><td>890</td><td>0.008</td></tr>
+<tr><td>sip</td><td>Tilgin Vood HG23xx_DSx000-02_02_01_78</td><td>887</td><td>0.008</td></tr>
+<tr><td>sip</td><td>TANDBERG/4103 (X7.1)</td><td>857</td><td>0.008</td></tr>
+<tr><td>sip</td><td>X-Lite SIP phone</td><td>830</td><td>0.007</td></tr>
+<tr><td>sip</td><td>RTP300-3.1.22</td><td>770</td><td>0.007</td></tr>
+<tr><td>sip</td><td>Asterisk PBX</td><td>742</td><td>0.006</td></tr>
+<tr><td>sip</td><td>Linksys/SPA2102-5.2.12</td><td>731</td><td>0.006</td></tr>
+<tr><td>sip</td><td>Linksys/SPA2102-5.1.12</td><td>714</td><td>0.006</td></tr>
+<tr><td>sip</td><td>Tandberg VCS VoIP server</td><td>694</td><td>0.006</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v3 74.05.05 SIP</td><td>661</td><td>0.006</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7390 84.05.20 SIP</td><td>633</td><td>0.006</td></tr>
+<tr><td>sip</td><td>Motorola SBV5220-SIP-1.2.4-SCM-09-SHTW</td><td>613</td><td>0.005</td></tr>
+<tr><td>sip</td><td>VOS2009 V2.1.2.0</td><td>609</td><td>0.005</td></tr>
+<tr><td>sip</td><td>Tandberg MXP VoIP server</td><td>608</td><td>0.005</td></tr>
+<tr><td>sip</td><td>Tilgin Vood HG13xxx_CSx000-01_07_01_16</td><td>607</td><td>0.005</td></tr>
+<tr><td>sip</td><td>Zoiper VoIP software</td><td>582</td><td>0.005</td></tr>
+<tr><td>sip-proxy</td><td>OpenSER SIP Server</td><td>568</td><td>0.005</td></tr>
+<tr><td>sip</td><td>Linksys/SPA2102-5.1.9</td><td>525</td><td>0.005</td></tr>
+<tr><td>sip</td><td>Pirelli/Pirelli WLAN IAD-1.40S-M</td><td>483</td><td>0.004</td></tr>
+<tr><td>sip</td><td>Ingate-Firewall/4.8.1</td><td>472</td><td>0.004</td></tr>
+<tr><td>sip</td><td>Ingate-Firewall/4.8.4</td><td>458</td><td>0.004</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v1 54.04.88 SIP</td><td>445</td><td>0.004</td></tr>
+<tr><td>sip</td><td>Tilgin Vood HG13xxx_CSx000-01_07_03_04</td><td>436</td><td>0.004</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-/v.5.80A.023.006</td><td>430</td><td>0.004</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v3 74.04.88 SIP</td><td>415</td><td>0.004</td></tr>
+<tr><td>sip-proxy</td><td>SIP Express Router</td><td>407</td><td>0.004</td></tr>
+<tr><td>sip</td><td>VoipNow</td><td>397</td><td>0.003</td></tr>
+<tr><td>sip</td><td>SIP-6328-2Re-v4.2.66-__/v2.0 Enabled</td><td>397</td><td>0.003</td></tr>
+<tr><td>sip</td><td>Asterisk PBX 1.6.1.11</td><td>392</td><td>0.003</td></tr>
+<tr><td>sip</td><td>sipgt-78/release-5-30F2</td><td>386</td><td>0.003</td></tr>
+<tr><td>sip</td><td>iPECS-LIK v5.5Fc</td><td>381</td><td>0.003</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.13.0)</td><td>376</td><td>0.003</td></tr>
+<tr><td>sip</td><td>Intertex ix66-3-1-2---rel-3-13</td><td>374</td><td>0.003</td></tr>
+<tr><td>sip</td><td>SIP-6328-2Re-v16.2.73-__/v2.0 Enabled</td><td>366</td><td>0.003</td></tr>
+<tr><td>sip</td><td>Ingate-Firewall/4.9.1</td><td>350</td><td>0.003</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN Speedport W 701V SIP</td><td>349</td><td>0.003</td></tr>
+<tr><td>sip</td><td>Tilgin Vood HG13xxx_CSx000-01_09_01_35</td><td>344</td><td>0.003</td></tr>
+<tr><td>sip</td><td>TANDBERG/4102 (X7.0.2)</td><td>342</td><td>0.003</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.8.0)</td><td>339</td><td>0.003</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7390 84.05.05 SIP</td><td>330</td><td>0.003</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.6.2.13)</td><td>328</td><td>0.003</td></tr>
+<tr><td>sip</td><td>Linksys/PAP2-3.1.22(LS)</td><td>327</td><td>0.003</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN Speedport W 501V SIP</td><td>326</td><td>0.003</td></tr>
+<tr><td>sip-proxy</td><td>Siemens HiPath 3000 VoIP gateway</td><td>325</td><td>0.003</td></tr>
+<tr><td>sip</td><td>Tandberg-512 VoIP server</td><td>317</td><td>0.003</td></tr>
+<tr><td>sip</td><td>MagicJack/2.0.607c (SJ Labs)</td><td>316</td><td>0.003</td></tr>
+<tr><td>sip</td><td>Tandberg-257 VoIP server</td><td>313</td><td>0.003</td></tr>
+<tr><td>sip</td><td>Intertex ix66-3-1-2---rel-3-15</td><td>313</td><td>0.003</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 29.04.70 SIP</td><td>312</td><td>0.003</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7240 73.05.22 SIP</td><td>306</td><td>0.003</td></tr>
+<tr><td>sip</td><td>MERA MSIP v.1.0.2</td><td>305</td><td>0.003</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.7.1)</td><td>294</td><td>0.003</td></tr>
+<tr><td>sip</td><td>Voice Carrier SIP v1.2.9</td><td>284</td><td>0.002</td></tr>
+<tr><td>sip</td><td>TANDBERG/4099 (X5.2)</td><td>279</td><td>0.002</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN Sinus W 500V SIP</td><td>274</td><td>0.002</td></tr>
+<tr><td>sip</td><td>Linksys/RT31P2-3.1.7(LIa)</td><td>270</td><td>0.002</td></tr>
+<tr><td>sip</td><td>Linksys/SPA3102-3.3.6(GW)</td><td>267</td><td>0.002</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0rc1(1.8.11)</td><td>266</td><td>0.002</td></tr>
+<tr><td>sip</td><td>Draytek Mars 0.1.0</td><td>262</td><td>0.002</td></tr>
+<tr><td>sip</td><td>Snom 320 VoIP phone</td><td>256</td><td>0.002</td></tr>
+<tr><td>sip</td><td>VOS3000 V2.1.2.0</td><td>255</td><td>0.002</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 29.04.38 SIP</td><td>249</td><td>0.002</td></tr>
+<tr><td>sip</td><td>SIPfoundry sipXecs PBX</td><td>245</td><td>0.002</td></tr>
+<tr><td>sip</td><td>Cisco/SPA303-7.4.8</td><td>243</td><td>0.002</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.12.0)</td><td>235</td><td>0.002</td></tr>
+<tr><td>sip</td><td>FPBX-2.7.0(1.6.2.13)</td><td>233</td><td>0.002</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v2 54.05.05 SIP</td><td>233</td><td>0.002</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7141 40.04.76 SIP</td><td>232</td><td>0.002</td></tr>
+<tr><td>sip</td><td>Sippy</td><td>231</td><td>0.002</td></tr>
+<tr><td>sip</td><td>Motorola SBV5220-SIP-1.2.6-SCM-00-SHTW</td><td>231</td><td>0.002</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.6.2.20)</td><td>231</td><td>0.002</td></tr>
+<tr><td>sip</td><td>Tandberg-73 VoIP server</td><td>230</td><td>0.002</td></tr>
+<tr><td>sip</td><td>sipgt-78/release-5-33F4</td><td>230</td><td>0.002</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.6.0)</td><td>230</td><td>0.002</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-NA 05.01/2.1</td><td>229</td><td>0.002</td></tr>
+<tr><td>sip</td><td>Aastra 6731i/2.6.0.2010</td><td>229</td><td>0.002</td></tr>
+<tr><td>sip</td><td>SIParator/4.9.2</td><td>227</td><td>0.002</td></tr>
+<tr><td>sip</td><td>PnP PAP2T</td><td>213</td><td>0.002</td></tr>
+<tr><td>sip</td><td>MyPBX</td><td>210</td><td>0.002</td></tr>
+<tr><td>sip</td><td>Linksys/PAP2-3.1.9(LSc)</td><td>208</td><td>0.002</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.5.0)</td><td>196</td><td>0.002</td></tr>
+<tr><td>sip</td><td>TANDBERG/4097 (X6.0)</td><td>195</td><td>0.002</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.8.12.0)</td><td>191</td><td>0.002</td></tr>
+<tr><td>sip</td><td>SJphone SIP client</td><td>184</td><td>0.002</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.12.0)</td><td>181</td><td>0.002</td></tr>
+<tr><td>sip</td><td>Linksys/SPA942-6.1.5(a)</td><td>179</td><td>0.002</td></tr>
+<tr><td>sip</td><td>Linksys/SPA3102-5.1.10(GW)</td><td>178</td><td>0.002</td></tr>
+<tr><td>sip</td><td>Aastra 57i/2.6.0.2010</td><td>177</td><td>0.002</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 29.04.67 SIP</td><td>176</td><td>0.002</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.13.0)</td><td>173</td><td>0.002</td></tr>
+<tr><td>sip</td><td>VOS3000 V2.1.2.6</td><td>170</td><td>0.001</td></tr>
+<tr><td>sip</td><td>iPECS-LIK v5.5Df</td><td>170</td><td>0.001</td></tr>
+<tr><td>sip-proxy</td><td>FreeSWITCH</td><td>169</td><td>0.001</td></tr>
+<tr><td>sip</td><td>sipgt-67/release-5.10-final-10</td><td>168</td><td>0.001</td></tr>
+<tr><td>sip</td><td>iPECS-CM</td><td>165</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.11)</td><td>162</td><td>0.001</td></tr>
+<tr><td>sip</td><td>sipgt-78/release-5-20F6</td><td>161</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.14.0)</td><td>159</td><td>0.001</td></tr>
+<tr><td>sip</td><td>RIX67GW2/exp-4-0-3-x (Apr 12 2007)</td><td>156</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.10.0)</td><td>155</td><td>0.001</td></tr>
+<tr><td>sip</td><td>VOS2009 V2.1.2.6</td><td>153</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Aastra 6731i/2.6.0.1007</td><td>152</td><td>0.001</td></tr>
+<tr><td>sip</td><td>sipgt-67/exp-4-0-3-x (Apr 12 2007)</td><td>151</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Cisco/SPA504G-7.4.8</td><td>150</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.6.2.20)</td><td>147</td><td>0.001</td></tr>
+<tr><td>sip</td><td>sipgt-67/release-4.03-final</td><td>146</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7113 60.04.68 SIP</td><td>146</td><td>0.001</td></tr>
+<tr><td>netbios-ssn</td><td></td><td>146</td><td>0.001</td></tr>
+<tr><td>sip</td><td>SIParator/4.8.1</td><td>145</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.7.0)</td><td>145</td><td>0.001</td></tr>
+<tr><td>sip</td><td>WRTP54G-3.1.27</td><td>143</td><td>0.001</td></tr>
+<tr><td>sip</td><td>sipgt-78/release-5-11F6</td><td>142</td><td>0.001</td></tr>
+<tr><td>sip</td><td>IST-OP-2.1.4.2</td><td>142</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Linksys/RT31P2-3.1.9(LId)</td><td>141</td><td>0.001</td></tr>
+<tr><td>sip</td><td>iPECS-LIK</td><td>141</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.8.11.0)</td><td>141</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Panasonic-MPR10-V4.2003/VSIPGW-V2.3001</td><td>138</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.8.0)</td><td>138</td><td>0.001</td></tr>
+<tr><td>sip</td><td>CISCO-SBC/2.x</td><td>138</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AskoziaPBX</td><td>138</td><td>0.001</td></tr>
+<tr><td>sip</td><td>TANDBERG/4102 (X7.0.3)</td><td>137</td><td>0.001</td></tr>
+<tr><td>sip</td><td>TANDBERG/4102 (X7.0.1)</td><td>137</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7240 73.05.21 SIP</td><td>133</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-112 FXS/v.5.20A.009.003</td><td>132</td><td>0.001</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-GE 05.01/2.1</td><td>131</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Ekiga SIP</td><td>130</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.11.0)</td><td>127</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Linksys/SPA2002-3.1.20(o)</td><td>126</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.8.9.3)</td><td>126</td><td>0.001</td></tr>
+<tr><td>sip</td><td>sipgt-78/release-5-32F2</td><td>125</td><td>0.001</td></tr>
+<tr><td>sip</td><td>InnoMedia SIP MTA6328-2Re v3.0.75</td><td>125</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.6.2.13)</td><td>124</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.6.2.11)</td><td>124</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.7.2)</td><td>122</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Tilgin Vood HG121x_CSx000-01_08_01_12</td><td>121</td><td>0.001</td></tr>
+<tr><td>socks5</td><td></td><td>120</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Panasonic-MPR10-V4.1001/VSIPGW-V2.3001</td><td>120</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.8.0)</td><td>120</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.6.0)</td><td>120</td><td>0.001</td></tr>
+<tr><td>sip</td><td>sipgt-78/release-5-33F5</td><td>117</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Voice Carrier SIP 1.2.9</td><td>115</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Tandberg-67 VoIP server</td><td>115</td><td>0.001</td></tr>
+<tr><td>sip</td><td>iPECS-LIK vE.5Ec</td><td>115</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.6.2.18)</td><td>115</td><td>0.001</td></tr>
+<tr><td>sip</td><td>TANDBERG/4120 (X7.2)</td><td>114</td><td>0.001</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-NA 06.02/2.1</td><td>114</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Foxfon</td><td>114</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Aastra 6731i/2.6.0.1008</td><td>114</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.7.2)</td><td>113</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN Speedport W 900V SIP</td><td>112</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7320 100.05.22 SIP</td><td>111</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 29.04.57 SIP</td><td>111</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Panasonic-MPR10-VSIPGW/V2.0501</td><td>109</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Aastra 57i/2.6.0.66</td><td>109</td><td>0.001</td></tr>
+<tr><td>sip</td><td>DenwaPBX</td><td>108</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Motorola SBV5121-SIP-1.2.6-SCM-00-SHTW</td><td>104</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.15.0)</td><td>104</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Asterisk Gemeinschaft</td><td>103</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Tandberg-517 VoIP server</td><td>102</td><td>0.001</td></tr>
+<tr><td>sip</td><td>MediaCore/1.0.2</td><td>102</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Ingate-Firewall/4.7.1</td><td>102</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.8.13.0)</td><td>102</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Tilgin Vood HG13xxx_CSx000-01_07_06_19</td><td>101</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.8.10.0)</td><td>101</td><td>0.001</td></tr>
+<tr><td>sip</td><td>TS-v4.5.0-08a</td><td>100</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AVS-SPU</td><td>100</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Motorola SBV5222-SIP-2.0.6-SCM-00-SHTW</td><td>99</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Cisco/SPA122-1.0.1(022)</td><td>99</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 54.04.80 SIP</td><td>98</td><td>0.001</td></tr>
+<tr><td>sip</td><td>D-Link DVG-5121SP VoIP adapter</td><td>97</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Brekeke SIP Server rev.286.3</td><td>96</td><td>0.001</td></tr>
+<tr><td>sip</td><td>MERA MVTS3G v.4.4.0-20</td><td>95</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.6.2.9)</td><td>95</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.3.5 (QUADRO-2X)</td><td>95</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Aastra 53i/3.2.2.1136</td><td>95</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.6.2.20)</td><td>94</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.8.8.0)</td><td>94</td><td>0.001</td></tr>
+<tr><td>sip</td><td>MERA MVTS3G v.4.3.0-38r</td><td>93</td><td>0.001</td></tr>
+<tr><td>sip</td><td> M5T SIP-UA SAFE/v3.6.4.8</td><td>93</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Linksys/WRP400-2.00.26</td><td>93</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Linksys/SPA1001-3.1.19(SE)</td><td>93</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.6.2.11)</td><td>93</td><td>0.001</td></tr>
+<tr><td>sip</td><td>OpenStage_40_V2 R2.47.0      SIP  111201</td><td>92</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Linksys/SPA941-5.1.8</td><td>92</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.3.2)</td><td>92</td><td>0.001</td></tr>
+<tr><td>sip</td><td>NEC-i IPK II-NA 01.61/2.1</td><td>91</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.10.0)</td><td>91</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Linksys/PAP2T-5.1.1(LS)</td><td>90</td><td>0.001</td></tr>
+<tr><td>sip-proxy</td><td>Audiocodes Mediant 1000 SIP gateway</td><td>89</td><td>0.001</td></tr>
+<tr><td>sip</td><td>i3micro Vood 422_S_2_7_1_RC_2</td><td>89</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.5.0)</td><td>89</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7112 87.04.87 SIP</td><td>89</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Panasonic-MPR10-V5.0002/VSIPGW-V2.3002</td><td>88</td><td>0.001</td></tr>
+<tr><td>sip</td><td> M5T SIP Stack/4.1.7.9</td><td>88</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Linksys/PAP2T-5.1.3(LS)</td><td>88</td><td>0.001</td></tr>
+<tr><td>sip</td><td>DC-SIP/2.0</td><td>87</td><td>0.001</td></tr>
+<tr><td>sip</td><td>VoIPEX Switch</td><td>86</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-114 FXS/v.5.20A.021.001</td><td>86</td><td>0.001</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-GE 04.00/2.1</td><td>85</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Linksys/SPA9000-6.1.5</td><td>85</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.2.48 (QUADRO-2X)</td><td>84</td><td>0.001</td></tr>
+<tr><td>sip</td><td>ZXV10 H201L/V1.0.01.TcomT12</td><td>83</td><td>0.001</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-NA 06.03/2.1</td><td>83</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.6.2.9)</td><td>83</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.9.3)</td><td>83</td><td>0.001</td></tr>
+<tr><td>sip</td><td>YATE/3.3.2</td><td>82</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Aastra 6730i/2.6.0.2010</td><td>82</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Tilgin Vood HG13xxx_CSx000-01_07_02_08</td><td>80</td><td>0.001</td></tr>
+<tr><td>sip</td><td>sipgt-78/release-5-33F6</td><td>80</td><td>0.001</td></tr>
+<tr><td>sip</td><td>sipgt-78/release-5-11-final-2</td><td>80</td><td>0.001</td></tr>
+<tr><td>sip</td><td>PBX</td><td>80</td><td>0.001</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-NA 05.02/2.1</td><td>80</td><td>0.001</td></tr>
+<tr><td>sip</td><td>MERA MVTS3G v.4.3.0-46</td><td>79</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Intertex ix66-2-0-7---rel-2-07</td><td>79</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.13.0)</td><td>79</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Thirdlane</td><td>77</td><td>0.001</td></tr>
+<tr><td>sip</td><td>sipgt-67/release-5.10-final-7</td><td>77</td><td>0.001</td></tr>
+<tr><td>sip</td><td>SIParator/4.9.1</td><td>77</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.7.0(1.6.2.11)</td><td>77</td><td>0.001</td></tr>
+<tr><td>sip-proxy</td><td>Siemens HiPath 4000 VoIP gateway</td><td>74</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Linksys/PAP2-3.1.3(LS)</td><td>74</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.4.2)</td><td>74</td><td>0.001</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-NA 07.00/2.1</td><td>73</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Aastra MX-ONE PBX SIP</td><td>73</td><td>0.001</td></tr>
+<tr><td>sip</td><td>sipgt-78/release-5-35</td><td>72</td><td>0.001</td></tr>
+<tr><td>sip-proxy</td><td>Audiocodes Mediant 2000 SIP gateway</td><td>72</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Linksys/SPA3102-5.1.7(GW)</td><td>72</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v3 74.04.80 SIP</td><td>72</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 29.04.59 SIP</td><td>71</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Sipwise NGCP LB 2.X</td><td>70</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.2.47 (QUADRO-2X)</td><td>70</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v2 54.05.06 SIP</td><td>70</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Sansay VSX 2.1</td><td>69</td><td>0.001</td></tr>
+<tr><td>sip</td><td>PBXact-2.10.1(1.8.13.0)</td><td>69</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.11.0)</td><td>69</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Brekeke SIP Server</td><td>69</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Aastra 57i/2.6.0.1007</td><td>69</td><td>0.001</td></tr>
+<tr><td>sip</td><td>NEC-i IPK II-NA 01.60/2.1</td><td>68</td><td>0.001</td></tr>
+<tr><td>sip</td><td>iPECS-MG</td><td>68</td><td>0.001</td></tr>
+<tr><td>sip</td><td>iPECS-LIK vE.5Gj</td><td>68</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.1.39 (QUADRO-2X)</td><td>68</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7390 84.04.91 SIP</td><td>68</td><td>0.001</td></tr>
+<tr><td>sip</td><td>SIPPER for PhonerLite</td><td>67</td><td>0.001</td></tr>
+<tr><td>sip</td><td>OpenStage_40_V2 R2.41.0      SIP  110802</td><td>67</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.7.0(1.6.2.20)</td><td>67</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.11.1)</td><td>66</td><td>0.001</td></tr>
+<tr><td>sip</td><td>BandwidthVoice</td><td>66</td><td>0.001</td></tr>
+<tr><td>sip</td><td>IST-OP-2.0.2.1</td><td>65</td><td>0.001</td></tr>
+<tr><td>sip</td><td>IM v16.2.73</td><td>65</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Twinkle softphone</td><td>64</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.6.2.18)</td><td>64</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Cisco/SPA112-1.1.0(011)</td><td>64</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7113 60.04.67 SIP</td><td>64</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AsteriskPBX</td><td>64</td><td>0.001</td></tr>
+<tr><td>sip</td><td>YATE/3.0.0</td><td>63</td><td>0.001</td></tr>
+<tr><td>sip</td><td>UI Kamailio</td><td>63</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Cisco/SPA122-1.1.0(011)</td><td>63</td><td>0.001</td></tr>
+<tr><td>sip</td><td>kamailio (3.1.5 (x86_64/linux))</td><td>62</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(10.0.0)</td><td>62</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Aastra 6731i/2.6.0.66</td><td>62</td><td>0.001</td></tr>
+<tr><td>sip</td><td>iPECS-LIK v5.5Ed</td><td>61</td><td>0.001</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-GE 03.00/2.1</td><td>60</td><td>0.001</td></tr>
+<tr><td>sip</td><td>ET747-a3</td><td>60</td><td>0.001</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 Italia SIP</td><td>59</td><td>0.001</td></tr>
+<tr><td>sip-proxy</td><td>Comdasys SIP Server</td><td>58</td><td>0.001</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.8.1)</td><td>58</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-114 FXS/v.5.40A.043</td><td>58</td><td>0.001</td></tr>
+<tr><td>sip</td><td>Linksys/SPA3000-3.1.10(GWd)</td><td>57</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.6.2.10)</td><td>57</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.1.39 (QUADRO-4X/16X)</td><td>57</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/WAG54G-P2-2.01.03</td><td>56</td><td>0.0</td></tr>
+<tr><td>sip</td><td>kamailio (3.2.1 (x86_64/linux))</td><td>56</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.7.0)</td><td>56</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 54.04.81 SIP</td><td>56</td><td>0.0</td></tr>
+<tr><td>sip</td><td>IST-OP-2.4.4.5</td><td>55</td><td>0.0</td></tr>
+<tr><td>sip</td><td>IST-OP-2.3.3.6</td><td>55</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Ingate-Firewall/4.6.2</td><td>55</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 51i/2.6.0.1007</td><td>55</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SJphone/1.60.289a (SJ Labs)</td><td>54</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA2100-3.3.6</td><td>54</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Brekeke OnDO SIP Server (rev.172)</td><td>54</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SIP/2.0</td><td>53</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i IPK II-NA 02.11/2.1</td><td>53</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA8000-5.1.10</td><td>53</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/RT31P2-2.0.10(LIc)</td><td>53</td><td>0.0</td></tr>
+<tr><td>sip</td><td>jingl.com.au</td><td>53</td><td>0.0</td></tr>
+<tr><td>sip</td><td>sipgt-67/release-5.10-final-4</td><td>52</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA3000-3.1.20(GW)</td><td>52</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA2000-3.1.10(j)</td><td>52</td><td>0.0</td></tr>
+<tr><td>sip</td><td>kamailio (3.3.0 (x86_64/linux))</td><td>52</td><td>0.0</td></tr>
+<tr><td>sip</td><td>kamailio (3.2.3 (x86_64/linux))</td><td>52</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Cisco/SPA525G2-7.4.8</td><td>52</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Brekeke SIP Server rev.286</td><td>52</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i UX5000-NA 03.00/2.1</td><td>51</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA8000-6.1.10(001)</td><td>51</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SJphone/1.64.353 (SJ Labs)</td><td>50</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MERA MVTS3G v.4.3.0-41a</td><td>50</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/WRP200-1.01.08</td><td>50</td><td>0.0</td></tr>
+<tr><td>sip</td><td>IST-OP-2.3.4.3</td><td>50</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/WRP400-1.00.04.c</td><td>49</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA8000-6.1.3</td><td>49</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Intracom/Intracom WLAN IAD-1.58.A</td><td>49</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 6731i/2.5.2.1010</td><td>49</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MOR Softswitch</td><td>48</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Ingate-Firewall/4.6.4</td><td>48</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.10.1)</td><td>48</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.8.7.0)</td><td>48</td><td>0.0</td></tr>
+<tr><td>sip</td><td>CommuniGatePro/5.4.6 _community_</td><td>48</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Brekeke SIP Server rev.286.1</td><td>48</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 54.04.76 SIP</td><td>48</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 55i/2.6.0.66</td><td>48</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sippy Softswitch v3.0.43</td><td>47</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Panasonic-MPR10-VSIPGW/V2.0004</td><td>47</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA3102-5.2.13(GW002)</td><td>47</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.7.1)</td><td>47</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FCI VoIP/1.2.0.1</td><td>47</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 55i/2.6.0.1007</td><td>47</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Tilgin Vood HG13xxx_CSx000-01_07_05_06</td><td>46</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Tandberg-80 VoIP server</td><td>46</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sipura/SPA3000-2.0.13(GWg)</td><td>46</td><td>0.0</td></tr>
+<tr><td>sip</td><td>iPECS-MG v1.7Di</td><td>46</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.14.0)</td><td>46</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.2.28 (QUADRO-2X)</td><td>46</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Elastix</td><td>46</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-114 FXS/v.5.20A.009.003</td><td>46</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Snom 370 VoIP phone</td><td>45</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.10.1)</td><td>45</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.6.0)</td><td>45</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.14.1)</td><td>45</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.3.6 (QUADRO-4X/16X)</td><td>45</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Datera CalleX IP PBX</td><td>45</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v2 54.05.04 SIP</td><td>45</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 29.04.86 SIP</td><td>45</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-114 FXS_FXO/v.5.20A.009.003</td><td>45</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Snom 300 VoIP phone</td><td>44</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sippy Softswitch v3.0.45</td><td>44</td><td>0.0</td></tr>
+<tr><td>sip</td><td>sipgt-78/release-5-33F2</td><td>44</td><td>0.0</td></tr>
+<tr><td>sip</td><td>PBXact-2.10.1(1.8.14.0)</td><td>44</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-NA 04.00/2.1</td><td>44</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA2102-5.2.3</td><td>44</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/PAP2-3.1.8(LS)</td><td>44</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.6.2.21)</td><td>44</td><td>0.0</td></tr>
+<tr><td>sip</td><td>DPC2203-120531</td><td>44</td><td>0.0</td></tr>
+<tr><td>sip</td><td>TeleVantage-UA/8.00.5586</td><td>43</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sipura/SPA2100-3.2.5(d)</td><td>43</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sipura/SPA1001-2.0.13(SEg)</td><td>43</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i Topaz 07.10/2.1</td><td>43</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-NA 06.00/2.1</td><td>43</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MERA DAMOS</td><td>43</td><td>0.0</td></tr>
+<tr><td>sip</td><td>IST-OP-2.3.3.3</td><td>43</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.6.2.16.1)</td><td>43</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.8.10.1)</td><td>43</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.2.47 (QUADRO-FXO-IPPBX)</td><td>43</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Deltapath frSIP UC 2.9.3</td><td>43</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Asterisk PBX 1.6.1.1</td><td>43</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Alcatel-Lucent-HPSS/3.0.3</td><td>43</td><td>0.0</td></tr>
+<tr><td>sip</td><td>VSC</td><td>42</td><td>0.0</td></tr>
+<tr><td>sip</td><td>sipgt-78/release-5-30</td><td>42</td><td>0.0</td></tr>
+<tr><td>sip</td><td>sipgt-68/release-4-02-final</td><td>42</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MizuVoIPServer 4.5.0.52</td><td>42</td><td>0.0</td></tr>
+<tr><td>sip</td><td>IST-OP-2.1.3.6</td><td>42</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.8.1)</td><td>42</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.3.2)</td><td>42</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(10.6.0)</td><td>42</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0rc1(1.6.2.24)</td><td>42</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Cuuma VOIP Server</td><td>42</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 29.04.99 SIP</td><td>42</td><td>0.0</td></tr>
+<tr><td>sip-proxy</td><td>Siemens HiPath 2000 VoIP gateway</td><td>41</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Panasonic-MPR07-V4.2003/VSIPGW-V2.3001</td><td>41</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/PAP2-3.1.12(LS)</td><td>41</td><td>0.0</td></tr>
+<tr><td>sip</td><td>kamailio (3.1.5 (i386/linux))</td><td>41</td><td>0.0</td></tr>
+<tr><td>sip</td><td>iPECS-MG v1.7Cd</td><td>41</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Intertex ix66-2-0-6-4---rel-2-06</td><td>41</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Telmex release 1105a stamp 58835</td><td>40</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-GE 06.00/2.1</td><td>40</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/PAP2T-5.1.5(LS)</td><td>40</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Karel-Sip-Proxy-Server Version AAB-39</td><td>40</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.3.3)</td><td>40</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.7.2)</td><td>40</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.8.11)</td><td>40</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v2 54.04.88 SIP</td><td>40</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 55i/3.2.2.2044</td><td>40</td><td>0.0</td></tr>
+<tr><td>sip</td><td>TeleVantage-UA/7.50.4898</td><td>39</td><td>0.0</td></tr>
+<tr><td>sip</td><td>TANDBERG/72 (X4.3)</td><td>39</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/PAP2-3.1.23(LS)</td><td>39</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/PAP2-2.0.12(LS)</td><td>39</td><td>0.0</td></tr>
+<tr><td>sip</td><td>iPECS-LIK vE.5Gg</td><td>39</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Ingate-Firewall/4.8.6</td><td>39</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.3.3)</td><td>39</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.6.2.17.3)</td><td>39</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7320 100.05.20 SIP</td><td>39</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-114 FXS/v.5.60A.014.009</td><td>39</td><td>0.0</td></tr>
+<tr><td>sip</td><td>YATE/4.1.0</td><td>38</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Tandberg-55 VoIP server</td><td>38</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SIP-6528-2R-v4.2.51-__/v2.0 Enabled</td><td>38</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.9.0)</td><td>38</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.10.0)</td><td>38</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.9.1)</td><td>38</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.6.2.6)</td><td>38</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 6730i/2.6.0.1007</td><td>38</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Snom 821 VoIP phone</td><td>37</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sipura/SPA941-4.1.8</td><td>37</td><td>0.0</td></tr>
+<tr><td>sip</td><td>sipgt-68/release-5-02-final</td><td>37</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Panasonic-MPR11-V4.2003/VSIPGW-V2.3001</td><td>37</td><td>0.0</td></tr>
+<tr><td>sip</td><td>One IP Astium PBX</td><td>37</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-GE 07.00/2.1</td><td>37</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/PAP2T</td><td>37</td><td>0.0</td></tr>
+<tr><td>sip</td><td>kamailio (3.1.4 (x86_64/linux))</td><td>37</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.9.2)</td><td>37</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.6.2.6)</td><td>37</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.6.2.17.2)</td><td>37</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.11.1)</td><td>37</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SIP-UA_DIPTEL_ASTERISK</td><td>36</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SIP-6328-2Re-v4.2.70-__/v2.0 Enabled</td><td>36</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MERA MVTS3G v.4.4.0-22</td><td>36</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MERA MVTS3G v.4.3.0-45</td><td>36</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA942-5.2.5</td><td>36</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.4.1)</td><td>36</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Datera Call-eX IP PBX</td><td>36</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVAVoIP/1.5.2</td><td>36</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-118 FXS/v.5.20A.024.002</td><td>36</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sippy Softswitch v3.0.42</td><td>35</td><td>0.0</td></tr>
+<tr><td>sip</td><td>sipgt-78/release-5-20F5</td><td>35</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-GE 06.01/2.1</td><td>35</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA2102-3.3.5(a)</td><td>35</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.6.2.16.1)</td><td>35</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.6.2.17.3)</td><td>35</td><td>0.0</td></tr>
+<tr><td>sip</td><td>DIAL4YOUAGENT</td><td>35</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Connect First SIP Routing Engine</td><td>35</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 57i/2.6.0.1008</td><td>35</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 53i/2.6.0.1007</td><td>35</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Wildix GW16 (3.0.2.19211)</td><td>34</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Tandberg-58 VoIP server</td><td>34</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Speedport W 722V/Version -1.18.000</td><td>34</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Snom 360 VoIP phone</td><td>34</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i UX5000-NA 03.03/2.1</td><td>34</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.4)</td><td>34</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.8.11.1)</td><td>34</td><td>0.0</td></tr>
+<tr><td>dominoconsole</td><td>Lotus Domino Console</td><td>34</td><td>0.0</td></tr>
+<tr><td>sip</td><td>YATE/4.0.1</td><td>33</td><td>0.0</td></tr>
+<tr><td>sip</td><td>VOS2000</td><td>33</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SIParator/4.6.2</td><td>33</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MERA MVTS3G v.4.3.0-44</td><td>33</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA942-5.1.15(a)</td><td>33</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Kerio Operator</td><td>33</td><td>0.0</td></tr>
+<tr><td>sip</td><td>IST-OP-2.2.4.7</td><td>33</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FreevoicePBX</td><td>33</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.15.0)</td><td>33</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.6.2.21)</td><td>33</td><td>0.0</td></tr>
+<tr><td>sip</td><td>TOLEE/7.5</td><td>32</td><td>0.0</td></tr>
+<tr><td>sip</td><td>TANDBERG/4096 (X5.0)</td><td>32</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SIParator/4.7.1</td><td>32</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-NA 04.01/2.1</td><td>32</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i AspireML-NA 07.00/2.1</td><td>32</td><td>0.0</td></tr>
+<tr><td>sip</td><td>kamailio (3.3.0 (i386/linux))</td><td>32</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Ingate-Firewall/4.10.1</td><td>32</td><td>0.0</td></tr>
+<tr><td>sip</td><td>HiPath OpenOffice EE V1 M5T SIP Stack/4.0.26.26</td><td>32</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.6.2.17.2)</td><td>32</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.6.2.24)</td><td>32</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-118 FXS/v.5.60A.007</td><td>32</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 6730i/3.2.2.56</td><td>32</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 57i/3.2.2.2044</td><td>32</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 55i/2.6.0.2010</td><td>32</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 55i/2.5.0.2000</td><td>32</td><td>0.0</td></tr>
+<tr><td>sip</td><td>TANDBERG/72 (X4.2.1)</td><td>31</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sipura/SPA921-4.1.10(b)</td><td>31</td><td>0.0</td></tr>
+<tr><td>sip</td><td>PBXpress 2.0</td><td>31</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Panasonic-MPR10-V5.0003/VSIPGW-V2.3002</td><td>31</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i Topaz 07.60/2.1</td><td>31</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MERA MVTS3G v.4.4.0-21</td><td>31</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MERA MVTS3G v.3.10.4-11d-Release</td><td>31</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/WRP400-1.01.00</td><td>31</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA2102-5.1.10</td><td>31</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.2.12 (QUADRO-2X)</td><td>31</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Alphalink SIP Proxy 2.0</td><td>31</td><td>0.0</td></tr>
+<tr><td>sip</td><td>sipgt-67/release-4.02-final</td><td>30</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA2100-3.3.14</td><td>30</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.4.4)</td><td>30</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.3.2 (QUADRO-2X2)</td><td>30</td><td>0.0</td></tr>
+<tr><td>sip</td><td>CS-CustomerName/v.5.60A.035.003</td><td>30</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-118 FXS/v.5.60A.014.009</td><td>30</td><td>0.0</td></tr>
+<tr><td>sip</td><td>asterisk</td><td>30</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra/ZULTYS_ZIP 6731i/3.2.2.56</td><td>30</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Mediatrix 4102S/v2.0.17.285 4102-MX-D2000-79</td><td>29</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Intracom/Intracom WLAN IAD-1.28.A</td><td>29</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(10.0.0)</td><td>29</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(10.5.0)</td><td>29</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Cisco/SPA502G-7.4.9c</td><td>29</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7390 84.04.89 SIP</td><td>29</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Asterisk PBX 1.6.2.0 Bayscribe 1.0</td><td>29</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Tilgin Vood 342_AS0000-03_05_11_06</td><td>28</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Tandberg-53 VoIP server</td><td>28</td><td>0.0</td></tr>
+<tr><td>sip</td><td>TANDBERG/516 (TC5.1.0.280662)</td><td>28</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sony PCS-TL50 videoconferencing SIP</td><td>28</td><td>0.0</td></tr>
+<tr><td>sip</td><td>sipgt-78/release-5-10-final-3</td><td>28</td><td>0.0</td></tr>
+<tr><td>sip-proxy</td><td>Audiocodes Mediant 600 SIP gateway</td><td>28</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-GE 06.02/2.1</td><td>28</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-GE 05.00/2.1</td><td>28</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i AspireML-NA 07.32/2.1</td><td>28</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Karel-Sip-Proxy-Server Version AAB-23</td><td>28</td><td>0.0</td></tr>
+<tr><td>sip</td><td>kamailio (3.2.2 (x86_64/linux))</td><td>28</td><td>0.0</td></tr>
+<tr><td>sip</td><td>IST-OP-2.3.2.6</td><td>28</td><td>0.0</td></tr>
+<tr><td>sip</td><td>iPECS-LIK v5.5Gt</td><td>28</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.6.2.5)</td><td>28</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.3.12 (QUADROM-8L/26X/12LI/26XI)</td><td>28</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 6731i/3.2.2.2077</td><td>28</td><td>0.0</td></tr>
+<tr><td>sip</td><td>ZXDSL 931VII/V2.0.00.HU.T10</td><td>27</td><td>0.0</td></tr>
+<tr><td>sip</td><td>M5T SIP Stack/4.1.2.2</td><td>27</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/RT31P2-3.1.3(LI)</td><td>27</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Kamailio (1.5.2-notls (x86_64/linux))</td><td>27</td><td>0.0</td></tr>
+<tr><td>sip</td><td>IST-OP-2.3.2.9</td><td>27</td><td>0.0</td></tr>
+<tr><td>sip</td><td>IST-OP-2.3.2.2</td><td>27</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.4)</td><td>27</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Deltapath frSIP PBX 2.9.2</td><td>27</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-124 FXS/v.5.60A.007</td><td>27</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Asterisk PBX 1.6.1.0</td><td>27</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 57i/2.6.0.2019</td><td>27</td><td>0.0</td></tr>
+<tr><td>sip</td><td>WRTP54G-3.1.17</td><td>26</td><td>0.0</td></tr>
+<tr><td>sip</td><td>tghs</td><td>26</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SIP Proxy SAG</td><td>26</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-GE 01.43/2.1</td><td>26</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/RT31P2-3.1.5(LI)</td><td>26</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/RT31P2</td><td>26</td><td>0.0</td></tr>
+<tr><td>sip</td><td>kamailio (3.2.3 (i386/linux))</td><td>26</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.7.1)</td><td>26</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Cisco/SPA504G-7.4.3</td><td>26</td><td>0.0</td></tr>
+<tr><td>sip</td><td>CD Heavy Industries v4.20</td><td>26</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Wave/2.0.1000.6129</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>TS-v4.5.0-06a</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>TeleVantage-UA/8.10.5647</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>TeleVantage-UA/7.60.4997</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SJphone/1.61.312b (SJ Labs)</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sipura/SPA2002-3.1.5</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>sipgt-78/release-5-20F3</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Panasonic-MPR07-V5.0002/VSIPGW-V2.3002</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/WRP400-1.00.06</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>iPECS-MG v1.7Dh</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.6.2.7)</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.6.2.24)</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.4.1)</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(10.7.0)</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(10.4.0)</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.2.49 (QUADROM-8L/26X/12LI/26XI)</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.1.31 (QUADRO-2X)</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Connectit Networks</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 54.04.70 SIP</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 Annex A 58.04.82 SIP</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-114 FXS/v.5.60A.024.003</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-114 FXS/v.5.20A.043.005</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Asterisk IPICustom</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 6731i/3.2.2.2044</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 57iCT/2.6.0.1008</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 57i/3.2.2.56</td><td>25</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Wildix GW08 (3.0.2.19209-mu6)</td><td>24</td><td>0.0</td></tr>
+<tr><td>sip</td><td>weepee</td><td>24</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sipura/SPA1001-3.1.8(SEc)</td><td>24</td><td>0.0</td></tr>
+<tr><td>sip-proxy</td><td>Sphericall VoIP Gateway</td><td>24</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MERA MVTS3G v.4.3.0-34</td><td>24</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MERA MVTS3G v.4.3.0-22</td><td>24</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA2100-3.3.9</td><td>24</td><td>0.0</td></tr>
+<tr><td>sip</td><td>kamailio (3.2.1 (i386/linux))</td><td>24</td><td>0.0</td></tr>
+<tr><td>sip</td><td>IST-OP-2.3.3.8</td><td>24</td><td>0.0</td></tr>
+<tr><td>sip</td><td>ipbx 2.3.8</td><td>24</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Freeswitch 2.0.0</td><td>24</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.6.2.15)</td><td>24</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.0(1.8.5.0)</td><td>24</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.7.0(1.6.2.10)</td><td>24</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.8.7.1)</td><td>24</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Cisco/SPA504G-7.4.9c</td><td>24</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v2 54.04.90 SIP</td><td>24</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v2 54.04.86 SIP</td><td>24</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 57i/3.2.2.2077</td><td>24</td><td>0.0</td></tr>
+<tr><td>sip</td><td>TANDBERG/4102 (X7.0)</td><td>23</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SIParator/4.10.1</td><td>23</td><td>0.0</td></tr>
+<tr><td>sip</td><td>RIX67GW2/release-5.10-final-10</td><td>23</td><td>0.0</td></tr>
+<tr><td>sip-proxy</td><td>OpenIMSCore SIP EXpress router</td><td>23</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Panasonic-MPR11-VSIPGW/V2.0501</td><td>23</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i IPK II-NA 02.10/2.1</td><td>23</td><td>0.0</td></tr>
+<tr><td>sip</td><td>kamailio (3.2.0 (x86_64/linux))</td><td>23</td><td>0.0</td></tr>
+<tr><td>sip</td><td>iPECS-LIK vE.5De</td><td>23</td><td>0.0</td></tr>
+<tr><td>sip</td><td>ipbx 2.3.9</td><td>23</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Intorrent Technologies Supercell PBX</td><td>23</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.8.6.0)</td><td>23</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.6.2.11)</td><td>23</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.3.3 (QUADROM-8L/26X/12LI/26XI)</td><td>23</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Enswitch</td><td>23</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7240 73.05.05 SIP</td><td>23</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 Annex A 58.04.78 SIP</td><td>23</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-114 FXS/v.5.20A.027.004</td><td>23</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 9143i/3.2.2.2077</td><td>23</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 55i/2.6.0.2019</td><td>23</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 53i/2.6.0.2010</td><td>23</td><td>0.0</td></tr>
+<tr><td>sip</td><td>YATE/4.1.1</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Wildix GW08 (3.0.2.19211)</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Trinity</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Tilgin Vood HG111xx_SIP_01_03_01_46</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>teleum</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Speedport W 723V/Version -1.24.000</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sipura/SPA2000-3.1.5</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>sipgt-78/ISOS (Jan 29 2010)</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Pirelli/Pirelli WLAN IAD-1.32S-M</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>OpenStage_20_V2 R2.41.0      SIP  110802</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i AspireVS-NA 07.00/2.1</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MERA MVTS3G v.4.3.0-46a</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA921-5.1.8</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/RT31P2-2.0.14(LIVa)</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Lancom</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>iPECS-LIK vE.5Gu</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Ingate-Firewall/4.8.3</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.8.2)</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.14.1)</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.6.2.10)</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.0)</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.6.2.7)</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.6.2.14)</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(10.6.1)</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(10.4.0)</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(10.3.0)</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0rc1(1.8.11.0)</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.2.26 (QUADRO-FXO-IPPBX)</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Deltapath frSIP PBX</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>CommuniGatePro/5.4.4 _community_</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7390 84.04.86 SIP</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7320 100.04.89 SIP</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 Annex A 58.04.84 SIP</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 29.04.49 SIP</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Asterisk PBX (ScopServ)</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 57iCT/2.5.3.18</td><td>22</td><td>0.0</td></tr>
+<tr><td>sip</td><td>WOZZ-EXEMPLO</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Wildix GW16 (3.0.2.19209-mu6)</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>TeleVantage-UA/7.50.4965</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sipura/SPA2100-3.2.2(g)</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SIP-6328-2Re-v20.1.1-__/v2.0 Enabled</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Panasonic-MPR08-V4.2003/VSIPGW-V2.3001</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>OpenStage_40_V2 R1.21.0      SIP  101006</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i SL Series 02.00/2.1</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MERA MVTS3G v.4.4.0-16</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA942-5.2.8</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>IST-OP-2.1.3.5</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.0)</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.13.1)</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0rc1(1.8.8.0)</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0rc1(1.6.2.20)</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.8.9.2)</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.8.9.1)</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.8.7.2)</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(10.0.0)</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.2.26 (QUADRO-4X/16X)</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Comendo A/S</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v3 74.04.86 SIP</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 54.04.80 by lucof2000 con aggiunta labor dsl SIP</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7112 87.04.80 SIP</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 57iCT/2.6.0.2010</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 53i/2.6.0.1008</td><td>21</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Tandberg-59 VoIP server</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>TANDBERG/515 (TC4.2.1.265253)</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sipura/SPA2000-2.0.13(g)</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>sipgt-78/release-5-11F4</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SIP-6528-2-v4.2.65-__/v2.0 Enabled</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Panasonic-MPR07-VSIPGW/V3.0007</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i Topaz 08.00/2.1</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i AspireML-GE 07.00/2.1</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MERA MVTS3G v.4.3.0-40</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA942-5.1.7</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA3102-5.1.5(GWa)</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA2102-5.1.6</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Karel-Sip-Proxy-Server Version AAB-35</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>kamailio (3.2.0 (i386/linux))</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>iPECS-LIK vE.5Ea</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.6.2.14)</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.12.2)</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.6.2.24)</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>ecomPBXserver</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Cisco/SPA504G-7.4.8a</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Cisco 3845</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v3 74.04.76 SIP</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-114 FXS/v.5.40A.017.004</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 57iCT/2.6.0.1007</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 57i/2.5.2.1010</td><td>20</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Tilgin Vood HG13xxx_CSx000-01_05_00_67</td><td>19</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Tilgin Vood HG135x_HG155x_CSx000-01_09_05_09</td><td>19</td><td>0.0</td></tr>
+<tr><td>sip</td><td>RTP300-3.1.17</td><td>19</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Panasonic-MPR11-V4.1001/VSIPGW-V2.3001</td><td>19</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-NA E5.02/2.1</td><td>19</td><td>0.0</td></tr>
+<tr><td>sip</td><td>kamailio (3.1.4 (i386/linux))</td><td>19</td><td>0.0</td></tr>
+<tr><td>sip</td><td>IM v3.0.64</td><td>19</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.9.3)</td><td>19</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.2)</td><td>19</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.3)</td><td>19</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.6.2.17)</td><td>19</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.5.0)</td><td>19</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.2.48 (QUADRO-4X/16X)</td><td>19</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7390 84.05.20_beta 0x0C SIP</td><td>19</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 Annex A 58.04.67 SIP</td><td>19</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-112 FXS/v.5.60A.014.009</td><td>19</td><td>0.0</td></tr>
+<tr><td>sip</td><td>VoizBridge Agent 1.00</td><td>18</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Tilgin Vood HG135x_HG155x_CSx000-01_07_02_06</td><td>18</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Panasonic-MPR10-VSIPGW/V2.0101</td><td>18</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-NA 03.00/2.1</td><td>18</td><td>0.0</td></tr>
+<tr><td>sip</td><td>minipbx100</td><td>18</td><td>0.0</td></tr>
+<tr><td>sip</td><td>kamailio (3.3.1 (x86_64/linux))</td><td>18</td><td>0.0</td></tr>
+<tr><td>sip</td><td>kamailio (3.2.2 (i386/linux))</td><td>18</td><td>0.0</td></tr>
+<tr><td>sip</td><td>IST-OP-2.4.4.1</td><td>18</td><td>0.0</td></tr>
+<tr><td>sip</td><td>IST-OP-2.2.4.6</td><td>18</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Glassfish SIP Server</td><td>18</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.9.1)</td><td>18</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.6.2.11)</td><td>18</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.1.6 (QUADRO-FXO-IPPBX)</td><td>18</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.0.19 (QUADRO-2X)</td><td>18</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v1 54.04.86 SIP</td><td>18</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-ISDN_SIP_GW_4xBR/v.5.40A.019.002</td><td>18</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 6731i/3.2.2.56</td><td>18</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Wildix GW40 (3.0.2.19209-mu6)</td><td>17</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SpeakUp vPBX</td><td>17</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SJphone/1.64.343 (SJ Labs)</td><td>17</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sippy Softswitch v3.0.36</td><td>17</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SipPhone</td><td>17</td><td>0.0</td></tr>
+<tr><td>sip</td><td>RIX67GW2/release-5.10-final-7</td><td>17</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MERA MVTS3G v.4.3.0-48aS</td><td>17</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/WRP200-1.01.07</td><td>17</td><td>0.0</td></tr>
+<tr><td>sip</td><td>LinksysPAP(2T)</td><td>17</td><td>0.0</td></tr>
+<tr><td>sip</td><td>kamailio (3.1.3 (x86_64/linux))</td><td>17</td><td>0.0</td></tr>
+<tr><td>sip</td><td>iPECS-MG vA.7Ec</td><td>17</td><td>0.0</td></tr>
+<tr><td>sip</td><td>iPECS-MG vA.7Da</td><td>17</td><td>0.0</td></tr>
+<tr><td>sip</td><td>ipbx 2.3.10</td><td>17</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.4.4)</td><td>17</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.6.2.15)</td><td>17</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.7.0(1.6.2.9)</td><td>17</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.6.2.23)</td><td>17</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.3.2 (QUADROM-8L/26X/12LI/26XI)</td><td>17</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.2.49 (QUADRO-4X/16X)</td><td>17</td><td>0.0</td></tr>
+<tr><td>sip</td><td>CommuniGatePro/5.4.5 _community_</td><td>17</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Brekeke SIP Server rev.333</td><td>17</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7113 ITA SIP</td><td>17</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-118 FXS/v.5.20A.043.005</td><td>17</td><td>0.0</td></tr>
+<tr><td>sip</td><td>VOS2009 V2.1.3.2</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>voip.eutelia.it</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SJphone/1.63.325 (SJ Labs)</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sipura/SPA2002-3.1.2(a)</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sippy Softswitch v3.0.40</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SIParator/4.8.4</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-NA 03.13/2.1</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Mpcsystem</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Mozilla</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MERA MVTS3G v.4.4.0-23a</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MERA MVTS3G v.4.0.1-51</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Mediatrix 4102S/v2.0.15.260 4102-MX-D2000-74</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA1001-3.1.16(SE)</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Karel-Sip-Proxy-Server Version AAC</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>IST-OP-1.9.5.7</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>iPECS-LIK vE.5Go</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>ipbx 2.3.6</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>ipbx 2.3.11</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>ipbx 2.2.2</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.3)</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.12.2)</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.6.2.17)</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.0(1.6.2.13)</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.8.14.0)</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.2.9 (QUADRO-2X)</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN DECT W500V Annex A SIP</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-/v.5.80A.008.007</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-124 FXS/v.5.20A.050.001</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-118 FXS/v.5.40A.043</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 6731i/2.6.0.2019</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 57i/3.2.1.43</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>3Com-VCX-IP-Telecommuting-Module/4.6.5</td><td>16</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Wildix GW40 (3.0.2.19211)</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>TeleVantage-UA/8.00.5556</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>TANDBERG/72 (X4.1)</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Tandberg-57 VoIP server</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SIParator/4.6.4</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SIP-6328-4-v4.2.66-__/v2.0 Enabled</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SGA-NEIX</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Safari</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>OTelloPBX</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-GE F5.02/2.1</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-GE A1.42/2.1</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i AspireML-GE 07.60/2.1</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA942-6.1.3(a)</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA8000-5.1.12</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA2102-5.2.13(004)</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>kamailio (3.1.1 (x86_64/linux))</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Intertex ix66-3-1-2---rel-3-12</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Iagu-Slipper/3.4b4</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.11)</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.6.2.22)</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.6.2.19)</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.15.0)</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.2.48 (QUADROM-IPPBX)</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v4.1.52 (QUADRO-2X)</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>BRSIP v3.0.4.1</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Axeos PBX</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 54.04.67 SIP</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-124 FXS/v.5.20A.027.004</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-112 FXS/v.5.20A.043.005</td><td>15</td><td>0.0</td></tr>
+<tr><td>sip</td><td>XCast Partner/1.1</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Telurix</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Tandberg-68 VoIP server</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Snom 870 VoIP phone</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sipura/SPA2000-2.0.10(e)</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SBC VSX v1.8.0</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Router</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>portasipfriendly</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Panasonic-MPR07-V4.1002/VSIPGW-V2.3001</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>OpenStage_60_V2 R2.41.0      SIP  110802</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>OpenScape Office M5T SIP Stack/4.0.26.26</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i UX5000-NA 03.01/2.1</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i IPK II-NA 01.51/2.1</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>mJ/2.1.621c.33998I0</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/WRP400-2.00.20</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>kamailio (3.1.2 (i386/linux))</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>IST-OP-2.4.3.4</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>iPECS-MG v1.7Bs</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>IPBX</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.6.2.23)</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.6.2.5)</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.6.2.24)</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.6.2.19)</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.7.0(1.6.2.17.3)</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.9.2)</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.9.0)</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.6.2.21)</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.6.2.20)</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.1.38 (QUADRO-4X/16X)</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>DUAL Softswitch 4.SIP.028</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Cisco/SPA504G-7.4.9a</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Cisco/SPA303-7.4.9c</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Cisco/SPA303-7.4.7</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Brekeke SIP Server rev.217</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v3 74.05.06 SIP</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7141 40.04.87 SIP</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-/v.5.80A.033.003</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-118 FXS/v.5.60A.024.003</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-114 FXS/v.5.60A.018.005</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 57i/3.2.0.1011</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 53i/3.2.2.2077</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 53i/3.2.2.2044</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 53i/2.6.0.2019</td><td>14</td><td>0.0</td></tr>
+<tr><td>sip</td><td>VOS3000 V2.1.3.2</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>unknown</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Tilgin Vood HG132x_HG133x_CSx000-02_02_03_07</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Tilgin Vood 452W_B_AS0000-03_05_08_08</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Speedport W 722V/Version -1.10.000</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>sipgt-78/release-5-20F2</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sansay/8.0</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i Topaz 08.10/2.1</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-GE 01.40/2.1</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MMS-VoIP-Platform</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MERA MVTS3G v.4.3.0-25a</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>M5T SIP-UA SAFE/v3.6.9.13</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA3000-3.1.18(GW)</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Karel-Sip-Proxy-Server Version AAB-1</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Kamailio (1.5.5-notls (x86_64/linux))</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>iPECS-LIK vE.5Gp</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>intertel</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Fusion Communications.</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.14.0)</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.6.2.18.1)</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.6.1.20)</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.7.0(1.6.2.6)</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.7.0(1.6.2.16.1)</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.4)</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.3.3)</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.3.2)</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.2.47 (QUADROM-8L/26X/12LI/26XI)</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.0.11 (QUADRO-2X)</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>ecomPBXlight</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Cisco/SRP527-1.01.22(VP003)</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>cc ipbx v 0.1</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Brekeke OnDO SIP Server (rev.180)</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7140 Annex A 39.04.76 SIP</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7112 87.04.76 SIP</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-114 FXO/v.5.20A.042.002</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 9480iCT/2.5.1.2000</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 6731i/2.5.1.41</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 53i/2.6.0.66</td><td>13</td><td>0.0</td></tr>
+<tr><td>sip</td><td>YATE/4.0.0</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>YATE/3.3.3</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>YATE/2.2.0</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>X-Lite</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Tilgin Vood HG135x_HG155x_CSx000-01_09_03_10</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>TANDBERG/515 (TC4.2.0.260857)</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SKT-LTE-VT1.0 SU640_AND/1.0</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sippy Softswitch</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SIPPER for phoner</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>sipgt-78/release-5-32F4</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>sipgt-78/release-5-11F3</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>sipgt-78/ISOS (Apr  8 2011)</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Plataforma Tellfree</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i Topaz 06.50/2.1</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-NA 02.50/2.1</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-NA 01.43/2.1</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>LANCOM</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>kamailio (3.1.0 (x86_64/linux))</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>JVS SoftSwitch v3.0.45</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>ipbx 2.1.0</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Ingate-Firewall/4.10.0-alpha1</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.2.3)</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0rc1(1.8.7.0)</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.8.15.0)</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.8.13.1)</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.1.38 (QUADRO-2X)</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.1.14 (QUADRO-ISDN)</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Ehhky SIP Proxy</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>CommuniGatePro/5.4.4 _trial_</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Cisco/SPA504G-7.4.6</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Brekeke SIP Server rev.239</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7141 Annex A SIP</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-/v.5.80A.053.005</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-/v.5.80A.028.004</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-118 FXS/v.5.40A.017.004</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-114 FXS/v.5.20A.024.002</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 9143i/2.6.0.1007</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 57i/3.2.2.2063</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 57i/2.5.0.82</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 55i/3.2.2.56</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 55i/2.5.3.2002</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 53i/2.5.2.1010</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>200.67.150.243</td><td>12</td><td>0.0</td></tr>
+<tr><td>sip</td><td>TSG-GLOBAL-COBRA</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Tilgin Vood 452W_S_3_4_2_RC_2</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Tilgin Vood 322_AS0000-03_05_11_06</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>TANDBERG/516 (TC5.0.1.275220)</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sippy Softswitch v3.0.34</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sippy Softswitch v3.0.33</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SIP Proxy</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>sipgt-78/release-5-10-final</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>sipgt-67/release-3.18-final</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SIP-6328-2Re-v4.2.67-__/v2.0 Enabled</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SIP-6328-2Re-v4.2.64-__/v2.0 Enabled</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Panasonic-MPR08-V5.0002/VSIPGW-V2.3002</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>OpenStage_80_V2 R2.47.0      SIP  111201</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>OpenStage_40_V1 R5.13.255    SIP  DEV</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>OpenSIPS</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NetSapiens SiPBx 1-1216</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i UX5000-NA 03.02/2.1</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i Topaz 06.00/2.1</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MERA MVTS3G v.4.4.0-17</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MERA MVTS3G v.4.4.0-15</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MERA MVTS3G v.4.3.0-38c</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Mediatrix 4102S/v2.0.21.302 4102-RC-D2001-16</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MagicJack-M/2.0.607c (SJ Labs)</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/WRP200-1.01.09</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA2102-3.2.8(d)</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/PAP2-3.1.6(LS)</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>kamailio (3.1.2 (x86_64/linux))</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Kamailio (1.4.5-tls (x86_64/linux))</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>jarrow</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>IST-OP-2.4.5.7</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>IPT 1010/1.3.5</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>iPECS-LIK vE.5Gw</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>iPECS-LIK vE.5Ge</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>ipbx 2.3.7</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.9.0(1.8.13.1)</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.2)</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.0(1.8.4)</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.7.0(1.6.2.17.2)</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.6.0(1.6.2.17.2)</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.9.1)</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.1(1.8.4.1)</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0rc1(1.6.2.23)</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.8.5.0)</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(10.3.0)</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.1.31 (QUADRO-4X/16X)</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>CommuniGatePro/5.4.3 _community_</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>CommuniGatePro/5.3.8 _community_</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Cisco/SPA303-7.4.9a</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Cisco/SPA303-7.4.6</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN W701V Annex A SIP</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-V7111 ANALOG FXS/v.5.60A.028</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-118 FXS/v.5.60A.018.005</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-118 FXS/v.5.40A.015.004</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-118 FXS/v.5.20A.042.003</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-118 FXS_FXO/v.5.20A.043.005</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-114 FXS/v.5.20A.047.003</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-112 FXS/v.5.40A.033.005</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 6739i/3.0.1.38</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 6730i/2.5.1.2000</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 57iCT/2.6.0.66</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 57iCT/2.5.0.82</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 57i/3.2.2.1141</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 55i/2.4.0.96</td><td>11</td><td>0.0</td></tr>
+<tr><td>sip</td><td>YATE/2.0.0</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>X-PRO build 1101</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>XFON</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>WRTP54G-3.1.22</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Wildix GW08 (3.0.1.15954)</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>voip</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>UCoIP G9</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Speedport W 723V/Version -1.26.000</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SIPXEVER ETOSK</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sippy Softswitch v1.7.37</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Sippy B2BUA (RADIUS)</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>sipgt-78/release-5-02-final-2</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SIP-6328-2Re-v7.0.8-__/v2.0 Enabled</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SIP-6328-2Re-v4.2.65-__/v2.0 Enabled</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>SIP-6328-2Re</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>RIX67GW2/release-5.10-final-4</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Polycom SoundPoint 331</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Panasonic-MPR08-VSIPGW/V3.0007</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>OpenStage_40_V2 R2.44.0      SIP  111004</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>OpenStage_20_V2 R2.44.0      SIP  111004</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>OpenScape SBC V2R0.23.00 Build 2</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i Topaz 07.51/2.1</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-GE K5.01/2.1</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-GE F5.01/2.1</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i SV8100-GE 01.50/2.1</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>NEC-i AspireVS-NA 07.32/2.1</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>N4COM SIP Proxy</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>MERA MVTS3G v.4.4.0-19a</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Mediatrix 4102S/v2.0.12.230 4102-MX-D2000-69</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/WRP200-1.01.11</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Linksys/SPA962-6.1.5(a)</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Lancom1823</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Lancom1722</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Karel-Sip-Gateway</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>kamailio (3.3.1 (i386/linux))</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>kamailio (3.0.1 (x86_64/linux))</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>kamailio (3.0.0 (i386/linux))</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Kamailio (1.4.3-notls (i386/linux))</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>JVS Softswitch v3.0.45</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>IST-OP-2.2.2.1</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>iPECS-MG vA.7Bs</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>iPECS-LIK SBG vE.5Gp</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Intracom/Intracom WLAN IAD-1.52.S.A</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>InnoMedia SIP MTA6328-2Re v3.0.79</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Ingate-Firewall/4.6.1</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.8.1(1.8.1.1)</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.7.0(1.6.2.18)</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.7.0(1.6.2.15)</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.7.0(1.6.2.14)</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(1.6.2.9)</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FPBX-2.10.0(10.2.0)</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>FlexPBX</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.3.13 (QUADROM-IPPBX)</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.2.12 (QUADRO-4X/16X)</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.1.27 (QUADRO-2X)</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Epygi Quadro SIP User Agent/v5.1.18 (QUADRO-4X/16X)</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>DPX2203-120531</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>CommuniGatePro/5.4.2 _community_</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>CISCO SYSTEMS SIP</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Cisco/SRP527-1.01.26(VP001)</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Cisco/SPA508G-7.4.9a</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Cisco/SPA504G-7.5.1a</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Cisco/SPA303-7.4.8a</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>CCNQ 2.0 Proxy</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>camundaNET</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7390 84.04.84 SIP</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 v2 54.05.09 SIP</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7270 54.04.59 SIP</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7240 73.04.88 SIP</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>AVM FRITZ!Box Fon WLAN 7170 Annex A 58.04.47 SIP</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-/v.5.80A.039.005</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-/v.5.80A.037</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-124 FXS/v.5.60A.024.003</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-124 FXS/v.5.20A.037.005</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-118 FXS/v.5.20A.009.003</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-114 FXS/v.5.40A.015.004</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-112 FXS/v.5.60A.007.002</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-112 FXS/v.5.20A.031.007</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Audiocodes-Sip-Gateway-MP-112 FXS/v.5.20A.027.004</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Asteriks IPBX</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra/ZULTYS_ZIP 57i/2.6.0.2010</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 9143i/2.4.0.96</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 6731i/3.2.1.43</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 6730i/2.6.0.1008</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 55i/2.5.0.82</td><td>10</td><td>0.0</td></tr>
+<tr><td>sip</td><td>Aastra 55i/2.4.1.1012</td><td>10</td><td>0.0</td></tr>
+<tr><td>http</td><td></td><td>10</td><td>0.0</td></tr>
+
+   </tbody>
+  </table>
+ </div>
+</div>

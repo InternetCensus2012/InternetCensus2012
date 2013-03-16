@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Internet Census 2012</title>
+ <script type="text/javascript" src="../js/jquery-latest.js"></script> 
+ <script type="text/javascript" src="../js/__jquery.tablesorter.min.js"></script> 
+ <link rel="stylesheet" type="text/css" href="../style.css">
+
+ <script>
+ $(document).ready(function() 
+  { 
+   generate(0);
+   $("#sortable").tablesorter(); 
+  } 
+ ); 
+
+ function generate(index) {
+    
+  var pages=[
+   ["1t","3t","7t","7u","9t","13u","17u","19t","21t","22t","23t","25t","26t","35t","37u","42t","42u","43t","44t","53t","53u","69u","70t","79t","80t","81t","82t","83t","84t","85t","88t","88u","98t","100t","106t","110t","111t","111u","113t","119t","123u","130t","135t","135u","137u","139t","143t","144t","161t","161u","177u","179t","199t"],
+   ["214t","254t","255t","256t","257t","264t","280t","311t","389t","390t","406t","407u","427t","443t","444t","445t","449t","464t","465t","497t","500u","505t","510t","512t","513t","514t","515t","517u","518u","523t","523u","524t","540t","543t","544t","548t","554t","587t","591t","593t","616t","620t","625t","626u","628t","631t","636t","641t","646t","660t","666t"],
+   ["706t","710t","711t","731t","771t","782t","783t","787t","808t","873t","888t","898t","900t","901t","902t","990t","993t","995t","1000t","1010t","1022t","1024t","1025t","1026t","1027t","1028t","1029t","1030t","1031t","1032t","1033t","1035t","1036t","1037t","1038t","1039t","1040t","1041t","1042t","1043t","1044t","1048t","1049t","1050t","1053t","1054t","1056t","1058t","1059t"],
+   ["1064t","1065t","1066t","1068t","1069t","1071t","1074t","1080t","1090t","1095t","1098t","1099t","1100t","1105t","1109t","1110t","1111t","1112t","1200t","1212t","1214t","1217t","1220t","1234t","1241t","1248t","1302t","1311t","1314t","1344t","1352t","1400t","1414t","1415t","1416t","1417t","1418t","1419t","1419u","1420t","1432t","1433t","1434u","1467t","1494t"],
+   ["1500t","1501t","1503t","1505t","1505u","1521t","1522t","1526t","1527t","1549t","1550t","1574t","1583t","1604u","1610t","1611t","1666t","1687t","1688t","1702t","1720t","1723t","1748t","1754t","1755t","1761t","1761u","1762t","1763t","1801t","1830t","1900t","1935t","1967u","1972t","1981t","1998t","2000t","2001t","2002t","2003t","2005t","2010t","2024t","2030t","2040t","2049t","2064t","2068t"],
+   ["2100t","2103t","2105t","2107t","2121t","2160t","2161t","2301t","2303u","2306t","2383t","2396t","2401t","2427t","2427u","2525t","2600t","2601t","2627t","2638u","2701t","2715t","2717t","2869t","2947t","2967t","2967u","3000t","3001t","3002t","3003t","3004t","3005t","3006t","3025t","3031t","3050t","3052t","3128t","3268t","3280t","3306t","3310t","3333t","3351t","3372t","3389t","3483u","3493t","3531t"],
+   ["3632t","3689t","3690t","3703t","3872t","3892t","3900t","3940t","3986t","4000t","4001t","4045t","4045u","4155t","4369t","4443t","4444t","4567t","4660t","4711t","4868t","4899t","4999t","5000t","5001t","5003t","5009t","5050t","5051t","5060t","5060u","5061t","5101t","5120t","5190t","5222t","5232t","5269t","5280t","5302t","5323t","5353u","5357t","5400t","5427t","5432t","5520t","5530t","5550t","5555t","5556t","5570t"],
+   ["5600t","5631t","5632u","5666t","5800t","5801t","5802t","5803t","5900t","5901t","6000t","6001t","6002t","6003t","6004t","6005t","6006t","6007t","6008t","6009t","6010t","6011t","6012t","6013t","6014t","6015t","6016t","6017t","6018t","6019t","6020t","6050t","6103t","6112t","6163t","6346t","6379t","6543t","6544t","6560t","6588t","6600t","6646t","6660t","6661t","6662t","6663t","6664t","6665t","6666t","6667t","6668t","6669t","6670t","6699t"],
+   ["6802t","6969t","7000t","7001u","7002t","7007t","7008t","7070t","7100t","7101t","7144t","7145t","7171t","7180t","7200t","7210t","7272t","7402t","7461t","7776t","7777t","7780t","7937t","7938t","8000t","8001t","8002t","8003t","8004t","8005t","8006t","8007t","8008t","8009t","8010t","8031t","8080t","8081t","8082t","8083t","8084t","8085t","8087t","8088t","8118t","8138t","8181t","8194t","8307t","8333t","8443t","8770t"],
+   ["8880t","8881t","8882t","8883t","8884t","8885t","8886t","8887t","8888t","9000t","9001t","9002t","9003t","9030t","9050t","9080t","9088t","9089t","9090t","9091t","9092t","9093t","9094t","9095t","9096t","9097t","9098t","9099t","9100t","9100u","9101t","9102t","9103t","9104t","9105t","9106t","9107t","9481t","9801t","9999t","10000t","10000u","10001t","10005t","10010t","10031t","10080u","11210t","11211t","11211u","11371t","11965t","12203u","12345t"],
+   ["13013t","13666t","13720t","13722t","13783t","14238t","14534t","15000t","15001t","15002t","17007t","17555u","17988t","18086t","18182t","18264t","19150t","19350t","20000t","22001t","22490t","26214t","26470t","27000t","27001t","27002t","27003t","27004t","27005t","27006t","27007t","27008t","27009t","27010t","27017t","27960u","30444t","31337t","31416t","32211t","32750t","32750u","32751t","32751u","32752t","32752u","32753t","32753u","32754t","32754u"],
+   ["32755t","32755u","32756t","32756u","32757t","32757u","32758t","32758u","32759t","32759u","32760t","32760u","32761t","32761u","32762t","32762u","32763t","32763u","32764t","32764u","32765t","32765u","32766t","32766u","32767t","32767u","32768t","32768u","32769t","32769u","32770t","32770u","32771t","32771u","32772t","32772u","32773t","32773u","32774t","32774u","32775t","32775u","32776t","32776u","32777t","32777u"],
+   ["32778t","32778u","32779t","32779u","32780t","32780u","32781t","32781u","32782t","32782u","32783t","32783u","32784t","32784u","32785t","32785u","32786t","32786u","32787t","32787u","32788t","32788u","32789t","32789u","32790t","32790u","32791t","32791u","32792t","32792u","32793t","32793u","32794t","32794u","32795t","32795u","32796t","32796u","32797t","32797u","32798t","32798u","32799t","32799u"],
+   ["32800t","32800u","32801t","32801u","32802t","32802u","32803t","32803u","32804t","32804u","32805t","32805u","32806t","32806u","32807t","32807u","32808t","32808u","32809t","32809u","32810t","32810u","33015t","34012t","37435t","38978t","38978u","40193t","41523t","49152t","49152u","49153u","49154u","49155u","49156u","49157t","49400t","50000t","50001t","50002t","50003t","50004t","50005t","50006t","50007t","50008t","50009t"],
+   ["50010t","50011t","50012t","50013t","50014t","50015t","50016t","50017t","50018t","50019t","50020t","50021t","50022t","50023t","50024t","50025t","50030t","55553t","55555t","56667t","60000t","60001t","60002t","60003t","60004t","60006t","60007t","60008t","60009t","60010t","60011t","60012t","60013t","60014t","60015t","60016t","60017t","60018t","60019t","60020t","60021t","60022t","60023t","60024t","60025t","Combinedt"]
+  ];
+  current = "110t"
+
+  var html = ""
+  var col = 0;
+  for (var i = 0; i < pages[index].length; ++i){
+   if (col == 0){
+    html = html + "<tr>"
+   }
+   if(pages[index][i].indexOf("u") != -1){
+    port = pages[index][i].replace(/u/g, " UDP");
+    link = pages[index][i].replace(/u/g, "_UDP_product.html");
+   }else{
+    port = pages[index][i].replace(/t/g, "");
+    link = pages[index][i].replace(/t/g, "_TCP_product.html");
+   }
+   if(pages[index][i] == ("" + current)){
+    html = html + "<td style=\"background-color:#e9e9e9\"><a href=\""+link+"\">"+port+"</a></td>"
+   }else{
+    html = html + "<td><a href=\""+link+"\">"+port+"</a></td>"
+   }
+   
+   col = col +1;
+   if (col == 14){
+    col = 0;
+    html = html + "</tr>"
+   }
+  }
+  $("#submenu").html(html);
+  $(".clicks").css({'background-color': ''})
+  $("#click"+index).css({'background-color': '#e9e9e9'})
+ }
+ </script>
+ 
+</head>
+
+<body>
+<div id="main">
+
+ <table id = "nav">
+ <col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" />
+ <tr>
+ <td><a href="../paper.html">Paper</a></td>
+ <td><a href="../images.html">Images</a></td>
+ <td><a href="../download.html">Download</a></td>
+ <td><a href="../hilbert.html">Hilbert Browser</a></td>
+ <td class="highlight1"><a href="../serviceprobe_overview.html">Service Probe Overview</a></td>
+ <td><a href="../tld_overview.html">rDNS Overview</a></td>
+ </tr>
+ </table>
+
+ 
+ <table id="nav1">
+ <tr>
+  <td style="width:10%"><a href="../serviceprobe_overview.html"><span style="font-size: 14px;">Overview</span></a></td>
+  <td> 
+  <span style="font-size: 14px;">Port Details</span>
+   <table id = "nav">
+    <tr>
+     <td id="click0" class="clicks" onclick="generate(0)">< 200</td>
+     <td id="click1" class="clicks" onclick="generate(1)">< 700</td>
+     <td id="click2" class="clicks" onclick="generate(2)">< 1060 </td>
+     <td id="click3" class="clicks" onclick="generate(3)">< 1500 </td>
+     <td id="click4" class="clicks" onclick="generate(4)">< 2100 </td>
+     <td id="click5" class="clicks" onclick="generate(5)">< 3600 </td>
+     <td id="click6" class="clicks" onclick="generate(6)">< 5600 </td>
+     <td id="click7" class="clicks" onclick="generate(7)">< 6700 </td>
+     <td id="click8" class="clicks" onclick="generate(8)">< 8800 </td>
+     <td id="click9" class="clicks" onclick="generate(9)">< 13000</td>
+     <td id="click10" class="clicks" onclick="generate(10)">< 32755</td>
+     <td id="click11" class="clicks" onclick="generate(11)">< 32778</td>
+     <td id="click12" class="clicks" onclick="generate(12)">< 32800</td>
+     <td id="click13" class="clicks" onclick="generate(13)">< 50010</td>
+     <td id="click14" class="clicks" onclick="generate(14)">< 65536</td>
+    </tr>
+   </table>
+
+   <table  id = "submenu">
+    <tr><td>This menu requires javascript, sorry<td><tr>
+   </table>
+  </td>
+ </tr>
+ </table>
+ <table id = "nav">
+ <tr>
+  <td style ="width:12.5%" ><a href="106_TCP_full.html">Prev Port</a></td>
+  <td style ="width:25% ;"><a href="110_TCP_product.html">Products</a></td>
+  <td style ="width:25% ;"><a href="110_TCP_version.html">Versions</a></td>
+  <td style ="width:25% ; background-color: #e4e4e4" ><a href="110_TCP_full.html">Full</a></td>
+  <td style ="width:12.5%" ><a href="111_TCP_full.html">Next Port</a></td>
+ <tr>
+ </table>
+ 
+ 
+ <div id="content">
+  Overview of services running on Port 110 TCP.<br>
+  ~5.94 Million IP addresses observed from May to December 2012  <br>
+  To get raw lists of the data go to <a href="../download.html">Download</a>. For an explanation of what this data is and how it was obtained, see <a href="../paper.html">Paper</a>.<br><br>
+
+
+  <table id="sortable" class="tablesorter" style ="text-align:center;border:none"> 
+   
+   <thead>
+    <th>Servicename <img src="../icon_sort.png"></th>
+<th>Product <img src="../icon_sort.png"></th>
+<th>Version <img src="../icon_sort.png"></th><th>Info<img src="../icon_sort.png"></th><th>OS<img src="../icon_sort.png"></th><th>Devicetype<img src="../icon_sort.png"></th><th>Count <img src="../icon_sort.png"></th>
+<th>Percent <img src="../icon_sort.png"></th>
+ 
+   </thead>
+   <tbody>
+    <tr><td>pop3</td><td>Dovecot pop3d</td><td></td><td></td><td></td><td></td><td>2515917</td><td>42.364</td></tr>
+<tr><td>pop3</td><td>Courier pop3d</td><td></td><td></td><td></td><td></td><td>877071</td><td>14.768</td></tr>
+<tr><td>no match</td><td></td><td></td><td></td><td></td><td></td><td>706705</td><td>11.9</td></tr>
+<tr><td>pop3</td><td>qmail pop3d</td><td></td><td></td><td></td><td></td><td>388580</td><td>6.543</td></tr>
+<tr><td>pop3</td><td>MailEnable POP3 Server</td><td></td><td></td><td>Windows</td><td></td><td>171370</td><td>2.886</td></tr>
+<tr><td>pop3</td><td>Dovecot DirectAdmin pop3d</td><td></td><td></td><td></td><td></td><td>97924</td><td>1.649</td></tr>
+<tr><td>pop3</td><td>IdeaPop3Server pop3d</td><td>v0.70</td><td></td><td></td><td></td><td>94494</td><td>1.591</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2007-2010 pop3d</td><td></td><td></td><td>Windows</td><td></td><td>93258</td><td>1.57</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.7638.1</td><td></td><td>Windows</td><td></td><td>84543</td><td>1.424</td></tr>
+<tr><td>pop3</td><td>Zimbra Collabration Suite pop3d</td><td></td><td></td><td></td><td></td><td>68542</td><td>1.154</td></tr>
+<tr><td>pop3</td><td></td><td></td><td></td><td></td><td></td><td>53040</td><td>0.893</td></tr>
+<tr><td>pop3</td><td>SmarterMail pop3d</td><td></td><td></td><td>Windows</td><td></td><td>39891</td><td>0.672</td></tr>
+<tr><td>pop3</td><td>hMailServer pop3d</td><td></td><td></td><td>Windows</td><td></td><td>36159</td><td>0.609</td></tr>
+<tr><td>pop3</td><td>IdeaPop3Server pop3d</td><td>v0.80</td><td></td><td></td><td></td><td>26045</td><td>0.439</td></tr>
+<tr><td>pop3</td><td>Zimbra pop3d</td><td></td><td></td><td></td><td></td><td>24564</td><td>0.414</td></tr>
+<tr><td>pop3</td><td>qpopper</td><td></td><td></td><td></td><td></td><td>24288</td><td>0.409</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2001.78rh</td><td></td><td></td><td></td><td>21804</td><td>0.367</td></tr>
+<tr><td>pop3</td><td>Openwall popa3d</td><td></td><td></td><td></td><td></td><td>19514</td><td>0.329</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.0.8, modified by Sphera Technologies</td><td></td><td></td><td></td><td>18218</td><td>0.307</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.0.5</td><td></td><td></td><td></td><td>16835</td><td>0.283</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.0.9</td><td></td><td></td><td></td><td>16486</td><td>0.278</td></tr>
+<tr><td>pop3</td><td>Microsoft Windows 2003 POP3 Service</td><td>1.0</td><td></td><td>Windows 2000</td><td></td><td>16415</td><td>0.276</td></tr>
+<tr><td>mongodb</td><td>MongoDB</td><td>1</td><td></td><td></td><td></td><td>14239</td><td>0.24</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2004.89</td><td></td><td></td><td></td><td>10672</td><td>0.18</td></tr>
+<tr><td>pop3</td><td>MailMax pop3d</td><td></td><td></td><td>Windows</td><td></td><td>10504</td><td>0.177</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2006i.98</td><td></td><td></td><td></td><td>9449</td><td>0.159</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2003.83rh</td><td></td><td></td><td></td><td>9397</td><td>0.158</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td></td><td></td><td></td><td></td><td>8522</td><td>0.143</td></tr>
+<tr><td>pop3-proxy</td><td>Perdition pop3 proxy</td><td></td><td></td><td></td><td></td><td>8261</td><td>0.139</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>11.0.3</td><td></td><td>Windows</td><td></td><td>7998</td><td>0.135</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2007 pop3d</td><td></td><td></td><td>Windows</td><td></td><td>7905</td><td>0.133</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2007e.104</td><td></td><td></td><td></td><td>7623</td><td>0.128</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2000 pop3d</td><td>6.0.6249.0</td><td></td><td>Windows</td><td></td><td>7467</td><td>0.126</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.7-Invoca-RPM-2.3.7-12.el5_7.2</td><td></td><td></td><td></td><td>7237</td><td>0.122</td></tr>
+<tr><td>pop3</td><td>vm-pop3d</td><td>1.1.7f-DA-2</td><td>derived from gnu-pop3d</td><td></td><td></td><td>6607</td><td>0.111</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.7-Invoca-RPM-2.3.7-7.el5_4.3</td><td></td><td></td><td></td><td>6594</td><td>0.111</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2000.70</td><td></td><td></td><td></td><td>6003</td><td>0.101</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>12.5.6</td><td></td><td>Windows</td><td></td><td>5749</td><td>0.097</td></tr>
+<tr><td>http</td><td>CCProxy</td><td></td><td></td><td></td><td></td><td>5707</td><td>0.096</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2007b.104</td><td></td><td></td><td></td><td>5694</td><td>0.096</td></tr>
+<tr><td>pop3</td><td>cppop pop3d</td><td>21.0</td><td></td><td></td><td></td><td>4462</td><td>0.075</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.7638.1</td><td>German</td><td>Windows</td><td></td><td>4456</td><td>0.075</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.0.8</td><td></td><td></td><td></td><td>4191</td><td>0.071</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>11.0.0</td><td></td><td>Windows</td><td></td><td>3919</td><td>0.066</td></tr>
+<tr><td>pop3</td><td>Qpop pop3d</td><td>2.53</td><td></td><td></td><td></td><td>3773</td><td>0.064</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2006b.94</td><td></td><td></td><td></td><td>3684</td><td>0.062</td></tr>
+<tr><td>pop3</td><td>Winmail pop3d</td><td></td><td></td><td>Windows</td><td></td><td>3683</td><td>0.062</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.7226.0</td><td></td><td>Windows</td><td></td><td>3373</td><td>0.057</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.7638.1</td><td>Spanish</td><td>Windows</td><td></td><td>3336</td><td>0.056</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>-----</td><td></td><td></td><td></td><td>3275</td><td>0.055</td></tr>
+<tr><td>pop3</td><td>Cubic Circle Cucipop pop3d</td><td>1.31</td><td></td><td></td><td></td><td>3227</td><td>0.054</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.7638.1</td><td>Chinese</td><td>Windows</td><td></td><td>3110</td><td>0.052</td></tr>
+<tr><td>pop3</td><td>ipopd</td><td>2003.83rh</td><td></td><td></td><td></td><td>3093</td><td>0.052</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2004.89</td><td></td><td></td><td></td><td>3079</td><td>0.052</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2003.83</td><td></td><td></td><td></td><td>2997</td><td>0.05</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>10.0.0</td><td></td><td>Windows</td><td></td><td>2983</td><td>0.05</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2007e.104rh</td><td></td><td></td><td></td><td>2905</td><td>0.049</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2006a.94</td><td></td><td></td><td></td><td>2838</td><td>0.048</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>7.64</td><td></td><td></td><td></td><td>2701</td><td>0.045</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.7638.1</td><td>Italian</td><td>Windows</td><td></td><td>2532</td><td>0.043</td></tr>
+<tr><td>pop3</td><td>tpop3d</td><td></td><td></td><td></td><td></td><td>2531</td><td>0.043</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.9-Fedora-RPM-2.3.9-7.fc7</td><td></td><td></td><td></td><td>2528</td><td>0.043</td></tr>
+<tr><td>pop3-proxy</td><td>Zarafa pop3 proxy</td><td></td><td></td><td>Unix</td><td></td><td>2516</td><td>0.042</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.7638.1</td><td>Taiwanese</td><td>Windows</td><td></td><td>2437</td><td>0.041</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>12.5.4</td><td></td><td>Windows</td><td></td><td>2369</td><td>0.04</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.7638.1</td><td>French</td><td></td><td></td><td>2350</td><td>0.04</td></tr>
+<tr><td>pop3</td><td>602LAN Suite pop3</td><td></td><td></td><td>Windows</td><td></td><td>2276</td><td>0.038</td></tr>
+<tr><td>pop3</td><td>Mercury/32 pop3d</td><td></td><td></td><td>Windows</td><td></td><td>2222</td><td>0.037</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2006b.94</td><td></td><td></td><td></td><td>2160</td><td>0.036</td></tr>
+<tr><td>pop3</td><td>WinWebMail pop3d</td><td>3.8.1.3</td><td></td><td>Windows</td><td></td><td>2156</td><td>0.036</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>10.1.1</td><td></td><td>Windows</td><td></td><td>2151</td><td>0.036</td></tr>
+<tr><td>pop3</td><td>ipopd</td><td>2000.69rh</td><td></td><td></td><td></td><td>2149</td><td>0.036</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13-Debian-2.2.13-19+squeeze3</td><td>Debian</td><td>Linux</td><td></td><td>2148</td><td>0.036</td></tr>
+<tr><td>pop3</td><td>vm-pop3d</td><td>1.1.6</td><td>derived from gnu-pop3d</td><td></td><td></td><td>2127</td><td>0.036</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>9.4.2</td><td></td><td></td><td></td><td>2116</td><td>0.036</td></tr>
+<tr><td>pop3</td><td>XMail pop3d</td><td>1.27</td><td></td><td></td><td></td><td>2084</td><td>0.035</td></tr>
+<tr><td>pop3</td><td>WinWebMail pop3d</td><td>3.8.0.1</td><td></td><td>Windows</td><td></td><td>2034</td><td>0.034</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.7-Invoca-RPM-2.3.7-7.el5_6.4</td><td></td><td></td><td></td><td>1974</td><td>0.033</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.0.19</td><td></td><td></td><td></td><td>1971</td><td>0.033</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2000.70rh</td><td></td><td></td><td></td><td>1956</td><td>0.033</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.6944.0</td><td></td><td>Windows</td><td></td><td>1937</td><td>0.033</td></tr>
+<tr><td>pop3</td><td>Qpop pop3d</td><td>?</td><td></td><td></td><td></td><td>1886</td><td>0.032</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>10.1.2</td><td></td><td>Windows</td><td></td><td>1880</td><td>0.032</td></tr>
+<tr><td>pop3</td><td>ipopd</td><td>2001.78rh</td><td></td><td></td><td></td><td>1878</td><td>0.032</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>8.0.3</td><td></td><td>Windows</td><td></td><td>1857</td><td>0.031</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>2.3.11</td><td></td><td></td><td></td><td>1811</td><td>0.03</td></tr>
+<tr><td>chat</td><td>AIM or ICQ server</td><td></td><td></td><td></td><td></td><td>1778</td><td>0.03</td></tr>
+<tr><td>pop3</td><td>Citadel pop3d</td><td></td><td></td><td></td><td></td><td>1740</td><td>0.029</td></tr>
+<tr><td>pop3-proxy</td><td>Astaro firewall pop3 proxy</td><td></td><td></td><td></td><td>firewall</td><td>1681</td><td>0.028</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.5.3</td><td></td><td></td><td></td><td>1670</td><td>0.028</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.0.13</td><td></td><td></td><td></td><td>1626</td><td>0.027</td></tr>
+<tr><td>pop3</td><td>ipopd</td><td>2000.70</td><td></td><td></td><td></td><td>1606</td><td>0.027</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.0.4</td><td></td><td></td><td></td><td>1539</td><td>0.026</td></tr>
+<tr><td>http</td><td></td><td></td><td></td><td></td><td></td><td>1525</td><td>0.026</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2007e.104</td><td></td><td></td><td></td><td>1514</td><td>0.025</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>9.6.1</td><td></td><td>Windows</td><td></td><td>1507</td><td>0.025</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2001.80</td><td></td><td></td><td></td><td>1455</td><td>0.024</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>9.3.2</td><td></td><td></td><td></td><td>1429</td><td>0.024</td></tr>
+<tr><td>pop3</td><td>XMail pop3d</td><td>1.25</td><td></td><td></td><td></td><td>1402</td><td>0.024</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2007f.104</td><td></td><td></td><td></td><td>1389</td><td>0.023</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>12.5.3</td><td></td><td>Windows</td><td></td><td>1366</td><td>0.023</td></tr>
+<tr><td>pop3</td><td>DBMail pop3d</td><td></td><td></td><td></td><td></td><td>1360</td><td>0.023</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.16</td><td></td><td></td><td></td><td>1351</td><td>0.023</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>10.3.5</td><td></td><td></td><td></td><td>1328</td><td>0.022</td></tr>
+<tr><td>pop3</td><td>Solid pop3d</td><td></td><td></td><td></td><td></td><td>1326</td><td>0.022</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>9.1.0</td><td></td><td></td><td></td><td>1323</td><td>0.022</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2004.88</td><td></td><td></td><td></td><td>1298</td><td>0.022</td></tr>
+<tr><td>imap</td><td>IMail imapd</td><td></td><td></td><td></td><td></td><td>1243</td><td>0.021</td></tr>
+<tr><td>socks-proxy</td><td>CCProxy socks proxy</td><td></td><td>unauthorized</td><td></td><td></td><td>1219</td><td>0.021</td></tr>
+<tr><td>pop3</td><td>FirstClass pop3d</td><td></td><td></td><td></td><td></td><td>1200</td><td>0.02</td></tr>
+<tr><td>pop3</td><td>Tobit David.fx pop3d</td><td></td><td></td><td></td><td></td><td>1194</td><td>0.02</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>10.4.1</td><td></td><td></td><td></td><td>1189</td><td>0.02</td></tr>
+<tr><td>pop3</td><td>WinWebMail pop3d</td><td>3.7.6.1</td><td></td><td>Windows</td><td></td><td>1178</td><td>0.02</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>12.0.3</td><td></td><td>Windows</td><td></td><td>1174</td><td>0.02</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>10.1.0</td><td></td><td>Windows</td><td></td><td>1168</td><td>0.02</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.0.3</td><td></td><td></td><td></td><td>1134</td><td>0.019</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2000 pop3d</td><td>6.0.6619.12</td><td></td><td>Windows</td><td></td><td>1134</td><td>0.019</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.1.0</td><td></td><td></td><td></td><td>1130</td><td>0.019</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.1.16</td><td></td><td></td><td></td><td>1103</td><td>0.019</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>9.6.6</td><td></td><td>Windows</td><td></td><td>1101</td><td>0.019</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>X2.0</td><td></td><td></td><td></td><td>1097</td><td>0.018</td></tr>
+<tr><td>http</td><td>SonicWALL</td><td></td><td></td><td></td><td>firewall</td><td>1090</td><td>0.018</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>9.5.2</td><td></td><td>Windows</td><td></td><td>1089</td><td>0.018</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.12</td><td></td><td></td><td></td><td>1079</td><td>0.018</td></tr>
+<tr><td>pop3</td><td>WinWebMail pop3d</td><td>3.8.1.5</td><td></td><td>Windows</td><td></td><td>1072</td><td>0.018</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2006e.96</td><td></td><td></td><td></td><td>1061</td><td>0.018</td></tr>
+<tr><td>pop3</td><td>XMail pop3d</td><td>1.26</td><td></td><td></td><td></td><td>1051</td><td>0.018</td></tr>
+<tr><td>pop3-proxy</td><td>UserGate pop3 proxy</td><td></td><td></td><td>Windows</td><td></td><td>1042</td><td>0.018</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2007b.104</td><td></td><td></td><td></td><td>983</td><td>0.017</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.12</td><td>Mac OS X 10.4.8</td><td>Mac OS X</td><td></td><td>977</td><td>0.016</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.4.5</td><td></td><td></td><td></td><td>970</td><td>0.016</td></tr>
+<tr><td>pop3</td><td>Scalix pop3d</td><td></td><td></td><td></td><td></td><td>959</td><td>0.016</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2007d.104</td><td></td><td></td><td></td><td>948</td><td>0.016</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.5.2</td><td></td><td></td><td></td><td>899</td><td>0.015</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>12.5.2</td><td></td><td>Windows</td><td></td><td>896</td><td>0.015</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>12.0.4</td><td></td><td>Windows</td><td></td><td>884</td><td>0.015</td></tr>
+<tr><td>pop3</td><td>Dovecot MUA pop3d</td><td></td><td></td><td></td><td></td><td>880</td><td>0.015</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>9.5.1</td><td></td><td>Windows</td><td></td><td>871</td><td>0.015</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.6944.0</td><td>Chinese</td><td>Windows</td><td></td><td>870</td><td>0.015</td></tr>
+<tr><td>pop3</td><td>Eudora Internet Mail Server X pop3d</td><td>3.3.9</td><td></td><td>Mac OS X</td><td></td><td>855</td><td>0.014</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13-Debian-2.2.13-14+lenny6</td><td>Debian</td><td>Linux</td><td></td><td>850</td><td>0.014</td></tr>
+<tr><td>pop3</td><td>WinWebMail pop3d</td><td>3.7.3.1</td><td></td><td>Windows</td><td></td><td>848</td><td>0.014</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>9.3.1</td><td></td><td></td><td></td><td>843</td><td>0.014</td></tr>
+<tr><td>pop3</td><td>Teapop pop3d</td><td>0.3.8</td><td></td><td></td><td></td><td>836</td><td>0.014</td></tr>
+<tr><td>pop3</td><td>IA MailServer pop3d</td><td></td><td></td><td>Windows</td><td></td><td>828</td><td>0.014</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>9.6.5</td><td></td><td>Windows</td><td></td><td>826</td><td>0.014</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13-Debian-2.2.13-13ubuntu3</td><td></td><td></td><td></td><td>823</td><td>0.014</td></tr>
+<tr><td>pop3</td><td>RaidenMAILD pop3d</td><td>1916</td><td></td><td>Windows</td><td></td><td>815</td><td>0.014</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>5.3h2-2</td><td></td><td></td><td></td><td>795</td><td>0.013</td></tr>
+<tr><td>pop3</td><td>WinWebMail pop3d</td><td>3.8.1.1</td><td></td><td>Windows</td><td></td><td>792</td><td>0.013</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>9.6.2</td><td></td><td>Windows</td><td></td><td>784</td><td>0.013</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.4.4</td><td></td><td></td><td></td><td>771</td><td>0.013</td></tr>
+<tr><td>pop3</td><td>SCO-modified QPOP pop3d</td><td>3.0.2-scoR5</td><td></td><td>SCO UNIX</td><td></td><td>764</td><td>0.013</td></tr>
+<tr><td>pop3</td><td>XMail pop3d</td><td>1.22</td><td></td><td></td><td></td><td>748</td><td>0.013</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.0.5, modified by Sphera Technologies</td><td></td><td></td><td></td><td>744</td><td>0.013</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.5.1</td><td></td><td></td><td></td><td>734</td><td>0.012</td></tr>
+<tr><td>pop3</td><td>Qpop pop3d</td><td>3.1b5</td><td></td><td></td><td></td><td>731</td><td>0.012</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>10.0.5</td><td></td><td>Windows</td><td></td><td>726</td><td>0.012</td></tr>
+<tr><td>pop3</td><td>PSCS VPop3</td><td></td><td></td><td></td><td></td><td>706</td><td>0.012</td></tr>
+<tr><td>pop3</td><td>WinWebMail pop3d</td><td>3.7.7.3</td><td></td><td>Windows</td><td></td><td>701</td><td>0.012</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13</td><td></td><td></td><td></td><td>698</td><td>0.012</td></tr>
+<tr><td>pop3</td><td>WinWebMail pop3d</td><td>3.8.2.1</td><td></td><td>Windows</td><td></td><td>691</td><td>0.012</td></tr>
+<tr><td>pop3</td><td>JAMES pop3d</td><td>2.3.2</td><td></td><td></td><td></td><td>688</td><td>0.012</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>9.5.6</td><td></td><td>Windows</td><td></td><td>673</td><td>0.011</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.11</td><td></td><td></td><td></td><td>673</td><td>0.011</td></tr>
+<tr><td>pop3</td><td>cppop pop3d</td><td>20.0</td><td></td><td></td><td></td><td>672</td><td>0.011</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>10.0.2</td><td></td><td>Windows</td><td></td><td>671</td><td>0.011</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2001.78</td><td></td><td></td><td></td><td>667</td><td>0.011</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>8.1.3</td><td></td><td>Windows</td><td></td><td>664</td><td>0.011</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.7638.1</td><td>Korean</td><td>Windows</td><td></td><td>653</td><td>0.011</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.5.2FP2</td><td></td><td></td><td></td><td>646</td><td>0.011</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>4.1.8</td><td></td><td></td><td></td><td>643</td><td>0.011</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2004.89rh</td><td></td><td></td><td></td><td>633</td><td>0.011</td></tr>
+<tr><td>pop3</td><td>IBM OS 400 pop3d</td><td></td><td></td><td>OS/400</td><td></td><td>601</td><td>0.01</td></tr>
+<tr><td>pop3</td><td>ModusMail pop3d</td><td>4.7.840.0</td><td></td><td>Windows</td><td></td><td>600</td><td>0.01</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.5</td><td></td><td></td><td></td><td>594</td><td>0.01</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.7-Invoca-RPM-2.3.7-2.el5</td><td></td><td></td><td></td><td>587</td><td>0.01</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>10.0.4</td><td></td><td>Windows</td><td></td><td>585</td><td>0.01</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2000 pop3d</td><td>6.0.6603.0</td><td></td><td>Windows</td><td></td><td>584</td><td>0.01</td></tr>
+<tr><td>pop3</td><td>vm-pop3d</td><td>1.1.7e</td><td>derived from gnu-pop3d</td><td></td><td></td><td>580</td><td>0.01</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>9.0.4</td><td></td><td>Windows</td><td></td><td>578</td><td>0.01</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>8.9.1</td><td></td><td>Windows</td><td></td><td>566</td><td>0.01</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>9.6.4</td><td></td><td>Windows</td><td></td><td>565</td><td>0.01</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.5.3FP1</td><td></td><td></td><td></td><td>565</td><td>0.01</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>7.0.1</td><td></td><td>Windows</td><td></td><td>563</td><td>0.009</td></tr>
+<tr><td>pop3</td><td>MailSite pop3d</td><td>6.1.22.0</td><td></td><td></td><td></td><td>561</td><td>0.009</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>7.59</td><td></td><td></td><td></td><td>540</td><td>0.009</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>5.2a-1</td><td></td><td></td><td></td><td>534</td><td>0.009</td></tr>
+<tr><td>pop3</td><td>Atmail pop3d</td><td></td><td></td><td></td><td></td><td>532</td><td>0.009</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>7.0.2</td><td></td><td></td><td></td><td>525</td><td>0.009</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>12.0.1</td><td></td><td>Windows</td><td></td><td>520</td><td>0.009</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>4.2.4</td><td></td><td></td><td></td><td>514</td><td>0.009</td></tr>
+<tr><td>pop3</td><td>Qpop pop3d</td><td>2.3</td><td></td><td></td><td></td><td>513</td><td>0.009</td></tr>
+<tr><td>pop3</td><td>qpoppper pop3d</td><td></td><td></td><td></td><td></td><td>500</td><td>0.008</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2007d.104</td><td></td><td></td><td></td><td>499</td><td>0.008</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>12.5.5</td><td></td><td>Windows</td><td></td><td>499</td><td>0.008</td></tr>
+<tr><td>pop3</td><td>MailSite pop3d</td><td>9.5.4.2</td><td></td><td></td><td></td><td>499</td><td>0.008</td></tr>
+<tr><td>pop3</td><td>XMail pop3d</td><td>1.24</td><td></td><td></td><td></td><td>493</td><td>0.008</td></tr>
+<tr><td>pop3</td><td>CMailServer pop3d</td><td>5.4.6</td><td></td><td>Windows</td><td></td><td>487</td><td>0.008</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2006j.98</td><td></td><td></td><td></td><td>478</td><td>0.008</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.8</td><td></td><td></td><td></td><td>478</td><td>0.008</td></tr>
+<tr><td>pop3</td><td>ipopd</td><td>2000.70rh</td><td></td><td></td><td></td><td>475</td><td>0.008</td></tr>
+<tr><td>pop3</td><td>ModusMail pop3d</td><td>5.1.1024.13396</td><td></td><td>Windows</td><td></td><td>474</td><td>0.008</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2006f.96</td><td></td><td></td><td></td><td>465</td><td>0.008</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.11-Fedora-RPM-2.3.11-1.fc8</td><td></td><td></td><td></td><td>462</td><td>0.008</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>6.8.5</td><td></td><td>Windows</td><td></td><td>457</td><td>0.008</td></tr>
+<tr><td>pop3</td><td>Arvixe pop3d</td><td></td><td></td><td></td><td></td><td>455</td><td>0.008</td></tr>
+<tr><td>pop3</td><td>vm-pop3d</td><td>1.1.7f-T6-DA</td><td>derived from gnu-pop3d</td><td></td><td></td><td>452</td><td>0.008</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>12.0.0</td><td></td><td>Windows</td><td></td><td>446</td><td>0.008</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>11.0.2</td><td></td><td>Windows</td><td></td><td>446</td><td>0.008</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.29</td><td></td><td></td><td></td><td>444</td><td>0.007</td></tr>
+<tr><td>pop3</td><td>RaidenMAILD pop3d</td><td>2103</td><td></td><td>Windows</td><td></td><td>441</td><td>0.007</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>7.64</td><td></td><td></td><td></td><td>440</td><td>0.007</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>12.5.1</td><td></td><td>Windows</td><td></td><td>434</td><td>0.007</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.16-Fedora-RPM-2.3.16-7.fc14</td><td></td><td></td><td></td><td>434</td><td>0.007</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.7-Invoca-RPM-2.3.7-2.el5_3.2</td><td></td><td></td><td></td><td>430</td><td>0.007</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13-Debian-2.2.13-14+lenny3</td><td>Debian</td><td>Linux</td><td></td><td>427</td><td>0.007</td></tr>
+<tr><td>pop3</td><td>BVRP Software SLMAIL pop3d</td><td></td><td></td><td></td><td></td><td>427</td><td>0.007</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2000.69rh</td><td></td><td></td><td></td><td>419</td><td>0.007</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>9.0.1</td><td></td><td>Windows</td><td></td><td>417</td><td>0.007</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.19</td><td></td><td></td><td></td><td>415</td><td>0.007</td></tr>
+<tr><td>http</td><td>letv</td><td>2012-06-21</td><td></td><td></td><td></td><td>414</td><td>0.007</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>9.5.5</td><td></td><td>Windows</td><td></td><td>412</td><td>0.007</td></tr>
+<tr><td>pop3</td><td>Qpop pop3d</td><td>3.0.2</td><td></td><td></td><td></td><td>409</td><td>0.007</td></tr>
+<tr><td>pop3</td><td>RaidenMAILD pop3d</td><td>2001</td><td></td><td>Windows</td><td></td><td>405</td><td>0.007</td></tr>
+<tr><td>pop3</td><td>JAMES pop3d</td><td>2.3.1</td><td></td><td></td><td></td><td>403</td><td>0.007</td></tr>
+<tr><td>pop3</td><td>MailSite pop3d</td><td>9.4.1.0</td><td></td><td></td><td></td><td>398</td><td>0.007</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.1.12</td><td></td><td></td><td></td><td>398</td><td>0.007</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.3.13</td><td></td><td></td><td></td><td>397</td><td>0.007</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>9.2.1</td><td></td><td></td><td></td><td>396</td><td>0.007</td></tr>
+<tr><td>pop3</td><td>Code-Crafters Ability Mail Server pop3d</td><td>2.72</td><td></td><td>Windows</td><td></td><td>394</td><td>0.007</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>7.59</td><td></td><td></td><td></td><td>390</td><td>0.007</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>10.3.1</td><td></td><td></td><td></td><td>390</td><td>0.007</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.8</td><td>PHP/5.2.4-2ubuntu5.19 with Suhosin-Patch</td><td></td><td></td><td>387</td><td>0.007</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>9.6.3</td><td></td><td>Windows</td><td></td><td>383</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.7.3 patch 1</td><td></td><td></td><td></td><td>382</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>WinWebMail pop3d</td><td>3.7.1.1</td><td></td><td>Windows</td><td></td><td>375</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>Mercury Mail Transport System pop3d</td><td></td><td></td><td></td><td></td><td>367</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>MailSite pop3d</td><td>6.1.16.0</td><td></td><td></td><td></td><td>364</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.5.2FP3</td><td></td><td></td><td></td><td>362</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.12-Invoca-RPM-2.2.12-8.1.RHEL4</td><td></td><td></td><td></td><td>362</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.5.2FP1</td><td></td><td></td><td></td><td>354</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>7.0.3</td><td></td><td></td><td></td><td>352</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.3</td><td></td><td></td><td></td><td>351</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>6.0a5-5</td><td></td><td></td><td></td><td>350</td><td>0.006</td></tr>
+<tr><td>smtp</td><td>Microsoft Exchange smtpd</td><td></td><td></td><td>Windows</td><td></td><td>348</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange pop3d</td><td>5.5.2653.23</td><td></td><td>Windows</td><td></td><td>345</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.2.20</td><td></td><td></td><td></td><td>345</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>ModusMail pop3d</td><td>5.0.916.0</td><td></td><td>Windows</td><td></td><td>343</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>Qpop pop3d</td><td>3.1.2</td><td></td><td></td><td></td><td>342</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>Code-Crafters Ability Mail Server pop3d</td><td>2.71</td><td></td><td>Windows</td><td></td><td>342</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>8.1.4</td><td></td><td>Windows</td><td></td><td>340</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>Post.Office pop3d</td><td>3.5.3 release 223</td><td>w/ZPOP 1.0</td><td></td><td></td><td>336</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.1.18-IPv6-Debian-2.1.18-5.1</td><td></td><td></td><td></td><td>336</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>10.2.2</td><td></td><td></td><td></td><td>334</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>10.0.7</td><td></td><td></td><td></td><td>332</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.14</td><td></td><td></td><td></td><td>331</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.3.12</td><td></td><td></td><td></td><td>331</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.0.9</td><td></td><td></td><td></td><td>329</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13-Debian-2.2.13-19squeeze3build0.10.04.1</td><td></td><td></td><td></td><td>327</td><td>0.006</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Mail Server pop3d</td><td>1.0.8.4</td><td></td><td>Windows</td><td></td><td>320</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.0.1</td><td></td><td></td><td></td><td>317</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.7226.0</td><td>German</td><td>Windows</td><td></td><td>314</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>12.5.0</td><td></td><td>Windows</td><td></td><td>314</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>9.4.0</td><td></td><td></td><td></td><td>314</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>10.3.4</td><td></td><td></td><td></td><td>312</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.6.2</td><td></td><td></td><td></td><td>310</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>RaidenMAILD pop3d</td><td>1917</td><td></td><td>Windows</td><td></td><td>309</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.12</td><td>Mac OS X 10.4.0</td><td>Mac OS X</td><td></td><td>309</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.7-Invoca-RPM-2.3.7-1.1.el5</td><td></td><td></td><td></td><td>305</td><td>0.005</td></tr>
+<tr><td>nagios-nsca</td><td>Nagios NSCA</td><td></td><td></td><td></td><td></td><td>304</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.7-Invoca-RPM-2.3.7-12.el5_7.1</td><td></td><td></td><td></td><td>302</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>7.2.0</td><td></td><td>Windows</td><td></td><td>300</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>7.2.3</td><td></td><td>Windows</td><td></td><td>299</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>4.47</td><td></td><td></td><td></td><td>298</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.4.1</td><td></td><td></td><td></td><td>298</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>3.9e-1</td><td></td><td></td><td></td><td>295</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2002.81</td><td></td><td></td><td></td><td>294</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>RaidenMAILD pop3d</td><td>1917.15</td><td></td><td>Windows</td><td></td><td>293</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.0.14</td><td></td><td></td><td></td><td>293</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.1.18</td><td></td><td></td><td></td><td>290</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>4.2.10</td><td></td><td></td><td></td><td>290</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.5.0 patch 1</td><td></td><td></td><td></td><td>289</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>7.0.1</td><td></td><td></td><td></td><td>288</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.12</td><td>Mac OS X 10.3</td><td>Mac OS X</td><td></td><td>287</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>2.2.12-Invoca-RPM-2.2.12-4.2.cc</td><td></td><td></td><td></td><td>284</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>Qpop pop3d</td><td>3.1</td><td></td><td></td><td></td><td>282</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>13.0.3</td><td></td><td>Windows</td><td></td><td>282</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>4.4.2</td><td></td><td>Windows</td><td></td><td>280</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>WinWebMail pop3d</td><td>3.7.5.1</td><td></td><td>Windows</td><td></td><td>279</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>7.4.5</td><td></td><td>Windows</td><td></td><td>279</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>10.0.1</td><td></td><td>Windows</td><td></td><td>278</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>Teapop pop3d</td><td>0.3.7</td><td></td><td></td><td></td><td>272</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>11.0.1</td><td></td><td>Windows</td><td></td><td>272</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>3.5b3-3</td><td></td><td></td><td></td><td>270</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Mail Server Pro pop3d</td><td>1.8.9.6</td><td></td><td>Windows</td><td></td><td>270</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.5.2</td><td></td><td></td><td></td><td>269</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.13</td><td></td><td></td><td></td><td>269</td><td>0.005</td></tr>
+<tr><td>http</td><td>AIM</td><td>1.0</td><td></td><td></td><td></td><td>268</td><td>0.005</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>10.2.1</td><td></td><td></td><td></td><td>266</td><td>0.004</td></tr>
+<tr><td>pop3-proxy</td><td>JanaServer pop3 proxy</td><td></td><td></td><td>Windows</td><td></td><td>265</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.0.2</td><td></td><td></td><td></td><td>265</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>MailSite pop3d</td><td>9.5.4.6</td><td></td><td></td><td></td><td>261</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.3.1</td><td></td><td></td><td></td><td>261</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>Tobit DvISE pop3d</td><td></td><td></td><td></td><td></td><td>260</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>3.7b6-6</td><td></td><td></td><td></td><td>259</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.0.3[relayer-1.9.1]</td><td></td><td></td><td></td><td>254</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Pro</td><td>1.8.8.8</td><td></td><td>Windows</td><td></td><td>252</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>AltiGen AltiServ pop3d</td><td></td><td></td><td></td><td>PBX</td><td>252</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>12.0.2</td><td></td><td>Windows</td><td></td><td>250</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>XMail pop3d</td><td>1.21</td><td></td><td></td><td></td><td>249</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Mail Server pop3d</td><td>1.0.8.3</td><td></td><td>Windows</td><td></td><td>249</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.7.3</td><td></td><td></td><td></td><td>248</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.7.2</td><td></td><td></td><td></td><td>248</td><td>0.004</td></tr>
+<tr><td>http-proxy</td><td>CCProxy http proxy</td><td></td><td></td><td>Windows</td><td></td><td>246</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.4.6</td><td></td><td></td><td></td><td>244</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>Qpop pop3d</td><td>2.52</td><td></td><td></td><td></td><td>243</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>6.0a4-4</td><td></td><td></td><td></td><td>242</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.5.2FP4</td><td></td><td></td><td></td><td>241</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.0.14</td><td></td><td></td><td></td><td>240</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2003.83</td><td></td><td></td><td></td><td>237</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.4.16</td><td></td><td></td><td></td><td>237</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13-Debian-2.2.13-10</td><td></td><td></td><td></td><td>236</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.7.1</td><td></td><td></td><td></td><td>234</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2002.81</td><td></td><td></td><td></td><td>234</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.0.16</td><td></td><td></td><td></td><td>231</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.0</td><td></td><td></td><td></td><td>229</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>iPlanet messaging multiplexor</td><td>5.1 HotFix 1.4</td><td></td><td></td><td></td><td>224</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.0.10</td><td></td><td></td><td></td><td>224</td><td>0.004</td></tr>
+<tr><td>mongodb</td><td>MongoDB</td><td>8</td><td></td><td></td><td></td><td>224</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>WinWebMail pop3d</td><td>3.6.3.1</td><td></td><td>Windows</td><td></td><td>223</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>3.8k4-4</td><td></td><td></td><td></td><td>222</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.2.16</td><td></td><td></td><td></td><td>222</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.5.1FP4</td><td></td><td></td><td></td><td>221</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2007f.104</td><td></td><td></td><td></td><td>220</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>9.1.1</td><td></td><td></td><td></td><td>220</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.0.4, modified by Sphera Technologies</td><td></td><td></td><td></td><td>218</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13-Debian-2.2.13-10+etch4</td><td>Debian</td><td>Linux</td><td></td><td>218</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>9.0.0</td><td></td><td>Windows</td><td></td><td>215</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>10.4.0</td><td></td><td></td><td></td><td>215</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2000 pop3d</td><td>6.0.4417.0</td><td></td><td>Windows</td><td></td><td>212</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.5.1FP5</td><td></td><td></td><td></td><td>211</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>10.1.2</td><td></td><td></td><td></td><td>211</td><td>0.004</td></tr>
+<tr><td>pop3-proxy</td><td>CCProxy pop3d</td><td>7.2</td><td></td><td></td><td></td><td>209</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.4.0</td><td></td><td></td><td></td><td>209</td><td>0.004</td></tr>
+<tr><td>pop3</td><td>Solid POP3d</td><td></td><td></td><td></td><td></td><td>207</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Atrium Software's Mercur pop3d</td><td>5.00.12</td><td></td><td>Windows</td><td></td><td>206</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>8.1.1</td><td></td><td>Windows</td><td></td><td>205</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>8.0.2</td><td></td><td>Windows</td><td></td><td>204</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.7.0 patch 1</td><td></td><td></td><td></td><td>202</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.7.0</td><td></td><td></td><td></td><td>201</td><td>0.003</td></tr>
+<tr><td>ssl</td><td>SSLv3</td><td></td><td></td><td></td><td></td><td>200</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>7.0</td><td></td><td></td><td></td><td>200</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.4.1</td><td></td><td></td><td></td><td>197</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>10.0.8</td><td></td><td></td><td></td><td>194</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.12-Invoca-RPM-2.2.12-9.RHEL4</td><td></td><td></td><td></td><td>194</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.6944.0</td><td>Taiwanese</td><td>Windows</td><td></td><td>193</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>7.0.3FP1</td><td></td><td></td><td></td><td>193</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Code-Crafters Ability Mail Server pop3d</td><td>2.70</td><td></td><td>Windows</td><td></td><td>193</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.4.3</td><td></td><td></td><td></td><td>192</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>8.1.5</td><td></td><td>Windows</td><td></td><td>191</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.12-Invoca-RPM-2.2.12-3.RHEL4.1</td><td></td><td></td><td></td><td>190</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.0.15</td><td></td><td></td><td></td><td>189</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.0.18</td><td></td><td></td><td></td><td>187</td><td>0.003</td></tr>
+<tr><td>pop3-proxy</td><td>IronMail pop3-proxy</td><td></td><td></td><td></td><td></td><td>187</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.5.1FP3</td><td></td><td></td><td></td><td>187</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>7.6.4</td><td></td><td>Windows</td><td></td><td>185</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>7.5.2</td><td></td><td>Windows</td><td></td><td>183</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>CMailServer pop3d</td><td>5.3</td><td></td><td>Windows</td><td></td><td>182</td><td>0.003</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td></td><td></td><td></td><td></td><td>180</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>RaidenMAILD pop3d</td><td>1915</td><td></td><td>Windows</td><td></td><td>179</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.7226.0</td><td>Italian</td><td>Windows</td><td></td><td>179</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.9-Fedora-RPM-2.3.9-7.fc6</td><td></td><td></td><td></td><td>176</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>2.2.12</td><td></td><td></td><td></td><td>176</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>WinWebMail pop3d</td><td>3.7.7.1</td><td></td><td>Windows</td><td></td><td>175</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13-Debian-2.2.13-14+lenny4</td><td>Debian</td><td>Linux</td><td></td><td>173</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2004.89mdk</td><td></td><td></td><td></td><td>172</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>WinWebMail pop3d</td><td>3.7.0.5</td><td></td><td>Windows</td><td></td><td>171</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2001.80</td><td></td><td></td><td></td><td>171</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Qpop pop3d</td><td>2.2</td><td></td><td></td><td></td><td>170</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.12p2</td><td></td><td></td><td></td><td>170</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>8.3.15-1</td><td></td><td>Windows</td><td></td><td>169</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>5.3h-1</td><td></td><td></td><td></td><td>168</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>BSD-based in.pop3d</td><td>1.006d</td><td></td><td></td><td></td><td>168</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.2.14</td><td></td><td></td><td></td><td>167</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2006c.94</td><td></td><td></td><td></td><td>166</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>6.8.4</td><td></td><td>Windows</td><td></td><td>166</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.12-Invoca-RPM-2.2.12-6.fc4</td><td></td><td></td><td></td><td>165</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2004.87mdk</td><td></td><td></td><td></td><td>164</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>MailSite pop3d</td><td>5.3.11.0</td><td></td><td></td><td></td><td>164</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.2.3</td><td></td><td></td><td></td><td>164</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2006k.101</td><td></td><td></td><td></td><td>163</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>CMailServer pop3d</td><td>5.4.1</td><td></td><td>Windows</td><td></td><td>163</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.5.1</td><td></td><td></td><td></td><td>162</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Eudora Internet Mail Server X pop3d</td><td>3.3.7</td><td></td><td>Mac OS X</td><td></td><td>162</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.16-Fedora-RPM-2.3.16-6.el6_1.4</td><td></td><td></td><td></td><td>160</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2007e.104rh</td><td></td><td></td><td></td><td>157</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Mail Server Pro pop3d</td><td>1.8.9.5</td><td></td><td>Windows</td><td></td><td>156</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.7226.0</td><td>French</td><td></td><td></td><td>155</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.3.15</td><td></td><td></td><td></td><td>154</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2007.101</td><td></td><td></td><td></td><td>153</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2000.70</td><td></td><td></td><td></td><td>151</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2001.78</td><td></td><td></td><td></td><td>150</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>8.3.8</td><td></td><td>Windows</td><td></td><td>150</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.12-Debian-2.2.12-4ubuntu1</td><td></td><td></td><td></td><td>150</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>RaidenMAILD pop3d</td><td>2104</td><td></td><td>Windows</td><td></td><td>149</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>7.1.2</td><td></td><td>Windows</td><td></td><td>149</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.2.19</td><td></td><td></td><td></td><td>149</td><td>0.003</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>9.5.4</td><td></td><td>Windows</td><td></td><td>148</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.1.16</td><td></td><td></td><td></td><td>148</td><td>0.002</td></tr>
+<tr><td>pop3-proxy</td><td>MailMarshal pop3d</td><td>6.9.9.0</td><td></td><td></td><td></td><td>147</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>9.6.0</td><td></td><td>Windows</td><td></td><td>147</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.6.1</td><td></td><td></td><td></td><td>147</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>MailSite pop3d</td><td>9.0.1.0</td><td></td><td></td><td></td><td>146</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Floosietek FTGate6 pop3d</td><td></td><td></td><td>Windows</td><td></td><td>146</td><td>0.002</td></tr>
+<tr><td>mongodb</td><td>MongoDB</td><td>5</td><td></td><td></td><td></td><td>146</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>7.1.0</td><td></td><td>Windows</td><td></td><td>143</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.1-Invoca-RPM-2.3.1-2.8.fc4</td><td></td><td></td><td></td><td>143</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>5.3b2-2</td><td></td><td></td><td></td><td>142</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.1.14</td><td></td><td></td><td></td><td>141</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.4.12</td><td></td><td></td><td></td><td>140</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>CMailServer pop3d</td><td>5.4.3</td><td></td><td>Windows</td><td></td><td>140</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.4.2</td><td></td><td></td><td></td><td>139</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.7651.51</td><td></td><td>Windows</td><td></td><td>138</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>2.2.13p1</td><td></td><td></td><td></td><td>138</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.2.12</td><td></td><td></td><td></td><td>138</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.1.11</td><td></td><td></td><td></td><td>137</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>WinWebMail pop3d</td><td>3.7.0.3</td><td></td><td>Windows</td><td></td><td>136</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>RaidenMAILD pop3d</td><td>1914</td><td></td><td>Windows</td><td></td><td>136</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>7.0.2FP2</td><td></td><td></td><td></td><td>136</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>10.0.3</td><td></td><td>Windows</td><td></td><td>135</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.12-Invoca-RPM-2.2.12-10.el4_8.4</td><td></td><td></td><td></td><td>135</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>RaidenMAILD pop3d</td><td>2000</td><td></td><td>Windows</td><td></td><td>134</td><td>0.002</td></tr>
+<tr><td>pop3-proxy</td><td>Trend Micro IMSS virus scanning POP3 proxy</td><td></td><td></td><td>Windows</td><td></td><td>134</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.7226.0</td><td>Spanish</td><td>Windows</td><td></td><td>134</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.7</td><td></td><td></td><td></td><td>134</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Code-Crafters Ability Mail Server pop3d</td><td>2.63</td><td></td><td>Windows</td><td></td><td>134</td><td>0.002</td></tr>
+<tr><td>tcpwrapped</td><td>BSD TCP Wrappers</td><td></td><td>qpopper</td><td></td><td></td><td>132</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>SCO pop3d</td><td>2.1.4-scoR5</td><td></td><td>SCO UNIX</td><td></td><td>132</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.6944.0</td><td>Spanish</td><td>Windows</td><td></td><td>132</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.3.5</td><td></td><td></td><td></td><td>132</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>ArGoSoft freeware pop3d</td><td>1.8.9.2</td><td></td><td></td><td></td><td>132</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.3.8</td><td></td><td></td><td></td><td>131</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>JAMES pop3d</td><td>2.2.0</td><td></td><td></td><td></td><td>130</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2003.83mdk</td><td></td><td></td><td></td><td>130</td><td>0.002</td></tr>
+<tr><td>smtp</td><td></td><td></td><td></td><td></td><td></td><td>128</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>VisNetic MailServer pop3d</td><td>9.3.2.0</td><td></td><td></td><td></td><td>128</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.5FP1</td><td></td><td></td><td></td><td>128</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.4.6</td><td></td><td></td><td></td><td>128</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13p1</td><td></td><td></td><td></td><td>128</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Code-Crafters Ability Mail Server pop3d</td><td>2.52</td><td></td><td>Windows</td><td></td><td>128</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>ModusMail pop3d</td><td>4.7.840.14</td><td></td><td>Windows</td><td></td><td>127</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2000 pop3d</td><td>6.0.6487.0</td><td></td><td>Windows</td><td></td><td>127</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.1.18-IPv6-Debian-2.1.18-1+sarge2</td><td>Debian</td><td>Linux</td><td></td><td>127</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Qpop pop3d</td><td>3.0.2-krb-IV</td><td></td><td></td><td></td><td>126</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2006e.96</td><td></td><td></td><td></td><td>126</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>InterMail pop3d</td><td></td><td></td><td></td><td></td><td>126</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.1.13</td><td></td><td></td><td></td><td>126</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.9</td><td></td><td></td><td></td><td>125</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.2.13</td><td></td><td></td><td></td><td>125</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>6.0.8</td><td></td><td>Windows</td><td></td><td>124</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>8.0.3</td><td></td><td>Windows</td><td></td><td>123</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2004.87</td><td></td><td></td><td></td><td>122</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>7.2.1</td><td></td><td>Windows</td><td></td><td>122</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.5.1FP2</td><td></td><td></td><td></td><td>121</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>ArGoSoft freeware pop3d</td><td>1.8.8.8</td><td></td><td></td><td></td><td>121</td><td>0.002</td></tr>
+<tr><td>http</td><td>Microsoft HTTPAPI httpd</td><td>2.0</td><td>SSDP/UPnP</td><td>Windows</td><td></td><td>121</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>SCO pop3d</td><td>2.1.4-R3</td><td></td><td>SCO UNIX</td><td></td><td>120</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>8.0.1</td><td></td><td>Windows</td><td></td><td>120</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2004.89rh</td><td></td><td></td><td></td><td>120</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.4.0</td><td></td><td></td><td></td><td>120</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2007.101</td><td></td><td></td><td></td><td>118</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.7226.0</td><td>Taiwanese</td><td>Windows</td><td></td><td>118</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>FreeBSD popd</td><td>2.2.2</td><td></td><td></td><td></td><td>118</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Qpop pop3d</td><td>3.0b18</td><td></td><td></td><td></td><td>117</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.6944.0</td><td>French</td><td></td><td></td><td>117</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>RaidenMAILD pop3d</td><td>1917.14</td><td></td><td>Windows</td><td></td><td>116</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.6.0 patch 1</td><td></td><td></td><td></td><td>115</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>9.4.1</td><td></td><td></td><td></td><td>114</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.7-Invoca-RPM-2.3.7-1.1</td><td></td><td></td><td></td><td>114</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2000 pop3d</td><td>6.0.6618.1</td><td></td><td>Windows</td><td></td><td>113</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>10.4.3</td><td></td><td></td><td></td><td>113</td><td>0.002</td></tr>
+<tr><td>pop3-proxy</td><td>MailMarshal pop3d</td><td>6.8.4.0</td><td></td><td></td><td></td><td>112</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>13.0.2</td><td></td><td>Windows</td><td></td><td>112</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>MailSite pop3d</td><td>4.5.6.0</td><td></td><td></td><td></td><td>112</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2007a.104</td><td></td><td></td><td></td><td>111</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.5.3FP2</td><td></td><td></td><td></td><td>111</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>WebEasyMail pop3d</td><td>3.5.2.1</td><td></td><td>Windows</td><td></td><td>110</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2004.89mdv</td><td></td><td></td><td></td><td>109</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.16-Fedora-RPM-2.3.16-6.el6_2.5</td><td></td><td></td><td></td><td>109</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>CMailServer pop3d</td><td>5.4.0</td><td></td><td>Windows</td><td></td><td>109</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.7226.0</td><td>Chinese</td><td>Windows</td><td></td><td>108</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>9.0.7</td><td></td><td>Windows</td><td></td><td>108</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2006j.98</td><td></td><td></td><td></td><td>108</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.15</td><td></td><td></td><td></td><td>108</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Qpop pop3d</td><td>2.51</td><td></td><td></td><td></td><td>107</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Novell GroupWise pop3d</td><td></td><td></td><td>Unix</td><td></td><td>107</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>8.5.0-8</td><td></td><td>Windows</td><td></td><td>107</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>9.0.6</td><td></td><td>Windows</td><td></td><td>107</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>10.3.2</td><td></td><td></td><td></td><td>107</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.12-Invoca-RPM-2.2.12-17.el4</td><td></td><td></td><td></td><td>107</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>XMail pop3d</td><td>1.20</td><td></td><td></td><td></td><td>106</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>WebSTAR pop3 server</td><td></td><td></td><td></td><td></td><td>106</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>WebEasyMail pop3d</td><td>3.6.2.1</td><td></td><td>Windows</td><td></td><td>106</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>2.0.16</td><td></td><td></td><td></td><td>106</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.4.2</td><td></td><td></td><td></td><td>105</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.1-Invoca-RPM-2.3.1-2.8.fc5</td><td></td><td></td><td></td><td>105</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Mail Server Pro pop3d</td><td>1.8.9.1</td><td></td><td>Windows</td><td></td><td>105</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>RaidenMAILD pop3d</td><td>1917.12</td><td></td><td>Windows</td><td></td><td>104</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>7.0.4</td><td></td><td></td><td></td><td>103</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Mail Server pop3d</td><td>1.0.7.7</td><td></td><td>Windows</td><td></td><td>103</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.2.11</td><td></td><td></td><td></td><td>102</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>GNU POP3 Server</td><td>0.9.8</td><td></td><td></td><td></td><td>101</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>ModusMail pop3d</td><td>5.0.916.25</td><td></td><td>Windows</td><td></td><td>100</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>7.0.1</td><td></td><td>Windows</td><td></td><td>100</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>ModusMail pop3d</td><td>2.1.255.0</td><td></td><td>Windows</td><td></td><td>99</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>4.3g2-2</td><td></td><td></td><td></td><td>97</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.6944.0</td><td>German</td><td>Windows</td><td></td><td>97</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>10.3.3</td><td></td><td></td><td></td><td>97</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.7-Invoca-RPM-2.3.7-12.ao</td><td></td><td></td><td></td><td>97</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Mail Server Pro pop3d</td><td>1.8.9.3</td><td></td><td>Windows</td><td></td><td>97</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>RaidenMAILD pop3d</td><td>1912</td><td></td><td>Windows</td><td></td><td>96</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange pop3d</td><td>5.5.2658.25</td><td></td><td>Windows</td><td></td><td>95</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2006f.96an</td><td></td><td></td><td></td><td>95</td><td>0.002</td></tr>
+<tr><td>tcpwrapped</td><td>BSD TCP Wrappers</td><td></td><td>popper</td><td></td><td></td><td>94</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>WinRoute Pro pop3</td><td>4.2.5</td><td></td><td></td><td></td><td>94</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.2.8</td><td></td><td></td><td></td><td>94</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.3.0</td><td></td><td></td><td></td><td>93</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>10.1.3</td><td></td><td></td><td></td><td>92</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13-Debian-2.2.13-19</td><td></td><td></td><td></td><td>92</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>2.2.13-Debian-2.2.13-19+squeeze3</td><td></td><td></td><td></td><td>92</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Code-Crafters Ability Mail Server pop3d</td><td>2012</td><td></td><td>Windows</td><td></td><td>92</td><td>0.002</td></tr>
+<tr><td>ssh</td><td></td><td></td><td>protocol 1.5</td><td></td><td></td><td>91</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>MailSite pop3d</td><td>8.0.4.0</td><td></td><td></td><td></td><td>91</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.4.6-Invoca-RPM-2.4.6-5</td><td></td><td></td><td></td><td>91</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>2.4.16</td><td></td><td></td><td></td><td>91</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.2.18</td><td></td><td></td><td></td><td>91</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>6.1c-1</td><td></td><td></td><td></td><td>90</td><td>0.002</td></tr>
+<tr><td>pop3</td><td>RaidenMAILD pop3d</td><td>1917.13</td><td></td><td>Windows</td><td></td><td>89</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>7.2.2</td><td></td><td>Windows</td><td></td><td>89</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>7.0.4FP2</td><td></td><td></td><td></td><td>89</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>10.3.0</td><td></td><td></td><td></td><td>89</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.3.10</td><td></td><td></td><td></td><td>89</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>4.0u4-4</td><td></td><td></td><td></td><td>88</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.11-GIGASYS-Groupware-2.3.11-10</td><td></td><td></td><td></td><td>88</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Pro</td><td>1.8.9.6</td><td></td><td>Windows</td><td></td><td>88</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>WinWebMail pop3d</td><td>3.7.0.7</td><td></td><td>Windows</td><td></td><td>87</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.12-Invoca-RPM-2.2.12-1.1.fc3</td><td></td><td></td><td></td><td>87</td><td>0.001</td></tr>
+<tr><td>vnc</td><td>VNC</td><td></td><td>protocol 3.8</td><td></td><td></td><td>86</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.0</td><td></td><td></td><td></td><td>86</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Eudora Internet Mail Server X pop3d</td><td>3.2.9</td><td></td><td>Mac OS X</td><td></td><td>86</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.1.9</td><td></td><td></td><td></td><td>86</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Mail Server Pro pop3d</td><td>1.8.8.8</td><td></td><td>Windows</td><td></td><td>86</td><td>0.001</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td>6.0</td><td></td><td>Windows</td><td></td><td>86</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>8.2.4</td><td></td><td>Windows</td><td></td><td>85</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>7.0.2FP3</td><td></td><td></td><td></td><td>85</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.4.12-Debian-2.4.12-2</td><td></td><td></td><td></td><td>85</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.3.4</td><td></td><td></td><td></td><td>85</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>RaidenMAILD pop3d</td><td>1910</td><td></td><td>Windows</td><td></td><td>84</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>9.5.3</td><td></td><td>Windows</td><td></td><td>84</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>4.39</td><td></td><td></td><td></td><td>84</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.16-Fedora-RPM-2.3.16-6.el6</td><td></td><td></td><td></td><td>84</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>SCO pop3d</td><td>3.3(34)</td><td></td><td>SCO UNIX</td><td></td><td>83</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>4.2.8</td><td></td><td></td><td></td><td>83</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>4.2d2-2</td><td></td><td></td><td></td><td>82</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>8.5.0-9</td><td></td><td>Windows</td><td></td><td>82</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MailSite pop3d</td><td>8.0.3.0</td><td></td><td></td><td></td><td>82</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.5.1FP1</td><td></td><td></td><td></td><td>82</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2006f.96</td><td></td><td></td><td></td><td>81</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13-Debian-2.2.13-19+squeeze1</td><td>Debian</td><td>Linux</td><td></td><td>81</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Mail Server pop3d</td><td>1.0.8.1</td><td></td><td>Windows</td><td></td><td>81</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.0.2FP6</td><td></td><td></td><td></td><td>80</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.2.10</td><td></td><td></td><td></td><td>80</td><td>0.001</td></tr>
+<tr><td>openvpn</td><td>OpenVPN</td><td></td><td></td><td></td><td></td><td>80</td><td>0.001</td></tr>
+<tr><td>mongodb</td><td>MongoDB</td><td>3</td><td></td><td></td><td></td><td>80</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>XMail pop3d</td><td>1.23</td><td></td><td></td><td></td><td>79</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>RaidenMAILD pop3d</td><td>2100</td><td></td><td>Windows</td><td></td><td>79</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>6.8.5</td><td>Chinese</td><td>Windows</td><td></td><td>79</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CMailServer pop3d</td><td>5.3.8</td><td></td><td>Windows</td><td></td><td>79</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Qpop pop3d</td><td>4.0.3</td><td></td><td></td><td></td><td>78</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>8.1.2</td><td></td><td>Windows</td><td></td><td>78</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.11-Fedora-RPM-2.3.11-1.fc9</td><td></td><td></td><td></td><td>78</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.1.3</td><td></td><td></td><td></td><td>77</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>7.4.2</td><td></td><td>Windows</td><td></td><td>75</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>2.2.13-Debian-2.2.13-14+lenny6</td><td></td><td></td><td></td><td>75</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.3.2</td><td></td><td></td><td></td><td>75</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>4.0o-1</td><td></td><td></td><td></td><td>74</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>IMail pop3d</td><td>8.22 1-1</td><td></td><td></td><td></td><td>74</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.3.9</td><td></td><td></td><td></td><td>74</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>RaidenMAILD pop3d</td><td>1911</td><td></td><td>Windows</td><td></td><td>73</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipopd</td><td>2003.83</td><td></td><td></td><td></td><td>73</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.11-GIGASYS-Groupware-2.3.11-0</td><td></td><td></td><td></td><td>73</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13-Debian-2.2.13-19ubuntu4</td><td></td><td></td><td></td><td>73</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13-Debian-2.2.13-14+b3</td><td>Debian</td><td>Linux</td><td></td><td>73</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.12-Gentoo</td><td></td><td></td><td></td><td>73</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>2.3.16-kolab-nocaps</td><td></td><td></td><td></td><td>73</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange pop3d</td><td>5.5.2658.34</td><td></td><td>Windows</td><td></td><td>72</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>6.0.7</td><td></td><td>Windows</td><td></td><td>72</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.3.11</td><td></td><td></td><td></td><td>72</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.6944.0</td><td>Korean</td><td>Windows</td><td></td><td>71</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MailSite pop3d</td><td>9.2.0.0</td><td></td><td></td><td></td><td>71</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.7-Invoca-RPM-2.3.7-12.el5</td><td></td><td></td><td></td><td>71</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>2.3.16</td><td></td><td></td><td></td><td>71</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2006h.96</td><td></td><td></td><td></td><td>70</td><td>0.001</td></tr>
+<tr><td>pop3-proxy</td><td>MailMarshal pop3d</td><td>6.8.3.0</td><td></td><td></td><td></td><td>70</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.4.13</td><td></td><td></td><td></td><td>70</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.4.12-Invoca-RPM-2.4.12-2</td><td></td><td></td><td></td><td>70</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Qpop pop3d</td><td>3.0.1</td><td></td><td></td><td></td><td>69</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Pro</td><td>1.8.9.5</td><td></td><td>Windows</td><td></td><td>69</td><td>0.001</td></tr>
+<tr><td>smtp</td><td>Microsoft ESMTP</td><td>6.0.3790.4675</td><td></td><td>Windows</td><td></td><td>68</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Sun Java System Messaging Server pop3d</td><td>6.2-3.04</td><td></td><td></td><td></td><td>67</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.4.8</td><td></td><td></td><td></td><td>67</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>2.3.14</td><td></td><td></td><td></td><td>67</td><td>0.001</td></tr>
+<tr><td>http</td><td>GoAhead-Webs httpd</td><td></td><td></td><td></td><td></td><td>67</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>QPop pop3d</td><td>3.0.2</td><td></td><td></td><td></td><td>66</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2000.69</td><td></td><td></td><td></td><td>66</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.0.13</td><td></td><td></td><td></td><td>66</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>4.3.12</td><td></td><td></td><td></td><td>66</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>RaidenMAILD pop3d</td><td>2113</td><td></td><td>Windows</td><td></td><td>65</td><td>0.001</td></tr>
+<tr><td>pop3-proxy</td><td>MailMarshal pop3d</td><td>6.7.2.0</td><td></td><td></td><td></td><td>65</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>4.2.7</td><td></td><td></td><td></td><td>65</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>7.1.6</td><td></td><td>Windows</td><td></td><td>64</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>7.2.3</td><td>Chinese</td><td>Windows</td><td></td><td>64</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>4.46</td><td></td><td></td><td></td><td>64</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.8</td><td></td><td></td><td></td><td>64</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13-Debian-2.2.13-19squeeze2build0.10.04.1</td><td></td><td></td><td></td><td>64</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.10-Invoca-RPM-2.2.10-1.RHEL4.1</td><td></td><td></td><td></td><td>64</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>1.5.19</td><td></td><td></td><td></td><td>64</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.7226.0</td><td>Korean</td><td>Windows</td><td></td><td>63</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>7.2.0</td><td></td><td>Windows</td><td></td><td>63</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>LSMTP pop3d</td><td>1.1b</td><td></td><td></td><td></td><td>63</td><td>0.001</td></tr>
+<tr><td>mongodb</td><td>MongoDB</td><td>4</td><td></td><td></td><td></td><td>63</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ModusMail pop3d</td><td>4.6.741.0</td><td></td><td>Windows</td><td></td><td>62</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>6.5.2</td><td></td><td>Windows</td><td></td><td>62</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>IMail pop3d</td><td>8.22 2-1</td><td></td><td></td><td></td><td>62</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.1.15</td><td></td><td></td><td></td><td>62</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.3.14</td><td></td><td></td><td></td><td>62</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.2.0</td><td></td><td></td><td></td><td>61</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.14-Fedora-RPM-2.3.14-1.fc10</td><td></td><td></td><td></td><td>61</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Code-Crafters Ability Mail Server pop3d</td><td>2.57</td><td></td><td>Windows</td><td></td><td>61</td><td>0.001</td></tr>
+<tr><td>tcpwrapped</td><td>BSD TCP Wrappers</td><td></td><td>ipop3d</td><td></td><td></td><td>60</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Post.Office pop3d</td><td>3.8.4 release 116</td><td>w/ZPOP 1.0</td><td></td><td></td><td>60</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>6.7.9</td><td></td><td>Windows</td><td></td><td>60</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2003.83oops</td><td></td><td></td><td></td><td>60</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>GNU POP3 Server</td><td>0.9.8hw</td><td></td><td></td><td></td><td>60</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.3.7</td><td></td><td></td><td></td><td>60</td><td>0.001</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.24</td><td></td><td></td><td></td><td>60</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>5.0e4-4</td><td></td><td></td><td></td><td>59</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2001.78oops</td><td></td><td></td><td></td><td>59</td><td>0.001</td></tr>
+<tr><td>pop3</td><td></td><td>12.5.6</td><td>unregistered</td><td>Windows</td><td></td><td>59</td><td>0.001</td></tr>
+<tr><td>vnc</td><td>RealVNC Enterprise</td><td></td><td>protocol 4.1</td><td></td><td></td><td>58</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Netscape Messaginging Server pop3d</td><td>3.6</td><td></td><td></td><td></td><td>58</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.5.0</td><td></td><td></td><td></td><td>58</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13-Debian-2.2.13-19+squeeze2</td><td>Debian</td><td>Linux</td><td></td><td>58</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Plus</td><td>1.8.9.2</td><td></td><td>Windows</td><td></td><td>58</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>5.3i-26</td><td></td><td></td><td></td><td>57</td><td>0.001</td></tr>
+<tr><td>pop3-proxy</td><td>Trend Micro IMSS virus scanning POP3 proxy</td><td>7.0</td><td></td><td>Windows</td><td></td><td>57</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Novell NetMail pop3d</td><td>7994</td><td></td><td>Unix</td><td></td><td>57</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.0.10</td><td></td><td></td><td></td><td>57</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2002.81cl</td><td></td><td></td><td></td><td>57</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.12-Invoca-RPM-2.2.12-6</td><td></td><td></td><td></td><td>57</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.10</td><td></td><td></td><td></td><td>57</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ModusMail pop3d</td><td>5.11.1156.15006</td><td></td><td>Windows</td><td></td><td>56</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Code-Crafters Ability Mail Server pop3d</td><td>2011</td><td></td><td>Windows</td><td></td><td>56</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Mail Server Pro pop3d</td><td>1.8.8.7</td><td></td><td>Windows</td><td></td><td>56</td><td>0.001</td></tr>
+<tr><td>telnet</td><td></td><td></td><td></td><td></td><td></td><td>55</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipopd</td><td>2001.80</td><td></td><td></td><td></td><td>55</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2001.76</td><td></td><td></td><td></td><td>55</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.0.7</td><td></td><td></td><td></td><td>54</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ModusMail pop3d</td><td>5.11.1157.15026</td><td></td><td>Windows</td><td></td><td>54</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>8.0.2</td><td>Chinese</td><td>Windows</td><td></td><td>54</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.7-Invoca-RPM-2.3.7-7.el5</td><td></td><td></td><td></td><td>54</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.4c1</td><td></td><td></td><td></td><td>54</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>vm-pop3d</td><td>1.1.7f-T7</td><td>derived from gnu-pop3d</td><td></td><td></td><td>53</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2006k.98</td><td></td><td></td><td></td><td>53</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.1.18-IPv6-Debian-2.1.18-1</td><td></td><td></td><td></td><td>53</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>4.2a3-3</td><td></td><td></td><td></td><td>52</td><td>0.001</td></tr>
+<tr><td>pop3-proxy</td><td>CCProxy pop3d</td><td>2010</td><td></td><td></td><td></td><td>52</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Mailtraq pop3d</td><td>2.16.5.3046</td><td></td><td>Windows</td><td></td><td>52</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>10.0.4</td><td></td><td></td><td></td><td>52</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.1.9</td><td></td><td></td><td></td><td>52</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>4.2</td><td></td><td></td><td></td><td>52</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>3.8k2-2</td><td></td><td></td><td></td><td>51</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>7.4.0</td><td></td><td>Windows</td><td></td><td>51</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2004.88</td><td></td><td></td><td></td><td>51</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2001.78mdk</td><td></td><td></td><td></td><td>51</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.1.8</td><td></td><td></td><td></td><td>51</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2007c.104</td><td></td><td></td><td></td><td>50</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2006f.96an</td><td></td><td></td><td></td><td>50</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>5.0e3-3</td><td></td><td></td><td></td><td>50</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>8.0.3</td><td>Chinese</td><td>Windows</td><td></td><td>50</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>7.2.5</td><td></td><td>Windows</td><td></td><td>50</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>7.0.4FP1</td><td></td><td></td><td></td><td>50</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>6.50</td><td></td><td></td><td></td><td>50</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Floosietek FTGate4 pop3d</td><td></td><td></td><td>Windows</td><td></td><td>50</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>RaidenMAILD pop3d</td><td>2102</td><td></td><td>Windows</td><td></td><td>49</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2000 pop3d</td><td>6.0.5762.3</td><td></td><td>Windows</td><td></td><td>49</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>9.0.0-5</td><td></td><td>Windows</td><td></td><td>49</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MailSite pop3d</td><td>9.5.4.5</td><td></td><td></td><td></td><td>49</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2007e.104.7fAN</td><td></td><td></td><td></td><td>49</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2006a.94</td><td></td><td></td><td></td><td>49</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.2.17</td><td></td><td></td><td></td><td>49</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.0.9-mysql-0.15</td><td></td><td></td><td></td><td>48</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.6944.0</td><td>Italian</td><td>Windows</td><td></td><td>48</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>13.0.0</td><td></td><td>Windows</td><td></td><td>48</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MailSite pop3d</td><td>9.3.1.0</td><td></td><td></td><td></td><td>48</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13-Debian-2.2.13-14+lenny5</td><td>Debian</td><td>Linux</td><td></td><td>48</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Ocean Mail Server pop3d</td><td>1.1.12.0</td><td></td><td>Windows</td><td></td><td>47</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.4.1 patch 1</td><td></td><td></td><td></td><td>47</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipopd</td><td>2001.78</td><td></td><td></td><td></td><td>47</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.4.10</td><td></td><td></td><td></td><td>47</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.1.10</td><td></td><td></td><td></td><td>47</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Mail Server pop3d</td><td>1.0.7.8</td><td></td><td>Windows</td><td></td><td>47</td><td>0.001</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.8</td><td>(Ubuntu) PHP/5.2.4-2ubuntu5.19 with Suhosin-Patch</td><td></td><td></td><td>47</td><td>0.001</td></tr>
+<tr><td>smtp</td><td>Postfix smtpd</td><td></td><td></td><td></td><td></td><td>46</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>WebEasyMail pop3d</td><td>3.5.3.1</td><td></td><td>Windows</td><td></td><td>46</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2007e.104PLD</td><td></td><td></td><td></td><td>46</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>7.6.1</td><td></td><td>Windows</td><td></td><td>46</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>8.1.6</td><td></td><td>Windows</td><td></td><td>46</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MailSite pop3d</td><td>6.1.20.0</td><td></td><td></td><td></td><td>46</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>10.2.0</td><td></td><td></td><td></td><td>46</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>2.2.13-Debian-2.2.13-19squeeze3build0.10.04.1</td><td></td><td></td><td></td><td>46</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.2.6</td><td></td><td></td><td></td><td>46</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.2.0</td><td></td><td></td><td></td><td>46</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>4.3.9</td><td></td><td></td><td></td><td>46</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>3.5.9</td><td></td><td></td><td></td><td>46</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td></td><td></td><td></td><td></td><td>46</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2000.69</td><td></td><td></td><td></td><td>45</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Stalker pop3d</td><td>1.8b9d14</td><td></td><td>Mac OS</td><td></td><td>45</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>13.0.1</td><td></td><td>Windows</td><td></td><td>45</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.4c2</td><td></td><td></td><td></td><td>45</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>3.8i3-3</td><td></td><td></td><td></td><td>44</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Quick 'n Easy pop3d</td><td></td><td></td><td>Windows</td><td></td><td>44</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>6.2.1</td><td></td><td>Windows</td><td></td><td>44</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Mail Server pop3d</td><td>1.0.7.5</td><td></td><td>Windows</td><td></td><td>44</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>RaidenMAILD pop3d</td><td>1913</td><td></td><td>Windows</td><td></td><td>43</td><td>0.001</td></tr>
+<tr><td>pop3-proxy</td><td>Proxy+ pop3d</td><td></td><td></td><td>Windows</td><td></td><td>43</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>7.0.0</td><td></td><td>Windows</td><td></td><td>43</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2002.81mdk</td><td></td><td></td><td></td><td>43</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.2.9</td><td></td><td></td><td></td><td>43</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.2.5</td><td></td><td></td><td></td><td>43</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Code-Crafters Ability Mail Server pop3d</td><td>2.61</td><td></td><td>Windows</td><td></td><td>43</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>4.2d4-4</td><td></td><td></td><td></td><td>42</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2004.89mdk</td><td></td><td></td><td></td><td>42</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.9-Gentoo</td><td></td><td></td><td></td><td>42</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.16-Fedora-RPM-2.3.18-1.fc14</td><td></td><td></td><td></td><td>42</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.2.15</td><td></td><td></td><td></td><td>42</td><td>0.001</td></tr>
+<tr><td>mongodb</td><td>MongoDB</td><td>6249.0</td><td></td><td></td><td></td><td>42</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Microsoft ftpd</td><td></td><td></td><td>Windows</td><td></td><td>42</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>VisNetic MailServer pop3d</td><td>8.5.0.8</td><td></td><td></td><td></td><td>41</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>3.6f5-5</td><td></td><td></td><td></td><td>41</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>8.5.0-5</td><td></td><td>Windows</td><td></td><td>41</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>6.1.0</td><td></td><td>Windows</td><td></td><td>41</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>9.0.5</td><td></td><td>Windows</td><td></td><td>41</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.8-Fedora-RPM-2.3.8-3.fc6</td><td></td><td></td><td></td><td>41</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ArGoSoft freeware pop3d</td><td>1.8.8.7</td><td></td><td></td><td></td><td>41</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>WinGate pop3d</td><td></td><td></td><td>Windows</td><td></td><td>40</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Teapop pop3d</td><td>0.3.3</td><td></td><td></td><td></td><td>40</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.0.12</td><td></td><td></td><td></td><td>40</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange pop3d</td><td>5.5.2654.50</td><td></td><td>Windows</td><td></td><td>40</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>6.7.2</td><td></td><td>Windows</td><td></td><td>40</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2006k.98</td><td></td><td></td><td></td><td>40</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3 Murder</td><td>2.3.16-Fedora-RPM-2.3.16-6.el6_2.5</td><td></td><td></td><td></td><td>40</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.4.14</td><td></td><td></td><td></td><td>40</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.0.8</td><td></td><td></td><td></td><td>40</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>WorkgroupMail pop3d</td><td>7.6.3</td><td></td><td>Windows</td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>VisNetic MailServer pop3d</td><td>9.1.4.1</td><td></td><td></td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>3.7b8-8</td><td></td><td></td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2003 pop3d</td><td>6.5.7623.0</td><td></td><td>Windows</td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.0.2FP1</td><td></td><td></td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.6.2 patch 2</td><td></td><td></td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.12</td><td></td><td></td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>4.0.6</td><td></td><td></td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Mail Server Pro pop3d</td><td>1.8.9.4</td><td></td><td>Windows</td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>mongodb</td><td>MongoDB</td><td>2</td><td></td><td></td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.1.2</td><td></td><td></td><td></td><td>38</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>DeskNow pop3d</td><td>1.0</td><td></td><td></td><td></td><td>38</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.1.7</td><td></td><td></td><td></td><td>38</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>4.2.6</td><td></td><td></td><td></td><td>38</td><td>0.001</td></tr>
+<tr><td>http</td><td>Apache</td><td></td><td></td><td></td><td></td><td>38</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>4.3</td><td>protocol 2.0</td><td></td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>WinWebMail pop3d</td><td>3.8.3.1</td><td></td><td>Windows</td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>WinWebMail pop3d</td><td>3.8.0.2</td><td></td><td>Windows</td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>4.3g4-4</td><td></td><td></td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Qpop pop3d</td><td>2.3-krb-IV</td><td></td><td></td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>pop3-proxy</td><td>MailMarshal pop3d</td><td>6.4.6.0</td><td></td><td></td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>6.8.5</td><td>Spanish</td><td>Windows</td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.1.4</td><td></td><td></td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2007a.104</td><td></td><td></td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2006c1.94mdv</td><td></td><td></td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Eudora Internet Mail Server X pop3d</td><td>3.2.10</td><td></td><td>Mac OS X</td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.1</td><td></td><td></td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>2.3.9-Gentoo</td><td></td><td></td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.1.4</td><td></td><td></td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>WebSTAR 4D pop3d</td><td>5.4.1</td><td></td><td>Mac OS X</td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>pop3-proxy</td><td>Trend Micro IMSS virus scanning POP3 proxy</td><td>5.1</td><td></td><td>Windows</td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>8.9.0-1</td><td></td><td>Windows</td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>8.5.0-6</td><td></td><td>Windows</td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>7.1.2</td><td>Chinese</td><td>Windows</td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Eudora Internet Mail Server pop3d</td><td>1.3.1</td><td></td><td></td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.10-Invoca-RPM-2.2.10-3.fc2</td><td></td><td></td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.1.4</td><td></td><td></td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>2.7.STABLE9</td><td></td><td></td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>WebEasyMail pop3d</td><td>3.5.2.3</td><td></td><td>Windows</td><td></td><td>35</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>6.0b-61</td><td></td><td></td><td></td><td>35</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Merak Mail Server pop3d</td><td>1.0</td><td></td><td>Windows</td><td></td><td>35</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>9.0.9</td><td></td><td>Windows</td><td></td><td>35</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Eudora Internet Mail Server pop3d</td><td>3.2.8</td><td></td><td></td><td></td><td>35</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.9-Fedora-RPM-2.3.9-7.fc8</td><td></td><td></td><td></td><td>35</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.16-Fedora-RPM-2.3.16-3.fc12</td><td></td><td></td><td></td><td>35</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>1.6.24</td><td></td><td></td><td></td><td>35</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.2.7</td><td></td><td></td><td></td><td>35</td><td>0.001</td></tr>
+<tr><td>arcserve</td><td>ARCserve Discovery</td><td></td><td></td><td></td><td></td><td>35</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>3.9c-1</td><td></td><td></td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>NetMail pop3d</td><td>3.11.1.6</td><td></td><td></td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ModusMail pop3d</td><td>3.2.315.0</td><td></td><td>Windows</td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>7.2.0</td><td>Chinese</td><td>Windows</td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>6.5.1</td><td></td><td>Windows</td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>7.0.2FP1</td><td></td><td></td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.2.2</td><td></td><td></td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>JAMES pop3d</td><td>2.3.0</td><td></td><td></td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2006c.94</td><td></td><td></td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>10.1.1</td><td></td><td></td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>2.3.7-Invoca-RPM-2.3.7-12.el5_7.2</td><td></td><td></td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>2.1.18-IPv6-Debian-2.1.18-5.1</td><td></td><td></td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Mail Server Pro pop3d</td><td>1.8.9.2</td><td></td><td>Windows</td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Mail Server pop3d</td><td>1.0.8.5</td><td></td><td>Windows</td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>tcpwrapped</td><td>BSD TCP Wrappers</td><td></td><td>teapop</td><td></td><td></td><td>33</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2000 pop3d</td><td>6.0.6556.4</td><td></td><td>Windows</td><td></td><td>33</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>7.1.1</td><td></td><td>Windows</td><td></td><td>33</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.14-Debian-2.3.14-2</td><td></td><td></td><td></td><td>33</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.14.1</td><td></td><td></td><td></td><td>33</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.1.17</td><td></td><td></td><td></td><td>33</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>2.2.13-Debian-2.2.13-14+lenny3</td><td></td><td></td><td></td><td>33</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cubic Circle Cucipop pop3d</td><td>1.22</td><td></td><td></td><td></td><td>33</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.0.11</td><td></td><td></td><td></td><td>33</td><td>0.001</td></tr>
+<tr><td>http</td><td>Boa HTTPd</td><td>0.94.14rc21</td><td></td><td></td><td></td><td>33</td><td>0.001</td></tr>
+<tr><td>smtp</td><td>Microsoft Exchange smtpd</td><td></td><td>disabled</td><td>Windows</td><td></td><td>32</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Post.Office pop3d</td><td>3.5.3J release 223-101-J</td><td>w/ZPOP 1.0</td><td></td><td></td><td>32</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>7.2.2</td><td>Chinese</td><td>Windows</td><td></td><td>32</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2010.104</td><td></td><td></td><td></td><td>32</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2006k.101</td><td></td><td></td><td></td><td>32</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.4.9-Debian-2.4.9-1</td><td></td><td></td><td></td><td>32</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Mail Server pop3d</td><td>1.0.8.2</td><td></td><td>Windows</td><td></td><td>32</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Teapop pop3d</td><td>0.3.5</td><td></td><td></td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Novell NetMail pop3d</td><td>5438</td><td></td><td>Unix</td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Novell NetMail pop3d</td><td>1.6</td><td></td><td>Unix</td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>12.5.8</td><td></td><td>Windows</td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>E-Post POP3 Server</td><td>4.30</td><td></td><td></td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3 Murder</td><td>2.3.16</td><td></td><td></td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>1.5.14</td><td></td><td></td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Code-Crafters Ability Mail Server pop3d</td><td>2.62</td><td></td><td>Windows</td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>pop3-proxy</td><td>MailMarshal pop3d</td><td>6.5.4.0</td><td></td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>6.8.7</td><td></td><td>Windows</td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.1.0</td><td></td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Eudora Worldmail pop3d</td><td>1.3.160</td><td></td><td>Windows</td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>2.3.3</td><td></td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>2.3.11-kolab-nocaps</td><td></td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>4.2.9</td><td></td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>pop3</td><td>Atrium Software's Mercur pop3d</td><td>4.03.12</td><td></td><td>Windows</td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>Dropbear sshd</td><td>0.52</td><td>protocol 2.0</td><td>Linux</td><td></td><td>29</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>vm-pop3d</td><td>1.1.7f</td><td>derived from gnu-pop3d</td><td></td><td></td><td>29</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>6.0a2-2</td><td></td><td></td><td></td><td>29</td><td>0.0</td></tr>
+<tr><td>pop3-proxy</td><td>CCProxy pop3d</td><td>6.64</td><td></td><td></td><td></td><td>29</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.0.3</td><td></td><td></td><td></td><td>29</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2001.77</td><td></td><td></td><td></td><td>29</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.10-Invoca-RPM-2.3.10-3</td><td></td><td></td><td></td><td>29</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.1.12</td><td></td><td></td><td></td><td>29</td><td>0.0</td></tr>
+<tr><td>nntp</td><td>INN nntpd</td><td></td><td>posting ok</td><td></td><td></td><td>29</td><td>0.0</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.25b</td><td></td><td></td><td></td><td>29</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.5p1 Debian 6+squeeze2</td><td>protocol 2.0</td><td>Linux</td><td></td><td>28</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>5.9.4</td><td></td><td>Windows</td><td></td><td>28</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>7.2.0</td><td>Spanish</td><td>Windows</td><td></td><td>28</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>6.8.0</td><td></td><td>Windows</td><td></td><td>28</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.1.1</td><td></td><td></td><td></td><td>28</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>ipopd</td><td>2001.78oops</td><td></td><td></td><td></td><td>28</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.15-Fedora-RPM-2.3.15-2.fc10</td><td></td><td></td><td></td><td>28</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13-Debian-2.2.13-9.1</td><td></td><td></td><td></td><td>28</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>2.1.18-IPv6-Debian-2.1.18-1+sarge2</td><td></td><td></td><td></td><td>28</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Pro</td><td>1.8.9.3</td><td></td><td>Windows</td><td></td><td>28</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Plus</td><td>1.8.8.8</td><td></td><td>Windows</td><td></td><td>28</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>XMail pop3d</td><td>1.17</td><td></td><td>Linux</td><td></td><td>27</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>6.0a3-3</td><td></td><td></td><td></td><td>27</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Sun Solstice Internet Mail Server pop3d</td><td>2.0</td><td></td><td>Unix</td><td></td><td>27</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.0.5fc2</td><td></td><td></td><td></td><td>27</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange pop3d</td><td>5.5.2653.23</td><td>Russian</td><td></td><td></td><td>27</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>7.6.0</td><td></td><td>Windows</td><td></td><td>27</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>9.0.4</td><td>Spanish</td><td>Windows</td><td></td><td>27</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>eXtremail pop3d</td><td>2.1 rel1</td><td></td><td></td><td></td><td>27</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Eudora Internet Mail Server pop3d</td><td>3.2.9</td><td></td><td></td><td></td><td>27</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3 Murder</td><td>2.1.18</td><td></td><td></td><td></td><td>27</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.4.11</td><td></td><td></td><td></td><td>27</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13-Debian-2.2.13-19squeeze1build0.10.04.1</td><td></td><td></td><td></td><td>27</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Code-Crafters Ability Mail Server pop3d</td><td>2.56</td><td></td><td>Windows</td><td></td><td>27</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Pro</td><td>1.8.9.1</td><td></td><td>Windows</td><td></td><td>27</td><td>0.0</td></tr>
+<tr><td>pop3</td><td></td><td>9.6.5</td><td>unregistered</td><td>Windows</td><td></td><td>27</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>5.1c2-2</td><td></td><td></td><td></td><td>26</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Sun Java System Messaging Server pop3d</td><td>6.3-0.15</td><td></td><td></td><td></td><td>26</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.1b18</td><td></td><td></td><td></td><td>26</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.5.3FP3</td><td></td><td></td><td></td><td>26</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2004.89mdv</td><td></td><td></td><td></td><td>26</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2004.87mdk</td><td></td><td></td><td></td><td>26</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13-Gentoo</td><td></td><td></td><td></td><td>26</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13-Debian-2.2.13-14.117.201112201012</td><td></td><td></td><td></td><td>26</td><td>0.0</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td>5.0</td><td></td><td>Windows</td><td></td><td>26</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>VisNetic MailServer pop3d</td><td>5.8.6.6</td><td></td><td></td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Sun Java System Messaging Server pop3d</td><td>6.2-8.04</td><td></td><td></td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.0.5-mysql-0.14</td><td></td><td></td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange 2000 pop3d</td><td>6.0.6389.0</td><td></td><td>Windows</td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>6.0.3</td><td></td><td>Windows</td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>MailSite pop3d</td><td>8.0.5.0</td><td></td><td></td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>MailSite pop3d</td><td>7.0.6.1</td><td></td><td></td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.6.0</td><td></td><td></td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.2.1</td><td></td><td></td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>7.60</td><td></td><td></td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>2.2.13-Debian-2.2.13-14ubuntu3</td><td></td><td></td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Code-Crafters Ability Mail Server pop3d</td><td>2.60</td><td></td><td>Windows</td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Pro</td><td>1.8.8.7</td><td></td><td>Windows</td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>ArGoSoft freeware pop3d</td><td>1.8.9.1</td><td></td><td></td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>mongodb</td><td>MongoDB</td><td>7638.1</td><td></td><td></td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>http</td><td>Mbedthis-Appweb</td><td>2.0.4</td><td></td><td></td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache Tomcat/Coyote JSP engine</td><td>1.1</td><td></td><td></td><td></td><td>25</td><td>0.0</td></tr>
+<tr><td>vnc</td><td>RealVNC Personal</td><td></td><td>protocol 4.0</td><td></td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>socks-proxy</td><td>Socks4A</td><td></td><td></td><td></td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2006d.96</td><td></td><td></td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>5.1c-1</td><td></td><td></td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>3.9g2-2</td><td></td><td></td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange pop3d</td><td>5.5.2650.23</td><td></td><td>Windows</td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>8.5.0-2</td><td></td><td>Windows</td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>5.0.5</td><td></td><td>Windows</td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>MailSite pop3d</td><td>5.3.6.0</td><td></td><td></td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>MailSite pop3d</td><td>5.3.4.0</td><td></td><td></td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>X1.0</td><td></td><td></td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Kerio Connect pop3d</td><td>7.3.2</td><td></td><td></td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>10.0.0</td><td></td><td></td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>E-Post POP3 Server</td><td>4.27</td><td></td><td></td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13-Debian-2.2.13-9</td><td></td><td></td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.12-Invoca-RPM-2.2.12-16.el4</td><td></td><td></td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.12-Invoca-RPM-2.2.12-1</td><td></td><td></td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.1.18-luukku-12037</td><td></td><td></td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.1.6</td><td></td><td></td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Classic Hamster pop3d</td><td>2.1.0.11</td><td></td><td>Windows</td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Mail Server pop3d</td><td>1.0.8.0</td><td></td><td>Windows</td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>imap</td><td>Dovecot imapd</td><td></td><td></td><td></td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.3p1 Debian 3ubuntu7</td><td>Ubuntu Linux; protocol 2.0</td><td>Linux</td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>WorkgroupMail pop3d</td><td>7.6.4</td><td></td><td>Windows</td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>VisNetic MailServer pop3d</td><td>5.5.8.3</td><td></td><td></td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Teapop pop3d</td><td>0.3.8.1</td><td></td><td></td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>3.9h-18</td><td></td><td></td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>3.8m-1</td><td></td><td></td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>3.8f3-3</td><td></td><td></td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>RaidenMAILD pop3d</td><td>1917.11</td><td></td><td>Windows</td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>RaidenMAILD pop3d</td><td>1909</td><td></td><td>Windows</td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>9.0.8</td><td></td><td>Windows</td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.5HF467</td><td></td><td></td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Lotus Domino POP3 server</td><td>8.0.2FP4</td><td></td><td></td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>5.7.9</td><td></td><td></td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Kerio Connect pop3d</td><td>7.4.0</td><td></td><td></td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2000.70mdk</td><td></td><td></td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>ipop3d</td><td>2000.69hw</td><td></td><td></td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>IMail pop3d</td><td>8.22 3-1</td><td></td><td></td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13-Debian-2.2.13-8~bpo1</td><td>Debian</td><td>Linux</td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.2.2</td><td></td><td></td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.2.1</td><td></td><td></td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>http</td><td>UserGate http report area</td><td></td><td></td><td>Windows</td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Serv-U ftpd</td><td>6.0</td><td></td><td>Windows</td><td></td><td>23</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.5p1 Debian 4ubuntu6</td><td>Ubuntu Linux; protocol 2.0</td><td>Linux</td><td></td><td>22</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>3.8f2-2</td><td></td><td></td><td></td><td>22</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.0.14b1</td><td></td><td></td><td></td><td>22</td><td>0.0</td></tr>
+<tr><td>pop3-proxy</td><td>FreePOPs pop3 proxy</td><td>0.2.9</td><td></td><td></td><td></td><td>22</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>PMDF pop3d</td><td>6.3.2</td><td></td><td>OpenVMS</td><td></td><td>22</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Microsoft Exchange pop3d</td><td>5.5.2657.74</td><td></td><td>Windows</td><td></td><td>22</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Mailtraq pop3d</td><td>2.16.2.2990</td><td></td><td>Windows</td><td></td><td>22</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Kerio MailServer POP3 Server</td><td>6.0.8</td><td></td><td></td><td></td><td>22</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>JAMES pop3d</td><td>2.2.0a15</td><td></td><td></td><td></td><td>22</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>9.1.5-7</td><td></td><td></td><td></td><td>22</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.1.5</td><td></td><td></td><td></td><td>22</td><td>0.0</td></tr>
+<tr><td>http</td><td>Netwave IP camera http config</td><td></td><td></td><td></td><td>webcam</td><td>22</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.5p1 Debian 6+squeeze1</td><td>protocol 2.0</td><td>Linux</td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>WinWebMail pop3d</td><td>3.8.1.6</td><td></td><td>Windows</td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Sun Java System Messaging Server pop3d</td><td>6.3-6.03</td><td></td><td></td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Qpop pop3d</td><td>2.4</td><td></td><td></td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Qpopper pop3d</td><td>4.0.2</td><td></td><td></td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3-proxy</td><td>MailMarshal pop3d</td><td>6.9.8.0</td><td></td><td></td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3-proxy</td><td>CCProxy pop3d</td><td>7.1</td><td></td><td></td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>PMDF pop3d</td><td>6.6.2</td><td></td><td>OpenVMS</td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>5.8.6</td><td></td><td>Windows</td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>5.5.7</td><td></td><td>Windows</td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>7.2.1</td><td>Chinese</td><td>Windows</td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>5.0.1</td><td></td><td>Windows</td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>12.5.7</td><td></td><td>Windows</td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>MailSite pop3d</td><td>6.1.16.3</td><td></td><td></td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Kerio Connect pop3d</td><td>7.1.0 patch 1</td><td></td><td></td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>iPlanet pop3d</td><td>5.2 Patch 2</td><td></td><td></td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.6</td><td></td><td></td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.12-Mandriva-RPM-2.2.12-15mdk</td><td></td><td></td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.1.5</td><td></td><td></td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>2.2.13-Debian-2.2.13-10+etch4</td><td></td><td></td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>CommuniGate Pro</td><td>5.3.1</td><td></td><td></td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>CMailServer pop3d</td><td>5.2.2</td><td></td><td>Windows</td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Mail Server pop3d</td><td>1.0.7.0</td><td></td><td>Windows</td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>ArGoSoft freeware pop3d</td><td>1.8.7.5</td><td></td><td></td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>WebSTAR 4D pop3d</td><td>5.4.0</td><td></td><td>Mac OS X</td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>VisNetic MailServer pop3d</td><td>7.2.4.1</td><td></td><td></td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>VisNetic MailServer pop3d</td><td>5.0.2.3</td><td></td><td></td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>UW Imap pop3d</td><td>2006i.2007-sau</td><td></td><td></td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>5.3i-31</td><td></td><td></td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>SurgeMail pop3d</td><td>3.0c2-2</td><td></td><td></td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>pop3-proxy</td><td>CCProxy pop3d</td><td>6.63</td><td></td><td></td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Post.Office pop3d</td><td>3.5.1 release 219</td><td>w/ZPOP 1.0</td><td></td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Merak Mail server pop3d</td><td>8.5.0-3</td><td></td><td>Windows</td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>7.2.3</td><td>Spanish</td><td>Windows</td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>6.8.4</td><td>Chinese</td><td>Windows</td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>MDaemon pop3d</td><td>5.0.4</td><td></td><td>Windows</td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>IceWarp pop3d</td><td>9.0.0-8</td><td></td><td></td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Eudora Internet Mail Server pop3d</td><td>3.2.10</td><td></td><td></td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3 Murder</td><td>2.3.16-CalMail-v2.4</td><td></td><td></td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.16-Fedora-RPM-2.3.16-2.fc11</td><td></td><td></td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.3.15-Fedora-RPM-2.3.15-1.fc7</td><td></td><td></td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus pop3d</td><td>2.2.13-Debian-2.2.13-14ubuntu3.1</td><td></td><td></td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>Cyrus POP3</td><td>2.2.13-Debian-2.2.13-13ubuntu3</td><td></td><td></td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>ArGoSoft Mail Server Pro pop3d</td><td>1.8.6.0</td><td></td><td>Windows</td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>mongodb</td><td>MongoDB</td><td>7</td><td></td><td></td><td></td><td>20</td><td>0.0</td></tr>
+<tr><td>ftp</td><td></td><td></td><td></td><td></td><td></td><td>20</td><td>0.0</td></tr>
+
+   </tbody>
+  </table>
+ </div>
+</div>

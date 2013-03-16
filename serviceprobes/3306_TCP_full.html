@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Internet Census 2012</title>
+ <script type="text/javascript" src="../js/jquery-latest.js"></script> 
+ <script type="text/javascript" src="../js/__jquery.tablesorter.min.js"></script> 
+ <link rel="stylesheet" type="text/css" href="../style.css">
+
+ <script>
+ $(document).ready(function() 
+  { 
+   generate(5);
+   $("#sortable").tablesorter(); 
+  } 
+ ); 
+
+ function generate(index) {
+    
+  var pages=[
+   ["1t","3t","7t","7u","9t","13u","17u","19t","21t","22t","23t","25t","26t","35t","37u","42t","42u","43t","44t","53t","53u","69u","70t","79t","80t","81t","82t","83t","84t","85t","88t","88u","98t","100t","106t","110t","111t","111u","113t","119t","123u","130t","135t","135u","137u","139t","143t","144t","161t","161u","177u","179t","199t"],
+   ["214t","254t","255t","256t","257t","264t","280t","311t","389t","390t","406t","407u","427t","443t","444t","445t","449t","464t","465t","497t","500u","505t","510t","512t","513t","514t","515t","517u","518u","523t","523u","524t","540t","543t","544t","548t","554t","587t","591t","593t","616t","620t","625t","626u","628t","631t","636t","641t","646t","660t","666t"],
+   ["706t","710t","711t","731t","771t","782t","783t","787t","808t","873t","888t","898t","900t","901t","902t","990t","993t","995t","1000t","1010t","1022t","1024t","1025t","1026t","1027t","1028t","1029t","1030t","1031t","1032t","1033t","1035t","1036t","1037t","1038t","1039t","1040t","1041t","1042t","1043t","1044t","1048t","1049t","1050t","1053t","1054t","1056t","1058t","1059t"],
+   ["1064t","1065t","1066t","1068t","1069t","1071t","1074t","1080t","1090t","1095t","1098t","1099t","1100t","1105t","1109t","1110t","1111t","1112t","1200t","1212t","1214t","1217t","1220t","1234t","1241t","1248t","1302t","1311t","1314t","1344t","1352t","1400t","1414t","1415t","1416t","1417t","1418t","1419t","1419u","1420t","1432t","1433t","1434u","1467t","1494t"],
+   ["1500t","1501t","1503t","1505t","1505u","1521t","1522t","1526t","1527t","1549t","1550t","1574t","1583t","1604u","1610t","1611t","1666t","1687t","1688t","1702t","1720t","1723t","1748t","1754t","1755t","1761t","1761u","1762t","1763t","1801t","1830t","1900t","1935t","1967u","1972t","1981t","1998t","2000t","2001t","2002t","2003t","2005t","2010t","2024t","2030t","2040t","2049t","2064t","2068t"],
+   ["2100t","2103t","2105t","2107t","2121t","2160t","2161t","2301t","2303u","2306t","2383t","2396t","2401t","2427t","2427u","2525t","2600t","2601t","2627t","2638u","2701t","2715t","2717t","2869t","2947t","2967t","2967u","3000t","3001t","3002t","3003t","3004t","3005t","3006t","3025t","3031t","3050t","3052t","3128t","3268t","3280t","3306t","3310t","3333t","3351t","3372t","3389t","3483u","3493t","3531t"],
+   ["3632t","3689t","3690t","3703t","3872t","3892t","3900t","3940t","3986t","4000t","4001t","4045t","4045u","4155t","4369t","4443t","4444t","4567t","4660t","4711t","4868t","4899t","4999t","5000t","5001t","5003t","5009t","5050t","5051t","5060t","5060u","5061t","5101t","5120t","5190t","5222t","5232t","5269t","5280t","5302t","5323t","5353u","5357t","5400t","5427t","5432t","5520t","5530t","5550t","5555t","5556t","5570t"],
+   ["5600t","5631t","5632u","5666t","5800t","5801t","5802t","5803t","5900t","5901t","6000t","6001t","6002t","6003t","6004t","6005t","6006t","6007t","6008t","6009t","6010t","6011t","6012t","6013t","6014t","6015t","6016t","6017t","6018t","6019t","6020t","6050t","6103t","6112t","6163t","6346t","6379t","6543t","6544t","6560t","6588t","6600t","6646t","6660t","6661t","6662t","6663t","6664t","6665t","6666t","6667t","6668t","6669t","6670t","6699t"],
+   ["6802t","6969t","7000t","7001u","7002t","7007t","7008t","7070t","7100t","7101t","7144t","7145t","7171t","7180t","7200t","7210t","7272t","7402t","7461t","7776t","7777t","7780t","7937t","7938t","8000t","8001t","8002t","8003t","8004t","8005t","8006t","8007t","8008t","8009t","8010t","8031t","8080t","8081t","8082t","8083t","8084t","8085t","8087t","8088t","8118t","8138t","8181t","8194t","8307t","8333t","8443t","8770t"],
+   ["8880t","8881t","8882t","8883t","8884t","8885t","8886t","8887t","8888t","9000t","9001t","9002t","9003t","9030t","9050t","9080t","9088t","9089t","9090t","9091t","9092t","9093t","9094t","9095t","9096t","9097t","9098t","9099t","9100t","9100u","9101t","9102t","9103t","9104t","9105t","9106t","9107t","9481t","9801t","9999t","10000t","10000u","10001t","10005t","10010t","10031t","10080u","11210t","11211t","11211u","11371t","11965t","12203u","12345t"],
+   ["13013t","13666t","13720t","13722t","13783t","14238t","14534t","15000t","15001t","15002t","17007t","17555u","17988t","18086t","18182t","18264t","19150t","19350t","20000t","22001t","22490t","26214t","26470t","27000t","27001t","27002t","27003t","27004t","27005t","27006t","27007t","27008t","27009t","27010t","27017t","27960u","30444t","31337t","31416t","32211t","32750t","32750u","32751t","32751u","32752t","32752u","32753t","32753u","32754t","32754u"],
+   ["32755t","32755u","32756t","32756u","32757t","32757u","32758t","32758u","32759t","32759u","32760t","32760u","32761t","32761u","32762t","32762u","32763t","32763u","32764t","32764u","32765t","32765u","32766t","32766u","32767t","32767u","32768t","32768u","32769t","32769u","32770t","32770u","32771t","32771u","32772t","32772u","32773t","32773u","32774t","32774u","32775t","32775u","32776t","32776u","32777t","32777u"],
+   ["32778t","32778u","32779t","32779u","32780t","32780u","32781t","32781u","32782t","32782u","32783t","32783u","32784t","32784u","32785t","32785u","32786t","32786u","32787t","32787u","32788t","32788u","32789t","32789u","32790t","32790u","32791t","32791u","32792t","32792u","32793t","32793u","32794t","32794u","32795t","32795u","32796t","32796u","32797t","32797u","32798t","32798u","32799t","32799u"],
+   ["32800t","32800u","32801t","32801u","32802t","32802u","32803t","32803u","32804t","32804u","32805t","32805u","32806t","32806u","32807t","32807u","32808t","32808u","32809t","32809u","32810t","32810u","33015t","34012t","37435t","38978t","38978u","40193t","41523t","49152t","49152u","49153u","49154u","49155u","49156u","49157t","49400t","50000t","50001t","50002t","50003t","50004t","50005t","50006t","50007t","50008t","50009t"],
+   ["50010t","50011t","50012t","50013t","50014t","50015t","50016t","50017t","50018t","50019t","50020t","50021t","50022t","50023t","50024t","50025t","50030t","55553t","55555t","56667t","60000t","60001t","60002t","60003t","60004t","60006t","60007t","60008t","60009t","60010t","60011t","60012t","60013t","60014t","60015t","60016t","60017t","60018t","60019t","60020t","60021t","60022t","60023t","60024t","60025t","Combinedt"]
+  ];
+  current = "3306t"
+
+  var html = ""
+  var col = 0;
+  for (var i = 0; i < pages[index].length; ++i){
+   if (col == 0){
+    html = html + "<tr>"
+   }
+   if(pages[index][i].indexOf("u") != -1){
+    port = pages[index][i].replace(/u/g, " UDP");
+    link = pages[index][i].replace(/u/g, "_UDP_product.html");
+   }else{
+    port = pages[index][i].replace(/t/g, "");
+    link = pages[index][i].replace(/t/g, "_TCP_product.html");
+   }
+   if(pages[index][i] == ("" + current)){
+    html = html + "<td style=\"background-color:#e9e9e9\"><a href=\""+link+"\">"+port+"</a></td>"
+   }else{
+    html = html + "<td><a href=\""+link+"\">"+port+"</a></td>"
+   }
+   
+   col = col +1;
+   if (col == 14){
+    col = 0;
+    html = html + "</tr>"
+   }
+  }
+  $("#submenu").html(html);
+  $(".clicks").css({'background-color': ''})
+  $("#click"+index).css({'background-color': '#e9e9e9'})
+ }
+ </script>
+ 
+</head>
+
+<body>
+<div id="main">
+
+ <table id = "nav">
+ <col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" />
+ <tr>
+ <td><a href="../paper.html">Paper</a></td>
+ <td><a href="../images.html">Images</a></td>
+ <td><a href="../download.html">Download</a></td>
+ <td><a href="../hilbert.html">Hilbert Browser</a></td>
+ <td class="highlight1"><a href="../serviceprobe_overview.html">Service Probe Overview</a></td>
+ <td><a href="../tld_overview.html">rDNS Overview</a></td>
+ </tr>
+ </table>
+
+ 
+ <table id="nav1">
+ <tr>
+  <td style="width:10%"><a href="../serviceprobe_overview.html"><span style="font-size: 14px;">Overview</span></a></td>
+  <td> 
+  <span style="font-size: 14px;">Port Details</span>
+   <table id = "nav">
+    <tr>
+     <td id="click0" class="clicks" onclick="generate(0)">< 200</td>
+     <td id="click1" class="clicks" onclick="generate(1)">< 700</td>
+     <td id="click2" class="clicks" onclick="generate(2)">< 1060 </td>
+     <td id="click3" class="clicks" onclick="generate(3)">< 1500 </td>
+     <td id="click4" class="clicks" onclick="generate(4)">< 2100 </td>
+     <td id="click5" class="clicks" onclick="generate(5)">< 3600 </td>
+     <td id="click6" class="clicks" onclick="generate(6)">< 5600 </td>
+     <td id="click7" class="clicks" onclick="generate(7)">< 6700 </td>
+     <td id="click8" class="clicks" onclick="generate(8)">< 8800 </td>
+     <td id="click9" class="clicks" onclick="generate(9)">< 13000</td>
+     <td id="click10" class="clicks" onclick="generate(10)">< 32755</td>
+     <td id="click11" class="clicks" onclick="generate(11)">< 32778</td>
+     <td id="click12" class="clicks" onclick="generate(12)">< 32800</td>
+     <td id="click13" class="clicks" onclick="generate(13)">< 50010</td>
+     <td id="click14" class="clicks" onclick="generate(14)">< 65536</td>
+    </tr>
+   </table>
+
+   <table  id = "submenu">
+    <tr><td>This menu requires javascript, sorry<td><tr>
+   </table>
+  </td>
+ </tr>
+ </table>
+ <table id = "nav">
+ <tr>
+  <td style ="width:12.5%" ><a href="3280_TCP_full.html">Prev Port</a></td>
+  <td style ="width:25% ;"><a href="3306_TCP_product.html">Products</a></td>
+  <td style ="width:25% ;"><a href="3306_TCP_version.html">Versions</a></td>
+  <td style ="width:25% ; background-color: #e4e4e4" ><a href="3306_TCP_full.html">Full</a></td>
+  <td style ="width:12.5%" ><a href="3310_TCP_full.html">Next Port</a></td>
+ <tr>
+ </table>
+ 
+ 
+ <div id="content">
+  Overview of services running on Port 3306 TCP.<br>
+  ~3.01 Million IP addresses observed from May to December 2012  <br>
+  To get raw lists of the data go to <a href="../download.html">Download</a>. For an explanation of what this data is and how it was obtained, see <a href="../paper.html">Paper</a>.<br><br>
+
+
+  <table id="sortable" class="tablesorter" style ="text-align:center;border:none"> 
+   
+   <thead>
+    <th>Servicename <img src="../icon_sort.png"></th>
+<th>Product <img src="../icon_sort.png"></th>
+<th>Version <img src="../icon_sort.png"></th><th>Info<img src="../icon_sort.png"></th><th>OS<img src="../icon_sort.png"></th><th>Devicetype<img src="../icon_sort.png"></th><th>Count <img src="../icon_sort.png"></th>
+<th>Percent <img src="../icon_sort.png"></th>
+ 
+   </thead>
+   <tbody>
+    <tr><td>mysql</td><td>MySQL</td><td></td><td>unauthorized</td><td></td><td></td><td>1154800</td><td>38.32</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.25-log</td><td></td><td></td><td></td><td>97650</td><td>3.24</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.27-log</td><td></td><td></td><td></td><td>82941</td><td>2.752</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.91-log</td><td></td><td></td><td></td><td>79261</td><td>2.63</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.95-community</td><td></td><td></td><td></td><td>73778</td><td>2.448</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.77</td><td></td><td></td><td></td><td>64194</td><td>2.13</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.95</td><td></td><td></td><td></td><td>61219</td><td>2.031</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.63-cll</td><td></td><td></td><td></td><td>52506</td><td>1.742</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.23-55</td><td></td><td></td><td></td><td>52458</td><td>1.741</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61</td><td></td><td></td><td></td><td>30767</td><td>1.021</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-24+lenny5</td><td></td><td></td><td></td><td>27178</td><td>0.902</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.49-3</td><td></td><td></td><td></td><td>26512</td><td>0.88</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.45</td><td></td><td></td><td></td><td>25322</td><td>0.84</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.95-community-log</td><td></td><td></td><td></td><td>22775</td><td>0.756</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.45-community-nt</td><td></td><td></td><td></td><td>20371</td><td>0.676</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.65-cll</td><td></td><td></td><td></td><td>19076</td><td>0.633</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-0+squeeze1</td><td></td><td></td><td></td><td>16936</td><td>0.562</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-24+lenny4</td><td></td><td></td><td></td><td>16289</td><td>0.541</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.48</td><td></td><td></td><td></td><td>14813</td><td>0.492</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.28-log</td><td></td><td></td><td></td><td>14720</td><td>0.488</td></tr>
+<tr><td>no match</td><td></td><td></td><td></td><td></td><td></td><td>14086</td><td>0.467</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.63-0+squeeze1</td><td></td><td></td><td></td><td>13593</td><td>0.451</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-log</td><td></td><td></td><td></td><td>13558</td><td>0.45</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.77-log</td><td></td><td></td><td></td><td>12936</td><td>0.429</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.22-log</td><td></td><td></td><td></td><td>12782</td><td>0.424</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.22-standard</td><td></td><td></td><td></td><td>12310</td><td>0.408</td></tr>
+<tr><td>http</td><td></td><td></td><td></td><td></td><td></td><td>12003</td><td>0.398</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.16</td><td></td><td></td><td></td><td>11525</td><td>0.382</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.63-0ubuntu0.10.04.1-log</td><td></td><td></td><td></td><td>10744</td><td>0.357</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.25</td><td></td><td></td><td></td><td>10496</td><td>0.348</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.62-cll</td><td></td><td></td><td></td><td>10161</td><td>0.337</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.50</td><td></td><td></td><td></td><td>10015</td><td>0.332</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.56-log</td><td></td><td></td><td></td><td>9670</td><td>0.321</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.63-0ubuntu0.10.04.1</td><td></td><td></td><td></td><td>9220</td><td>0.306</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.22</td><td></td><td></td><td></td><td>9030</td><td>0.3</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.52</td><td></td><td></td><td></td><td>8906</td><td>0.296</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-24+lenny5-log</td><td></td><td></td><td></td><td>8836</td><td>0.293</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.58</td><td></td><td></td><td></td><td>8457</td><td>0.281</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.20</td><td></td><td></td><td></td><td>8353</td><td>0.277</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.28</td><td></td><td></td><td></td><td>8326</td><td>0.276</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.41-3ubuntu12.10</td><td></td><td></td><td></td><td>8290</td><td>0.275</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.56-community</td><td></td><td></td><td></td><td>8217</td><td>0.273</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.52-log</td><td></td><td></td><td></td><td>8130</td><td>0.27</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.96-community</td><td></td><td></td><td></td><td>8119</td><td>0.269</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.66</td><td></td><td></td><td></td><td>7977</td><td>0.265</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.63</td><td></td><td></td><td></td><td>7752</td><td>0.257</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.63-nmm1-log</td><td></td><td></td><td></td><td>7594</td><td>0.252</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.14</td><td></td><td></td><td></td><td>7545</td><td>0.25</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.96-0ubuntu3</td><td></td><td></td><td></td><td>7145</td><td>0.237</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.95-log</td><td></td><td></td><td></td><td>7117</td><td>0.236</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.92</td><td></td><td></td><td></td><td>7092</td><td>0.235</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.36</td><td></td><td></td><td></td><td>7004</td><td>0.232</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.67-community-nt</td><td></td><td></td><td></td><td>6974</td><td>0.231</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.54</td><td></td><td></td><td></td><td>6866</td><td>0.228</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.56</td><td></td><td></td><td></td><td>6493</td><td>0.215</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.60</td><td></td><td></td><td></td><td>6458</td><td>0.214</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.58</td><td></td><td></td><td></td><td>6428</td><td>0.213</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.15</td><td></td><td></td><td></td><td>6161</td><td>0.204</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.20</td><td></td><td></td><td></td><td>6160</td><td>0.204</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.30-log</td><td></td><td></td><td></td><td>6104</td><td>0.203</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.49-3-log</td><td></td><td></td><td></td><td>5996</td><td>0.199</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.58-log</td><td></td><td></td><td></td><td>5993</td><td>0.199</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.58-1ubuntu1</td><td></td><td></td><td></td><td>5915</td><td>0.196</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a</td><td></td><td></td><td></td><td>5857</td><td>0.194</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td></td><td>Too many connections</td><td></td><td></td><td>5729</td><td>0.19</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.27</td><td></td><td></td><td></td><td>5691</td><td>0.189</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.25</td><td></td><td></td><td></td><td>5612</td><td>0.186</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.45-log</td><td></td><td></td><td></td><td>5177</td><td>0.172</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.53-log</td><td></td><td></td><td></td><td>5156</td><td>0.171</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.22</td><td></td><td></td><td></td><td>5152</td><td>0.171</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.90</td><td></td><td></td><td></td><td>5106</td><td>0.169</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-community-nt</td><td></td><td></td><td></td><td>5063</td><td>0.168</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.25-cll</td><td></td><td></td><td></td><td>4978</td><td>0.165</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.90-log</td><td></td><td></td><td></td><td>4868</td><td>0.162</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.92-community</td><td></td><td></td><td></td><td>4756</td><td>0.158</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.67</td><td></td><td></td><td></td><td>4739</td><td>0.157</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.27-community-nt</td><td></td><td></td><td></td><td>4700</td><td>0.156</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.24-cll</td><td></td><td></td><td></td><td>4613</td><td>0.153</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.54-log</td><td></td><td></td><td></td><td>4583</td><td>0.152</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.92-log</td><td></td><td></td><td></td><td>4496</td><td>0.149</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.63-0+squeeze1-log</td><td></td><td></td><td></td><td>4397</td><td>0.146</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.54</td><td></td><td></td><td></td><td>4389</td><td>0.146</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.17</td><td></td><td></td><td></td><td>4343</td><td>0.144</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.57-community</td><td></td><td></td><td></td><td>4333</td><td>0.144</td></tr>
+<tr><td>http</td><td>SonicWALL</td><td></td><td></td><td></td><td>firewall</td><td>4277</td><td>0.142</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.21</td><td></td><td></td><td></td><td>4214</td><td>0.14</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.39</td><td></td><td></td><td></td><td>4210</td><td>0.14</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.67-community</td><td></td><td></td><td></td><td>4200</td><td>0.139</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.57</td><td></td><td></td><td></td><td>4159</td><td>0.138</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.21</td><td></td><td></td><td></td><td>4121</td><td>0.137</td></tr>
+<tr><td>irc</td><td>Dancer ircd</td><td></td><td></td><td></td><td></td><td>4087</td><td>0.136</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.33-log</td><td></td><td></td><td></td><td>4018</td><td>0.133</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.62-log</td><td></td><td></td><td></td><td>3651</td><td>0.121</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.27</td><td></td><td></td><td></td><td>3644</td><td>0.121</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.91mm-log</td><td></td><td></td><td></td><td>3619</td><td>0.12</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.47</td><td></td><td></td><td></td><td>3555</td><td>0.118</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.24</td><td></td><td></td><td></td><td>3545</td><td>0.118</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.24-0ubuntu0.12.04.1</td><td></td><td></td><td></td><td>3530</td><td>0.117</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.63-rel13.4-log</td><td></td><td></td><td></td><td>3377</td><td>0.112</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.96-community-log</td><td></td><td></td><td></td><td>3345</td><td>0.111</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51b-community-nt</td><td></td><td></td><td></td><td>3335</td><td>0.111</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.57-log</td><td></td><td></td><td></td><td>3322</td><td>0.11</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.41</td><td></td><td></td><td></td><td>3246</td><td>0.108</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.92-community-log</td><td></td><td></td><td></td><td>3112</td><td>0.103</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.26</td><td></td><td></td><td></td><td>3089</td><td>0.103</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.49</td><td></td><td></td><td></td><td>3032</td><td>0.101</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.20-log</td><td></td><td></td><td></td><td>2983</td><td>0.099</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.8</td><td></td><td></td><td></td><td>2904</td><td>0.096</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.38-community</td><td></td><td></td><td></td><td>2886</td><td>0.096</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.67-log</td><td></td><td></td><td></td><td>2815</td><td>0.093</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.19</td><td></td><td></td><td></td><td>2799</td><td>0.093</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.23</td><td></td><td></td><td></td><td>2788</td><td>0.093</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.29-rc-community</td><td></td><td></td><td></td><td>2779</td><td>0.092</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.39-log</td><td></td><td></td><td></td><td>2734</td><td>0.091</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.24-log</td><td></td><td></td><td></td><td>2624</td><td>0.087</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-3ubuntu5.8</td><td></td><td></td><td></td><td>2593</td><td>0.086</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.32-Debian_7etch12-log</td><td></td><td></td><td></td><td>2584</td><td>0.086</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.52-cll</td><td></td><td></td><td></td><td>2574</td><td>0.085</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.63-log</td><td></td><td></td><td></td><td>2568</td><td>0.085</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.21-standard</td><td></td><td></td><td></td><td>2559</td><td>0.085</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.22-community-nt</td><td></td><td></td><td></td><td>2537</td><td>0.084</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.13</td><td></td><td></td><td></td><td>2533</td><td>0.084</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.27</td><td></td><td></td><td></td><td>2503</td><td>0.083</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.50-community</td><td></td><td></td><td></td><td>2500</td><td>0.083</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.48-log</td><td></td><td></td><td></td><td>2491</td><td>0.083</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.84-log</td><td></td><td></td><td></td><td>2387</td><td>0.079</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-log</td><td></td><td></td><td></td><td>2372</td><td>0.079</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.38-log</td><td></td><td></td><td></td><td>2369</td><td>0.079</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.41-community-nt</td><td></td><td></td><td></td><td>2364</td><td>0.078</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.9</td><td></td><td></td><td></td><td>2359</td><td>0.078</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-24+lenny4-log</td><td></td><td></td><td></td><td>2343</td><td>0.078</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.59</td><td></td><td></td><td></td><td>2303</td><td>0.076</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.38</td><td></td><td></td><td></td><td>2300</td><td>0.076</td></tr>
+<tr><td>chat</td><td>AIM or ICQ server</td><td></td><td></td><td></td><td></td><td>2295</td><td>0.076</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.30-community</td><td></td><td></td><td></td><td>2286</td><td>0.076</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.55</td><td></td><td></td><td></td><td>2280</td><td>0.076</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.22-community-nt</td><td></td><td></td><td></td><td>2271</td><td>0.075</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.62-0ubuntu0.10.04.1</td><td></td><td></td><td></td><td>2268</td><td>0.075</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.60-log</td><td></td><td></td><td></td><td>2265</td><td>0.075</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.45-community</td><td></td><td></td><td></td><td>2191</td><td>0.073</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.54-1ubuntu4</td><td></td><td></td><td></td><td>2140</td><td>0.071</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.91-community-cll</td><td></td><td></td><td></td><td>2128</td><td>0.071</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-community</td><td></td><td></td><td></td><td>2124</td><td>0.07</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.22</td><td></td><td></td><td></td><td>2117</td><td>0.07</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.1-alpha-max</td><td></td><td></td><td></td><td>2114</td><td>0.07</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.45-community</td><td></td><td></td><td></td><td>2099</td><td>0.07</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-0ubuntu0.10.04.1</td><td></td><td></td><td></td><td>2065</td><td>0.069</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.48-community</td><td></td><td></td><td></td><td>2055</td><td>0.068</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.41-community</td><td></td><td></td><td></td><td>2046</td><td>0.068</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.51-community</td><td></td><td></td><td></td><td>2037</td><td>0.068</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.22-standard-log</td><td></td><td></td><td></td><td>2020</td><td>0.067</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.49-log</td><td></td><td></td><td></td><td>2008</td><td>0.067</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.37-community-nt</td><td></td><td></td><td></td><td>2000</td><td>0.066</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.46-community</td><td></td><td></td><td></td><td>1997</td><td>0.066</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.53-community</td><td></td><td></td><td></td><td>1983</td><td>0.066</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.18-nt</td><td></td><td></td><td></td><td>1934</td><td>0.064</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.15-log</td><td></td><td></td><td></td><td>1930</td><td>0.064</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.37</td><td></td><td></td><td></td><td>1927</td><td>0.064</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.91-community</td><td></td><td></td><td></td><td>1919</td><td>0.064</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.51</td><td></td><td></td><td></td><td>1875</td><td>0.062</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.39-community</td><td></td><td></td><td></td><td>1824</td><td>0.061</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-0+squeeze1-log</td><td></td><td></td><td></td><td>1822</td><td>0.06</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.91</td><td></td><td></td><td></td><td>1780</td><td>0.059</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.45-community-nt-log</td><td></td><td></td><td></td><td>1770</td><td>0.059</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.81-community-nt</td><td></td><td></td><td></td><td>1734</td><td>0.058</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.49-community</td><td></td><td></td><td></td><td>1725</td><td>0.057</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.75-0ubuntu10.5</td><td></td><td></td><td></td><td>1716</td><td>0.057</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-community</td><td></td><td></td><td></td><td>1710</td><td>0.057</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.25</td><td></td><td></td><td></td><td>1697</td><td>0.056</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.11</td><td></td><td></td><td></td><td>1666</td><td>0.055</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.24-55</td><td></td><td></td><td></td><td>1665</td><td>0.055</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.36-log</td><td></td><td></td><td></td><td>1661</td><td>0.055</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.26</td><td></td><td></td><td></td><td>1642</td><td>0.054</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51</td><td></td><td></td><td></td><td>1641</td><td>0.054</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.66-0+squeeze1</td><td></td><td></td><td></td><td>1636</td><td>0.054</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.32-community</td><td></td><td></td><td></td><td>1635</td><td>0.054</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-3ubuntu5.4</td><td></td><td></td><td></td><td>1625</td><td>0.054</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.41-log</td><td></td><td></td><td></td><td>1617</td><td>0.054</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.28-cll</td><td></td><td></td><td></td><td>1607</td><td>0.053</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.16-log</td><td></td><td></td><td></td><td>1594</td><td>0.053</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.55-community</td><td></td><td></td><td></td><td>1588</td><td>0.053</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.8-log</td><td></td><td></td><td></td><td>1569</td><td>0.052</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.27-cll</td><td></td><td></td><td></td><td>1553</td><td>0.052</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.20-community-nt</td><td></td><td></td><td></td><td>1552</td><td>0.052</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.33-community</td><td></td><td></td><td></td><td>1530</td><td>0.051</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.49-log</td><td></td><td></td><td></td><td>1517</td><td>0.05</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.52-community</td><td></td><td></td><td></td><td>1516</td><td>0.05</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.34a</td><td></td><td></td><td></td><td>1515</td><td>0.05</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.12</td><td></td><td></td><td></td><td>1484</td><td>0.049</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.18-nt</td><td></td><td></td><td></td><td>1475</td><td>0.049</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.53</td><td></td><td></td><td></td><td>1467</td><td>0.049</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.25-log</td><td></td><td></td><td></td><td>1463</td><td>0.049</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.54-community</td><td></td><td></td><td></td><td>1452</td><td>0.048</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.40-community</td><td></td><td></td><td></td><td>1436</td><td>0.048</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51b-community-nt-log</td><td></td><td></td><td></td><td>1423</td><td>0.047</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.21-cll</td><td></td><td></td><td></td><td>1419</td><td>0.047</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.49-3~bpo50+1-log</td><td></td><td></td><td></td><td>1414</td><td>0.047</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.49-1ubuntu8.1</td><td></td><td></td><td></td><td>1414</td><td>0.047</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.49-3~bpo50+1</td><td></td><td></td><td></td><td>1397</td><td>0.046</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.34-community</td><td></td><td></td><td></td><td>1383</td><td>0.046</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.58-community</td><td></td><td></td><td></td><td>1379</td><td>0.046</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.90-community</td><td></td><td></td><td></td><td>1379</td><td>0.046</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.55-log</td><td></td><td></td><td></td><td>1366</td><td>0.045</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.25a</td><td></td><td></td><td></td><td>1350</td><td>0.045</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.20-beta-community-nt-debug</td><td></td><td></td><td></td><td>1331</td><td>0.044</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.84</td><td></td><td></td><td></td><td>1318</td><td>0.044</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.91-community-log</td><td></td><td></td><td></td><td>1311</td><td>0.044</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-24+lenny2</td><td></td><td></td><td></td><td>1297</td><td>0.043</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.54</td><td></td><td></td><td></td><td>1297</td><td>0.043</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.41-3ubuntu12.10-log</td><td></td><td></td><td></td><td>1285</td><td>0.043</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.63-0ubuntu0.11.10.1</td><td></td><td></td><td></td><td>1280</td><td>0.042</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.37-log</td><td></td><td></td><td></td><td>1273</td><td>0.042</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.20-standard</td><td></td><td></td><td></td><td>1270</td><td>0.042</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.60-community</td><td></td><td></td><td></td><td>1268</td><td>0.042</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.62</td><td></td><td></td><td></td><td>1256</td><td>0.042</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.37-standard</td><td></td><td></td><td></td><td>1256</td><td>0.042</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td></td><td></td><td></td><td></td><td>1248</td><td>0.041</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.42-community</td><td></td><td></td><td></td><td>1229</td><td>0.041</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.59-log</td><td></td><td></td><td></td><td>1225</td><td>0.041</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.18</td><td></td><td></td><td></td><td>1217</td><td>0.04</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.22-log</td><td></td><td></td><td></td><td>1210</td><td>0.04</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.12</td><td></td><td></td><td></td><td>1205</td><td>0.04</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.37-1ubuntu5.5</td><td></td><td></td><td></td><td>1191</td><td>0.04</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.44-log</td><td></td><td></td><td></td><td>1191</td><td>0.04</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.23-nt</td><td></td><td></td><td></td><td>1191</td><td>0.04</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.63-community</td><td></td><td></td><td></td><td>1187</td><td>0.039</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.27-standard</td><td></td><td></td><td></td><td>1186</td><td>0.039</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.86-log</td><td></td><td></td><td></td><td>1182</td><td>0.039</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.45-Debian_1ubuntu3.4</td><td></td><td></td><td></td><td>1178</td><td>0.039</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.47-community</td><td></td><td></td><td></td><td>1161</td><td>0.039</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-rel13.2-log</td><td></td><td></td><td></td><td>1151</td><td>0.038</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-24+lenny3</td><td></td><td></td><td></td><td>1148</td><td>0.038</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.20-cll</td><td></td><td></td><td></td><td>1144</td><td>0.038</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.84-percona-highperf-b18-log</td><td></td><td></td><td></td><td>1137</td><td>0.038</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.51-log</td><td></td><td></td><td></td><td>1136</td><td>0.038</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.45</td><td></td><td></td><td></td><td>1133</td><td>0.038</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.27-standard</td><td></td><td></td><td></td><td>1122</td><td>0.037</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.7</td><td></td><td></td><td></td><td>1119</td><td>0.037</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.34</td><td></td><td></td><td></td><td>1109</td><td>0.037</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.88-log</td><td></td><td></td><td></td><td>1107</td><td>0.037</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.27-log</td><td></td><td></td><td></td><td>1106</td><td>0.037</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.44-community</td><td></td><td></td><td></td><td>1098</td><td>0.036</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.23-log</td><td></td><td></td><td></td><td>1096</td><td>0.036</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.18</td><td></td><td></td><td></td><td>1089</td><td>0.036</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.18</td><td></td><td></td><td></td><td>1089</td><td>0.036</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.19-log</td><td></td><td></td><td></td><td>1063</td><td>0.035</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.68</td><td></td><td></td><td></td><td>1059</td><td>0.035</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.28-29.2-log</td><td></td><td></td><td></td><td>1058</td><td>0.035</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.10</td><td></td><td></td><td></td><td>1043</td><td>0.035</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.44-log</td><td></td><td></td><td></td><td>1040</td><td>0.035</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.21-log</td><td></td><td></td><td></td><td>1037</td><td>0.034</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.53</td><td></td><td></td><td></td><td>1026</td><td>0.034</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.24-55-log</td><td></td><td></td><td></td><td>1025</td><td>0.034</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.20-log</td><td></td><td></td><td></td><td>1016</td><td>0.034</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.14-log</td><td></td><td></td><td></td><td>1012</td><td>0.034</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.10a</td><td></td><td></td><td></td><td>1012</td><td>0.034</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.91-community-nt</td><td></td><td></td><td></td><td>1011</td><td>0.034</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.46-log</td><td></td><td></td><td></td><td>1007</td><td>0.033</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.54-0.dotdeb.0</td><td></td><td></td><td></td><td>1002</td><td>0.033</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.17-log</td><td></td><td></td><td></td><td>998</td><td>0.033</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.24</td><td></td><td></td><td></td><td>997</td><td>0.033</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.14-standard-log</td><td></td><td></td><td></td><td>994</td><td>0.033</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.96-0ubuntu3-log</td><td></td><td></td><td></td><td>993</td><td>0.033</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.24a-community-nt</td><td></td><td></td><td></td><td>991</td><td>0.033</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>3.2.0.13</td><td></td><td></td><td></td><td>987</td><td>0.033</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.37</td><td></td><td></td><td></td><td>983</td><td>0.033</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.30</td><td></td><td></td><td></td><td>982</td><td>0.033</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.24-percona-sure1-log</td><td></td><td></td><td></td><td>965</td><td>0.032</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.58-log</td><td></td><td></td><td></td><td>960</td><td>0.032</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.66-0ubuntu0.10.04.1-log</td><td></td><td></td><td></td><td>955</td><td>0.032</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-3ubuntu5.7</td><td></td><td></td><td></td><td>947</td><td>0.031</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-0ubuntu0.10.10.1</td><td></td><td></td><td></td><td>944</td><td>0.031</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.22-0ubuntu1</td><td></td><td></td><td></td><td>942</td><td>0.031</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.59-community</td><td></td><td></td><td></td><td>941</td><td>0.031</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.43-community</td><td></td><td></td><td></td><td>936</td><td>0.031</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-24+lenny3-log</td><td></td><td></td><td></td><td>932</td><td>0.031</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.27-log</td><td></td><td></td><td></td><td>932</td><td>0.031</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.66-0ubuntu0.10.04.1</td><td></td><td></td><td></td><td>930</td><td>0.031</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.31-community</td><td></td><td></td><td></td><td>917</td><td>0.03</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.26-nt</td><td></td><td></td><td></td><td>914</td><td>0.03</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.18-nt</td><td></td><td></td><td></td><td>913</td><td>0.03</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.22-log</td><td></td><td></td><td></td><td>906</td><td>0.03</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.32-Debian_7etch8-log</td><td></td><td></td><td></td><td>906</td><td>0.03</td></tr>
+<tr><td>ssl</td><td>SSLv3</td><td></td><td></td><td></td><td></td><td>901</td><td>0.03</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.58-nt</td><td></td><td></td><td></td><td>901</td><td>0.03</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.83-community-nt</td><td></td><td></td><td></td><td>891</td><td>0.03</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.63-0ubuntu0.11.04.1</td><td></td><td></td><td></td><td>879</td><td>0.029</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.57-5.1.57+tld2-log</td><td></td><td></td><td></td><td>879</td><td>0.029</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.28-0ubuntu0.12.04.2</td><td></td><td></td><td></td><td>874</td><td>0.029</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.32-Debian_7etch6-log</td><td></td><td></td><td></td><td>874</td><td>0.029</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.18-log</td><td></td><td></td><td></td><td>874</td><td>0.029</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.47-log</td><td></td><td></td><td></td><td>873</td><td>0.029</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.17-cll</td><td></td><td></td><td></td><td>872</td><td>0.029</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.36-community-log</td><td></td><td></td><td></td><td>872</td><td>0.029</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.19-nt</td><td></td><td></td><td></td><td>857</td><td>0.028</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.88</td><td></td><td></td><td></td><td>856</td><td>0.028</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.42-log</td><td></td><td></td><td></td><td>855</td><td>0.028</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.18-cll</td><td></td><td></td><td></td><td>849</td><td>0.028</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.42</td><td></td><td></td><td></td><td>842</td><td>0.028</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.28-29.1-log</td><td></td><td></td><td></td><td>837</td><td>0.028</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.50-log</td><td></td><td></td><td></td><td>835</td><td>0.028</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.22-cll</td><td></td><td></td><td></td><td>830</td><td>0.028</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.62-community</td><td></td><td></td><td></td><td>828</td><td>0.027</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.3-m3-log</td><td></td><td></td><td></td><td>821</td><td>0.027</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.82sp1</td><td></td><td></td><td></td><td>821</td><td>0.027</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.25-1~dotdeb.0</td><td></td><td></td><td></td><td>819</td><td>0.027</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.45-log</td><td></td><td></td><td></td><td>815</td><td>0.027</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.89</td><td></td><td></td><td></td><td>815</td><td>0.027</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.75</td><td></td><td></td><td></td><td>809</td><td>0.027</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.12-log</td><td></td><td></td><td></td><td>798</td><td>0.026</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.28-rc-community</td><td></td><td></td><td></td><td>792</td><td>0.026</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.44</td><td></td><td></td><td></td><td>782</td><td>0.026</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.32</td><td></td><td></td><td></td><td>780</td><td>0.026</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.28-0ubuntu0.12.04.3</td><td></td><td></td><td></td><td>779</td><td>0.026</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.27-community-nt-log</td><td></td><td></td><td></td><td>775</td><td>0.026</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.13</td><td></td><td></td><td></td><td>774</td><td>0.026</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.83</td><td></td><td></td><td></td><td>772</td><td>0.026</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.23-cll</td><td></td><td></td><td></td><td>771</td><td>0.026</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.25-log</td><td></td><td></td><td></td><td>771</td><td>0.026</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.67-community-log</td><td></td><td></td><td></td><td>769</td><td>0.026</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.32-Debian_7etch5</td><td></td><td></td><td></td><td>768</td><td>0.025</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.9-log</td><td></td><td></td><td></td><td>764</td><td>0.025</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-3ubuntu5.5</td><td></td><td></td><td></td><td>752</td><td>0.025</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.15</td><td></td><td></td><td></td><td>752</td><td>0.025</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.20a-nt</td><td></td><td></td><td></td><td>746</td><td>0.025</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.14</td><td></td><td></td><td></td><td>744</td><td>0.025</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.25a-27.1-log</td><td></td><td></td><td></td><td>741</td><td>0.025</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.38-log</td><td></td><td></td><td></td><td>733</td><td>0.024</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.96-community-nt</td><td></td><td></td><td></td><td>730</td><td>0.024</td></tr>
+<tr><td>http</td><td>AIM</td><td>1.0</td><td></td><td></td><td></td><td>723</td><td>0.024</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.23-rc</td><td></td><td></td><td></td><td>717</td><td>0.024</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.51-max-nt</td><td></td><td></td><td></td><td>717</td><td>0.024</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.46</td><td></td><td></td><td></td><td>710</td><td>0.024</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.11</td><td></td><td></td><td></td><td>710</td><td>0.024</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.32-log</td><td></td><td></td><td></td><td>708</td><td>0.023</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.41</td><td></td><td></td><td></td><td>700</td><td>0.023</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.90-community-nt</td><td></td><td></td><td></td><td>697</td><td>0.023</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.41-3ubuntu12.9</td><td></td><td></td><td></td><td>696</td><td>0.023</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.4-m3</td><td></td><td></td><td></td><td>695</td><td>0.023</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.30-community-log</td><td></td><td></td><td></td><td>694</td><td>0.023</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.21-community-nt</td><td></td><td></td><td></td><td>693</td><td>0.023</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51-log</td><td></td><td></td><td></td><td>692</td><td>0.023</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td></td><td>Spanish; unauthorized</td><td></td><td></td><td>691</td><td>0.023</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.95-rs</td><td></td><td></td><td></td><td>688</td><td>0.023</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.24_Debian-10sarge2-log</td><td></td><td></td><td></td><td>687</td><td>0.023</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.66-0ubuntu0.10.04.3</td><td></td><td></td><td></td><td>680</td><td>0.023</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.37-community</td><td></td><td></td><td></td><td>674</td><td>0.022</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.42-community-log</td><td></td><td></td><td></td><td>673</td><td>0.022</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.13-log</td><td></td><td></td><td></td><td>669</td><td>0.022</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.66-cll</td><td></td><td></td><td></td><td>665</td><td>0.022</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.25a-log</td><td></td><td></td><td></td><td>660</td><td>0.022</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.96-0ubuntu1</td><td></td><td></td><td></td><td>658</td><td>0.022</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-cll</td><td></td><td></td><td></td><td>642</td><td>0.021</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.86</td><td></td><td></td><td></td><td>642</td><td>0.021</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.67-community-nt-log</td><td></td><td></td><td></td><td>640</td><td>0.021</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.22.26a</td><td></td><td></td><td></td><td>638</td><td>0.021</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.37-log</td><td></td><td></td><td></td><td>634</td><td>0.021</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.22-nmm-1-log</td><td></td><td></td><td></td><td>628</td><td>0.021</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.70</td><td></td><td></td><td></td><td>617</td><td>0.02</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.34-log</td><td></td><td></td><td></td><td>614</td><td>0.02</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.30-log</td><td></td><td></td><td></td><td>609</td><td>0.02</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.16</td><td></td><td></td><td></td><td>609</td><td>0.02</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.59-nightly-20050301</td><td></td><td></td><td></td><td>605</td><td>0.02</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.18</td><td></td><td></td><td></td><td>600</td><td>0.02</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.22-rc-community</td><td></td><td></td><td></td><td>599</td><td>0.02</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.27-standard-log</td><td></td><td></td><td></td><td>598</td><td>0.02</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.32-Debian_7etch11-log</td><td></td><td></td><td></td><td>597</td><td>0.02</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.33</td><td></td><td></td><td></td><td>596</td><td>0.02</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-community-log</td><td></td><td></td><td></td><td>589</td><td>0.02</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.77-community-nt</td><td></td><td></td><td></td><td>588</td><td>0.02</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.56</td><td></td><td></td><td></td><td>584</td><td>0.019</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.24-0ubuntu0.12.04.1-log</td><td></td><td></td><td></td><td>583</td><td>0.019</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.15-nt</td><td></td><td></td><td></td><td>576</td><td>0.019</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.20</td><td></td><td></td><td></td><td>574</td><td>0.019</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.21-community-nt</td><td></td><td></td><td></td><td>570</td><td>0.019</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.11-log</td><td></td><td></td><td></td><td>569</td><td>0.019</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.50-community-log</td><td></td><td></td><td></td><td>564</td><td>0.019</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.35-community</td><td></td><td></td><td></td><td>563</td><td>0.019</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.32-Debian_7etch5-log</td><td></td><td></td><td></td><td>562</td><td>0.019</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.66-log</td><td></td><td></td><td></td><td>561</td><td>0.019</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td></td><td>unauthorized; French</td><td></td><td></td><td>553</td><td>0.018</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.36-community</td><td></td><td></td><td></td><td>553</td><td>0.018</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-24+lenny1</td><td></td><td></td><td></td><td>553</td><td>0.018</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.65-rel14.0-log</td><td></td><td></td><td></td><td>552</td><td>0.018</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.40</td><td></td><td></td><td></td><td>538</td><td>0.018</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-24+lenny2+spu1</td><td></td><td></td><td></td><td>537</td><td>0.018</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>6.0.11-alpha-log</td><td></td><td></td><td></td><td>535</td><td>0.018</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.49</td><td></td><td></td><td></td><td>534</td><td>0.018</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.12-nt</td><td></td><td></td><td></td><td>531</td><td>0.018</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.28-rc</td><td></td><td></td><td></td><td>530</td><td>0.018</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.7-nt</td><td></td><td></td><td></td><td>527</td><td>0.017</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.58-5.1.58+tld0-log</td><td></td><td></td><td></td><td>525</td><td>0.017</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51b</td><td></td><td></td><td></td><td>525</td><td>0.017</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.26-log</td><td></td><td></td><td></td><td>525</td><td>0.017</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.15</td><td></td><td></td><td></td><td>524</td><td>0.017</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.15-standard</td><td></td><td></td><td></td><td>523</td><td>0.017</td></tr>
+<tr><td>tcpwrapped</td><td>BSD TCP Wrappers</td><td></td><td>mysqld</td><td></td><td></td><td>516</td><td>0.017</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.65</td><td></td><td></td><td></td><td>515</td><td>0.017</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-3ubuntu5.8-log</td><td></td><td></td><td></td><td>515</td><td>0.017</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.16-nt</td><td></td><td></td><td></td><td>515</td><td>0.017</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.19-cll</td><td></td><td></td><td></td><td>512</td><td>0.017</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.44</td><td></td><td></td><td></td><td>509</td><td>0.017</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.77-community</td><td></td><td></td><td></td><td>503</td><td>0.017</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.58-1~dotdeb.0</td><td></td><td></td><td></td><td>502</td><td>0.017</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.17-nt</td><td></td><td></td><td></td><td>502</td><td>0.017</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.24-community-nt</td><td></td><td></td><td></td><td>497</td><td>0.016</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.16-nt</td><td></td><td></td><td></td><td>492</td><td>0.016</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.21-log</td><td></td><td></td><td></td><td>484</td><td>0.016</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.18-log</td><td></td><td></td><td></td><td>480</td><td>0.016</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.38</td><td></td><td></td><td></td><td>478</td><td>0.016</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.29</td><td></td><td></td><td></td><td>473</td><td>0.016</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-0ubuntu0.11.10.1</td><td></td><td></td><td></td><td>470</td><td>0.016</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.22</td><td></td><td></td><td></td><td>470</td><td>0.016</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.88-community-nt</td><td></td><td></td><td></td><td>467</td><td>0.015</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.63-rel13.4</td><td></td><td></td><td></td><td>465</td><td>0.015</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>6.0.0-alpha-community-nt-debug</td><td></td><td></td><td></td><td>462</td><td>0.015</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.83-log</td><td></td><td></td><td></td><td>459</td><td>0.015</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.63-community-log</td><td></td><td></td><td></td><td>457</td><td>0.015</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.85-community-nt</td><td></td><td></td><td></td><td>457</td><td>0.015</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.24a</td><td></td><td></td><td></td><td>454</td><td>0.015</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.21-nt</td><td></td><td></td><td></td><td>454</td><td>0.015</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.12-nt</td><td></td><td></td><td></td><td>453</td><td>0.015</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.55</td><td></td><td></td><td></td><td>453</td><td>0.015</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.40</td><td></td><td></td><td></td><td>453</td><td>0.015</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.25-1~dotdeb.0-log</td><td></td><td></td><td></td><td>450</td><td>0.015</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.66-0+squeeze1-log</td><td></td><td></td><td></td><td>448</td><td>0.015</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.52</td><td></td><td></td><td></td><td>448</td><td>0.015</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.21-community-nt-log</td><td></td><td></td><td></td><td>445</td><td>0.015</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.62-0ubuntu0.10.04.1-log</td><td></td><td></td><td></td><td>443</td><td>0.015</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.58</td><td></td><td></td><td></td><td>441</td><td>0.015</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.11-standard</td><td></td><td></td><td></td><td>432</td><td>0.014</td></tr>
+<tr><td>upnp</td><td>Portable SDK for UPnP devices</td><td>1.3.1</td><td>Linux 2.6.21; UPnP 1.0</td><td>Linux</td><td></td><td>430</td><td>0.014</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.26-rc-log</td><td></td><td></td><td></td><td>427</td><td>0.014</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.41-3ubuntu12.6</td><td></td><td></td><td></td><td>426</td><td>0.014</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.65-log</td><td></td><td></td><td></td><td>425</td><td>0.014</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.35-log</td><td></td><td></td><td></td><td>424</td><td>0.014</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.14-nt</td><td></td><td></td><td></td><td>423</td><td>0.014</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.85</td><td></td><td></td><td></td><td>417</td><td>0.014</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.26-log</td><td></td><td></td><td></td><td>414</td><td>0.014</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.33</td><td></td><td></td><td></td><td>411</td><td>0.014</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.19</td><td></td><td></td><td></td><td>411</td><td>0.014</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-3ubuntu5.4-log</td><td></td><td></td><td></td><td>408</td><td>0.014</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-24+lenny2-log</td><td></td><td></td><td></td><td>405</td><td>0.013</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.13-nt</td><td></td><td></td><td></td><td>404</td><td>0.013</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.56-ndb-7.1.14</td><td></td><td></td><td></td><td>403</td><td>0.013</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.62-0ubuntu0.11.10.1</td><td></td><td></td><td></td><td>401</td><td>0.013</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.12a-nt</td><td></td><td></td><td></td><td>401</td><td>0.013</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.32-Debian_7etch10-log</td><td></td><td></td><td></td><td>396</td><td>0.013</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td></td><td>Unauthorized; German</td><td></td><td></td><td>395</td><td>0.013</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.6-alpha-nt-max</td><td></td><td></td><td></td><td>395</td><td>0.013</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.45-community-log</td><td></td><td></td><td></td><td>394</td><td>0.013</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.22-community-nt-log</td><td></td><td></td><td></td><td>392</td><td>0.013</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.41-log</td><td></td><td></td><td></td><td>390</td><td>0.013</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.26-rc-community</td><td></td><td></td><td></td><td>389</td><td>0.013</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.35</td><td></td><td></td><td></td><td>386</td><td>0.013</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.70-log</td><td></td><td></td><td></td><td>385</td><td>0.013</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.32-Debian_7etch12</td><td></td><td></td><td></td><td>384</td><td>0.013</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.77-community-log</td><td></td><td></td><td></td><td>382</td><td>0.013</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.54-nt</td><td></td><td></td><td></td><td>382</td><td>0.013</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.54-1ubuntu4-log</td><td></td><td></td><td></td><td>377</td><td>0.013</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.82sp1-log</td><td></td><td></td><td></td><td>377</td><td>0.013</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.40-log</td><td></td><td></td><td></td><td>374</td><td>0.012</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.92-50-log</td><td></td><td></td><td></td><td>372</td><td>0.012</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.10-log</td><td></td><td></td><td></td><td>366</td><td>0.012</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.25-standard</td><td></td><td></td><td></td><td>366</td><td>0.012</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.87-community-nt</td><td></td><td></td><td></td><td>365</td><td>0.012</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.22-community-max-nt</td><td></td><td></td><td></td><td>364</td><td>0.012</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td></td><td>Host blocked because of too many connections</td><td></td><td></td><td>363</td><td>0.012</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.27-nmm1-log</td><td></td><td></td><td></td><td>363</td><td>0.012</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.22-rc</td><td></td><td></td><td></td><td>362</td><td>0.012</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.22-nt</td><td></td><td></td><td></td><td>359</td><td>0.012</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.51-nt</td><td></td><td></td><td></td><td>359</td><td>0.012</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.24_Debian-10sarge3-log</td><td></td><td></td><td></td><td>358</td><td>0.012</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.81</td><td></td><td></td><td></td><td>357</td><td>0.012</td></tr>
+<tr><td>http</td><td>Apache</td><td>1.3.6</td><td></td><td></td><td></td><td>357</td><td>0.012</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.95-0ubuntu1</td><td></td><td></td><td></td><td>355</td><td>0.012</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.20-log</td><td></td><td></td><td></td><td>355</td><td>0.012</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.7-rc</td><td></td><td></td><td></td><td>354</td><td>0.012</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.11-log</td><td></td><td></td><td></td><td>354</td><td>0.012</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.21</td><td></td><td></td><td></td><td>354</td><td>0.012</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-0ubuntu0.11.04.1</td><td></td><td></td><td></td><td>352</td><td>0.012</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.14</td><td></td><td></td><td></td><td>351</td><td>0.012</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.41-log</td><td></td><td></td><td></td><td>350</td><td>0.012</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.41-3ubuntu12.8-log</td><td></td><td></td><td></td><td>347</td><td>0.012</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.67-0ubuntu6</td><td></td><td></td><td></td><td>346</td><td>0.011</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.32-Debian_7etch1-log</td><td></td><td></td><td></td><td>346</td><td>0.011</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.24</td><td></td><td></td><td></td><td>346</td><td>0.011</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.46-community-log</td><td></td><td></td><td></td><td>345</td><td>0.011</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.51-max</td><td></td><td></td><td></td><td>345</td><td>0.011</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.18-standard-log</td><td></td><td></td><td></td><td>333</td><td>0.011</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-0ubuntu0.10.04.1-log</td><td></td><td></td><td></td><td>332</td><td>0.011</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.17-log</td><td></td><td></td><td></td><td>328</td><td>0.011</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.46</td><td></td><td></td><td></td><td>327</td><td>0.011</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.11-nt</td><td></td><td></td><td></td><td>326</td><td>0.011</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.56-community-log</td><td></td><td></td><td></td><td>325</td><td>0.011</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.19-log</td><td></td><td></td><td></td><td>325</td><td>0.011</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.95-rs-log</td><td></td><td></td><td></td><td>324</td><td>0.011</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.37-log</td><td></td><td></td><td></td><td>322</td><td>0.011</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.55-log</td><td></td><td></td><td></td><td>321</td><td>0.011</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.13a</td><td></td><td></td><td></td><td>318</td><td>0.011</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.52-max-nt</td><td></td><td></td><td></td><td>316</td><td>0.01</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.52-nt</td><td></td><td></td><td></td><td>314</td><td>0.01</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.41-3ubuntu12</td><td></td><td></td><td></td><td>312</td><td>0.01</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.91-50-log</td><td></td><td></td><td></td><td>311</td><td>0.01</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.19</td><td></td><td></td><td></td><td>310</td><td>0.01</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.75-log</td><td></td><td></td><td></td><td>306</td><td>0.01</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.10-log</td><td></td><td></td><td></td><td>302</td><td>0.01</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.96</td><td></td><td></td><td></td><td>300</td><td>0.01</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.26</td><td></td><td></td><td></td><td>299</td><td>0.01</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.53-community-log</td><td></td><td></td><td></td><td>298</td><td>0.01</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.81-community</td><td></td><td></td><td></td><td>296</td><td>0.01</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.37-1ubuntu5.5-log</td><td></td><td></td><td></td><td>294</td><td>0.01</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.26-standard-log</td><td></td><td></td><td></td><td>294</td><td>0.01</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.43</td><td></td><td></td><td></td><td>293</td><td>0.01</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.26-community-nt</td><td></td><td></td><td></td><td>288</td><td>0.01</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.89-log</td><td></td><td></td><td></td><td>286</td><td>0.009</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.15a</td><td></td><td></td><td></td><td>285</td><td>0.009</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.34-community-log</td><td></td><td></td><td></td><td>282</td><td>0.009</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.36</td><td></td><td></td><td></td><td>279</td><td>0.009</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.51-community-log</td><td></td><td></td><td></td><td>276</td><td>0.009</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-3ubuntu5.1</td><td></td><td></td><td></td><td>276</td><td>0.009</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.24-nt</td><td></td><td></td><td></td><td>276</td><td>0.009</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.33-log</td><td></td><td></td><td></td><td>275</td><td>0.009</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.31-community-log</td><td></td><td></td><td></td><td>274</td><td>0.009</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.54-0.dotdeb.0-log</td><td></td><td></td><td></td><td>273</td><td>0.009</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.66-nmm2-log</td><td></td><td></td><td></td><td>271</td><td>0.009</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.86-community-nt</td><td></td><td></td><td></td><td>271</td><td>0.009</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.26a</td><td></td><td></td><td></td><td>271</td><td>0.009</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.41-3ubuntu12.7</td><td></td><td></td><td></td><td>270</td><td>0.009</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.62-0ubuntu0.11.04.1</td><td></td><td></td><td></td><td>268</td><td>0.009</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.60-rel13.1-log</td><td></td><td></td><td></td><td>268</td><td>0.009</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.13a-nt</td><td></td><td></td><td></td><td>264</td><td>0.009</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.22-55</td><td></td><td></td><td></td><td>263</td><td>0.009</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-24+lenny1-log</td><td></td><td></td><td></td><td>263</td><td>0.009</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.32</td><td></td><td></td><td></td><td>258</td><td>0.009</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.63-0ubuntu0.11.10.1-log</td><td></td><td></td><td></td><td>257</td><td>0.009</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.13-55-log</td><td></td><td></td><td></td><td>256</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.14-log</td><td></td><td></td><td></td><td>256</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.8-nt</td><td></td><td></td><td></td><td>254</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.52-log</td><td></td><td></td><td></td><td>254</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.41-3ubuntu12.8</td><td></td><td></td><td></td><td>253</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.37-1ubuntu5</td><td></td><td></td><td></td><td>253</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.10a-log</td><td></td><td></td><td></td><td>253</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.15-log</td><td></td><td></td><td></td><td>253</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.28-1~dotdeb.0</td><td></td><td></td><td></td><td>251</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.26-standard</td><td></td><td></td><td></td><td>251</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.18-max-log</td><td></td><td></td><td></td><td>249</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.16-cll</td><td></td><td></td><td></td><td>248</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.49-1ubuntu8.1-log</td><td></td><td></td><td></td><td>248</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.22-rc-log</td><td></td><td></td><td></td><td>248</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.11-Debian_4sarge8-log</td><td></td><td></td><td></td><td>248</td><td>0.008</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td>6.0</td><td></td><td>Windows</td><td></td><td>248</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.89-community-nt</td><td></td><td></td><td></td><td>247</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.4.3-beta-community</td><td></td><td></td><td></td><td>246</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.83-community</td><td></td><td></td><td></td><td>244</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.87</td><td></td><td></td><td></td><td>243</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.17-nt</td><td></td><td></td><td></td><td>243</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.20-standard</td><td></td><td></td><td></td><td>243</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.22.32</td><td></td><td></td><td></td><td>243</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.37-standard-log</td><td></td><td></td><td></td><td>242</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-Alibaba-120201-log</td><td></td><td></td><td></td><td>240</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.56-rs</td><td></td><td></td><td></td><td>240</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.18-log</td><td></td><td></td><td></td><td>240</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-Alibaba-121011-log</td><td></td><td></td><td></td><td>239</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.33-community-log</td><td></td><td></td><td></td><td>238</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.11-Debian_4sarge7-log</td><td></td><td></td><td></td><td>238</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.82-log</td><td></td><td></td><td></td><td>237</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.67-Max</td><td></td><td></td><td></td><td>236</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.10-nt</td><td></td><td></td><td></td><td>236</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.48-community-log</td><td></td><td></td><td></td><td>235</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.23-rc-community</td><td></td><td></td><td></td><td>235</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-0ubuntu0.10.10.1-log</td><td></td><td></td><td></td><td>233</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.89-community</td><td></td><td></td><td></td><td>233</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.16-nt</td><td></td><td></td><td></td><td>231</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.11-beta</td><td></td><td></td><td></td><td>228</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.92-50</td><td></td><td></td><td></td><td>228</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.15a-ISPrime</td><td></td><td></td><td></td><td>227</td><td>0.008</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.58-community-log</td><td></td><td></td><td></td><td>225</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.27-standard-log</td><td></td><td></td><td></td><td>225</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.75-0ubuntu10.2</td><td></td><td></td><td></td><td>223</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.27-community</td><td></td><td></td><td></td><td>223</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.27-percona-sure1-log</td><td></td><td></td><td></td><td>221</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.58-1ubuntu1-log</td><td></td><td></td><td></td><td>220</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.52-community-log</td><td></td><td></td><td></td><td>219</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.67-standard</td><td></td><td></td><td></td><td>219</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.37-community</td><td></td><td></td><td></td><td>219</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.24a-Debian_3.infrant1</td><td></td><td></td><td></td><td>218</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.37-1ubuntu5.1</td><td></td><td></td><td></td><td>217</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.12-log</td><td></td><td></td><td></td><td>217</td><td>0.007</td></tr>
+<tr><td>http</td><td>TBS</td><td>R2 UPnP</td><td></td><td></td><td></td><td>217</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.24-standard-log</td><td></td><td></td><td></td><td>216</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.1-alpha-nt</td><td></td><td></td><td></td><td>215</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.15</td><td></td><td></td><td></td><td>215</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51b-log</td><td></td><td></td><td></td><td>214</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.54-rel12.6-log</td><td></td><td></td><td></td><td>212</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.20-55-log</td><td></td><td></td><td></td><td>211</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.49-1ubuntu8</td><td></td><td></td><td></td><td>211</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.22-standard</td><td></td><td></td><td></td><td>211</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.25-rc-log</td><td></td><td></td><td></td><td>210</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.15-nt</td><td></td><td></td><td></td><td>210</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.22-community</td><td></td><td></td><td></td><td>209</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.58-1~dotdeb.0-log</td><td></td><td></td><td></td><td>208</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.13</td><td></td><td></td><td></td><td>208</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.57-community-log</td><td></td><td></td><td></td><td>207</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.28-rc-log</td><td></td><td></td><td></td><td>205</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.10a-nt</td><td></td><td></td><td></td><td>204</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.24-log</td><td></td><td></td><td></td><td>204</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.23-55-log</td><td></td><td></td><td></td><td>202</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-beget-log</td><td></td><td></td><td></td><td>202</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.48</td><td></td><td></td><td></td><td>201</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.41-3ubuntu12.6-log</td><td></td><td></td><td></td><td>200</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.22-Debian_0ubuntu6.06.10-log</td><td></td><td></td><td></td><td>200</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.60</td><td></td><td></td><td></td><td>199</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.87-community</td><td></td><td></td><td></td><td>196</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.67-0ubuntu6.1</td><td></td><td></td><td></td><td>196</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.37</td><td></td><td></td><td></td><td>196</td><td>0.007</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.58-1~dotdeb.1</td><td></td><td></td><td></td><td>195</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.39-community-log</td><td></td><td></td><td></td><td>195</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.45-community-log</td><td></td><td></td><td></td><td>192</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.90-community-log</td><td></td><td></td><td></td><td>192</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.20-nt</td><td></td><td></td><td></td><td>192</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.18-standard</td><td></td><td></td><td></td><td>190</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.14-standard</td><td></td><td></td><td></td><td>190</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.41-community-log</td><td></td><td></td><td></td><td>189</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.26-nt-max</td><td></td><td></td><td></td><td>189</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.86-community</td><td></td><td></td><td></td><td>187</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.7-standard-log</td><td></td><td></td><td></td><td>187</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.66-community</td><td></td><td></td><td></td><td>184</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.84-community-nt</td><td></td><td></td><td></td><td>184</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.27-29.0-log</td><td></td><td></td><td></td><td>182</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.21-55</td><td></td><td></td><td></td><td>182</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.66-0ubuntu0.10.04.3-log</td><td></td><td></td><td></td><td>182</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.14-nt</td><td></td><td></td><td></td><td>182</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.53-max</td><td></td><td></td><td></td><td>182</td><td>0.006</td></tr>
+<tr><td>http</td><td>WangWnagSimpleServer</td><td>1.0</td><td></td><td></td><td></td><td>181</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.37-1ubuntu5.4</td><td></td><td></td><td></td><td>179</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.43-log</td><td></td><td></td><td></td><td>178</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.10</td><td></td><td></td><td></td><td>177</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.5-m3</td><td></td><td></td><td></td><td>176</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.60-5.1.60+tld0-log</td><td></td><td></td><td></td><td>175</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-community-log</td><td></td><td></td><td></td><td>174</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.87-log</td><td></td><td></td><td></td><td>174</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.41-3ubuntu12.7-log</td><td></td><td></td><td></td><td>173</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.15-nt</td><td></td><td></td><td></td><td>173</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.22-Debian_0ubuntu6.06.15-log</td><td></td><td></td><td></td><td>172</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.24_Debian-10sarge3</td><td></td><td></td><td></td><td>170</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.49-nt</td><td></td><td></td><td></td><td>170</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.28-1~dotdeb.0-log</td><td></td><td></td><td></td><td>169</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.18-Max</td><td></td><td></td><td></td><td>169</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.17</td><td></td><td></td><td></td><td>168</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.54-log</td><td></td><td></td><td></td><td>168</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>6.0.2-alpha-community-nt-debug</td><td></td><td></td><td></td><td>167</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.23a</td><td></td><td></td><td></td><td>167</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.47-community-log</td><td></td><td></td><td></td><td>166</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.31</td><td></td><td></td><td></td><td>166</td><td>0.006</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.26-standard</td><td></td><td></td><td></td><td>165</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.17-log</td><td></td><td></td><td></td><td>165</td><td>0.005</td></tr>
+<tr><td>http-proxy</td><td>EZproxy web proxy</td><td></td><td></td><td></td><td></td><td>165</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.55-community-log</td><td></td><td></td><td></td><td>164</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-3ubuntu5</td><td></td><td></td><td></td><td>164</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-community-nt-log</td><td></td><td></td><td></td><td>163</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.34-enterprise-nt</td><td></td><td></td><td></td><td>163</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.24a-community-nt-log</td><td></td><td></td><td></td><td>163</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.2.0-falcon-alpha-community-nt</td><td></td><td></td><td></td><td>162</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-24-log</td><td></td><td></td><td></td><td>162</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.22-max</td><td></td><td></td><td></td><td>161</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.22-0ubuntu1-log</td><td></td><td></td><td></td><td>160</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.26-rc</td><td></td><td></td><td></td><td>160</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.22-community-nt-log</td><td></td><td></td><td></td><td>160</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.28-0ubuntu0.12.04.3-log</td><td></td><td></td><td></td><td>159</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.32-Debian_7etch11</td><td></td><td></td><td></td><td>158</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.24a-log</td><td></td><td></td><td></td><td>158</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.14-log</td><td></td><td></td><td></td><td>158</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.65-community</td><td></td><td></td><td></td><td>157</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.0-m2-community</td><td></td><td></td><td></td><td>156</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-24</td><td></td><td></td><td></td><td>156</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.22-55-log</td><td></td><td></td><td></td><td>155</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.22-standard-log</td><td></td><td></td><td></td><td>155</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.16-standard</td><td></td><td></td><td></td><td>155</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.49-max-nt</td><td></td><td></td><td></td><td>155</td><td>0.005</td></tr>
+<tr><td>http</td><td>Netwave IP camera http config</td><td></td><td></td><td></td><td>webcam</td><td>155</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.67-0.dotdeb.1</td><td></td><td></td><td></td><td>154</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.20a-nt</td><td></td><td></td><td></td><td>154</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.19-standard</td><td></td><td></td><td></td><td>153</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.1a-alpha-max-debug</td><td></td><td></td><td></td><td>153</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.85-community</td><td></td><td></td><td></td><td>152</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.41</td><td></td><td></td><td></td><td>152</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.28-29.1</td><td></td><td></td><td></td><td>151</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-2~dotdeb.0</td><td></td><td></td><td></td><td>151</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.51-rel11.5-log</td><td></td><td></td><td></td><td>151</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.45-Odin-DB-Server-log</td><td></td><td></td><td></td><td>150</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.21-standard-log</td><td></td><td></td><td></td><td>150</td><td>0.005</td></tr>
+<tr><td>http</td><td>Apache Tomcat/Coyote JSP engine</td><td>1.1</td><td></td><td></td><td></td><td>150</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.28-0ubuntu0.12.04.2-log</td><td></td><td></td><td></td><td>149</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.18-standard</td><td></td><td></td><td></td><td>149</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.63-0ubuntu0.11.04.1-log</td><td></td><td></td><td></td><td>147</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.40-community-log</td><td></td><td></td><td></td><td>147</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.6-rc</td><td></td><td></td><td></td><td>146</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.26-rc-5.1.26rc-log</td><td></td><td></td><td></td><td>146</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.19-standard</td><td></td><td></td><td></td><td>146</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.24-standard</td><td></td><td></td><td></td><td>146</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.31-log</td><td></td><td></td><td></td><td>144</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.22-Debian_0ubuntu6.06.11-log</td><td></td><td></td><td></td><td>144</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.32-community-log</td><td></td><td></td><td></td><td>143</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.96-log</td><td></td><td></td><td></td><td>143</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.62-1~dotdeb.0</td><td></td><td></td><td></td><td>142</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.58-1</td><td></td><td></td><td></td><td>142</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.41-3ubuntu12.3</td><td></td><td></td><td></td><td>142</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.75-0ubuntu10.5-log</td><td></td><td></td><td></td><td>141</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.33-Community-Server-log</td><td></td><td></td><td></td><td>141</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.24a-standard</td><td></td><td></td><td></td><td>141</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.10-standard-log</td><td></td><td></td><td></td><td>140</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.58-1-log</td><td></td><td></td><td></td><td>139</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.83-0ubuntu3</td><td></td><td></td><td></td><td>139</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.47</td><td></td><td></td><td></td><td>139</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.63-ius</td><td></td><td></td><td></td><td>138</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.22-community</td><td></td><td></td><td></td><td>138</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.21-standard-log</td><td></td><td></td><td></td><td>138</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.24-rc-log</td><td></td><td></td><td></td><td>137</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.41-community</td><td></td><td></td><td></td><td>137</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.12-log</td><td></td><td></td><td></td><td>137</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.4-m3-log</td><td></td><td></td><td></td><td>136</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-24+lenny2+spu1-log</td><td></td><td></td><td></td><td>136</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.9-nt</td><td></td><td></td><td></td><td>136</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.21.32a-log</td><td></td><td></td><td></td><td>136</td><td>0.005</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.19-55-log</td><td></td><td></td><td></td><td>135</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.59-rel13.0-log</td><td></td><td></td><td></td><td>135</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.37-community-nt-log</td><td></td><td></td><td></td><td>134</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.26-nt-log</td><td></td><td></td><td></td><td>134</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.57</td><td></td><td></td><td></td><td>134</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.12-standard-log</td><td></td><td></td><td></td><td>133</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.55-nt</td><td></td><td></td><td></td><td>133</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.49-community-log</td><td></td><td></td><td></td><td>132</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.32-Debian_7etch8</td><td></td><td></td><td></td><td>132</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.18-log</td><td></td><td></td><td></td><td>132</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-rel13.2</td><td></td><td></td><td></td><td>131</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.16-log</td><td></td><td></td><td></td><td>131</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.68-log</td><td></td><td></td><td></td><td>130</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.18-nt-log</td><td></td><td></td><td></td><td>130</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.15-ISPrime</td><td></td><td></td><td></td><td>130</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.9-max</td><td></td><td></td><td></td><td>129</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.25-rc-community</td><td></td><td></td><td></td><td>127</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.16-log</td><td></td><td></td><td></td><td>127</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.12-standard-log</td><td></td><td></td><td></td><td>127</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.21-55-log</td><td></td><td></td><td></td><td>126</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.12-standard</td><td></td><td></td><td></td><td>126</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.21-log</td><td></td><td></td><td></td><td>126</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.20-standard-log</td><td></td><td></td><td></td><td>126</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.57-rel12.8-log</td><td></td><td></td><td></td><td>125</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.2.3-falcon-alpha-community-nt</td><td></td><td></td><td></td><td>124</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.17-beta</td><td></td><td></td><td></td><td>124</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.0-alpha-max-nt</td><td></td><td></td><td></td><td>124</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.6.5-m8</td><td></td><td></td><td></td><td>122</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.37-community-log</td><td></td><td></td><td></td><td>122</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.18-standard</td><td></td><td></td><td></td><td>121</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.4.1-beta</td><td></td><td></td><td></td><td>120</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.24-rc-community</td><td></td><td></td><td></td><td>120</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.41-community-nt-log</td><td></td><td></td><td></td><td>120</td><td>0.004</td></tr>
+<tr><td>http</td><td>Avtech AVN801 network camera</td><td>1.0</td><td>UPnP 1.0</td><td></td><td>webcam</td><td>120</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.7-standard</td><td></td><td></td><td></td><td>119</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.42-nt</td><td></td><td></td><td></td><td>119</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.38-nt</td><td></td><td></td><td></td><td>119</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.2-m2-log</td><td></td><td></td><td></td><td>118</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.24-1~dotdeb.1</td><td></td><td></td><td></td><td>117</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.58-1~dotdeb.1-log</td><td></td><td></td><td></td><td>117</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.21-standard</td><td></td><td></td><td></td><td>117</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.19-community-nt</td><td></td><td></td><td></td><td>116</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.27-Max</td><td></td><td></td><td></td><td>116</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.18-nt-log</td><td></td><td></td><td></td><td>116</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.44-community-log</td><td></td><td></td><td></td><td>115</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.24-4</td><td></td><td></td><td></td><td>114</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>6.0.11-alpha-community</td><td></td><td></td><td></td><td>113</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.84-0.dotdeb.0-log</td><td></td><td></td><td></td><td>112</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.81-log</td><td></td><td></td><td></td><td>112</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.25a-cll</td><td></td><td></td><td></td><td>111</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.47-nt</td><td></td><td></td><td></td><td>111</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.91-rs-log</td><td></td><td></td><td></td><td>110</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.32-Debian_7etch4-log</td><td></td><td></td><td></td><td>108</td><td>0.004</td></tr>
+<tr><td>http</td><td>GoAhead-Webs httpd</td><td></td><td></td><td></td><td></td><td>108</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.24-MariaDB</td><td></td><td></td><td></td><td>107</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.75-0ubuntu10</td><td></td><td></td><td></td><td>107</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.25-nt</td><td></td><td></td><td></td><td>107</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.54-log</td><td></td><td></td><td></td><td>106</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-3ubuntu5.7-log</td><td></td><td></td><td></td><td>106</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.27-community-log</td><td></td><td></td><td></td><td>106</td><td>0.004</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.66-0ubuntu0.11.10.3</td><td></td><td></td><td></td><td>105</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.24-log</td><td></td><td></td><td></td><td>105</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.54-community-log</td><td></td><td></td><td></td><td>104</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.79</td><td></td><td></td><td></td><td>104</td><td>0.003</td></tr>
+<tr><td>http</td><td>Ubuntu</td><td>lucid UPnP</td><td></td><td></td><td></td><td>104</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.62-rel13.3-log</td><td></td><td></td><td></td><td>103</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.62-0ubuntu0.11.10.1-log</td><td></td><td></td><td></td><td>103</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.82-community-nt</td><td></td><td></td><td></td><td>103</td><td>0.003</td></tr>
+<tr><td>http</td><td>DrcomServer1.0</td><td></td><td></td><td></td><td></td><td>103</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.28-1</td><td></td><td></td><td></td><td>102</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-3ubuntu5.5-log</td><td></td><td></td><td></td><td>102</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.33</td><td></td><td></td><td></td><td>102</td><td>0.003</td></tr>
+<tr><td>ssh</td><td></td><td></td><td>protocol 1.5</td><td></td><td></td><td>101</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>6.0.6-alpha-community</td><td></td><td></td><td></td><td>101</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.24-4-log</td><td></td><td></td><td></td><td>101</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-0ubuntu0.11.10.1-log</td><td></td><td></td><td></td><td>101</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.15-log</td><td></td><td></td><td></td><td>101</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.13-nt</td><td></td><td></td><td></td><td>101</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.57-max-nt-log</td><td></td><td></td><td></td><td>101</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.20-55</td><td></td><td></td><td></td><td>100</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.85-log</td><td></td><td></td><td></td><td>100</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.81-community-log</td><td></td><td></td><td></td><td>100</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.23-rc-log</td><td></td><td></td><td></td><td>98</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.24_Debian-10sarge1-log</td><td></td><td></td><td></td><td>98</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.12</td><td></td><td></td><td></td><td>98</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>6.0.10-alpha-community</td><td></td><td></td><td></td><td>97</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.89-community-nt-log</td><td></td><td></td><td></td><td>97</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.58-log</td><td></td><td></td><td></td><td>97</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.56-log</td><td></td><td></td><td></td><td>97</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.87-d10-ourdelta65-log</td><td></td><td></td><td></td><td>96</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.18-standard-log</td><td></td><td></td><td></td><td>96</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.0-alpha-nt</td><td></td><td></td><td></td><td>96</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.27-28.1-log</td><td></td><td></td><td></td><td>95</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.31-1ubuntu2</td><td></td><td></td><td></td><td>95</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.58-max-debug</td><td></td><td></td><td></td><td>95</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.67-0.dotdeb.1-log</td><td></td><td></td><td></td><td>94</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.21</td><td></td><td></td><td></td><td>94</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.16</td><td></td><td></td><td></td><td>94</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.53-max-nt</td><td></td><td></td><td></td><td>94</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.1-m2</td><td></td><td></td><td></td><td>93</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.4.1-beta-log</td><td></td><td></td><td></td><td>93</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.91-community-nt-log</td><td></td><td></td><td></td><td>93</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.75-0ubuntu10.3</td><td></td><td></td><td></td><td>92</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.4-beta-nt</td><td></td><td></td><td></td><td>92</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.32-Debian_7etch6</td><td></td><td></td><td></td><td>92</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.96-0ubuntu1-log</td><td></td><td></td><td></td><td>91</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.67-0ubuntu6-log</td><td></td><td></td><td></td><td>91</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.45-Max</td><td></td><td></td><td></td><td>91</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.11-standard-log</td><td></td><td></td><td></td><td>91</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>6.0.11-alpha</td><td></td><td></td><td></td><td>90</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.95-community-cll</td><td></td><td></td><td></td><td>90</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.45-Debian_1ubuntu3.4-log</td><td></td><td></td><td></td><td>90</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.45-Debian_1ubuntu3.3-log</td><td></td><td></td><td></td><td>89</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.66-0ubuntu0.11.10.2</td><td></td><td></td><td></td><td>88</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.37-1ubuntu5.1-log</td><td></td><td></td><td></td><td>88</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.66a</td><td></td><td></td><td></td><td>88</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.46</td><td></td><td></td><td></td><td>88</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.3-m3</td><td></td><td></td><td></td><td>87</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.16-55-log</td><td></td><td></td><td></td><td>87</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.32-Debian_7etch5~bpo31+1-log</td><td></td><td></td><td></td><td>87</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.32-Debian_7etch10</td><td></td><td></td><td></td><td>87</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.26-Max</td><td></td><td></td><td></td><td>87</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.13a-log</td><td></td><td></td><td></td><td>87</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-3</td><td></td><td></td><td></td><td>86</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-standard</td><td></td><td></td><td></td><td>86</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.32-Debian_7etch1</td><td></td><td></td><td></td><td>86</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.22-Debian_0ubuntu6.06.11</td><td></td><td></td><td></td><td>86</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.24_Debian-10sarge2</td><td></td><td></td><td></td><td>86</td><td>0.003</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.24 26oct2003</td><td></td><td></td><td></td><td>86</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.16</td><td></td><td></td><td></td><td>85</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td></td><td>blocked - too many connection errors</td><td></td><td></td><td>84</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.19-1~dotdeb.1</td><td></td><td></td><td></td><td>84</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.56-0.dotdeb.0</td><td></td><td></td><td></td><td>84</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.54-rel12.5-log</td><td></td><td></td><td></td><td>84</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.37-1ubuntu5.4-log</td><td></td><td></td><td></td><td>84</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.82-community-log</td><td></td><td></td><td></td><td>84</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.22-Debian_0ubuntu6.06.6-log</td><td></td><td></td><td></td><td>84</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.24-1~dotdeb.1-log</td><td></td><td></td><td></td><td>83</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.20-1~dotdeb.0</td><td></td><td></td><td></td><td>83</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.25-rc</td><td></td><td></td><td></td><td>83</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.67-0ubuntu6.1-log</td><td></td><td></td><td></td><td>83</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.22-community-max-nt</td><td></td><td></td><td></td><td>83</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td></td><td>unauthorized; Italian</td><td></td><td></td><td>82</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.53-0.dotdeb.0</td><td></td><td></td><td></td><td>82</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.46sp1-enterprise-gpl-pro-log</td><td></td><td></td><td></td><td>82</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.20a-max</td><td></td><td></td><td></td><td>82</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.9</td><td></td><td></td><td></td><td>82</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.11-Debian_4sarge8</td><td></td><td></td><td></td><td>82</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.26-debug</td><td></td><td></td><td></td><td>82</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>6.0.4-alpha-community-log</td><td></td><td></td><td></td><td>81</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.43-community-log</td><td></td><td></td><td></td><td>81</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.92-rs</td><td></td><td></td><td></td><td>81</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.60-log</td><td></td><td></td><td></td><td>81</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.26-standard-log</td><td></td><td></td><td></td><td>81</td><td>0.003</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td>7.5</td><td></td><td>Windows</td><td></td><td>81</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>6.0.3-alpha-community</td><td></td><td></td><td></td><td>80</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.59-community-log</td><td></td><td></td><td></td><td>80</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51b-community</td><td></td><td></td><td></td><td>80</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.7-log</td><td></td><td></td><td></td><td>80</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.23</td><td></td><td></td><td></td><td>80</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td></td><td></td><td></td><td></td><td>80</td><td>0.003</td></tr>
+<tr><td>telnet</td><td>Linux telnetd</td><td></td><td></td><td>Linux</td><td></td><td>79</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.28-0ubuntu0.12.10.2</td><td></td><td></td><td></td><td>79</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.4.2-beta</td><td></td><td></td><td></td><td>79</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.95-community-nt</td><td></td><td></td><td></td><td>79</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.48-log</td><td></td><td></td><td></td><td>79</td><td>0.003</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td></td><td></td><td></td><td></td><td>79</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.75-0ubuntu10.2-log</td><td></td><td></td><td></td><td>78</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.23-1~dotdeb.0</td><td></td><td></td><td></td><td>77</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.50-rel11.4-log</td><td></td><td></td><td></td><td>77</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.46sp1-enterprise-gpl-advanced-log</td><td></td><td></td><td></td><td>77</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.16-standard</td><td></td><td></td><td></td><td>77</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.56-log</td><td></td><td></td><td></td><td>77</td><td>0.003</td></tr>
+<tr><td>http</td><td>PDR-M800</td><td>1.0</td><td></td><td></td><td></td><td>77</td><td>0.003</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.35-community-log</td><td></td><td></td><td></td><td>75</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.84-percona-highperf-b18</td><td></td><td></td><td></td><td>75</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.23-pro-gpl-log</td><td></td><td></td><td></td><td>75</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.11-gamma-nt</td><td></td><td></td><td></td><td>75</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.36-debug</td><td></td><td></td><td></td><td>75</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.92-community-cll</td><td></td><td></td><td></td><td>74</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.27-community-max-nt</td><td></td><td></td><td></td><td>74</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.91+tld0-log</td><td></td><td></td><td></td><td>73</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.82</td><td></td><td></td><td></td><td>73</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.21-log</td><td></td><td></td><td></td><td>73</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.28-0ubuntu0.12.10.1</td><td></td><td></td><td></td><td>72</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.21-beta-community</td><td></td><td></td><td></td><td>72</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.58yes</td><td></td><td></td><td></td><td>72</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.25a-1~dotdeb.1</td><td></td><td></td><td></td><td>71</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.29-rc-log</td><td></td><td></td><td></td><td>71</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.7-nt-log</td><td></td><td></td><td></td><td>71</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.21-community-max-nt</td><td></td><td></td><td></td><td>71</td><td>0.002</td></tr>
+<tr><td>http</td><td>Microsoft HTTPAPI httpd</td><td>2.0</td><td>SSDP/UPnP</td><td>Windows</td><td></td><td>71</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.63-ius-log</td><td></td><td></td><td></td><td>70</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.27-max</td><td></td><td></td><td></td><td>70</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.22-log</td><td></td><td></td><td></td><td>70</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.60-community-log</td><td></td><td></td><td></td><td>69</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.41-3ubuntu12.9-log</td><td></td><td></td><td></td><td>69</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.15-Debian_0.dotdeb.4-log</td><td></td><td></td><td></td><td>69</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.30</td><td></td><td></td><td></td><td>69</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.18-max-debug</td><td></td><td></td><td></td><td>69</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.17-standard</td><td></td><td></td><td></td><td>69</td><td>0.002</td></tr>
+<tr><td>arcserve</td><td>ARCserve Discovery</td><td></td><td></td><td></td><td></td><td>69</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.28-1-log</td><td></td><td></td><td></td><td>68</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.29-rc</td><td></td><td></td><td></td><td>68</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.11-beta-log</td><td></td><td></td><td></td><td>68</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.46-enterprise-gpl-log</td><td></td><td></td><td></td><td>68</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.22-max-log</td><td></td><td></td><td></td><td>68</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.51-log</td><td></td><td></td><td></td><td>68</td><td>0.002</td></tr>
+<tr><td>http</td><td>mini_httpd</td><td>1.19 19dec2003</td><td></td><td></td><td></td><td>68</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.6.5-m8-log</td><td></td><td></td><td></td><td>67</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.57-1~dotdeb.0</td><td></td><td></td><td></td><td>67</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.24a-standard-log</td><td></td><td></td><td></td><td>67</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.22-Debian_0ubuntu6.06.3-log</td><td></td><td></td><td></td><td>67</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.14-Max-log</td><td></td><td></td><td></td><td>67</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.13-standard</td><td></td><td></td><td></td><td>67</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.13-Max</td><td></td><td></td><td></td><td>67</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.10-standard</td><td></td><td></td><td></td><td>67</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.28-29.2</td><td></td><td></td><td></td><td>66</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.56-rs-log</td><td></td><td></td><td></td><td>66</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.15-max-debug</td><td></td><td></td><td></td><td>66</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.58-max-nt</td><td></td><td></td><td></td><td>66</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.44-enterprise-gpl-advanced-log</td><td></td><td></td><td></td><td>64</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.17</td><td></td><td></td><td></td><td>64</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.27-29.0</td><td></td><td></td><td></td><td>63</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.27-1~dotdeb.0</td><td></td><td></td><td></td><td>63</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.87-community-log</td><td></td><td></td><td></td><td>63</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.86-classic-log</td><td></td><td></td><td></td><td>63</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.15-standard</td><td></td><td></td><td></td><td>63</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.5-gamma</td><td></td><td></td><td></td><td>63</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.43-log</td><td></td><td></td><td></td><td>63</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.2-m2</td><td></td><td></td><td></td><td>62</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.55-MariaDB-log</td><td></td><td></td><td></td><td>62</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.56</td><td></td><td></td><td></td><td>62</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.41-community-log</td><td></td><td></td><td></td><td>62</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.13-rc-nt</td><td></td><td></td><td></td><td>62</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.11-nt-max</td><td></td><td></td><td></td><td>62</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.22-nt-max</td><td></td><td></td><td></td><td>62</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.18-max-nt</td><td></td><td></td><td></td><td>62</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.24-standard</td><td></td><td></td><td></td><td>61</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.59-nightly-20050301-log</td><td></td><td></td><td></td><td>61</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.45</td><td></td><td></td><td></td><td>61</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.75-0.dotdeb.0-log</td><td></td><td></td><td></td><td>60</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.62</td><td></td><td></td><td></td><td>60</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-3ubuntu5.1-log</td><td></td><td></td><td></td><td>60</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.25-pro-gpl-nt-log</td><td></td><td></td><td></td><td>60</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.24</td><td></td><td></td><td></td><td>60</td><td>0.002</td></tr>
+<tr><td>http</td><td>Boa HTTPd</td><td>0.94.14rc21</td><td></td><td></td><td></td><td>60</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.15-55-log</td><td></td><td></td><td></td><td>59</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.89-community-log</td><td></td><td></td><td></td><td>59</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.45-Debian_1ubuntu3.3</td><td></td><td></td><td></td><td>59</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.36-log</td><td></td><td></td><td></td><td>59</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.18-nt-log</td><td></td><td></td><td></td><td>59</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.13-max-debug</td><td></td><td></td><td></td><td>59</td><td>0.002</td></tr>
+<tr><td>vnc</td><td>VNC</td><td></td><td>protocol 3.8</td><td></td><td></td><td>58</td><td>0.002</td></tr>
+<tr><td>telnet</td><td></td><td></td><td></td><td></td><td></td><td>58</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>6.0.9-alpha-community</td><td></td><td></td><td></td><td>58</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.24-9</td><td></td><td></td><td></td><td>58</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.41-3ubuntu12-log</td><td></td><td></td><td></td><td>58</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.38-community-log</td><td></td><td></td><td></td><td>58</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.38-Ubuntu_0ubuntu1.4-log</td><td></td><td></td><td></td><td>58</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.22-Debian_0ubuntu6.06.12-log</td><td></td><td></td><td></td><td>58</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.27-hi4</td><td></td><td></td><td></td><td>58</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.24_Debian-10-log</td><td></td><td></td><td></td><td>58</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.7-rc-log</td><td></td><td></td><td></td><td>57</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.4.3-beta</td><td></td><td></td><td></td><td>57</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.49-1</td><td></td><td></td><td></td><td>57</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.24-rc</td><td></td><td></td><td></td><td>57</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.91-rs</td><td></td><td></td><td></td><td>57</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.37-community-log</td><td></td><td></td><td></td><td>57</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.32-Dotdeb_1.dotdeb.1-log</td><td></td><td></td><td></td><td>57</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.22-Debian_0ubuntu6.06.5-log</td><td></td><td></td><td></td><td>57</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.20-standard</td><td></td><td></td><td></td><td>57</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.15-Debian_1</td><td></td><td></td><td></td><td>57</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.19-55</td><td></td><td></td><td></td><td>56</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.19-standard-log</td><td></td><td></td><td></td><td>56</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.2-alpha-standard</td><td></td><td></td><td></td><td>56</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.26-nt-max-log</td><td></td><td></td><td></td><td>56</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.57-Max</td><td></td><td></td><td></td><td>56</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>6.0.4-alpha-community</td><td></td><td></td><td></td><td>55</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.62-1~dotdeb.0-log</td><td></td><td></td><td></td><td>55</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.39</td><td></td><td></td><td></td><td>55</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>6.0.3-alpha-community-log</td><td></td><td></td><td></td><td>54</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.56-rel12.7-log</td><td></td><td></td><td></td><td>54</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.15-Debian_1ubuntu5-log</td><td></td><td></td><td></td><td>54</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.51</td><td></td><td></td><td></td><td>54</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.2-m2-community</td><td></td><td></td><td></td><td>53</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.17-55-log</td><td></td><td></td><td></td><td>53</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.62-0ubuntu0.11.04.1-log</td><td></td><td></td><td></td><td>53</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.45-Debian_1ubuntu3.1-log</td><td></td><td></td><td></td><td>53</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.15-log</td><td></td><td></td><td></td><td>53</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.13-standard-log</td><td></td><td></td><td></td><td>53</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.57-1~dotdeb.1</td><td></td><td></td><td></td><td>52</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.49-1-log</td><td></td><td></td><td></td><td>52</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.15-Debian_1-log</td><td></td><td></td><td></td><td>52</td><td>0.002</td></tr>
+<tr><td>http</td><td>uc-httpd</td><td>1.0.0</td><td></td><td></td><td></td><td>52</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.27-28.0-log</td><td></td><td></td><td></td><td>51</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.1-m2-community</td><td></td><td></td><td></td><td>51</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.52-enterprise-commercial-advanced</td><td></td><td></td><td></td><td>51</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.20a-nt-log</td><td></td><td></td><td></td><td>51</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.16-max</td><td></td><td></td><td></td><td>51</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.10a-Max</td><td></td><td></td><td></td><td>51</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.15-Max-log</td><td></td><td></td><td></td><td>51</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>6.0.5-alpha-community</td><td></td><td></td><td></td><td>50</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.5-m3-log</td><td></td><td></td><td></td><td>50</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.22-Debian_0ubuntu6.06.14-log</td><td></td><td></td><td></td><td>50</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.18-Max</td><td></td><td></td><td></td><td>50</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.23-standard</td><td></td><td></td><td></td><td>50</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.23-Max</td><td></td><td></td><td></td><td>50</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.1-alpha-nt</td><td></td><td></td><td></td><td>50</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.15-standard</td><td></td><td></td><td></td><td>50</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.43-nt</td><td></td><td></td><td></td><td>50</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.20-enterprise-commercial-advanced-log</td><td></td><td></td><td></td><td>49</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.51-0.dotdeb.1</td><td></td><td></td><td></td><td>49</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.50-lk-log</td><td></td><td></td><td></td><td>49</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.20-max-log</td><td></td><td></td><td></td><td>49</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.12a-log</td><td></td><td></td><td></td><td>49</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.27-nt</td><td></td><td></td><td></td><td>49</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.26-max</td><td></td><td></td><td></td><td>49</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.56-Max</td><td></td><td></td><td></td><td>49</td><td>0.002</td></tr>
+<tr><td>http</td><td>uTorrent WebUI</td><td></td><td></td><td>Windows</td><td></td><td>49</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.0-m2</td><td></td><td></td><td></td><td>48</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.45-Debian_1ubuntu3-log</td><td></td><td></td><td></td><td>48</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.18-max</td><td></td><td></td><td></td><td>48</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.32-log</td><td></td><td></td><td></td><td>48</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.6.4-m7</td><td></td><td></td><td></td><td>47</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.2.9-MariaDB</td><td></td><td></td><td></td><td>47</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.55-5.1.55+tld0-log</td><td></td><td></td><td></td><td>47</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.90-community-nt-log</td><td></td><td></td><td></td><td>47</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.38-Ubuntu_0ubuntu1-log</td><td></td><td></td><td></td><td>47</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.22-Debian_0ubuntu6.06.9-log</td><td></td><td></td><td></td><td>47</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.21-standard</td><td></td><td></td><td></td><td>47</td><td>0.002</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.3</td><td>(CentOS)</td><td></td><td></td><td>47</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.18-55-log</td><td></td><td></td><td></td><td>46</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.66-ius</td><td></td><td></td><td></td><td>46</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.16-beta-log</td><td></td><td></td><td></td><td>46</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.85-community-log</td><td></td><td></td><td></td><td>46</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.22-standard</td><td></td><td></td><td></td><td>46</td><td>0.002</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>6.0.8-alpha-community</td><td></td><td></td><td></td><td>45</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.25-MariaDB</td><td></td><td></td><td></td><td>45</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.22-ndb-7.2.6-gpl</td><td></td><td></td><td></td><td>45</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.55-rel12.6-log</td><td></td><td></td><td></td><td>45</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.41-3ubuntu12.3-log</td><td></td><td></td><td></td><td>45</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.31-1ubuntu2-log</td><td></td><td></td><td></td><td>45</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.22-Debian_0ubuntu6.06.15</td><td></td><td></td><td></td><td>45</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.8-enterprise-commercial-advanced</td><td></td><td></td><td></td><td>44</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.4.2-beta-community</td><td></td><td></td><td></td><td>44</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.4.1-beta-community</td><td></td><td></td><td></td><td>44</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-2~dotdeb.0-log</td><td></td><td></td><td></td><td>44</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.22-rc-community-log</td><td></td><td></td><td></td><td>44</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.27-max-log</td><td></td><td></td><td></td><td>44</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.20a</td><td></td><td></td><td></td><td>44</td><td>0.001</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.24</td><td></td><td></td><td></td><td>44</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.25a-27.1</td><td></td><td></td><td></td><td>43</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.2.10-MariaDB-log</td><td></td><td></td><td></td><td>43</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.6-alpha</td><td></td><td></td><td></td><td>43</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.62-community-log</td><td></td><td></td><td></td><td>43</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-2</td><td></td><td></td><td></td><td>43</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.57-rel12.8</td><td></td><td></td><td></td><td>43</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.49-1ubuntu8-log</td><td></td><td></td><td></td><td>43</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.37-1ubuntu5-log</td><td></td><td></td><td></td><td>43</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.86-community-log</td><td></td><td></td><td></td><td>43</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.34-classic-nt-log</td><td></td><td></td><td></td><td>43</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.16-standard</td><td></td><td></td><td></td><td>43</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.20a-debug</td><td></td><td></td><td></td><td>43</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.22-1~dotdeb.0</td><td></td><td></td><td></td><td>42</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.66-0ubuntu0.11.10.3-log</td><td></td><td></td><td></td><td>42</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.56-LTOPS-log</td><td></td><td></td><td></td><td>42</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.54-rel12.5</td><td></td><td></td><td></td><td>42</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.94-enterprise-log</td><td></td><td></td><td></td><td>42</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.91+tld3-log</td><td></td><td></td><td></td><td>42</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.91-50</td><td></td><td></td><td></td><td>42</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.7-beta-nt</td><td></td><td></td><td></td><td>42</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.21-community-max-nt</td><td></td><td></td><td></td><td>42</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.24-nt-max</td><td></td><td></td><td></td><td>42</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.44-nt</td><td></td><td></td><td></td><td>42</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.20-1~dotdeb.0-log</td><td></td><td></td><td></td><td>41</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.45-51</td><td></td><td></td><td></td><td>41</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.83-enterprise-nt</td><td></td><td></td><td></td><td>41</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.13-log</td><td></td><td></td><td></td><td>41</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.23a-log</td><td></td><td></td><td></td><td>41</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.23-MariaDB</td><td></td><td></td><td></td><td>40</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.59-ius-log</td><td></td><td></td><td></td><td>40</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.96-community-nt-log</td><td></td><td></td><td></td><td>40</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.85-community-nt-log</td><td></td><td></td><td></td><td>40</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.79-enterprise</td><td></td><td></td><td></td><td>40</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.77-percona-highperf-b13-log</td><td></td><td></td><td></td><td>40</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51b-enterprise-gpl-log</td><td></td><td></td><td></td><td>40</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-3ubuntu5-log</td><td></td><td></td><td></td><td>40</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.19-nt-log</td><td></td><td></td><td></td><td>40</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.9-standard</td><td></td><td></td><td></td><td>40</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.13a-pro</td><td></td><td></td><td></td><td>40</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.27-nt-max-log</td><td></td><td></td><td></td><td>40</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.39-nt</td><td></td><td></td><td></td><td>40</td><td>0.001</td></tr>
+<tr><td>http</td><td>Allegro RomPager</td><td>4.07 UPnP/1.0</td><td>ZyXEL ZyWALL 2</td><td></td><td></td><td>40</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.6.2-m5</td><td></td><td></td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.6-alpha-nt-max-log</td><td></td><td></td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-0ubuntu0.11.04.1-log</td><td></td><td></td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.41-3ubuntu12.1</td><td></td><td></td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.23-rc-community-log</td><td></td><td></td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.77-0.dotdeb.0-log</td><td></td><td></td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-21-log</td><td></td><td></td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.23-community-nt</td><td></td><td></td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.21-community</td><td></td><td></td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.19</td><td></td><td></td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.8a</td><td></td><td></td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.11-Debian_4sarge2-log</td><td></td><td></td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.42</td><td></td><td></td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Microsoft ftpd</td><td></td><td></td><td>Windows</td><td></td><td>39</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.3-m3-community</td><td></td><td></td><td></td><td>38</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.24-3</td><td></td><td></td><td></td><td>38</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-3-log</td><td></td><td></td><td></td><td>38</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.50-enterprise-commercial-pro</td><td></td><td></td><td></td><td>38</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.20-beta-log</td><td></td><td></td><td></td><td>38</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.42</td><td></td><td></td><td></td><td>38</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.20</td><td></td><td></td><td></td><td>38</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.13a-nt-max-log</td><td></td><td></td><td></td><td>38</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.27-nt-max</td><td></td><td></td><td></td><td>38</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.12-max-nt</td><td></td><td></td><td></td><td>38</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.58-nt-log</td><td></td><td></td><td></td><td>38</td><td>0.001</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td>7.0</td><td></td><td>Windows</td><td></td><td>38</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.6.3-m6</td><td></td><td></td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.58-rel12.9-log</td><td></td><td></td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.49-1~bpo50+1</td><td></td><td></td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.48-0.dotdeb.0</td><td></td><td></td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.77-community-nt-log</td><td></td><td></td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.42-log</td><td></td><td></td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.32-Debian_7etch4</td><td></td><td></td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.2-alpha</td><td></td><td></td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.20-standard-log</td><td></td><td></td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.13-log</td><td></td><td></td><td></td><td>37</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.2.7-MariaDB</td><td></td><td></td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.95-0ubuntu1-log</td><td></td><td></td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.87-a2hosting-percona</td><td></td><td></td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.84-0.dotdeb.0</td><td></td><td></td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.83-community-log</td><td></td><td></td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.81-0.dotdeb.0-log</td><td></td><td></td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-24+lenny2~bpo40+1-log</td><td></td><td></td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.16-log</td><td></td><td></td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.11-Debian_etch1-log</td><td></td><td></td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.10a-standard</td><td></td><td></td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.31</td><td></td><td></td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.24_Debian-10sarge1</td><td></td><td></td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.15-Max</td><td></td><td></td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.14-standard</td><td></td><td></td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.13-max-nt</td><td></td><td></td><td></td><td>36</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.6.4-m7-log</td><td></td><td></td><td></td><td>35</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.19-log</td><td></td><td></td><td></td><td>35</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.9-log</td><td></td><td></td><td></td><td>35</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.9-gamma-nt</td><td></td><td></td><td></td><td>35</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.56-nt</td><td></td><td></td><td></td><td>35</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.19-1~dotdeb.1-log</td><td></td><td></td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.60-enterprise-commercial-classic</td><td></td><td></td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.59-rel13.0</td><td></td><td></td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.59-ius</td><td></td><td></td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.56-0.dotdeb.1</td><td></td><td></td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.50-5.1.50+tld0-log</td><td></td><td></td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.50-0.dotdeb.0</td><td></td><td></td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.21-beta</td><td></td><td></td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.24-log</td><td></td><td></td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.20-community-nt-log</td><td></td><td></td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.1a-alpha-nt</td><td></td><td></td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.27-nt-log</td><td></td><td></td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.22.25</td><td></td><td></td><td></td><td>34</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>6.0.7-alpha-community</td><td></td><td></td><td></td><td>33</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.25-MariaDB-log</td><td></td><td></td><td></td><td>33</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.20-ndb-7.2.5-gpl</td><td></td><td></td><td></td><td>33</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.49-0.dotdeb.0-log</td><td></td><td></td><td></td><td>33</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.16-beta-community-nt</td><td></td><td></td><td></td><td>33</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.13a-nt-max</td><td></td><td></td><td></td><td>33</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.44</td><td></td><td></td><td></td><td>33</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.22.30-log</td><td></td><td></td><td></td><td>33</td><td>0.001</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>2.7.STABLE9</td><td></td><td></td><td></td><td>33</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.24-2</td><td></td><td></td><td></td><td>32</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.1-m2-log</td><td></td><td></td><td></td><td>32</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.18-1~dotdeb.1</td><td></td><td></td><td></td><td>32</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.45yes-log</td><td></td><td></td><td></td><td>32</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.44b-MariaDB-log</td><td></td><td></td><td></td><td>32</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.26-rc-community-log</td><td></td><td></td><td></td><td>32</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.83-community-nt-log</td><td></td><td></td><td></td><td>32</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.32-Debian_7etch3-log</td><td></td><td></td><td></td><td>32</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.18-nt-max</td><td></td><td></td><td></td><td>32</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.15-max</td><td></td><td></td><td></td><td>32</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.21-CLUSTERS</td><td></td><td></td><td></td><td>32</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.14-nt-max</td><td></td><td></td><td></td><td>32</td><td>0.001</td></tr>
+<tr><td>smtp</td><td>Postfix smtpd</td><td></td><td></td><td></td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.17-55</td><td></td><td></td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.56-1</td><td></td><td></td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.41-3</td><td></td><td></td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.18-beta-log</td><td></td><td></td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.87-modified-log</td><td></td><td></td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.45-enterprise-gpl</td><td></td><td></td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.40-log</td><td></td><td></td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.21-standard-log</td><td></td><td></td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.25-pro-gpl-log</td><td></td><td></td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.15-Debian_0.dotdeb.4</td><td></td><td></td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.21-nt-log</td><td></td><td></td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.21-Max</td><td></td><td></td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.17-max-debug</td><td></td><td></td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td>5.1</td><td></td><td>Windows</td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>http</td><td>GoAhead-Webs</td><td></td><td></td><td></td><td></td><td>31</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.27-1~dotdeb.0-log</td><td></td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.2.9-MariaDB-log</td><td></td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.2.4-MariaDB</td><td></td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.52-1</td><td></td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.51-0.dotdeb.1-log</td><td></td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.46-enterprise-commercial-classic</td><td></td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.45-1</td><td></td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.45-0.dotdeb.0-log</td><td></td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.44-0.dotdeb.0</td><td></td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.14-beta-community-nt</td><td></td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.14-beta</td><td></td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.92-rs-log</td><td></td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.92-ius</td><td></td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.56sp1-enterprise-gpl-nt</td><td></td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.46-log</td><td></td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.46-enterprise-nt</td><td></td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.22-Debian_0ubuntu6.06.2-log</td><td></td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.1-alpha-standard</td><td></td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>http</td><td>Apache</td><td></td><td>SSL-only mode</td><td></td><td></td><td>30</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.28-0ubuntu0.12.10.2-log</td><td></td><td></td><td></td><td>29</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.58-ius</td><td></td><td></td><td></td><td>29</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.83-0ubuntu3-log</td><td></td><td></td><td></td><td>29</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.75-0ubuntu10.3-log</td><td></td><td></td><td></td><td>29</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-Max</td><td></td><td></td><td></td><td>29</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.34-classic-nt</td><td></td><td></td><td></td><td>29</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.9-standard-log</td><td></td><td></td><td></td><td>29</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.3b-beta-nt-max</td><td></td><td></td><td></td><td>29</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.15-standard-log</td><td></td><td></td><td></td><td>29</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.23-nt-max</td><td></td><td></td><td></td><td>29</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.20a-nt-max</td><td></td><td></td><td></td><td>29</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.55-nt-log</td><td></td><td></td><td></td><td>29</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.21.29a-gamma-debug</td><td></td><td></td><td></td><td>29</td><td>0.001</td></tr>
+<tr><td>http</td><td>Hikvision-Webs</td><td></td><td></td><td></td><td></td><td>29</td><td>0.001</td></tr>
+<tr><td>nntp</td><td>INN nntpd</td><td></td><td>posting ok</td><td></td><td></td><td>28</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.3.7-MariaDB</td><td></td><td></td><td></td><td>28</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.2.10-MariaDB-mariadb107-log</td><td></td><td></td><td></td><td>28</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.2.10-MariaDB-mariadb107</td><td></td><td></td><td></td><td>28</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.66-rel14.1</td><td></td><td></td><td></td><td>28</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.65-community-log</td><td></td><td></td><td></td><td>28</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-ius</td><td></td><td></td><td></td><td>28</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.58-ius-log</td><td></td><td></td><td></td><td>28</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.47-ndb-7.1.5-cluster-gpl-log</td><td></td><td></td><td></td><td>28</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.30-ndb-6.3.20-cluster-gpl-log</td><td></td><td></td><td></td><td>28</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.76</td><td></td><td></td><td></td><td>28</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.75-0ubuntu10-log</td><td></td><td></td><td></td><td>28</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.24a-community</td><td></td><td></td><td></td><td>28</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.15-nt-max</td><td></td><td></td><td></td><td>28</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.11-Debian_4-log</td><td></td><td></td><td></td><td>28</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.24-nt-log</td><td></td><td></td><td></td><td>28</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.17-max-nt</td><td></td><td></td><td></td><td>28</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.45-nt</td><td></td><td></td><td></td><td>28</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.22.24</td><td></td><td></td><td></td><td>28</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>6.0.10-alpha</td><td></td><td></td><td></td><td>27</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.23-1~dotdeb.0-log</td><td></td><td></td><td></td><td>27</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.22-1~dotdeb.0-log</td><td></td><td></td><td></td><td>27</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.3.6-MariaDB-log</td><td></td><td></td><td></td><td>27</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.66-rel14.1-log</td><td></td><td></td><td></td><td>27</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.34-ndb-7.0.6-cluster-gpl</td><td></td><td></td><td></td><td>27</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.15-beta-community-nt</td><td></td><td></td><td></td><td>27</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.92-enterprise</td><td></td><td></td><td></td><td>27</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-20</td><td></td><td></td><td></td><td>27</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.20-nt-log</td><td></td><td></td><td></td><td>27</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.13-Max-log</td><td></td><td></td><td></td><td>27</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.13-standard</td><td></td><td></td><td></td><td>27</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.52-entropy.ch-log</td><td></td><td></td><td></td><td>27</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.22.32-log</td><td></td><td></td><td></td><td>27</td><td>0.001</td></tr>
+<tr><td>http</td><td>thttpd</td><td>2.25b 29dec2003</td><td></td><td></td><td></td><td>27</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.6-rc-log</td><td></td><td></td><td></td><td>26</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.25a-1~dotdeb.1-log</td><td></td><td></td><td></td><td>26</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.23-2</td><td></td><td></td><td></td><td>26</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.7-beta</td><td></td><td></td><td></td><td>26</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.66-community-log</td><td></td><td></td><td></td><td>26</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.58-rel12.9</td><td></td><td></td><td></td><td>26</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.57-ius-log</td><td></td><td></td><td></td><td>26</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.44-ndb-7.1.3-cluster-gpl</td><td></td><td></td><td></td><td>26</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.44-0.dotdeb.0-log</td><td></td><td></td><td></td><td>26</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.43-nmm4-log</td><td></td><td></td><td></td><td>26</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.25-rc-standard</td><td></td><td></td><td></td><td>26</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-6</td><td></td><td></td><td></td><td>26</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.46-classic-nt</td><td></td><td></td><td></td><td>26</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.26-Max-log</td><td></td><td></td><td></td><td>26</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.21-community-max-nt-log</td><td></td><td></td><td></td><td>26</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.1a-alpha</td><td></td><td></td><td></td><td>26</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.11-Debian_4sarge2</td><td></td><td></td><td></td><td>26</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.22-debug</td><td></td><td></td><td></td><td>26</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.13-standard-log</td><td></td><td></td><td></td><td>26</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.30-gamma</td><td></td><td></td><td></td><td>26</td><td>0.001</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>5.4p1</td><td>FreeBSD 20100308; protocol 2.0</td><td>FreeBSD</td><td></td><td>25</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.16-55</td><td></td><td></td><td></td><td>25</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.61-2-log</td><td></td><td></td><td></td><td>25</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.51-ElEX-DB-log</td><td></td><td></td><td></td><td>25</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.47-MariaDB</td><td></td><td></td><td></td><td>25</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.20-beta</td><td></td><td></td><td></td><td>25</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.84-community-nt-log</td><td></td><td></td><td></td><td>25</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.62-log</td><td></td><td></td><td></td><td>25</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.46-enterprise-nt-log</td><td></td><td></td><td></td><td>25</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.1-alpha</td><td></td><td></td><td></td><td>25</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.18-standard-log</td><td></td><td></td><td></td><td>25</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.24-debug</td><td></td><td></td><td></td><td>25</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.56-Max-log</td><td></td><td></td><td></td><td>25</td><td>0.001</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>3.2.0.18</td><td></td><td></td><td></td><td>25</td><td>0.001</td></tr>
+<tr><td>http</td><td>GeoVision GeoHttpServer for webcams</td><td></td><td></td><td></td><td>webcam</td><td>25</td><td>0.001</td></tr>
+<tr><td>http</td><td>DD-WRT milli_httpd</td><td></td><td></td><td></td><td></td><td>25</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.3.2-MariaDB-beta-mariadb102~lenny</td><td></td><td></td><td></td><td>24</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.41-1.dotdeb.1</td><td></td><td></td><td></td><td>24</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.31sp1-enterprise-gpl-advanced</td><td></td><td></td><td></td><td>24</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.29-rc-community-log</td><td></td><td></td><td></td><td>24</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.84-enterprise-nt</td><td></td><td></td><td></td><td>24</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.82-community</td><td></td><td></td><td></td><td>24</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.24a-Debian_9ubuntu2.4-log</td><td></td><td></td><td></td><td>24</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.15-standard-log</td><td></td><td></td><td></td><td>24</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.15-nt-log</td><td></td><td></td><td></td><td>24</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.7-nt-max</td><td></td><td></td><td></td><td>24</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.15-nt-log</td><td></td><td></td><td></td><td>24</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.57-nt</td><td></td><td></td><td></td><td>24</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.22.23b</td><td></td><td></td><td></td><td>24</td><td>0.001</td></tr>
+<tr><td>http</td><td>FC</td><td></td><td></td><td></td><td></td><td>24</td><td>0.001</td></tr>
+<tr><td>http</td><td>Cross Web Server</td><td></td><td></td><td></td><td></td><td>24</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.60-rel13.1</td><td></td><td></td><td></td><td>23</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.56-ndb-7.1.15a-cluster-gpl-log</td><td></td><td></td><td></td><td>23</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.56-0.dotdeb.0-log</td><td></td><td></td><td></td><td>23</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.49-MariaDB-mariadb82-log</td><td></td><td></td><td></td><td>23</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.47-rel11.2</td><td></td><td></td><td></td><td>23</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.19-beta-community-nt-debug</td><td></td><td></td><td></td><td>23</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.92-87-log</td><td></td><td></td><td></td><td>23</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-3</td><td></td><td></td><td></td><td>23</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.22-Debian_0ubuntu6.06.10</td><td></td><td></td><td></td><td>23</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.17-nt-log</td><td></td><td></td><td></td><td>23</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.12a-nt-log</td><td></td><td></td><td></td><td>23</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.11-nt-log</td><td></td><td></td><td></td><td>23</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.11-Debian_4sarge7</td><td></td><td></td><td></td><td>23</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.21-nt-max</td><td></td><td></td><td></td><td>23</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.20a-nt-log</td><td></td><td></td><td></td><td>23</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.15-max-nt</td><td></td><td></td><td></td><td>23</td><td>0.001</td></tr>
+<tr><td>http</td><td>Mbedthis-Appweb</td><td>2.0.4</td><td></td><td></td><td></td><td>23</td><td>0.001</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1.4.20</td><td></td><td></td><td></td><td>23</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.13-enterprise-commercial-advanced-log</td><td></td><td></td><td></td><td>22</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.7-beta-log</td><td></td><td></td><td></td><td>22</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.62-ius</td><td></td><td></td><td></td><td>22</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.56-ndb-7.1.15a-cluster-gpl</td><td></td><td></td><td></td><td>22</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.51-ndb-7.1.9a-cluster-gpl-log</td><td></td><td></td><td></td><td>22</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.49-2</td><td></td><td></td><td></td><td>22</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.45-0.dotdeb.0</td><td></td><td></td><td></td><td>22</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.28-rc-community-log</td><td></td><td></td><td></td><td>22</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.12a-max</td><td></td><td></td><td></td><td>22</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.10-Max</td><td></td><td></td><td></td><td>22</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.10a-max</td><td></td><td></td><td></td><td>22</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.17-standard-log</td><td></td><td></td><td></td><td>22</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.57-log</td><td></td><td></td><td></td><td>22</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.36-log</td><td></td><td></td><td></td><td>22</td><td>0.001</td></tr>
+<tr><td>http</td><td>Net-OS 5.xx UPnP</td><td>1.0</td><td></td><td></td><td></td><td>22</td><td>0.001</td></tr>
+<tr><td>http</td><td>Apache</td><td>2.2.14</td><td>(Unix) mod_ssl/2.2.14 OpenSSL/0.9.8l mod_perl/2.0.4 Perl/v5.10.0</td><td></td><td></td><td>22</td><td>0.001</td></tr>
+<tr><td>http</td><td>AIM HTTP</td><td>1.0 (aim_http_proxy)</td><td></td><td></td><td></td><td>22</td><td>0.001</td></tr>
+<tr><td>smtp</td><td></td><td></td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.6.2-m5-log</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.8-enterprise-commercial-advanced-log</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.28a-MariaDB-log</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.15-rel21.0</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.11-enterprise-commercial-advanced-log</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.3.2-MariaDB-beta-mariadb102-log</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.2.7-MariaDB-mariadb101-log</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.65-rel14.0</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.55-rel12.6</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.49-0.dotdeb.0</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.41-3-log</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.22-rc-Debian_2~ppa5-log</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.51a-6-log</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.30-Debian_3-log</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.24a-Debian_9-log</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.21-community-max</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.20-log</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.18-pro-nt</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.13-rc-standard-log</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.8-standard</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.8</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.3b-beta-nt</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.11-Debian_4sarge5-log</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.0-alpha</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.20-Max</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.12-max-debug</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.41-nt</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.39-log</td><td></td><td></td><td></td><td>21</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.6.8-rc</td><td></td><td></td><td></td><td>20</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.5.24-3-log</td><td></td><td></td><td></td><td>20</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.2.4-MariaDB-log</td><td></td><td></td><td></td><td>20</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.57-1~dotdeb.1-log</td><td></td><td></td><td></td><td>20</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.57-1~dotdeb.0-log</td><td></td><td></td><td></td><td>20</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.51-MariaDB</td><td></td><td></td><td></td><td>20</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.1.48-enterprise-commercial-pro</td><td></td><td></td><td></td><td>20</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.88-community-log</td><td></td><td></td><td></td><td>20</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.26-lk-log</td><td></td><td></td><td></td><td>20</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.18-max</td><td></td><td></td><td></td><td>20</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>5.0.17-standard</td><td></td><td></td><td></td><td>20</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.3-beta</td><td></td><td></td><td></td><td>20</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.1.10a-standard-log</td><td></td><td></td><td></td><td>20</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.9-gamma</td><td></td><td></td><td></td><td>20</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.5-beta-max-nt</td><td></td><td></td><td></td><td>20</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.31-log</td><td></td><td></td><td></td><td>20</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.25-standard-log</td><td></td><td></td><td></td><td>20</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>4.0.16-max-debug</td><td></td><td></td><td></td><td>20</td><td>0.001</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>3.23.48</td><td></td><td></td><td></td><td>20</td><td>0.001</td></tr>
+<tr><td>http</td><td>thttpd</td><td></td><td>Panasonic BB-HCM511 IP camera http config</td><td></td><td></td><td>20</td><td>0.001</td></tr>
+<tr><td>http</td><td>Gadspot/Avtech AV787 webcam http config</td><td></td><td></td><td></td><td>webcam</td><td>20</td><td>0.001</td></tr>
+<tr><td>http</td><td>DVR Systems webcam http interface</td><td></td><td></td><td></td><td>webcam</td><td>20</td><td>0.001</td></tr>
+
+   </tbody>
+  </table>
+ </div>
+</div>

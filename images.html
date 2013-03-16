@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Internet Census 2012</title>
+
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+<div id="main">
+
+ <table id = "nav">
+ <col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" />
+ <tr>
+ <td><a href="paper.html">Paper</a></td>
+ <td class="highlight1"><a href="images.html">Images</a></td>
+ <td><a href="download.html">Download</a></td>
+ <td><a href="hilbert.html">Hilbert Browser</a></td>
+ <td><a href="serviceprobe_overview.html">Service Probe Overview</a></td>
+ <td><a href="tld_overview.html">rDNS Overview</a></td>
+ </tr>
+ </table>
+
+ <div id="content">
+  
+  <div style="float:left;width:100%;padding-bottom:30px">
+   <div style="float:left;500px;">
+    <img style="width:500px" src="images/worldmap_lowres_16to9_small.jpg">
+   </div>
+   <div style="padding-left:520px">
+    World map showing the 460 Million IP addresses that responded to ICMP ping requests or port scans from June and October 2012. Theses maps where generated in a high and a low geolocation resolution version, either with or without a legend and in aspect ratios of 16/9 and 4/3.
+	<br>
+	<br> 
+	High geolocation resolution:<br>
+	16/9 <a class="link" href="images/worldmap_16to9_1600x900.png">1600x900</a> 
+		 <a class="link" href="images/worldmap_16to9_3200x1800.png">3200x1800</a> <br>
+	16/9 no legend <a class="link" href="images/worldmap_nolegend_16to9_1600x900.png">1600x900</a> 
+				   <a class="link" href="images/worldmap_nolegend_16to9_3200x1800.png">3200x1800</a> <br>
+	4/3 <a class="link" href="images/worldmap_4to3_1600x900.png">1600x900</a> 
+		 <a class="link" href="images/worldmap_4to3_3200x1800.png">3200x1800</a> <br>
+	4/3 no legend <a class="link" href="images/worldmap_nolegend_4to3_1600x900.png">1600x900</a> 
+				   <a class="link" href="images/worldmap_nolegend_4to3_3200x1800.png">3200x1800</a> <br>
+	<br>
+	Low geolocation resolution:<br>
+	16/9 <a class="link" href="images/worldmap_lowres_16to9_1600x900.png">1600x900</a> 
+		 <a class="link" href="images/worldmap_lowres_16to9_3200x1800.png">3200x1800</a> <br>
+	16/9 no legend <a class="link" href="images/worldmap_lowres_nolegend_16to9_1600x900.png">1600x900</a> 
+				   <a class="link" href="images/worldmap_lowres_nolegend_16to9_3200x1800.png">3200x1800</a> <br>
+	4/3 <a class="link" href="images/worldmap_lowres_4to3_1600x900.png">1600x900</a> 
+		 <a class="link" href="images/worldmap_lowres_4to3_3200x1800.png">3200x1800</a> <br>
+	4/3 no legend <a class="link" href="images/worldmap_lowres_nolegend_4to3_1600x900.png">1600x900</a> 
+				   <a class="link" href="images/worldmap_lowres_nolegend_4to3_3200x1800.png">3200x1800</a> <br>
+	<tr>
+	</tr>
+   </table>
+    
+   </div>
+  </div>
+  
+  <div style="float:left;width:100%;padding-bottom:30px">
+   <div style="float:left;500px;">
+    <img style="width:500px" src="images/2012_hilbert_icmp_map_small.jpg">
+   </div>
+   <div style="padding-left:520px"><br><br>
+    Hilbert map of the 420 Million IP addresses that responded to ICMP ping requests at least two times between June and October 2012. The IP space is mapped to a 2-dimensional <a class="link" href="http://en.wikipedia.org/wiki/Hilbert_curve">Hilbert Curve</a> as inspired by <a class="link" href="http://xkcd.com/195/">xkcd</a>. For a zoomable, clickable version of this image as well as other data projected in a Hilbert curve take a look the <a class="link" target="_blank" href="hilbert/index.html"> Hilbert Browser</a>.<br><br>
+   <a class="link" href="images/hilbert_icmp_map.png">5120x4096</a> 8 MB full size image
+   </div>
+  </div>
+  
+  <div style="float:left;width:100%;padding-bottom:30px"> 
+   <div style="float:left;500px;">
+    <div id="worldmap_youtube">
+     <img id="gif1" style="width:500px" src="images/geovideo_frame_000_lowres.jpg"><br>
+     <span class="link" onclick='document.getElementById("gif1").src="images/geovideo_lowres.gif"'>Click here</span> to start animation
+    </div>
+   </div>
+   <div style="padding-left:520px"><br><br>
+    World map of 24 hour relative average utilization of IPv4 addresses observed using ICMP ping requests.<br><br>
+      <a class="link" href="images/geovideo.gif">9 MB full resolution GIF</a> <br><br>
+	  <a class="link" href="images/geovideo_lowres.gif">2.4 MB low resolution GIF</a> <br><br>
+	Single frames, <a class="link" href="download/geovideoframes.tar">17 MB tar file</a><br><br>
+   </div>
+  </div>
+  
+  <div style="float:left;width:100%;padding-bottom:30px"> 
+   <div style="float:left;500px;">
+    <div id="hilbertmap_youtube">
+     <img id="gif2" style="width:500px" src="images/hilbertvideo_frame_0000.jpg"><br>
+     <span class="link" onclick='document.getElementById("gif2").src="images/hilbertvideo_lowres.gif"'>Click here</span> to start animation
+    </div>
+   </div>
+   <div style="padding-left:520px"><br><br>
+    Hilbert map of 24 hour relative average utilization of IPv4 addresses observed using ICMP ping requests.<br><br>
+     <a class="link" href="images/hilbertvideo.gif">14 MB full resolution GIF</a> <br><br>
+	  <a class="link" href="images/hilbertvideo_lowres.gif">2.5 MB low resolution GIF</a> <br><br>
+	Single frames, <a class="link" href="download/hilbertvideoframes.tar">14 MB tar file</a><br><br>
+   </div>
+  </div>
+  
+  <div style="float:left;width:100%;padding-bottom:30px"> 
+   <div style="float:left;500px;">
+    <img style="width:500px" src="images/clientmap_16to9_small.jpg">
+   </div>
+   <div style="padding-left:520px"><br><br>
+    420 Thousand Carna Botnet clients active from March to December 2012.<br>
+	<br>
+     <a class="link" href="images/clientmap_16to9_1600x900.png">Clientmap 1600x900</a> <br><br>
+	 <a class="link" href="images/clientmap_16to9_3200x1800.png">Clientmap 3200x1800</a> 
+   </div>
+  </div>
+ </div> 
+</div>

@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Internet Census 2012</title>
+ <script type="text/javascript" src="../js/jquery-latest.js"></script> 
+ <script type="text/javascript" src="../js/__jquery.tablesorter.min.js"></script> 
+ <link rel="stylesheet" type="text/css" href="../style.css">
+
+ <script>
+ $(document).ready(function() 
+  { 
+   generate(0);
+   $("#sortable").tablesorter(); 
+  } 
+ ); 
+
+ function generate(index) {
+    
+  var pages=[
+   ["1t","3t","7t","7u","9t","13u","17u","19t","21t","22t","23t","25t","26t","35t","37u","42t","42u","43t","44t","53t","53u","69u","70t","79t","80t","81t","82t","83t","84t","85t","88t","88u","98t","100t","106t","110t","111t","111u","113t","119t","123u","130t","135t","135u","137u","139t","143t","144t","161t","161u","177u","179t","199t"],
+   ["214t","254t","255t","256t","257t","264t","280t","311t","389t","390t","406t","407u","427t","443t","444t","445t","449t","464t","465t","497t","500u","505t","510t","512t","513t","514t","515t","517u","518u","523t","523u","524t","540t","543t","544t","548t","554t","587t","591t","593t","616t","620t","625t","626u","628t","631t","636t","641t","646t","660t","666t"],
+   ["706t","710t","711t","731t","771t","782t","783t","787t","808t","873t","888t","898t","900t","901t","902t","990t","993t","995t","1000t","1010t","1022t","1024t","1025t","1026t","1027t","1028t","1029t","1030t","1031t","1032t","1033t","1035t","1036t","1037t","1038t","1039t","1040t","1041t","1042t","1043t","1044t","1048t","1049t","1050t","1053t","1054t","1056t","1058t","1059t"],
+   ["1064t","1065t","1066t","1068t","1069t","1071t","1074t","1080t","1090t","1095t","1098t","1099t","1100t","1105t","1109t","1110t","1111t","1112t","1200t","1212t","1214t","1217t","1220t","1234t","1241t","1248t","1302t","1311t","1314t","1344t","1352t","1400t","1414t","1415t","1416t","1417t","1418t","1419t","1419u","1420t","1432t","1433t","1434u","1467t","1494t"],
+   ["1500t","1501t","1503t","1505t","1505u","1521t","1522t","1526t","1527t","1549t","1550t","1574t","1583t","1604u","1610t","1611t","1666t","1687t","1688t","1702t","1720t","1723t","1748t","1754t","1755t","1761t","1761u","1762t","1763t","1801t","1830t","1900t","1935t","1967u","1972t","1981t","1998t","2000t","2001t","2002t","2003t","2005t","2010t","2024t","2030t","2040t","2049t","2064t","2068t"],
+   ["2100t","2103t","2105t","2107t","2121t","2160t","2161t","2301t","2303u","2306t","2383t","2396t","2401t","2427t","2427u","2525t","2600t","2601t","2627t","2638u","2701t","2715t","2717t","2869t","2947t","2967t","2967u","3000t","3001t","3002t","3003t","3004t","3005t","3006t","3025t","3031t","3050t","3052t","3128t","3268t","3280t","3306t","3310t","3333t","3351t","3372t","3389t","3483u","3493t","3531t"],
+   ["3632t","3689t","3690t","3703t","3872t","3892t","3900t","3940t","3986t","4000t","4001t","4045t","4045u","4155t","4369t","4443t","4444t","4567t","4660t","4711t","4868t","4899t","4999t","5000t","5001t","5003t","5009t","5050t","5051t","5060t","5060u","5061t","5101t","5120t","5190t","5222t","5232t","5269t","5280t","5302t","5323t","5353u","5357t","5400t","5427t","5432t","5520t","5530t","5550t","5555t","5556t","5570t"],
+   ["5600t","5631t","5632u","5666t","5800t","5801t","5802t","5803t","5900t","5901t","6000t","6001t","6002t","6003t","6004t","6005t","6006t","6007t","6008t","6009t","6010t","6011t","6012t","6013t","6014t","6015t","6016t","6017t","6018t","6019t","6020t","6050t","6103t","6112t","6163t","6346t","6379t","6543t","6544t","6560t","6588t","6600t","6646t","6660t","6661t","6662t","6663t","6664t","6665t","6666t","6667t","6668t","6669t","6670t","6699t"],
+   ["6802t","6969t","7000t","7001u","7002t","7007t","7008t","7070t","7100t","7101t","7144t","7145t","7171t","7180t","7200t","7210t","7272t","7402t","7461t","7776t","7777t","7780t","7937t","7938t","8000t","8001t","8002t","8003t","8004t","8005t","8006t","8007t","8008t","8009t","8010t","8031t","8080t","8081t","8082t","8083t","8084t","8085t","8087t","8088t","8118t","8138t","8181t","8194t","8307t","8333t","8443t","8770t"],
+   ["8880t","8881t","8882t","8883t","8884t","8885t","8886t","8887t","8888t","9000t","9001t","9002t","9003t","9030t","9050t","9080t","9088t","9089t","9090t","9091t","9092t","9093t","9094t","9095t","9096t","9097t","9098t","9099t","9100t","9100u","9101t","9102t","9103t","9104t","9105t","9106t","9107t","9481t","9801t","9999t","10000t","10000u","10001t","10005t","10010t","10031t","10080u","11210t","11211t","11211u","11371t","11965t","12203u","12345t"],
+   ["13013t","13666t","13720t","13722t","13783t","14238t","14534t","15000t","15001t","15002t","17007t","17555u","17988t","18086t","18182t","18264t","19150t","19350t","20000t","22001t","22490t","26214t","26470t","27000t","27001t","27002t","27003t","27004t","27005t","27006t","27007t","27008t","27009t","27010t","27017t","27960u","30444t","31337t","31416t","32211t","32750t","32750u","32751t","32751u","32752t","32752u","32753t","32753u","32754t","32754u"],
+   ["32755t","32755u","32756t","32756u","32757t","32757u","32758t","32758u","32759t","32759u","32760t","32760u","32761t","32761u","32762t","32762u","32763t","32763u","32764t","32764u","32765t","32765u","32766t","32766u","32767t","32767u","32768t","32768u","32769t","32769u","32770t","32770u","32771t","32771u","32772t","32772u","32773t","32773u","32774t","32774u","32775t","32775u","32776t","32776u","32777t","32777u"],
+   ["32778t","32778u","32779t","32779u","32780t","32780u","32781t","32781u","32782t","32782u","32783t","32783u","32784t","32784u","32785t","32785u","32786t","32786u","32787t","32787u","32788t","32788u","32789t","32789u","32790t","32790u","32791t","32791u","32792t","32792u","32793t","32793u","32794t","32794u","32795t","32795u","32796t","32796u","32797t","32797u","32798t","32798u","32799t","32799u"],
+   ["32800t","32800u","32801t","32801u","32802t","32802u","32803t","32803u","32804t","32804u","32805t","32805u","32806t","32806u","32807t","32807u","32808t","32808u","32809t","32809u","32810t","32810u","33015t","34012t","37435t","38978t","38978u","40193t","41523t","49152t","49152u","49153u","49154u","49155u","49156u","49157t","49400t","50000t","50001t","50002t","50003t","50004t","50005t","50006t","50007t","50008t","50009t"],
+   ["50010t","50011t","50012t","50013t","50014t","50015t","50016t","50017t","50018t","50019t","50020t","50021t","50022t","50023t","50024t","50025t","50030t","55553t","55555t","56667t","60000t","60001t","60002t","60003t","60004t","60006t","60007t","60008t","60009t","60010t","60011t","60012t","60013t","60014t","60015t","60016t","60017t","60018t","60019t","60020t","60021t","60022t","60023t","60024t","60025t","Combinedt"]
+  ];
+  current = "21t"
+
+  var html = ""
+  var col = 0;
+  for (var i = 0; i < pages[index].length; ++i){
+   if (col == 0){
+    html = html + "<tr>"
+   }
+   if(pages[index][i].indexOf("u") != -1){
+    port = pages[index][i].replace(/u/g, " UDP");
+    link = pages[index][i].replace(/u/g, "_UDP_product.html");
+   }else{
+    port = pages[index][i].replace(/t/g, "");
+    link = pages[index][i].replace(/t/g, "_TCP_product.html");
+   }
+   if(pages[index][i] == ("" + current)){
+    html = html + "<td style=\"background-color:#e9e9e9\"><a href=\""+link+"\">"+port+"</a></td>"
+   }else{
+    html = html + "<td><a href=\""+link+"\">"+port+"</a></td>"
+   }
+   
+   col = col +1;
+   if (col == 14){
+    col = 0;
+    html = html + "</tr>"
+   }
+  }
+  $("#submenu").html(html);
+  $(".clicks").css({'background-color': ''})
+  $("#click"+index).css({'background-color': '#e9e9e9'})
+ }
+ </script>
+ 
+</head>
+
+<body>
+<div id="main">
+
+ <table id = "nav">
+ <col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" /><col width="16.6%" />
+ <tr>
+ <td><a href="../paper.html">Paper</a></td>
+ <td><a href="../images.html">Images</a></td>
+ <td><a href="../download.html">Download</a></td>
+ <td><a href="../hilbert.html">Hilbert Browser</a></td>
+ <td class="highlight1"><a href="../serviceprobe_overview.html">Service Probe Overview</a></td>
+ <td><a href="../tld_overview.html">rDNS Overview</a></td>
+ </tr>
+ </table>
+
+ 
+ <table id="nav1">
+ <tr>
+  <td style="width:10%"><a href="../serviceprobe_overview.html"><span style="font-size: 14px;">Overview</span></a></td>
+  <td> 
+  <span style="font-size: 14px;">Port Details</span>
+   <table id = "nav">
+    <tr>
+     <td id="click0" class="clicks" onclick="generate(0)">< 200</td>
+     <td id="click1" class="clicks" onclick="generate(1)">< 700</td>
+     <td id="click2" class="clicks" onclick="generate(2)">< 1060 </td>
+     <td id="click3" class="clicks" onclick="generate(3)">< 1500 </td>
+     <td id="click4" class="clicks" onclick="generate(4)">< 2100 </td>
+     <td id="click5" class="clicks" onclick="generate(5)">< 3600 </td>
+     <td id="click6" class="clicks" onclick="generate(6)">< 5600 </td>
+     <td id="click7" class="clicks" onclick="generate(7)">< 6700 </td>
+     <td id="click8" class="clicks" onclick="generate(8)">< 8800 </td>
+     <td id="click9" class="clicks" onclick="generate(9)">< 13000</td>
+     <td id="click10" class="clicks" onclick="generate(10)">< 32755</td>
+     <td id="click11" class="clicks" onclick="generate(11)">< 32778</td>
+     <td id="click12" class="clicks" onclick="generate(12)">< 32800</td>
+     <td id="click13" class="clicks" onclick="generate(13)">< 50010</td>
+     <td id="click14" class="clicks" onclick="generate(14)">< 65536</td>
+    </tr>
+   </table>
+
+   <table  id = "submenu">
+    <tr><td>This menu requires javascript, sorry<td><tr>
+   </table>
+  </td>
+ </tr>
+ </table>
+ <table id = "nav">
+ <tr>
+  <td style ="width:12.5%" ><a href="19_TCP_product.html">Prev Port</a></td>
+  <td style ="width:25% ; background-color: #e4e4e4" ><a href="21_TCP_product.html">Products</a></td>
+  <td style ="width:25% ;"><a href="21_TCP_version.html">Versions</a></td>
+  <td style ="width:25% ;"><a href="21_TCP_full.html">Full</a></td>
+  <td style ="width:12.5%" ><a href="22_TCP_product.html">Next Port</a></td>
+ <tr>
+ </table>
+ 
+ 
+ <div id="content">
+  Overview of services running on Port 21 TCP.<br>
+  ~43.12 Million IP addresses observed from May to December 2012  <br>
+  To get raw lists of the data go to <a href="../download.html">Download</a>. For an explanation of what this data is and how it was obtained, see <a href="../paper.html">Paper</a>.<br><br>
+
+
+  <table id="sortable" class="tablesorter" style ="text-align:center;border:none"> 
+   <col width="20%" /><col width="50%" /><col width="15%" /><col width="15%" />
+   <thead>
+    <th>Servicename <img src="../icon_sort.png"></th>
+<th>Product <img src="../icon_sort.png"></th>
+<th>Count <img src="../icon_sort.png"></th>
+<th>Percent <img src="../icon_sort.png"></th>
+ 
+   </thead>
+   <tbody>
+    <tr><td>ftp</td><td>Netgear broadband router or ZyXel VoIP adapter ftpd</td><td>18753458</td><td>43.494</td></tr>
+<tr><td>ftp</td><td></td><td>3841675</td><td>8.91</td></tr>
+<tr><td>ftp</td><td>ProFTPD</td><td>2748567</td><td>6.375</td></tr>
+<tr><td>ftp</td><td>Pure-FTPd</td><td>2702448</td><td>6.268</td></tr>
+<tr><td>ftp</td><td>D-Link DSL-2750U ftp firmware update</td><td>2123235</td><td>4.924</td></tr>
+<tr><td>ftp</td><td>Microsoft ftpd</td><td>2047371</td><td>4.748</td></tr>
+<tr><td>no match</td><td>-/-</td><td>1987219</td><td>4.609</td></tr>
+<tr><td>ftp</td><td>vsftpd</td><td>1848265</td><td>4.287</td></tr>
+<tr><td>ftp</td><td>MikroTik router ftpd</td><td>781645</td><td>1.813</td></tr>
+<tr><td>ftp</td><td>FileZilla ftpd</td><td>647177</td><td>1.501</td></tr>
+<tr><td>ftp</td><td>vsftpd (before 2.0.8) or WU-FTPD</td><td>564833</td><td>1.31</td></tr>
+<tr><td>ftp</td><td>Serv-U ftpd</td><td>399644</td><td>0.927</td></tr>
+<tr><td>ftp</td><td>D-Link or USRobotics ADSL router firmware update ftpd</td><td>379265</td><td>0.88</td></tr>
+<tr><td>ftp</td><td>Check Point Firewall-1 ftpd</td><td>316457</td><td>0.734</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7390 WAP ftpd</td><td>314202</td><td>0.729</td></tr>
+<tr><td>ftp</td><td>GNU Inetutils FTPd</td><td>273976</td><td>0.635</td></tr>
+<tr><td>ftp</td><td>GlobespanVirata ftpd</td><td>230763</td><td>0.535</td></tr>
+<tr><td>ftp</td><td>Alcatel Speedtouch ADSL router ftpd</td><td>229050</td><td>0.531</td></tr>
+<tr><td>ftp</td><td>bftpd</td><td>223118</td><td>0.517</td></tr>
+<tr><td>ftp</td><td>VxWorks ftpd</td><td>175707</td><td>0.408</td></tr>
+<tr><td>ftp</td><td>NcFTPd</td><td>154940</td><td>0.359</td></tr>
+<tr><td>ftp</td><td>Netgear DG632 router ftpd</td><td>151289</td><td>0.351</td></tr>
+<tr><td>ftp</td><td>WU-FTPD</td><td>143016</td><td>0.332</td></tr>
+<tr><td>ftp</td><td>FreeBSD ftpd</td><td>139393</td><td>0.323</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7270v3 WAP ftpd</td><td>118291</td><td>0.274</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7270v2 WAP ftpd</td><td>95847</td><td>0.222</td></tr>
+<tr><td>ftp</td><td>Dreambox ftpd</td><td>82484</td><td>0.191</td></tr>
+<tr><td>ftp</td><td>oftpd</td><td>76233</td><td>0.177</td></tr>
+<tr><td>ftp</td><td>Synology DiskStation NAS ftpd</td><td>68472</td><td>0.159</td></tr>
+<tr><td>ftp</td><td>Symantec Raptor Firewall ftpd</td><td>68223</td><td>0.158</td></tr>
+<tr><td>ftp</td><td>Gene6 ftpd</td><td>64170</td><td>0.149</td></tr>
+<tr><td>ftp</td><td>HP JetDirect ftpd</td><td>48238</td><td>0.112</td></tr>
+<tr><td>ftp</td><td>DrayTek Vigor router ftpd</td><td>47190</td><td>0.109</td></tr>
+<tr><td>ftp</td><td>Muddleftpd</td><td>42701</td><td>0.099</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7240 WAP ftpd</td><td>42499</td><td>0.099</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7320 WAP ftpd</td><td>41420</td><td>0.096</td></tr>
+<tr><td>ftp</td><td>SurgeFTPd</td><td>41218</td><td>0.096</td></tr>
+<tr><td>ftp</td><td>tnftpd</td><td>39664</td><td>0.092</td></tr>
+<tr><td>ftp</td><td>Solaris ftpd</td><td>38915</td><td>0.09</td></tr>
+<tr><td>mongodb</td><td>MongoDB</td><td>35196</td><td>0.082</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7170 WAP ftpd</td><td>34910</td><td>0.081</td></tr>
+<tr><td>ftp</td><td>DrayTek Vigor 2820 ADSL router ftpd</td><td>30486</td><td>0.071</td></tr>
+<tr><td>http</td><td></td><td>28708</td><td>0.067</td></tr>
+<tr><td>ftp</td><td>Tornado vxWorks ftpd</td><td>27426</td><td>0.064</td></tr>
+<tr><td>ftp</td><td>Billion 741GE ADSL router</td><td>26687</td><td>0.062</td></tr>
+<tr><td>ftp</td><td>Xavi 7768 WAP ftpd</td><td>25505</td><td>0.059</td></tr>
+<tr><td>ftp</td><td>ZyXEL ZXDSL 831CII ADSL modem telnetd</td><td>25380</td><td>0.059</td></tr>
+<tr><td>ftp</td><td>HP LaserJet P4014 printer ftpd</td><td>24715</td><td>0.057</td></tr>
+<tr><td>ftp</td><td>Kiss DP-558 PVR ftpd</td><td>24025</td><td>0.056</td></tr>
+<tr><td>ftp</td><td>Brother/HP printer ftpd</td><td>23782</td><td>0.055</td></tr>
+<tr><td>ftp</td><td>NET Disk/NetStore ftpd</td><td>22618</td><td>0.052</td></tr>
+<tr><td>ftp</td><td>WS FTPd</td><td>21000</td><td>0.049</td></tr>
+<tr><td>ftp</td><td>Nepenthes HoneyTrap fake vulnerable ftpd</td><td>18776</td><td>0.044</td></tr>
+<tr><td>ftp</td><td>OpenBSD ftpd</td><td>17777</td><td>0.041</td></tr>
+<tr><td>ftp</td><td>Wind River FTP server</td><td>17125</td><td>0.04</td></tr>
+<tr><td>ftp</td><td>MegaBit Gear ftpd</td><td>17122</td><td>0.04</td></tr>
+<tr><td>ftp</td><td>TRENDnet/Hawking webcam ftpd</td><td>15733</td><td>0.036</td></tr>
+<tr><td>ftp</td><td>Dionaea honeypot ftpd</td><td>14501</td><td>0.034</td></tr>
+<tr><td>ftp</td><td>Tenor Multipath Switch ftpd</td><td>13421</td><td>0.031</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box 6360 cable modem ftpd</td><td>13335</td><td>0.031</td></tr>
+<tr><td>ftp</td><td>Microsoft IIS ftpd</td><td>13097</td><td>0.03</td></tr>
+<tr><td>ftp</td><td>Multitech MultiVoip 410 VoIP gateway ftpd</td><td>13023</td><td>0.03</td></tr>
+<tr><td>ssl</td><td>SSLv3</td><td>12690</td><td>0.029</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box WLAN 3370 WAP ftpd</td><td>11479</td><td>0.027</td></tr>
+<tr><td>ftp</td><td>Mac OS X Server ftpd</td><td>11073</td><td>0.026</td></tr>
+<tr><td>ftp</td><td>zFTPServer</td><td>9577</td><td>0.022</td></tr>
+<tr><td>ftp</td><td>IBM OS/400 FTPd</td><td>9101</td><td>0.021</td></tr>
+<tr><td>ftp</td><td>TYPSoft ftpd</td><td>8913</td><td>0.021</td></tr>
+<tr><td>ftp</td><td>ProFTPD or KnFTPD</td><td>8760</td><td>0.02</td></tr>
+<tr><td>ftp</td><td>Cerberus FTP Server</td><td>8732</td><td>0.02</td></tr>
+<tr><td>ftp</td><td>HP FTP Print Server</td><td>8437</td><td>0.02</td></tr>
+<tr><td>ftp</td><td>TwoFTPd</td><td>8407</td><td>0.019</td></tr>
+<tr><td>ftp</td><td>AD Network Video Dedicated Micros DVR ftpd</td><td>8385</td><td>0.019</td></tr>
+<tr><td>ftp</td><td>WU-FTPD or MIT Kerberos ftpd</td><td>7904</td><td>0.018</td></tr>
+<tr><td>ftp</td><td>WarFTPd</td><td>7684</td><td>0.018</td></tr>
+<tr><td>ftp</td><td>BetaFTPd</td><td>7659</td><td>0.018</td></tr>
+<tr><td>ftp</td><td>BSD ftpd</td><td>6564</td><td>0.015</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7360SL WAP ftpd</td><td>6327</td><td>0.015</td></tr>
+<tr><td>ftp</td><td>Rumpus ftpd</td><td>6249</td><td>0.014</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box WLAN 3270 WAP ftpd</td><td>5933</td><td>0.014</td></tr>
+<tr><td>ftp</td><td>Xlight ftpd</td><td>5919</td><td>0.014</td></tr>
+<tr><td>ftp</td><td>ACLogic CesarFTPd</td><td>5910</td><td>0.014</td></tr>
+<tr><td>ftp</td><td>Trolltech Troll-FTPd</td><td>5908</td><td>0.014</td></tr>
+<tr><td>ftp</td><td>Rhinosoft Serv-U FTP</td><td>5567</td><td>0.013</td></tr>
+<tr><td>ftp</td><td>Konica Minolta bizhub printer ftpd</td><td>5448</td><td>0.013</td></tr>
+<tr><td>ftp</td><td>NET+OS ftpd</td><td>5390</td><td>0.013</td></tr>
+<tr><td>ftp</td><td>Balance Servers TCAdmin game hosting ftpd</td><td>5375</td><td>0.012</td></tr>
+<tr><td>ftp</td><td>Quick 'n Easy ftpd</td><td>5328</td><td>0.012</td></tr>
+<tr><td>ssh</td><td>Dropbear sshd</td><td>5199</td><td>0.012</td></tr>
+<tr><td>ftp</td><td>Treck Embedded ftpd</td><td>4963</td><td>0.012</td></tr>
+<tr><td>ftp</td><td>HP-UX or AIX ftpd</td><td>4863</td><td>0.011</td></tr>
+<tr><td>ftp</td><td>ZyWALL USG 100 firewall ftpd</td><td>4643</td><td>0.011</td></tr>
+<tr><td>ftp</td><td>Nucleus ftpd</td><td>4508</td><td>0.01</td></tr>
+<tr><td>ftp</td><td>HTC P4000 PDA/Phone ftpd</td><td>4462</td><td>0.01</td></tr>
+<tr><td>ftp</td><td>ADI Convergence Galaxy update ftpd</td><td>4433</td><td>0.01</td></tr>
+<tr><td>ftp</td><td>Titan ftpd</td><td>4302</td><td>0.01</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7570vDSL WAP ftpd</td><td>4175</td><td>0.01</td></tr>
+<tr><td>ftp</td><td>Topfield TF7100HDPVRt DVR ftpd</td><td>4161</td><td>0.01</td></tr>
+<tr><td>ftp</td><td>ZyWALL USG 20 firewall ftpd</td><td>4039</td><td>0.009</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7270v1 WAP ftpd</td><td>3727</td><td>0.009</td></tr>
+<tr><td>ftp</td><td>Net Administration Divisions ftpd</td><td>3676</td><td>0.009</td></tr>
+<tr><td>ftp-proxy</td><td>UserGate ftpd</td><td>3615</td><td>0.008</td></tr>
+<tr><td>ftp</td><td>Telindus ftpd</td><td>3540</td><td>0.008</td></tr>
+<tr><td>ftp</td><td>APC AOS ftpd</td><td>3534</td><td>0.008</td></tr>
+<tr><td>ftp</td><td>Guild ftpd</td><td>3460</td><td>0.008</td></tr>
+<tr><td>ftp</td><td>Polycom VSX 8000 ftpd</td><td>3348</td><td>0.008</td></tr>
+<tr><td>ftp</td><td>Netgear 3500L WAP ftpd</td><td>3299</td><td>0.008</td></tr>
+<tr><td>ssh</td><td>OpenSSH</td><td>3277</td><td>0.008</td></tr>
+<tr><td>ftp-proxy</td><td>Frox ftp proxy</td><td>3235</td><td>0.008</td></tr>
+<tr><td>ftp</td><td>ZyXEL ZXDSL 831II ADSL modem telnetd</td><td>3170</td><td>0.007</td></tr>
+<tr><td>ftp</td><td>Texas Imperial Software WFTPD</td><td>2952</td><td>0.007</td></tr>
+<tr><td>ftp</td><td>Draytek ADSL router ftpd</td><td>2921</td><td>0.007</td></tr>
+<tr><td>ftp</td><td>Microsoft FTP Service</td><td>2852</td><td>0.007</td></tr>
+<tr><td>ftp</td><td>D-Link Printer Server ftpd</td><td>2775</td><td>0.006</td></tr>
+<tr><td>ftp</td><td>Comtrend FTP firmware update utility</td><td>2760</td><td>0.006</td></tr>
+<tr><td>ftp</td><td>Sun Solaris 8 ftpd</td><td>2688</td><td>0.006</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7360 WAP ftpd</td><td>2640</td><td>0.006</td></tr>
+<tr><td>ftp</td><td>NetBSD lukemftpd</td><td>2550</td><td>0.006</td></tr>
+<tr><td>chat</td><td>AIM or ICQ server</td><td>2545</td><td>0.006</td></tr>
+<tr><td>telnet</td><td>Linux telnetd</td><td>2433</td><td>0.006</td></tr>
+<tr><td>ftp</td><td>OEM FTPD 1.01</td><td>2407</td><td>0.006</td></tr>
+<tr><td>ftp</td><td>AMX NetLinx A/V control system ftpd</td><td>2380</td><td>0.006</td></tr>
+<tr><td>ftp</td><td>NET+ARM ftpd</td><td>2360</td><td>0.005</td></tr>
+<tr><td>ftp</td><td>Golden ftpd</td><td>2306</td><td>0.005</td></tr>
+<tr><td>ftp</td><td>Axis 214 PTZ Network Camera ftpd</td><td>2300</td><td>0.005</td></tr>
+<tr><td>ftp</td><td>Synolgy NAS ftpd</td><td>2289</td><td>0.005</td></tr>
+<tr><td>ftp</td><td>FreeFTPd</td><td>2280</td><td>0.005</td></tr>
+<tr><td>ftp</td><td>SlimFTPd</td><td>2225</td><td>0.005</td></tr>
+<tr><td>ftp</td><td>NetWare NWFTPD</td><td>2157</td><td>0.005</td></tr>
+<tr><td>ftp</td><td>pSOSystem ftpd</td><td>2106</td><td>0.005</td></tr>
+<tr><td>smtp</td><td>Cisco PIX sanitized smtpd</td><td>2004</td><td>0.005</td></tr>
+<tr><td>ftp</td><td>WAR-FTPD</td><td>1992</td><td>0.005</td></tr>
+<tr><td>ftp-proxy</td><td>AnalogX FTP proxy</td><td>1914</td><td>0.004</td></tr>
+<tr><td>ftp</td><td>ZyWALL USG 200 firewall ftpd</td><td>1862</td><td>0.004</td></tr>
+<tr><td>ftp</td><td>Actiontec router ftpd</td><td>1707</td><td>0.004</td></tr>
+<tr><td>http-proxy</td><td>Squid http proxy</td><td>1667</td><td>0.004</td></tr>
+<tr><td>ftp</td><td>Sonic FTP Server</td><td>1643</td><td>0.004</td></tr>
+<tr><td>ftp</td><td>Lexmark Pro800-Pro900 series printer ftpd</td><td>1598</td><td>0.004</td></tr>
+<tr><td>ftp</td><td>Intel NetportExpress print server ftpd</td><td>1597</td><td>0.004</td></tr>
+<tr><td>ftp</td><td>stupid-ftpd</td><td>1554</td><td>0.004</td></tr>
+<tr><td>ftp</td><td>GuildFTPd</td><td>1530</td><td>0.004</td></tr>
+<tr><td>ftp</td><td>WinFtpd</td><td>1507</td><td>0.003</td></tr>
+<tr><td>ftp-proxy</td><td>JanaServer ftp proxy</td><td>1497</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>ZyXEL ZyWALL USG 20 firewall ftpd</td><td>1493</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>Wing FTP Server</td><td>1473</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>ZyWALL USG 300 firewall ftpd</td><td>1433</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>ZyXEL ZyWALL USG 100 firewall ftpd</td><td>1370</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>Personal FTPd</td><td>1364</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>ZyWALL USG 50 firewall ftpd</td><td>1359</td><td>0.003</td></tr>
+<tr><td>http</td><td>lighttpd</td><td>1342</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>Aastra A150 VoIP phone ftpd</td><td>1308</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>Communigate Pro ftpd</td><td>1301</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>Axis M1011 Network Camera ftpd</td><td>1257</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>ArGoSoft ftpd</td><td>1212</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>PacketShaper ftpd</td><td>1196</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>GlobalSCAPE Secure FTPd</td><td>1162</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>Heimdal Kerberized ftpd</td><td>1128</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>Vivotek 3102 Camera ftpd</td><td>1126</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>Lexmark T640 printer ftpd</td><td>1124</td><td>0.003</td></tr>
+<tr><td>ftp-proxy</td><td>jftpgw ftp proxy</td><td>1122</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>Axis 2100 Network Camera ftpd</td><td>1118</td><td>0.003</td></tr>
+<tr><td>http</td><td>Apache</td><td>1093</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>Blackjumbodog FTPd</td><td>1091</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>3Com 3CDaemon ftpd</td><td>1091</td><td>0.003</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 2022 ftpd</td><td>1072</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>CrushFTPd</td><td>1066</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>ALFTP</td><td>1065</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Panasonic WJ-HD316 Digital Disk Recorder</td><td>1056</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>National Instruments LabVIEW ftpd</td><td>1052</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Axis 213 PTZ Network Camera ftpd</td><td>1040</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Canon imageRUNNER 570 printer ftpd</td><td>1036</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Konica Minolta bizhub printer smtpd</td><td>1012</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7270 WAP ftpd</td><td>1011</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>RaidenFTPd</td><td>1007</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>ZyWALL USG 20W firewall ftpd</td><td>999</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Axis 215 PTZ Network Camera ftpd</td><td>995</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7340 WAP ftpd</td><td>994</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Dell 2330dn Laser Printer printer ftpd</td><td>979</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Sina ftpd</td><td>964</td><td>0.002</td></tr>
+<tr><td>ftp-proxy</td><td>Squid ftp proxy</td><td>963</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>ZyXEL ZyWALL USG 50 firewall ftpd</td><td>936</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Axis 207 Network Camera ftpd</td><td>930</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Axis 211 Network Camera ftpd</td><td>926</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>BlackMoon ftpd</td><td>921</td><td>0.002</td></tr>
+<tr><td>tcpwrapped</td><td>BSD TCP Wrappers</td><td>918</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>AXIS 241S Video Server ftpd</td><td>916</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Huawei Quidway AR28-09 WAP ftpd</td><td>909</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>IronPort firewall ftpd</td><td>869</td><td>0.002</td></tr>
+<tr><td>http</td><td>Microsoft IIS httpd</td><td>844</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Lexmark S300-S400 series printer ftpd</td><td>806</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Cisco 3000 series VPN ftpd</td><td>802</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Axis 206 Network Camera ftpd</td><td>791</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Axis 207W Network Camera ftpd</td><td>786</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Dell Color Laser 3110cn printer ftpd</td><td>785</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>inLighten iBox digital signage ftpd</td><td>770</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>ActiveFax ftpd</td><td>770</td><td>0.002</td></tr>
+<tr><td>http</td><td>AIM</td><td>749</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Axis M1031-W Network Camera ftpd</td><td>742</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Code-Crafters Ability ftpd</td><td>741</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Kyocera IB-21E print server ftpd</td><td>733</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Pablo's ftpd</td><td>730</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Dell 2350dn Laser Printer printer ftpd</td><td>722</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 2851 ftpd</td><td>693</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 2510 ftpd</td><td>688</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>BSDI/Unixware ftpd</td><td>685</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Axis 212 PTZ Network Camera ftpd</td><td>675</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Axis M1054 Network Camera ftpd</td><td>656</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>AXIS 241Q Video Server ftpd</td><td>652</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>Axis P1346 Network Camera ftpd</td><td>651</td><td>0.002</td></tr>
+<tr><td>ftp</td><td>APC ftp server</td><td>646</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Lexmark N2052 printer ftpd</td><td>639</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Axis 210 Network Camera ftpd</td><td>634</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Cisco ftpd</td><td>632</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>IBM OS/390 ftpd</td><td>625</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Lexmark S600 series printer ftpd</td><td>624</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>ZyXEL ZyWALL USG 200 firewall ftpd</td><td>610</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Axis Q1755 Network Camera ftpd</td><td>595</td><td>0.001</td></tr>
+<tr><td>nagios-nsca</td><td>Nagios NSCA</td><td>577</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Zebra print server ftpd</td><td>575</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Toshiba CTX PBX ftpd</td><td>567</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>MacOS X Server ftpd</td><td>561</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Canon NB-EC2 FTP Print Server</td><td>559</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Dell Color Laser 5110cn printer ftpd</td><td>554</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>MoreFTPd</td><td>549</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Canon imageRUNNER C2880 printer ftpd</td><td>540</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>ZyXEL ZyWALL USG 20W firewall ftpd</td><td>532</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Fastream IQ ftpd</td><td>531</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>ZyXEL ZyWALL USG 300 firewall ftpd</td><td>523</td><td>0.001</td></tr>
+<tr><td>ftp-proxy</td><td>Symantec Enterprise Firewall FTP proxy</td><td>520</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C4500 ftpd</td><td>510</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Dell 1720dn printer ftpd</td><td>506</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Generic WAP ftpd</td><td>502</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Blue Coat ftpd</td><td>501</td><td>0.001</td></tr>
+<tr><td>http</td><td>Sagem F@st router httpd</td><td>497</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>NetComm NS4000 Network Camera</td><td>496</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Axis 221 Network Camera ftpd</td><td>495</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Compaq Tru64 ftp server</td><td>493</td><td>0.001</td></tr>
+<tr><td>ftp-proxy</td><td>AVM KEN! ftp proxy</td><td>490</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Lexmark E260dn printer ftpd</td><td>490</td><td>0.001</td></tr>
+<tr><td>ftp-proxy</td><td>Zscaler ftp proxy</td><td>487</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Cerberus ftpd</td><td>477</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Dell MFP Laser 3115cn printer ftpd</td><td>476</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Lexmark E460dn printer ftpd</td><td>474</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Panasonic DP-1820E printer ftpd</td><td>469</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Tumbleweed SecureTransport ftpd</td><td>464</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>HP-UX ftpd</td><td>461</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Xerox Phaser 6280DN printer ftpd</td><td>453</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-1370DN printer ftpd</td><td>439</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Axis P1344 Network Camera ftpd</td><td>432</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Axis Q6032-E PTZ Dome Network Camera ftpd</td><td>428</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 6001 ftpd</td><td>423</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Xerox Phaser 6280N printer ftpd</td><td>422</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Lexmark Pro200-S500 series printer ftpd</td><td>421</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Lantronix MSS100 serial interface ftpd</td><td>419</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Axis 211M Network Camera ftpd</td><td>419</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>BusyBox ftpd</td><td>418</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Axis P3344 Fixed Dome Network Camera ftpd</td><td>414</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 2027 ftpd</td><td>404</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 171 ftpd</td><td>402</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>SpeedStream 5660 ADSL router</td><td>397</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 4001 ftpd</td><td>397</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Lexmark T650 printer ftpd</td><td>394</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>EFI Fiery ftpd</td><td>394</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 2000 ftpd</td><td>387</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Axis M1011-W Network Camera ftpd</td><td>386</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>FirstClass FTP server</td><td>383</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C2500 ftpd</td><td>380</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Axis 205 Network Camera ftpd</td><td>376</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Axis P1343 Network Camera ftpd</td><td>374</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 201 ftpd</td><td>372</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>CrossFTP java ftpd</td><td>371</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Global Cache GC-100 ftpd</td><td>370</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>AXIS 216FD camera ftpd</td><td>370</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Lexmark E360dn printer ftpd</td><td>365</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Lexmark N2050 printer ftpd</td><td>364</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 3010 ftpd</td><td>363</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Lexmark C544 printer ftpd</td><td>361</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>lukemftpd</td><td>354</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Adtec broadcast video ftpd</td><td>347</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>glFTPd</td><td>346</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Dell 3330dn Laser Printer printer ftpd</td><td>343</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Dell Laser Printer 5100cn ftpd</td><td>337</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Axis 210A Network Camera ftpd</td><td>337</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Motorola Canopy WAP ftpd</td><td>334</td><td>0.001</td></tr>
+<tr><td>ftp-proxy</td><td>Proxy602 ftp proxy</td><td>332</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Lexmark X464de printer ftpd</td><td>330</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>AXIS 240Q Video Server ftpd</td><td>330</td><td>0.001</td></tr>
+<tr><td>http</td><td>nginx</td><td>325</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C2050 ftpd</td><td>321</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Axis 2120 Network Camera ftpd</td><td>320</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 5001 ftpd</td><td>319</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 161 ftpd</td><td>316</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>DViCO TVIX 6500A set top box ftpd</td><td>316</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Sharp AR-NC5J printer ftpd</td><td>310</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Axis 207MW Network Camera ftpd</td><td>310</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Lexmark T630 printer ftpd</td><td>309</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>OkiLAN 8100e print server</td><td>307</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 3351 ftpd</td><td>305</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Lexmark T644 printer ftpd</td><td>304</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>EMC Scalable Network Accelerator ftpd</td><td>303</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Canon NB-EC3 FTP Print Server</td><td>303</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C5000 ftpd</td><td>296</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Axis M1114 Network Camera ftpd</td><td>296</td><td>0.001</td></tr>
+<tr><td>http-proxy</td><td>CCProxy http proxy</td><td>290</td><td>0.001</td></tr>
+<tr><td>http</td><td>Draytek Vigor ADSL router webadmin</td><td>290</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Canon imageRUNNER printer ftpd</td><td>289</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Lexmark T652 printer ftpd</td><td>287</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Sun Solaris 7 ftpd</td><td>277</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 2550 ftpd</td><td>277</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C2051 ftpd</td><td>274</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Sun SunOS ftpd</td><td>272</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7141 WAP ftpd</td><td>272</td><td>0.001</td></tr>
+<tr><td>http</td><td>Netwave IP camera http config</td><td>265</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C4501 ftpd</td><td>261</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>ZyWALL USG 1000 firewall ftpd</td><td>260</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>NetSilicon DPO-7300 ftpd</td><td>258</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Dell 1710n printer ftpd</td><td>253</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C4000 ftpd</td><td>250</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Axis P5534-E PTZ Dome Network Camera ftpd</td><td>247</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Axis P3343 Fixed Dome Network Camera ftpd</td><td>247</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-1128MFP printer ftpd</td><td>244</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C2800 ftpd</td><td>242</td><td>0.001</td></tr>
+<tr><td>inetd</td><td>Pure-FTPd under inetd</td><td>241</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Lexmark X544 printer ftpd</td><td>240</td><td>0.001</td></tr>
+<tr><td>telnet</td><td></td><td>239</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Dell 3100cn laser printer ftpd</td><td>239</td><td>0.001</td></tr>
+<tr><td>smtp</td><td>OpenBSD spamd</td><td>237</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Lexmark V310-V510 series printer ftpd</td><td>236</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Dell 5310n printer ftpd</td><td>234</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 2032 ftpd</td><td>233</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Lexmark X264dn printer ftpd</td><td>233</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Axis P5534 PTZ Dome Network Camera ftpd</td><td>233</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Dell 5210n printer ftpd</td><td>231</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-3900DN printer ftpd</td><td>230</td><td>0.001</td></tr>
+<tr><td>vnc</td><td>VNC</td><td>229</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-3920DN printer ftpd</td><td>228</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>VBrick 4300 video encoder ftpd</td><td>227</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>IBM OS/2 ftpd</td><td>227</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>BulletProof FTPd</td><td>226</td><td>0.001</td></tr>
+<tr><td>smtp</td><td></td><td>225</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Xitami ftpd</td><td>225</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>AXIS 225FD camera ftpd</td><td>224</td><td>0.001</td></tr>
+<tr><td>http</td><td>DrcomServer1.0</td><td>223</td><td>0.001</td></tr>
+<tr><td>http</td><td>Microsoft HTTPAPI httpd</td><td>220</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Witelcom router ftpd</td><td>220</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C2550 ftpd</td><td>219</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C3001 ftpd</td><td>218</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-1000D-series print server ftpd</td><td>217</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Axis M1113 Network Camera ftpd</td><td>217</td><td>0.001</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 5000 ftpd</td><td>214</td><td>0.0</td></tr>
+<tr><td>http</td><td>Boa HTTPd</td><td>213</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>LukemFTPD</td><td>213</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark C543 printer ftpd</td><td>213</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>AXIS 2400 Video Server ftpd</td><td>212</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>WinGate ftpd</td><td>211</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark E120n printer ftpd</td><td>206</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Cisco Wireless Control System ftpd</td><td>206</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Xerox Phaser 6180DN printer ftpd</td><td>204</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 2045e ftpd</td><td>204</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C5501 ftpd</td><td>203</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lumetrix Imaging Photometer ftpd</td><td>203</td><td>0.0</td></tr>
+<tr><td>sftp</td><td>ProFTPD mod_sftp</td><td>200</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C3000 ftpd</td><td>200</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Panasonic WV-NP1000 webcam ftpd</td><td>200</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Dell Color Laser 1320c printer ftpd</td><td>199</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis Q6035-E PTZ Dome Network Camera ftpd</td><td>198</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 4000 ftpd</td><td>195</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>DrayTek Vigor 2820n ADSL router sshd</td><td>194</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Xerox Phaser 6180N printer ftpd</td><td>194</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Argosy Research HD363N Network HDD ftpd</td><td>192</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis M3203 Fixed Dome Network Camera ftpd</td><td>191</td><td>0.0</td></tr>
+<tr><td>ssh</td><td></td><td>189</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Canon VB-C10/VB-C10R webcam ftpd</td><td>188</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Bulletproof ftp server</td><td>186</td><td>0.0</td></tr>
+<tr><td>http</td><td>uTorrent WebUI</td><td>185</td><td>0.0</td></tr>
+<tr><td>http</td><td>CCProxy</td><td>185</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark E352dn printer ftpd</td><td>185</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark C540 printer ftpd</td><td>185</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-C5100DN printer ftpd</td><td>185</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Zebra GK420d or GX430T printer ftpd</td><td>184</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Dell Laser Priner M5200 ftpd</td><td>184</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>vxTarget ftpd</td><td>183</td><td>0.0</td></tr>
+<tr><td>psql</td><td>Pervasive.SQL Server - Relational Engine</td><td>182</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark E250dn printer ftpd</td><td>181</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Belkin USB hub ftpd</td><td>175</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis 211A Network Camera ftpd</td><td>174</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C2551 ftpd</td><td>173</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Sambar ftpd</td><td>171</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ocean FTPd</td><td>171</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-4020DN printer ftpd</td><td>170</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-2300N printer ftpd</td><td>169</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>AXIS 2401 Video Server ftpd</td><td>169</td><td>0.0</td></tr>
+<tr><td>http</td><td>Apache Tomcat/Coyote JSP engine</td><td>167</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark Pro700 series printer ftpd</td><td>167</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark N2060 printer ftpd</td><td>164</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis Q6034-E PTZ Dome Network Camera ftpd</td><td>164</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 1515 ftpd</td><td>163</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X364dn printer ftpd</td><td>163</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C3501 ftpd</td><td>162</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Arcanesoft Vermillion ftpd</td><td>162</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>NetBotz network monitor ftpd</td><td>161</td><td>0.0</td></tr>
+<tr><td>ftp-proxy</td><td>Trend Micro InterScan Web Security Suite ftp proxy</td><td>159</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>AXIS 241QA Video Server ftpd</td><td>159</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark S800 series printer ftpd</td><td>157</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C4502 ftpd</td><td>155</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Canon iPF6100 printer ftpd</td><td>154</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Personal FTPd Professional</td><td>153</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis P1347 Network Camera ftpd</td><td>153</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis M5014 PTZ Dome Network Camera ftpd</td><td>153</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis 209FD Network Camera ftpd</td><td>153</td><td>0.0</td></tr>
+<tr><td>http</td><td>thttpd</td><td>151</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 7001 ftpd</td><td>151</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 2852 ftpd</td><td>150</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark T654 printer ftpd</td><td>150</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark C534 printer ftpd</td><td>149</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Synology CubeStation ftpd</td><td>147</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C3500 ftpd</td><td>147</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>pyftpdlib</td><td>147</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Canon NB-C2 FTP Print Server</td><td>147</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Star Micronics TSP828L printer ftpd</td><td>146</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-C5250DN printer ftpd</td><td>145</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Bitvise WinSSHD</td><td>144</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio SP C430DN ftpd</td><td>144</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C3300 ftpd</td><td>144</td><td>0.0</td></tr>
+<tr><td>http</td><td>GoAhead-Webs httpd</td><td>143</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 3350 ftpd</td><td>143</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>AXIS 2400+ Video Server ftpd</td><td>143</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Synchronet ftpd</td><td>142</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio SP C420DN ftpd</td><td>142</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C6501 ftpd</td><td>142</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 4500 ftpd</td><td>142</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 3245C ftpd</td><td>142</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis 2130 PTZ Network Camera ftpd</td><td>142</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>AXIS P3301 camera ftpd</td><td>141</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Seagate GoFlex NAS device sshd</td><td>139</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Dell 5230n Laser Printer printer ftpd</td><td>139</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>AXIS 216MFD camera ftpd</td><td>138</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C2030 ftpd</td><td>136</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis M3011 Network Camera ftpd</td><td>136</td><td>0.0</td></tr>
+<tr><td>http</td><td>Avtech AVN801 network camera</td><td>135</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>PowerLogic embedded device ftpd</td><td>135</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>WeOnlyDo sshd</td><td>133</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 3350B ftpd</td><td>133</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Dell 5350dn Laser Printer printer ftpd</td><td>133</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-C5300DN printer ftpd</td><td>132</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 2035e ftpd</td><td>129</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark T642 printer ftpd</td><td>129</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Canon NB-E2 FTP Print Server</td><td>128</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Panasonic WJ-HD220 ftpd</td><td>127</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Cisco Aironet BR500E WAP telnetd</td><td>125</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-C5350DN printer ftpd</td><td>125</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>AXIS M3014 camera ftpd</td><td>125</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-2020D printer ftpd</td><td>122</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Xerox Phaser 6125N printer ftpd</td><td>121</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 5500 ftpd</td><td>121</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis 211W Network Camera ftpd</td><td>121</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X204n printer ftpd</td><td>120</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark T632 printer ftpd</td><td>119</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Indy FTP server</td><td>118</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-2600N printer ftpd</td><td>116</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 4000B ftpd</td><td>116</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Digital UNIX ftpd</td><td>116</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis 223M Megapixel Network Camera ftpd</td><td>116</td><td>0.0</td></tr>
+<tr><td>http</td><td>Httpd</td><td>115</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-C5150DN printer ftpd</td><td>115</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Zoom ADSL modem</td><td>114</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 2550B ftpd</td><td>114</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark E450dn printer ftpd</td><td>114</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis P5532-E PTZ Dome Network Camera ftpd</td><td>114</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>vftpd</td><td>113</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis P5512-E PTZ Dome Network Camera ftpd</td><td>113</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>AXIS 243SA Video Server ftpd</td><td>113</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C5502 ftpd</td><td>111</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Core FTP Server</td><td>111</td><td>0.0</td></tr>
+<tr><td>pwdgen</td><td>pwdgen</td><td>110</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Nortel WfFTP</td><td>110</td><td>0.0</td></tr>
+<tr><td>openvpn</td><td>OpenVPN</td><td>109</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP AR-M351U printer ftpd</td><td>107</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 3045 ftpd</td><td>107</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X656de printer ftpd</td><td>106</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Dell 1700n printer ftpd</td><td>106</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis 2110 Network Camera ftpd</td><td>106</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-2000D printer ftpd</td><td>105</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis M3204 Fixed Dome Network Camera ftpd</td><td>104</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Draytek Vigor ADSL router telnetd</td><td>103</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X734de printer ftpd</td><td>103</td><td>0.0</td></tr>
+<tr><td>http</td><td>mini_httpd</td><td>102</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP AR-M258 printer ftpd</td><td>102</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark C782 printer ftpd</td><td>102</td><td>0.0</td></tr>
+<tr><td>http</td><td>Arvento-Server</td><td>101</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark Pro910 Series printer ftpd</td><td>101</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis Q6032-E Network Camera ftpd</td><td>101</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis M1103 Network Camera ftpd</td><td>101</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis 206W Network Camera ftpd</td><td>101</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-M350U printer ftpd</td><td>100</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-3100N printer ftpd</td><td>99</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Golden PRO ftpd</td><td>99</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Scala InfoChannel Player ftpd</td><td>98</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>BulletProof ftpd</td><td>98</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-M363N printer ftpd</td><td>97</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-3501N printer ftpd</td><td>97</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C3002 ftpd</td><td>97</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 5000B ftpd</td><td>97</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio CL4000DN ftpd</td><td>97</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>EasyFTP Server ftpd</td><td>97</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP AR-M451U printer ftpd</td><td>96</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Medusa Async ftpd</td><td>96</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis P3304 Fixed Dome Network Camera ftpd</td><td>96</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>XBFileZilla</td><td>95</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio SP C410DN ftpd</td><td>95</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-4000DN printer ftpd</td><td>95</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Infortrend EonStor A24F-G2430 ftpd</td><td>95</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>OKI BV1250 VoIP adapter ftpd</td><td>94</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Mabry FTPServX</td><td>94</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark C734 printer ftpd</td><td>94</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>wzdftpd</td><td>93</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Intermec PM4i printer ftpd</td><td>93</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>CVX ftpd</td><td>92</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio SP 4210N ftpd</td><td>91</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 8001 ftpd</td><td>91</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-1350DN printer ftpd</td><td>91</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X463de printer ftpd</td><td>90</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 3035 ftpd</td><td>89</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Netburner embedded device ftpd</td><td>89</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-1135MFP printer ftpd</td><td>89</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>ZyXEL ZXDSL 832CII ADSL modem telnetd</td><td>88</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Dell W5300 printer ftpd</td><td>88</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio SP 4100N ftpd</td><td>87</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 4002 ftpd</td><td>87</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 3352 ftpd</td><td>86</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark T430 printer ftpd</td><td>86</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>FreeFloat ftpd</td><td>86</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis P3346 Fixed Dome Network Camera ftpd</td><td>86</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 2352 ftpd</td><td>85</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-6025MFP printer ftpd</td><td>85</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Canon iN-E5 FTP Print Server</td><td>85</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>ZyXEL ZyWALL USG 1000 firewall ftpd</td><td>84</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 3025 ftpd</td><td>83</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark S310 Series printer ftpd</td><td>83</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Polycom VSX 7000A VoIP phone ftpd</td><td>82</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis M3114 Fixed Dome Network Camera ftpd</td><td>82</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>AXIS 241Q Video Server Blade ftpd</td><td>82</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>AXIS 2401+ Video Server ftpd</td><td>81</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Xerox Phaser 6130N printer ftpd</td><td>79</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio AP610N ftpd</td><td>79</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>FTPshell ftpd</td><td>79</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Dell Internal Wireless Adapter 1100 printer ftpd</td><td>79</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis network print server ftpd</td><td>79</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio SP 8200DN ftpd</td><td>77</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X543 printer ftpd</td><td>77</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Baby FTP Server</td><td>77</td><td>0.0</td></tr>
+<tr><td>ssl</td><td>TLS</td><td>76</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark C736 printer ftpd</td><td>76</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-C5200DN printer ftpd</td><td>76</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Linksys WRT54Gv5 WAP ftpd</td><td>75</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-5001N printer ftpd</td><td>74</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 6000 ftpd</td><td>74</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Nomadix AG 5000 ftpd</td><td>74</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Dell 5530dn Laser Printer printer ftpd</td><td>74</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Canon NB-C1 FTP Print Server</td><td>74</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Postfix smtpd</td><td>73</td><td>0.0</td></tr>
+<tr><td>mysql</td><td>MySQL</td><td>73</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 7500 ftpd</td><td>73</td><td>0.0</td></tr>
+<tr><td>ftp-proxy</td><td>WinGate ftp proxy</td><td>73</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-C5025N printer ftpd</td><td>73</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C6000 ftpd</td><td>72</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 2238C ftpd</td><td>72</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X736de printer ftpd</td><td>72</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-1028MFP printer ftpd</td><td>72</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio SP C411DN ftpd</td><td>71</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Welltech Wellgate VoIP adapter ftpd</td><td>70</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>UNIX System V Release 4.0 ftpd</td><td>70</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark C532 printer ftpd</td><td>70</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera Mita KM-2810 printer ftpd</td><td>70</td><td>0.0</td></tr>
+<tr><td>socks-proxy</td><td>Socks4A</td><td>69</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Dell Internal Wireless Adapter 1150 printer ftpd</td><td>69</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-2310U printer ftpd</td><td>68</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 3500 ftpd</td><td>68</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-C2126MFP printer ftpd</td><td>68</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark T656 printer ftpd</td><td>67</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis P1311 Network Camera ftpd</td><td>67</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-M453N printer ftpd</td><td>66</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-M350N printer ftpd</td><td>66</td><td>0.0</td></tr>
+<tr><td>ftp-proxy</td><td>FileCatalyst ftp proxy</td><td>66</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark T634 printer ftpd</td><td>66</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-9530DN printer ftpd</td><td>66</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-2610N printer ftpd</td><td>65</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark C530 printer ftpd</td><td>65</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-M452N printer ftpd</td><td>64</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-M260N printer ftpd</td><td>64</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C300 ftpd</td><td>64</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Easy File Sharing ftpd</td><td>64</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>CrushFTP</td><td>64</td><td>0.0</td></tr>
+<tr><td>http</td><td>uc-httpd</td><td>63</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C300SR ftpd</td><td>63</td><td>0.0</td></tr>
+<tr><td>ftp-proxy</td><td>NetApp NetCache ftp proxy</td><td>63</td><td>0.0</td></tr>
+<tr><td>http</td><td>TwistedWeb httpd</td><td>62</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-4101N printer ftpd</td><td>62</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X646e printer ftpd</td><td>62</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Dell Color Laser 3010cn printer ftpd</td><td>62</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Microsoft Exchange smtpd</td><td>61</td><td>0.0</td></tr>
+<tr><td>http</td><td>PDR-M800</td><td>61</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Xerox Phaser 6500DN printer ftpd</td><td>61</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>WinEggDrop ftpd</td><td>61</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-C311 printer ftpd</td><td>61</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP AR-M257 printer ftpd</td><td>61</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-3830N printer ftpd</td><td>61</td><td>0.0</td></tr>
+<tr><td>dominoconsole</td><td>Lotus Domino Console</td><td>61</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Sharp AR-M276 printer ftpd</td><td>60</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark C510 printer ftpd</td><td>60</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>AXIS 209MFD camera ftpd</td><td>60</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>CoreFTP sshd</td><td>59</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-M283N printer ftpd</td><td>59</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 5002 ftpd</td><td>59</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X342n printer ftpd</td><td>59</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Dell M5200 printer ftpd</td><td>59</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>AXIS 205 Network Video ftpd</td><td>59</td><td>0.0</td></tr>
+<tr><td>socks-proxy</td><td>CCProxy socks proxy</td><td>58</td><td>0.0</td></tr>
+<tr><td>http</td><td>Hikvision-Webs</td><td>57</td><td>0.0</td></tr>
+<tr><td>backdoor</td><td>Kibuv.b worm</td><td>57</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>AXIS 247S Video Server ftpd</td><td>56</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-2700N printer ftpd</td><td>55</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 1600 ftpd</td><td>55</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio SP C820DN ftpd</td><td>54</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-C5030N printer ftpd</td><td>54</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Fastream NETFile FTPd</td><td>54</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 3030 ftpd</td><td>53</td><td>0.0</td></tr>
+<tr><td>ftp-proxy</td><td>DeleGate ftp proxy</td><td>53</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X658de printer ftpd</td><td>53</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>IBM FTPSERVE</td><td>53</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis 206M Network Camera ftpd</td><td>53</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Xerver Free ftpd</td><td>52</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 2018D ftpd</td><td>52</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera Mita KM-2820 printer ftpd</td><td>52</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis P5522-E PTZ Dome Network Camera ftpd</td><td>52</td><td>0.0</td></tr>
+<tr><td>http</td><td>Boa httpd</td><td>51</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-M362N printer ftpd</td><td>51</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C2000 ftpd</td><td>51</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Microsoft ESMTP</td><td>50</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-M503N printer ftpd</td><td>50</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-M450N printer ftpd</td><td>50</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C3502 ftpd</td><td>50</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP AR-M207 printer ftpd</td><td>49</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio SP C320DN ftpd</td><td>49</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 2500 ftpd</td><td>49</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 3235C ftpd</td><td>49</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Libra ftpd</td><td>49</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark C792 printer ftpd</td><td>49</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-C5015N printer ftpd</td><td>49</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio CL3500N ftpd</td><td>48</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 2075 ftpd</td><td>48</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X642e printer ftpd</td><td>48</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark C500 printer ftpd</td><td>48</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Pro 907EX ftpd</td><td>47</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 2020D ftpd</td><td>47</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>InterScan VirusWall ftpd</td><td>47</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Dell V520 Series printer ftpd</td><td>47</td><td>0.0</td></tr>
+<tr><td>directconnect</td><td>Direct Connect P2P</td><td>47</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>Tinyproxy</td><td>46</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Xerox Phaser 6500N printer ftpd</td><td>46</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>IndiFTPD</td><td>46</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>AudioVault ftpd</td><td>46</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark T520 printer ftpd</td><td>45</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis Q1604 Network Camera ftpd</td><td>45</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>smallftpd</td><td>44</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Plan 9 ftpd</td><td>44</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X738de printer ftpd</td><td>44</td><td>0.0</td></tr>
+<tr><td>vnc</td><td>RealVNC Enterprise</td><td>43</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>ZyXEL ZyWALL USG 2000 firewall ftpd</td><td>43</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>ZyWALL USG 2000 firewall ftpd</td><td>43</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-3110N printer ftpd</td><td>43</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio SP 4310N ftpd</td><td>43</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio AP410N ftpd</td><td>43</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>OkiDATA OkiLAN 8450e print server ftpd</td><td>43</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-C5400DN printer ftpd</td><td>43</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-3140MFP printer ftpd</td><td>43</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>AXIS 282 Video Server ftpd</td><td>43</td><td>0.0</td></tr>
+<tr><td>http</td><td>DD-WRT milli_httpd</td><td>42</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP AR-M318 printer ftpd</td><td>42</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 3228C ftpd</td><td>42</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Oracle XML DB ftpd</td><td>42</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark E332n printer ftpd</td><td>42</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Dell 3335dn Laser MFP printer ftpd</td><td>42</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>MikroTik RouterOS sshd</td><td>41</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio SP 4100NL ftpd</td><td>41</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 9001 ftpd</td><td>41</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Crob FTPd</td><td>41</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Cisco Site Selector ftpd</td><td>41</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis M1104 Network Camera ftpd</td><td>41</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>AXIS 5400+ (rev 2) print server ftpd</td><td>41</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP AR-M355N printer ftpd</td><td>40</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 6500 ftpd</td><td>40</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark Pro710 Series printer ftpd</td><td>40</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 301 ftpd</td><td>39</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark E240n printer ftpd</td><td>39</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP C4500/LD445c ftpd</td><td>39</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-C8020MFP printer ftpd</td><td>39</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>IBM Infoprint 1226 ftpd</td><td>39</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Hioki HiCorder 8855 ftpd</td><td>39</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Conti ftpd</td><td>39</td><td>0.0</td></tr>
+<tr><td>http</td><td>Cross Web Server</td><td>38</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 1035 ftpd</td><td>38</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-3820N printer ftpd</td><td>38</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Infortrend EonStor S12F-G1420 ftpd</td><td>38</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis P5512 PTZ Dome Network Camera ftpd</td><td>38</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Exim smtpd</td><td>37</td><td>0.0</td></tr>
+<tr><td>http</td><td>GoAhead-Webs</td><td>37</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-M260 printer ftpd</td><td>37</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP AR-M550N printer ftpd</td><td>37</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark Pro 1 printer ftpd</td><td>37</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-2025D printer ftpd</td><td>37</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis P5522 PTZ Dome Network Camera ftpd</td><td>37</td><td>0.0</td></tr>
+<tr><td>http</td><td>UserGate http report area</td><td>36</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-M310N printer ftpd</td><td>36</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-4501N printer ftpd</td><td>36</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Sharp AR-M237 printer ftpd</td><td>36</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C305 ftpd</td><td>36</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 8000 ftpd</td><td>36</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 7000 ftpd</td><td>36</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis M5013 PTZ Dome Network Camera ftpd</td><td>36</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>AXIS 5400+ print server ftpd</td><td>36</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>3Com ftpd</td><td>36</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Pro 1107EX ftpd</td><td>35</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark Optra T612 printer ftpd</td><td>35</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark C935 printer ftpd</td><td>35</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Hummingbird ftpd</td><td>35</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-2010U printer ftpd</td><td>34</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP AR-M455N printer ftpd</td><td>34</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 3224C ftpd</td><td>34</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Overland Storage Neo2000 ftpd</td><td>34</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X363dn printer ftpd</td><td>34</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark T522 printer ftpd</td><td>34</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP C3300/LD533C ftpd</td><td>34</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-C5020N printer ftpd</td><td>34</td><td>0.0</td></tr>
+<tr><td>upnp</td><td>Microsoft Windows UPnP</td><td>33</td><td>0.0</td></tr>
+<tr><td>http</td><td>Mbedthis-Appweb</td><td>33</td><td>0.0</td></tr>
+<tr><td>http</td><td>Jetty</td><td>33</td><td>0.0</td></tr>
+<tr><td>http</td><td>GoAhead-Webs embedded httpd</td><td>33</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio SP C811DN ftpd</td><td>33</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark C780 printer ftpd</td><td>33</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>AXIS 5600+ (rev 3) print server ftpd</td><td>33</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Cisco SSH</td><td>32</td><td>0.0</td></tr>
+<tr><td>http</td><td>GeoVision GeoHttpServer for webcams</td><td>32</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 1022 ftpd</td><td>32</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>OkiDATA OkiLAN 8300e print server ftpd</td><td>32</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X546 printer ftpd</td><td>32</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark T620 printer ftpd</td><td>32</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark E342n printer ftpd</td><td>32</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>KarjaSoft Sami ftpd</td><td>32</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Dreambox media device telnetd</td><td>31</td><td>0.0</td></tr>
+<tr><td>http</td><td>Gadspot/Avtech AV787 webcam http config</td><td>31</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Sharp MX-M753N printer ftpd</td><td>31</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-M550N printer ftpd</td><td>31</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio CL7200 ftpd</td><td>31</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 3232C ftpd</td><td>31</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 2051 ftpd</td><td>31</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 2015 ftpd</td><td>31</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Solar FTP Server</td><td>30</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-M450U printer ftpd</td><td>30</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio SP 4110N ftpd</td><td>30</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>NRG DSm725 printer ftpd</td><td>30</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X652de printer ftpd</td><td>30</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>ftpd.bin round-robin file server</td><td>30</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis P5532 PTZ Dome Network Camera ftpd</td><td>30</td><td>0.0</td></tr>
+<tr><td>svnserve</td><td>Subversion</td><td>29</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>USRobotics SureConnect ADSL router ftpd</td><td>29</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-3500N printer ftpd</td><td>29</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 1045 ftpd</td><td>29</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>NetPresenz</td><td>29</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark Optra S 1855 printer ftpd</td><td>29</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark C522 printer ftpd</td><td>29</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Konica Minolta printer ftpd</td><td>29</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-4100N printer ftpd</td><td>28</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio SP C821DN ftpd</td><td>28</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>NRG DSm415 printer ftpd</td><td>28</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark S510 Series printer ftpd</td><td>28</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP C2500/LD425c ftpd</td><td>28</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Infotec IS 2320 ftpd</td><td>28</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Dell V720 Series printer ftpd</td><td>28</td><td>0.0</td></tr>
+<tr><td>http</td><td>Netgear DG834G router http config</td><td>27</td><td>0.0</td></tr>
+<tr><td>http</td><td>Buffalo AirStation http config</td><td>27</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C5502A ftpd</td><td>27</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 2018 ftpd</td><td>27</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X792 printer ftpd</td><td>27</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark Pro5500 Series printer ftpd</td><td>27</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier LD122 ftpd</td><td>27</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>FRITZ!Box Fon WLAN 7140 WAP ftpd</td><td>27</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis Q6035 PTZ Dome Network Camera ftpd</td><td>27</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis M1014 Fixed Network Camera ftpd</td><td>27</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>AXIS 241SA Video Server ftpd</td><td>27</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Alcatel-Lucent ESS 7450 router ftpd</td><td>27</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Trend Micro InterScan</td><td>26</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Xerox FreeFlow Accxess ftpd</td><td>26</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-B401 printer ftpd</td><td>26</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio SP C431DN ftpd</td><td>26</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C7501 ftpd</td><td>26</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 2060 ftpd</td><td>26</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>NRG DSm622 printer ftpd</td><td>26</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP 4000/LD040 ftpd</td><td>26</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-C2026MFP printer ftpd</td><td>26</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-6030MFP printer ftpd</td><td>26</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>IBM Infoprint 1332 ftpd</td><td>26</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Humax iHDR-5050C DVR ftpd</td><td>26</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Canon NB-5F FTP Print Server</td><td>26</td><td>0.0</td></tr>
+<tr><td>http</td><td>siyou server</td><td>25</td><td>0.0</td></tr>
+<tr><td>http</td><td>Intoto httpd</td><td>25</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Zope Medusa ftpd</td><td>25</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 2232C ftpd</td><td>25</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 1060 ftpd</td><td>25</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X466de printer ftpd</td><td>25</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-3640MFP printer ftpd</td><td>25</td><td>0.0</td></tr>
+<tr><td>xml</td><td></td><td>24</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Xerox Phaser 6140N printer ftpd</td><td>24</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Silex SX-2000U2 USB server ftpd</td><td>24</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-M363U printer ftpd</td><td>24</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-M200D printer ftpd</td><td>24</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 1075 ftpd</td><td>24</td><td>0.0</td></tr>
+<tr><td>ftp-proxy</td><td>Generic FTP proxy</td><td>24</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Perception LiteServe ftpd</td><td>24</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X954 printer ftpd</td><td>24</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X2031e printer ftpd</td><td>24</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP 6001/LD360 ftpd</td><td>24</td><td>0.0</td></tr>
+<tr><td>http</td><td>micro_httpd</td><td>23</td><td>0.0</td></tr>
+<tr><td>http</td><td>DVR Systems webcam http interface</td><td>23</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-2300FG printer ftpd</td><td>23</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>OkiDATA OkiLAN 8100e print server ftpd</td><td>23</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Motorola/Symbol WS2000 WAP ftpd</td><td>23</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X654de printer ftpd</td><td>23</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X203n printer ftpd</td><td>23</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X2011e printer ftpd</td><td>23</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark W840 printer ftpd</td><td>23</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier LD135 ftpd</td><td>23</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-C8025MFP printer ftpd</td><td>23</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis Q6034 PTZ Dome Network Camera ftpd</td><td>23</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis M3113 Fixed Dome Network Camera ftpd</td><td>23</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Aironet BR500E wireless bridge ftpd</td><td>23</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>FreeProxy http proxy</td><td>22</td><td>0.0</td></tr>
+<tr><td>http</td><td>http server 1.0</td><td>22</td><td>0.0</td></tr>
+<tr><td>http</td><td>Dreambox httpd</td><td>22</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Silex SX-3000GB USB server ftpd</td><td>22</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-M620N printer ftpd</td><td>22</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-5111N printer ftpd</td><td>22</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP AR-M256 printer ftpd</td><td>22</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Sharp AR-M236 printer ftpd</td><td>22</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X644e printer ftpd</td><td>22</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier LP226c/SP C410 ftpd</td><td>22</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier LP125cx/LP126cn ftpd</td><td>22</td><td>0.0</td></tr>
+<tr><td>vtun</td><td>Vtun Virtual Tunnel</td><td>21</td><td>0.0</td></tr>
+<tr><td>vnc</td><td></td><td>21</td><td>0.0</td></tr>
+<tr><td>http</td><td>Datum</td><td>21</td><td>0.0</td></tr>
+<tr><td>http</td><td>AIM HTTP</td><td>21</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP AR-M620N printer ftpd</td><td>21</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Roland plotter print server ftpd</td><td>21</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 1027 ftpd</td><td>21</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Dell S2500 printer ftpd</td><td>21</td><td>0.0</td></tr>
+<tr><td>vnc-http</td><td>RealVNC</td><td>20</td><td>0.0</td></tr>
+<tr><td>http</td><td>Transmission BitTorrent management httpd</td><td>20</td><td>0.0</td></tr>
+<tr><td>http</td><td>LuCI Lua http config</td><td>20</td><td>0.0</td></tr>
+<tr><td>http</td><td>CrushFTP httpd</td><td>20</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 6002 ftpd</td><td>20</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>OkiDATA OkiLAN 8500e print server ftpd</td><td>20</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X864de printer ftpd</td><td>20</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark E462dtn printer ftpd</td><td>20</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera Mita TASKalfa 300ci printer ftpd</td><td>20</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>DrayTek Vigor 2820n ADSL router ftpd</td><td>20</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis Q1602 Network Camera ftpd</td><td>20</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>AXIS 5600+ print server ftpd</td><td>20</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>AXIS 241S Video Server Blade ftpd</td><td>20</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>AXIS 2411 Video Server ftpd</td><td>20</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>AXIS 1650 print server ftpd</td><td>20</td><td>0.0</td></tr>
+<tr><td>arcserve</td><td>ARCserve Discovery</td><td>20</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Silex SX-1000U USB server ftpd</td><td>19</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-M453U printer ftpd</td><td>19</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Sharp AR-M277 printer ftpd</td><td>19</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Savin 8055 printer ftpd</td><td>19</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>NetTerm ftpd</td><td>19</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark W850 printer ftpd</td><td>19</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark T420 printer ftpd</td><td>19</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark Optra T610 printer ftpd</td><td>19</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP 161/LD016 ftpd</td><td>19</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier LD145 ftpd</td><td>19</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-6970DN printer ftpd</td><td>19</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-1035MFP printer ftpd</td><td>19</td><td>0.0</td></tr>
+<tr><td>rsync</td><td></td><td>18</td><td>0.0</td></tr>
+<tr><td>pop3</td><td>qmail pop3d</td><td>18</td><td>0.0</td></tr>
+<tr><td>pop3-proxy</td><td>WinProxy pop3 proxy</td><td>18</td><td>0.0</td></tr>
+<tr><td>http</td><td>TeamViewer httpd</td><td>18</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Sharp MX-M623N printer ftpd</td><td>18</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-B402SC printer ftpd</td><td>18</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-B402 printer ftpd</td><td>18</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-2310F printer ftpd</td><td>18</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-2301N printer ftpd</td><td>18</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP AR-208D printer ftpd</td><td>18</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio SP 6330N ftpd</td><td>18</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C5501A ftpd</td><td>18</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C4502A ftpd</td><td>18</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>NRG DSm618d printer ftpd</td><td>18</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark C950 printer ftpd</td><td>18</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP C5000/LD550C ftpd</td><td>18</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP C3500/LD435c ftpd</td><td>18</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP 2550/LD425 ftpd</td><td>18</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>IronPort WSA firewall ftpd</td><td>18</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>IBM Infoprint 1352 ftpd</td><td>18</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>GlobalSCAPE CuteFTPd</td><td>18</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis M1013 Fixed Network Camera ftpd</td><td>18</td><td>0.0</td></tr>
+<tr><td>vnc</td><td>RealVNC Personal</td><td>17</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>SunSSH</td><td>17</td><td>0.0</td></tr>
+<tr><td>soap</td><td>gSOAP soap</td><td>17</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Sendmail</td><td>17</td><td>0.0</td></tr>
+<tr><td>http</td><td>RemotelyAnywhere remote PC management httpd</td><td>17</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>MikroTik http proxy</td><td>17</td><td>0.0</td></tr>
+<tr><td>http-proxy</td><td>F5 BIG-IP load balancer http proxy</td><td>17</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio SP 5210SR ftpd</td><td>17</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 1232C ftpd</td><td>17</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X945e printer ftpd</td><td>17</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X548 printer ftpd</td><td>17</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark S410 Series printer ftpd</td><td>17</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark Optra S 1255 printer ftpd</td><td>17</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP C2050/LD520C ftpd</td><td>17</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP 5001/LD150 ftpd</td><td>17</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-C8500DN printer ftpd</td><td>17</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-9130DN printer ftpd</td><td>17</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Infortrend EonStor S12F-G1433 ftpd</td><td>17</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Freebox ftpd</td><td>17</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Cisco 1721 router telnetd</td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>Z/0.1</td><td>16</td><td>0.0</td></tr>
+<tr><td>http</td><td>Beck IPC@CHIP embedded httpd</td><td>16</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>ZyXEL ZXDSL 831 ADSL modem telnetd</td><td>16</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Windows Ftp Server</td><td>16</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Silex C-6700WG USB server ftpd</td><td>16</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-C401 printer ftpd</td><td>16</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-4111N printer ftpd</td><td>16</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Pro 906EX ftpd</td><td>16</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio SP 5200S ftpd</td><td>16</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C7500 ftpd</td><td>16</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark C524 printer ftpd</td><td>16</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP 5000/LD050 ftpd</td><td>16</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>berretz.de mini-ftpd</td><td>16</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis P3364 Fixed Dome Network Camera ftpd</td><td>16</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis 230 MPEG-2 Network Camera ftpd</td><td>16</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>Netgear broadband router or ZyXel VoIP adapter telnetd</td><td>15</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>SCS sshd</td><td>15</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Communigate Pro SMTP</td><td>15</td><td>0.0</td></tr>
+<tr><td>http</td><td>dcs-lig-httpd</td><td>15</td><td>0.0</td></tr>
+<tr><td>honeypot</td><td>Network Flight Recorder BackOfficer Friendly honeypot</td><td>15</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP AR-M550U printer ftpd</td><td>15</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Sharp AR-C260M or AR-M351N printer ftpd</td><td>15</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C4501A ftpd</td><td>15</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 2045 ftpd</td><td>15</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>ProFTPD FTP Server</td><td>15</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>OKI BV1260 VoIP adapter ftpd</td><td>15</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X422 printer ftpd</td><td>15</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark C925 printer ftpd</td><td>15</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP C2550/LD525C ftpd</td><td>15</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP 2000/LD320d ftpd</td><td>15</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier LD 620C ftpd</td><td>15</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-6950DN printer ftpd</td><td>15</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>IBM Infoprint 1552 ftpd</td><td>15</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Dell Wireless Printer Adapter 3300 printer ftpd</td><td>15</td><td>0.0</td></tr>
+<tr><td>ssl</td><td>TLSv1</td><td>14</td><td>0.0</td></tr>
+<tr><td>http</td><td>Ipswitch WS_FTP http config</td><td>14</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 2035 ftpd</td><td>14</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 2016 ftpd</td><td>14</td><td>0.0</td></tr>
+<tr><td>ftp-proxy</td><td>WinProxy FTP proxy</td><td>14</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark N7000e printer ftpd</td><td>14</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark C920 printer ftpd</td><td>14</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark C720 printer ftpd</td><td>14</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier LD245 ftpd</td><td>14</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier LD127 ftpd</td><td>14</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier LD015 ftpd</td><td>14</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-C2626MFP printer ftpd</td><td>14</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Dell 966 Internal Wireless/Ethernet Adapter printer ftpd</td><td>14</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Dell 5535dn Laser MFP printer ftpd</td><td>14</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis P3354 Fixed Dome Network Camera ftpd</td><td>14</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Axis M3005 Network Camera ftpd</td><td>14</td><td>0.0</td></tr>
+<tr><td>telnet</td><td>BusyBox telnetd</td><td>13</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Alt-N MDaemon mail server</td><td>13</td><td>0.0</td></tr>
+<tr><td>jabber</td><td>ejabberd</td><td>13</td><td>0.0</td></tr>
+<tr><td>irc</td><td>ircu ircd</td><td>13</td><td>0.0</td></tr>
+<tr><td>http</td><td>server</td><td>13</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Xerox Phaser 6280DT printer ftpd</td><td>13</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Silex C-6600GB USB server ftpd</td><td>13</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-M850 printer ftpd</td><td>13</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-6201N printer ftpd</td><td>13</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-2600FN printer ftpd</td><td>13</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP AR-M700N printer ftpd</td><td>13</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP AR-M317 printer ftpd</td><td>13</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 1224C ftpd</td><td>13</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark Pro4000 Series printer ftpd</td><td>13</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP C4000/LD540C ftpd</td><td>13</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP 2510/LD325 ftpd</td><td>13</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP 201/LD 220 ftpd</td><td>13</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier LD235 ftpd</td><td>13</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-6975DN printer ftpd</td><td>13</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>IronPort mail appliance ftpd</td><td>13</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Internet Rex ftpd</td><td>13</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Infortrend EonStor A24F-G2224-1 ftpd</td><td>13</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>IBM Infoprint 1532 ftpd</td><td>13</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Dell 3333dn Laser MFP printer ftpd</td><td>13</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>BisonWare BisonFTPd</td><td>13</td><td>0.0</td></tr>
+<tr><td>damewaremr</td><td>DameWare Mini Remote Control</td><td>13</td><td>0.0</td></tr>
+<tr><td>vnc-http</td><td>Ultr@VNC</td><td>12</td><td>0.0</td></tr>
+<tr><td>vnc</td><td>Apple remote desktop vnc</td><td>12</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>Serv-U SSH Server</td><td>12</td><td>0.0</td></tr>
+<tr><td>ssh</td><td>GlobalScape CuteFTP sshd</td><td>12</td><td>0.0</td></tr>
+<tr><td>http</td><td>D-Link DIR-300 WAP http admin</td><td>12</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Sun Solaris 9 ftpd</td><td>12</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-6200N printer ftpd</td><td>12</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-5500N printer ftpd</td><td>12</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-3610N printer ftpd</td><td>12</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP AR-M316 printer ftpd</td><td>12</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP AR-M165 printer ftpd</td><td>12</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP AR-168D printer ftpd</td><td>12</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP C400SR ftpd</td><td>12</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio CL7000 ftpd</td><td>12</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 3260C ftpd</td><td>12</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio 2228C ftpd</td><td>12</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>NRG 2205/2238/2212 copier ftpd</td><td>12</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X364dw printer ftpd</td><td>12</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark T622 printer ftpd</td><td>12</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark Optra S 1650 printer ftpd</td><td>12</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark Optra M410 printer ftpd</td><td>12</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lantronix MPS100 ftpd</td><td>12</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP 4500/LD345 ftpd</td><td>12</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP 4001/LD140 ftpd</td><td>12</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP 171/LD 117 ftpd</td><td>12</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-1130MFP printer ftpd</td><td>12</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Infortrend EonStor A16U-G2430 ftpd</td><td>12</td><td>0.0</td></tr>
+<tr><td>citrix-ica</td><td>Citrix Metaframe XP ICA</td><td>12</td><td>0.0</td></tr>
+<tr><td>smtp</td><td>Symantec Enterprise Security manager smtpd</td><td>11</td><td>0.0</td></tr>
+<tr><td>irc</td><td>Unreal ircd</td><td>11</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Xerox Phaser 6600DN printer ftpd</td><td>11</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-M700N printer ftpd</td><td>11</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-M160D printer ftpd</td><td>11</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-C402SC printer ftpd</td><td>11</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP AR-M451N printer ftpd</td><td>11</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP AR-M351N printer ftpd</td><td>11</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio MP 9000 ftpd</td><td>11</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>NRG DSm620d printer ftpd</td><td>11</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP C3000/LD430c ftpd</td><td>11</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP 2851/LD528 ftpd</td><td>11</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier LD225 ftpd</td><td>11</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier LD175 ftpd</td><td>11</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Infortrend EonStor A12U-G2421 ftpd</td><td>11</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>DEC OpenVMS MultiNet FTPd</td><td>11</td><td>0.0</td></tr>
+<tr><td>http</td><td>RealVNC</td><td>10</td><td>0.0</td></tr>
+<tr><td>http</td><td>MS-SDK-HttpServer</td><td>10</td><td>0.0</td></tr>
+<tr><td>http</td><td>ImagiaTek</td><td>10</td><td>0.0</td></tr>
+<tr><td>http</td><td>Embedded HTTP Server</td><td>10</td><td>0.0</td></tr>
+<tr><td>http</td><td>Digiarty AirPIS 2.0.0.379</td><td>10</td><td>0.0</td></tr>
+<tr><td>http</td><td>CherryPy httpd</td><td>10</td><td>0.0</td></tr>
+<tr><td>http</td><td>Allegro RomPager</td><td>10</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP MX-M310 printer ftpd</td><td>10</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP AR-M205 printer ftpd</td><td>10</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>SHARP AR-M160 printer ftpd</td><td>10</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Pro 1357EX ftpd</td><td>10</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Ricoh Aficio SP 5210SF ftpd</td><td>10</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>NRG DSc428 printer ftpd</td><td>10</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark X854e printer ftpd</td><td>10</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark Optra T614 printer ftpd</td><td>10</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lexmark C748 printer ftpd</td><td>10</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP 6000/LD260 ftpd</td><td>10</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP 5000B/LD050B ftpd</td><td>10</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Lanier MP 3500/LD335 ftpd</td><td>10</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Kyocera FS-3040MFP printer ftpd</td><td>10</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Infortrend EonStor A16E-G2130-4 ftpd</td><td>10</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Infortrend EonStor A08U-G2421 ftpd</td><td>10</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>HP Tandem NonStop ftpd</td><td>10</td><td>0.0</td></tr>
+<tr><td>ftp</td><td>Aironet BR2000E wireless bridge ftpd</td><td>10</td><td>0.0</td></tr>
+
+   </tbody>
+  </table>
+ </div>
+</div>
